@@ -29,17 +29,15 @@
 ; auto-completion
 (require 'ac-math)
 (add-to-list 'ac-modes 'LaTeX-mode)
-(add-to-list 'ac-modes 'latex-mode)
 (defun ac-latex-mode-setup ()         ; add ac-sources to default ac-sources
   (setq ac-sources
      (append '(ac-source-math-latex ac-source-latex-commands  ac-source-math-unicode)
                ac-sources))
 )
 
-(add-hook 'LaTeX-mode-hook 'ac-latex-mode-setup)
-
 (setq LaTeX-mode-hook
  '(lambda ()
+    (ac-latex-mode-setup)
     (define-key LaTeX-mode-map "\C-cu" 'LaTeX-find-matching-begin)
     (define-key LaTeX-mode-map "\C-cd" 'LaTeX-find-matching-end)
     (define-key LaTeX-mode-map "\C-ci" 'LaTeX-insert-item)
