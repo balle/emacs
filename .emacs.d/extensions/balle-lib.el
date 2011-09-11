@@ -6,7 +6,7 @@
   (browse-url-w3 (concat "http://www.google.com/codesearch#search/&type=cs&q=" s) nil)
 )
 
-; comment out current line                                                                                                                                                                                   
+; comment out current line
 (defun balle-comment-line ()
    (interactive)
   (beginning-of-line)
@@ -75,3 +75,16 @@
   )
 )
 
+(defun balle-killall-non-special-buffers()
+   (interactive)
+
+   (dolist buffer (buffer-list)
+      (with-current-buffer buffer
+         (let ((file (buffer-file-name)))
+            (if (not file)
+ ;              (kill-buffer buffer)
+            )
+         )
+      )
+   )
+)
