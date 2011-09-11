@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: simple-table
+# key: simple-table
+
+\begin{table}[ht]
+  \centering
+  \caption{$1} \label{t:$1}
+  \begin{tabular}{p{0.3\textwidth} | p{0.3\textwidth} | p{0.3\textwidth}}
+    \hline
+    $2 & $3 & $4 \\
+  \end{tabular}
+\end{table}
+$0

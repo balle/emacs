@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: snip-code
+# key: snip-code
+# --
+
+\lstinputlisting[frame=single,caption=${1:Beschreibung}]{sourcecode/${2:Name}}\label{${3:ac,jc,jsc,pc,pyc,gc}:$1}
+$0

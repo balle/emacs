@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: snip-befehl
+# key: snip-befehl
+# --
+
+\textbf{Befehl${1:Mehrzahl}:}
+\begin{description}\label{sc:${2:allg. Beschreibung}}
+  \leftskip=1cm
+  \item[${3:Befehl}] \# ${4:Befehls Beschreibung}	
+\end{description}
+\begin{lstlisting}
+${5:Ausgabe}
+\end{lstlisting}
+$0

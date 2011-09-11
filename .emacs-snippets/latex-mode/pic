@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: snip-pic
+# key: snip-pic
+# --
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[scale=1.0]{images/${1:Name}}
+    \caption{${2:Beschreibung}}
+    \label{f:$2}
+\end{figure}
+$0
