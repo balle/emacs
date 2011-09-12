@@ -1,0 +1,280 @@
+* Save / Open / Close 						      :emacs:
+strg + x strg+s -> save
+strg + x strg+c -> close
+strg + x strg+f -> open file
+strg + x strg+w -> save as
+strg + x s      -> save all
+
+* Mark 								      :emacs:
+strg + space         -> set marker
+strg + x h           -> mark whole buffer
+alt  + h             -> mark paragraph
+
+* Copy / Cut / Paste 						      :emacs:
+strg + w     -> cut from marker to cursor
+alt  + w     -> copy from marker to curser
+strg + k     -> cut line from corser till end
+strg + y     -> insert
+strg + d     -> cut whole line
+strg + c     -> copy current line
+strg + c y   -> copy current line direkt drunter einfügen
+strg + c c   -> duplicate line but comment out first
+alt  + y     -> skip through kill-ring
+
+* Move 								      :emacs:
+strg+c <up>    -> move row or region upwards
+strg+c <down>  -> move row or region downwards
+strg+c <left>  -> move row or region left
+strg+c <right> -> move row or region right
+
+* Search 							      :emacs:
+alt  + g g        -> goto line
+strg + s          -> search forward
+strg + r          -> search backward
+alt  + %          -> search and replace
+strg + s strg + w -> search word under cursor
+alt  + strg + s   -> regular expression search forward
+alt  + x          -> query-replace-regexp
+strg + x strg + q -> goto last change
+
+* Go to 							      :emacs:
+strg + a -> begin of row
+strg + e -> end of row
+alt  + a -> begin of sentence
+alt  + e -> end of sentence
+alt  + < -> begin of buffer
+alt  + > -> end of buffer
+
+* Auto Complete 						      :emacs:
+tab                -> auto complete yasnippets
+alt  + x <command> -> execute a command (with tab completion)
+
+* Spelling / Tanslation 					      :emacs:
+alt + u        -> uppercase word before cursor
+alt + l        -> lowercase word before cursor
+alt + c        -> capitalize word before cursor
+F5             -> auto correct word before cursor
+F6             -> goto next ispell error
+F7             -> add word to dictionary
+alt + x ispell -> start spell checking of whole buffer
+strg + x ü     -> translate a word
+alt  + $       -> check word under cursor
+alt  + tab     -> correct word under cursor
+
+* Buffer 							      :emacs:
+strg + x 0 -> close current window
+strg + x 1 -> close all windows except current one
+strg + x 2 -> split horizontally
+strg + x 3 -> split vertically
+strg + x o -> switch between windows
+strg + x k -> kill current buffer
+alt  + +   -> enlarge current window
+alt  + -   -> shrink current window
+strg + x m -> show messages buffer
+strg + x left / right  -> previous / next buffer
+
+* Code folding							      :emacs:
+strg+c strg+o strg+t -> hide all but top level
+strg+c strg+o strg+a -> show all
+strg+c strg+o strg+s -> show subtree at cursor
+strg+c strg+o strg+d -> hide subtree at cursor
+strg+c strg+o strg+f -> move forward at same level
+strg+c strg+o strg+b -> move backward at same level
+
+* Python 							      :emacs:
+strg + c d          -> python doc for module / method
+strg + c g          -> goto definition
+strg + c i          -> auto import
+strg + c f          -> find occurencies
+strg + c r r        -> refactoring rename
+strg + x p o        -> open project
+strg + x p f        -> find file in rope project
+strg + c strg + k   -> mark block
+strg + c strg + u   -> goto begin of block
+strg + c strg + d   -> goto end of block
+strg + alt + p      -> jump back to bracket
+strg + alt + n      -> jump forward to bracket
+alt  + m            -> jump to first non-whitespace character
+strg + c strg + z   -> open python console
+strg + c c          -> run script
+strg + c strg + p r -> run django server
+strg + c strg + p b -> run django project in browser
+strg + c strg + p gs -> goto django settings
+strg + c strg + p d  -> run django db shell
+strg + c strg + p s  -> run django shell
+strg + c strg + p m  -> run django migrate
+strg + c strg + p t  -> run django test
+
+* LaTeX 							      :emacs:
+strg + c strg + c          -> compile / view
+strg + c strg + s          -> insert section with label
+strg + c strg + e          -> insert begin / end block
+strg + c strg + f strg + b -> font bold
+strg + c strg + f strg + i -> font italics
+strg + c strg + l          -> show compiler output
+strg + c strg + r          -> compile region
+strg + c `                 -> goto error
+strg + c )                 -> list all labels and make ref entry
+strg + c =                 -> show toc to navigation
+* Git 								      :emacs:
+f2             -> show status
+               -> s (stage == mark file for commit / add file)
+               -> c (commit)
+               -> d (diff file)
+               -> P (push)
+               -> F (pull)
+               -> l (log)
+                 -> revert to that commit
+                 -> \C-w copy sha1 commit id
+                 -> = diff HEAD to that commit
+                 -> grep history
+               -> t (tag)
+               -> z z (create stash)
+                 -> A (pop from stash)
+                 -> k (kill a stash)
+               -> b c (switch to branch)
+               -> b B (create new branch and switch to it)
+               -> b V (list branches)
+                 -> m (merge with that branch)
+                 -> k (delete branch)
+                 -> b (switch to that branch)
+               -> w (whazzup - show diff from current branch to others)
+* XML 								      :emacs:
+strg + c strg + f -> close current xml tag
+alt  + tab        -> xml autocomplete
+strg + alt+b      -> jump one xml tag back
+strg + alt+f      -> jump one xml tag forward
+
+* HTML 								      :emacs:
+strg + c strg+d       -> delete tag
+strg + c left / right -> skip tag back / forward
+strg + c /            -> close tag
+strg + c strg + v     -> show buffer in browser
+
+* Calendar                                                            :emacs:
+f1 -> execute calendar
+id -> insert daily task
+iw -> insert weekly  task
+im -> insert monthly task
+iy -> insert yearly task
+d  -> show task
+
+* Org Mode                                                            :emacs:
+strg + c tab            - collabse list
+shift + tab           - hide / show all
+strg + c strg + c     - tag an entry
+strg + c strg + t     - mark as todo / done
+strg + c strg + s     - insert schedule
+strg + c strg + d     - insert deadline
+strg + c up / down    - change priority
+
+strg + x t a          - show termin list
+strg + x t b          - show einkaufsliste
+strg + x t h          - show hacking list
+strg + t l            - show latex list
+strg + t e            - show emacs list
+strg + x t n          - show note list
+strg + x t p          - show python list
+strg + x t s          - show started list
+strg + x t t          - show todo list
+strg + x t w          - show wait list
+strg + x t x          - show next list
+f8                    - new entry
+alt + x org-tags-view - show todo list for one day
+alt + x org-agenda
+
+* YaSnippet 							      :emacs:
+alt + x yas/new-snippet    -> create new template
+
+# -*- mode: snippet -*-
+# name: Name
+# key: Name
+# --
+
+Template with
+${1:varname}
+$0 -> End of template
+
+* sudo 								      :emacs:
+/sudo::/etc/z.b.conf - sudo edit
+
+* retangle edit 						      :emacs:
+mark region, than strg+x r t and # (comment all lines in region)
+strg+x r k delete alle comment characters
+
+* Remote Edit 							      :emacs:
+# ftp edit
+/ftp:ftp1049583-balle@wp079.webpack.hosteurope.de:/
+
+* debugging lisp 						      :emacs:
+alt  + x edebug-all-defs than alt + x edebug-defun behind function
+ctrl + alt  f syntax check forward
+ctrl + alt  b syntax check backward
+mit ctrl + x ctrl + e execute statement
+
+* Bookmarks 							      :emacs:
+strg + x r m              -> set bookmark
+strg + x r b              -> goto bookmark
+strg + x r l              -> list bookmarks
+strg + x r d              -> delete bookmark
+strg + x r s              -> save bookmarks
+strg + space strg + space -> push pos to mark ring
+strg + x space            -> goto last pos in mark ring
+* Macros 							      :emacs:
+strg + x ( -> begin macro recording
+strg + x ) -> end macro recording
+strg + x e -> execute macro
+esc+x name-last-kbg-macro - to give macro a name for this session
+esc+x insert-kbd-macro - to save macro in a file
+
+* Repeat							      :emacs:
+esc <no> <shortcut> - repeat shortcut no times
+strg+u <shortcut> - do shortcut 4 times (strg+u strg+u 16 time and so on)
+strg+x z - repeat last command
+
+* Diff                                                                :emacs:
+\M-x ediff-buffers
+n - next difference
+p - previous difference
+Visually Diff two Regions
+\M-x ediff-regions-linewise
+\M-x ediff-regions-wordwise
+
+Merging with \M-x emerge-buffers
+
+
+Want to see / merge differences in two directories?
+ediff-directories
+emerge-merge-directories
+* Misc 								      :emacs:
+strg + g                      -> Cancel
+strg + x u                    -> UNDO
+esc+x package-list-packages   -> emacs erweiterung suchen / (de)installieren
+esc+x re-builder              -> regexp helper shows matches in buffer
+esc+x quoted-insert <key>     -> to get keycode to insert in set-key command
+alt  + x compare-windows      -> compare buffers of visible windows
+alt ;                         -> block comment
+alt  + x revert-buffer        -> reload the file
+alt  + x highlight-changes-mode
+strg + x esc esc              -> show executed commands as lisp code
+alt  + x text-scale-increase  -> increase font size
+alt  + x describe-face
+alt  + x eval-current-buffer
+alt  + x ediff-directories    -> show difference of two directories
+alt + x hightlight-regexp     -> highlight words matching regexp
+alt + x occur                 -> open new buffer, show all lines matching regexp
+alt + x switch-to-buffer
+f4                            -> grep for todo comments in dir
+
+* search / replace in more than one file 			      :emacs:
+execute dired
+mark files with m (u for unmark)
+alt + x dired-do-query-replace-regexp
+
+* Help 								      :emacs:
+strg + h a        -> apropos (help keyword search)
+strg + h b        -> show all keyboard shortcuts
+strg + h k        -> show description of shortcut
+strg + h f        -> show documentation of function
+strg + c strg + h -> show keyboard shortcuts of current mode
+strg+h F - search in emacs faq
