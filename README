@@ -5,7 +5,9 @@ Custumizations should be saved in ~/.emacs-custom
 Installation:
 
 emacs 
+gxmessage
 xclip
+xpp
 
 Afterwards just add three links
 cd ~
