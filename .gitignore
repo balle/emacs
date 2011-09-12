@@ -1,3 +1,6 @@
 .emacs.d/tramp
 .emacs.d/ac-comphist.dat
 .emacs.d/auto-save-list/
+.emacs.d/extensions/emacs-for-python/python-libs/*/*.pyc
+.emacs.d/extensions/emacs-for-python/python-libs/*/*/*.pyc
+.emacs.d/extensions/emacs-for-python/python-libs/*/*/*/*.pyc
