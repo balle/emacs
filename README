@@ -12,3 +12,6 @@ cd ~
 ln -s emacs/.emacs
 ln -s emacs/.emacs.d
 ln -s emacs/.emacs-snippets
+
+
+Documentation about keyboard shortcuts can be found in emacs.org
