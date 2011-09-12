@@ -26,11 +26,15 @@
      (menu ((t (nil))))
      (font-lock-builtin-face ((t (:foreground "#11f2f5"))))
      (font-lock-comment-face ((t (:foreground "#888a85"))))
-     (font-lock-function-name-face ((t (:foreground "#0f36c7"))))
      (font-lock-keyword-face ((t (:foreground "#11f2f5"))))
      (font-lock-string-face ((t (:foreground "#6df14b"))))
      (font-lock-type-face ((t (:foreground"#8ae234"))))
      (font-lock-variable-name-face ((t (:foreground "#f6e388"))))
+     (font-lock-function-name-face ((t (:foreground "orange"))))
+
+     (ediff-even-diff-A ((t (:background "yellow" :foreground "black"))))
+     (ediff-current-diff-B ((t (:background "yellow" :foreground "black"))))
+     (ediff-fine-diff-B ((t (:background "yellow" :foreground "black"))))
 
      (highlight ((t (:background "#7eff00" :foreground "black"))))
 ;     (hl-line ((t (:foreground "#ffffff" :background "#311784"))))
