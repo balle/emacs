@@ -10,8 +10,8 @@
 (global-set-key "\"" 'skeleton-pair-insert-maybe)
 
 ;; Just python
-(add-hook 'python-mode-hook 
-	  (lambda () 
+(add-hook 'python-mode-hook
+	  (lambda ()
 	    (define-key python-mode-map "'" 'skeleton-pair-insert-maybe)))
 
 ;; Live completion with auto-complete
@@ -31,7 +31,7 @@
 (define-key ac-complete-mode-map "\M-p" 'ac-previous)
 
 
-;; Disabling Yasnippet completion 
+;; Disabling Yasnippet completion
 (defun epy-snips-from-table (table)
   (with-no-warnings
     (let ((hashtab (ac-yasnippet-table-hash table))

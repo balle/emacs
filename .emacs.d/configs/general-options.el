@@ -58,7 +58,7 @@
 (setq search-exit-option t)
 
 ; display line numbers in margin (fringe). Emacs 23 only.
-;(global-linum-mode 1)
+(global-linum-mode 0)
 
 ; recent files menu entry
 ;(recentf-mode 1)
@@ -202,3 +202,5 @@
 
 ; load outline minor mode
 (outline-minor-mode 1)
+
+(set-face-background 'hl-line "green")

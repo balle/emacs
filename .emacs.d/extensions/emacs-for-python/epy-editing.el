@@ -13,7 +13,7 @@
 
 ;; Auto Completion
 (require 'auto-complete-config)
-(add-to-list 'ac-dictionary-directories 
+(add-to-list 'ac-dictionary-directories
 	     (concat epy-install-dir "auto-complete/ac-dict"))
 (ac-config-default)
 
@@ -149,6 +149,7 @@ original" (interactive)
 
 ; highlight current line
 (global-hl-line-mode 1)
+(set-face-background 'hl-line "seashell2") ;; Nice color
 
 ; highlight brackets
 (show-paren-mode t)
@@ -157,5 +158,8 @@ original" (interactive)
 (require 'highlight-indentation)
 (add-hook 'python-mode-hook 'highlight-indentation)
 
+;; Line numbering
+(setq linum-format "%4d")
+(global-linum-mode 1)
 
 (provide 'epy-editing)

@@ -27,13 +27,19 @@
 ;(outline-minor-mode 1)
 
 ; auto-completion
+(require 'auto-complete-config nil t)
 (require 'ac-math)
 (add-to-list 'ac-modes 'LaTeX-mode)
+(add-to-list 'ac-modes 'latex-mode)
+
 (defun ac-latex-mode-setup ()         ; add ac-sources to default ac-sources
   (setq ac-sources
      (append '(ac-source-math-latex ac-source-latex-commands  ac-source-math-unicode)
                ac-sources))
 )
+
+(auto-complete-mode)
+(ac-config-default)
 
 (setq LaTeX-mode-hook
  '(lambda ()

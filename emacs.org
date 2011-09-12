@@ -109,6 +109,9 @@ strg + c strg + p t  -> run django test
 strg + c strg + c          -> compile / view
 strg + c strg + s          -> insert section with label
 strg + c strg + e          -> insert begin / end block
+strg + c u                 -> jump to begin block
+strg + c d                 -> jump to end block
+strg + c i                 -> \item
 strg + c strg + f strg + b -> font bold
 strg + c strg + f strg + i -> font italics
 strg + c strg + l          -> show compiler output
@@ -248,7 +251,8 @@ ediff-directories
 emerge-merge-directories
 * Misc 								      :emacs:
 strg + g                      -> Cancel
-strg + x u                    -> UNDO
+strg + x u                    -> UNDO tree
+strg + x U                    -> undo last change
 esc+x package-list-packages   -> emacs erweiterung suchen / (de)installieren
 esc+x re-builder              -> regexp helper shows matches in buffer
 esc+x quoted-insert <key>     -> to get keycode to insert in set-key command
