@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# key: rtr
+# --
+    c = RequestContext(request, {$1})
+    return render_to_response('$2', c)
