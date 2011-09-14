@@ -20,13 +20,13 @@
 	     '("line \\([0-9]+\\) column \\([0-9]+\\) - \\(Warning\\|Error\\): \\(.*\\)"
 	       nil 1 2 4))
 
-(require 'django-html-mode)
+;(require 'django-html-mode)
 (require 'django-mode)
-(add-to-list 'auto-mode-alist '("\\.html$" . django-html-mode))
-(add-to-list 'ac-modes 'django-html-mode)
+;(add-to-list 'auto-mode-alist '("\\.html$" . django-html-mode))
+;(add-to-list 'ac-modes 'django-html-mode)
 
-(add-hook 'django-html-mode-hook '(lambda ()
-    (define-key django-html-mode-map "\C-c\C-d" 'django-html-close-tag)
-))
+;(add-hook 'django-html-mode-hook '(lambda ()
+;    (define-key django-html-mode-map "\C-c\C-d" 'django-html-close-tag)
+;))
 
 
