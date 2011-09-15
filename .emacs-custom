@@ -1,4 +1,5 @@
-(global-set-key [f1] 'calendar)
+(global-set-key [f1] 'magit-status)
+(global-set-key [f2] 'calendar)
 
 ; default browser
 (setq browse-url-browser-function 'browse-url-generic
