@@ -17,6 +17,8 @@
 (require 'undo-tree)
 (global-undo-tree-mode)
 
+(require 'bookmark+)
+
 ; display tabbar
 (require 'tabbar)
 (require 'tabbar-extension)

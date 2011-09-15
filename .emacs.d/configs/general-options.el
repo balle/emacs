@@ -12,12 +12,11 @@
 
 ; save desktop sessions
 (desktop-save-mode 1)
-;(winner-mode 1)
 (setq desktop-globals-to-save
       (append '((extended-command-history . 30)
                 (file-name-history        . 100)
                 (grep-history             . 30)
-                (compile-history          . 30)
+               (compile-history          . 30)
                 (minibuffer-history       . 50)
                 (query-replace-history    . 60)
                 (read-expression-history  . 60)
