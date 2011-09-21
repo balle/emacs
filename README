@@ -1,10 +1,10 @@
 Just a tiny repository to keep my emacs environment in sync.
-Features: Python, Django, Latex + Ispell, Flyspell, Flymake, Auto-Completion, Yasnippets, Printing and much more
-Custumizations should be saved in ~/.emacs-custom
+Features: Python, Django, Latex + Ispell, Flyspell, Flymake, Auto-Completion, Yasnippets, Ido, Bookmark+, Kill-Ring-Browser, Undo-Tree, Printing and much more
+Customizations should be saved in ~/.emacs-custom
 
 Installation:
 
-emacs 
+emacs
 gxmessage
 xclip
 xpp
