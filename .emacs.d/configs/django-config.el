@@ -21,7 +21,8 @@
 	       nil 1 2 4))
 
 ;(require 'django-html-mode)
-;(require 'django-mode)
+(require 'django-mode)
+(add-to-list 'ac-modes 'django-mode)
 ;(add-to-list 'auto-mode-alist '("\\.html$" . django-html-mode))
 ;(add-to-list 'ac-modes 'django-html-mode)
 
