@@ -230,6 +230,9 @@ ctrl + x r d              -> delete bookmark
 ctrl + x r s              -> save bookmarks
 ctrl + space ctrl + space -> push pos to mark ring
 ctrl + x space            -> goto last pos in mark ring
+* Project							      :emacs:
+esc+x project-load  -> load a project
+esc+x project-save  -> save desktop as project
 * Macros 							      :emacs:
 ctrl + x ( -> begin macro recording
 ctrl + x ) -> end macro recording
