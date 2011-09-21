@@ -48,6 +48,8 @@ alt  + a -> begin of sentence
 alt  + e -> end of sentence
 alt  + < -> begin of buffer
 alt  + > -> end of buffer
+f10      -> goto previos flymake error
+f11      -> goto next flymake error
 
 * Auto Complete 						      :emacs:
 tab                -> auto complete yasnippets
@@ -121,7 +123,7 @@ ctrl + c `                 -> goto error
 ctrl + c )                 -> list all labels and make ref entry
 ctrl + c =                 -> show toc to navigation
 * Git 								      :emacs:
-f2             -> show status
+f1             -> show status
                -> s (stage == mark file for commit / add file)
                -> c (commit)
                -> k (kill changes)
@@ -157,7 +159,7 @@ ctrl + c /            -> close tag
 ctrl + c ctrl + v     -> show buffer in browser
 
 * Calendar                                                            :emacs:
-f1 -> execute calendar
+f2 -> execute calendar
 id -> insert daily task
 iw -> insert weekly  task
 im -> insert monthly task
@@ -208,6 +210,9 @@ mark region, than ctrl+x r t and # (comment all lines in region)
 ctrl+x r k delete alle comment characters
 
 * Remote Edit 							      :emacs:
+# ssh edit
+/ssh:user@host:/
+
 # ftp edit
 /ftp:ftp1049583-balle@wp079.webpack.hosteurope.de:/
 
