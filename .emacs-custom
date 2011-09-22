@@ -5,6 +5,13 @@
 (setq browse-url-browser-function 'browse-url-generic
       browse-url-generic-program "chromium")
 
+; redmine
+(setq org-redmine-uri "http://www.redmine.org")
+
+ ;; REST API Key (optional). default nil
+ (setq org-redmine-api-key "xxxxxxxxxxxxxxxxxxx")
+
+(setq redmine-user "user")
 
 ; color theme
 (require 'color-theme)
