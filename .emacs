@@ -50,6 +50,7 @@
 (global-set-key "\C-xtd" 'balle-show-django-list)
 (global-set-key "\C-xte" 'balle-show-emacs-list)
 (global-set-key "\C-xth" 'balle-show-hack-list)
+(global-set-key "\C-xti" 'org-redmine-get-issue)
 (global-set-key "\C-xtn" 'balle-show-note-list)
 (global-set-key "\C-xtp" 'balle-show-python-list)
 (global-set-key "\C-xtr" 'balle-show-read-list)

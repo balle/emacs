@@ -22,14 +22,12 @@
 
 ; org-mode redmine interface
 (require 'org-redmine)
+(setq org-redmine-template-header "[%p_n%] #%i% %s% by %as_n%")
 
 (defun balle-redmine-tickets ()
   (interactive)
   (org-redmine-anything-show-issue-all 'redmine-user)
 )
-;(add-hook 'org-mode-hook '(lambda nil (
-;   (define-key org-mode-map "\C-c\C-tr" 'org-redmine-get-issue)
-;)))
 
 ; Capture templates for: TODO tasks, Notes, appointments
 ; from http://doc.norang.ca/org-mode.html
