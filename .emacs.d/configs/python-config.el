@@ -17,7 +17,7 @@
       (progn
 	(setq bds (bounds-of-thing-at-point 'line))
 	(setq start (car bds) end (cdr bds))))
-  (python-shift-left start end))
+  (python-indent-shift-left start end))
   (setq deactivate-mark nil)
 )
 (defun balle-python-shift-right ()
@@ -29,7 +29,7 @@
       (progn
 	(setq bds (bounds-of-thing-at-point 'line))
 	(setq start (car bds) end (cdr bds))))
-  (python-shift-right start end))
+  (python-indent-shift-right start end))
   (setq deactivate-mark nil)
 )
 
