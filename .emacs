@@ -1,7 +1,7 @@
 ; Load modules and configs
 (add-to-list 'load-path "~/.emacs.d/configs")
 (add-to-list 'load-path "~/.emacs.d/extensions")
-(add-to-list 'load-path "~/.emacs.d/extensions/ecb")
+(add-to-list 'load-path "~/.emacs.d/extensions/org-redmine")
 (add-to-list 'load-path "~/.emacs.d/extensions/ac-math")
 (add-to-list 'load-path "~/.emacs.d/extensions/org-7.5/lisp")
 (add-to-list 'load-path "~/.emacs.d/extensions/pony-mode")
@@ -70,6 +70,7 @@
 (global-set-key [f6] 'flyspell-goto-next-error)
 (global-set-key [f7] 'balle-flyspell-add-word)
 (global-set-key [f8] 'org-capture)
+(global-set-key [f9] 'balle-redmine-tickets)
 (global-set-key [f10] 'flymake-goto-prev-error)
 (global-set-key [f11] 'flymake-goto-next-error)
 (global-set-key (kbd "C-c a") 'auto-complete) ; for latex command auto-completion
@@ -80,11 +81,12 @@
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
  '(diary-entry-marker (quote diary-face))
- '(ecb-layout-name "balle2")
  '(ecb-create-layout-frame-width 42)
+ '(ecb-layout-name "balle2")
  '(ecb-options-version "2.40")
  '(ecb-split-edit-window-after-start nil)
- '(ecb-windows-width 0.13))
+ '(ecb-windows-width 0.13)
+ '(org-agenda-files (quote ("~/organize/TODO.org" "~/organize/projekte.org" "~/organize/emacs.org"))))
 
 (custom-set-faces
   ;; custom-set-faces was added by Custom.

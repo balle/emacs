@@ -13,6 +13,23 @@
 (setq appt-display-mode-line t)
 ;(setq appt-display-format 'window)
 
+; remember clock
+(setq org-clock-persist 'history)
+(org-clock-persistence-insinuate)
+
+; alert on clock mode if idle for 15 minutes
+(setq org-clock-idle-time 15)
+
+; org-mode redmine interface
+(require 'org-redmine)
+
+(defun balle-redmine-tickets ()
+  (interactive)
+  (org-redmine-anything-show-issue-all 'redmine-user)
+)
+;(add-hook 'org-mode-hook '(lambda nil (
+;   (define-key org-mode-map "\C-c\C-tr" 'org-redmine-get-issue)
+;)))
 
 ; Capture templates for: TODO tasks, Notes, appointments
 ; from http://doc.norang.ca/org-mode.html
