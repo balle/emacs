@@ -63,6 +63,7 @@
 (global-set-key (kbd "C-c <up>") 'move-text-up)
 (global-set-key (kbd "C-c <down>") 'move-text-down)
 (global-set-key (kbd "C-c s") 'switch-to-buffer)
+(global-set-key (kbd "C-c ;") 'comment-or-uncomment-region)
 (global-set-key "\C-xü" 'babel)
 (global-set-key [f1] 'magit-status)
 ;(global-set-key [f2] 'display-time-world)
@@ -75,19 +76,6 @@
 (global-set-key [f10] 'flymake-goto-prev-error)
 (global-set-key [f11] 'flymake-goto-next-error)
 (global-set-key (kbd "C-c a") 'auto-complete) ; for latex command auto-completion
-
-(custom-set-variables
-  ;; custom-set-variables was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
- '(diary-entry-marker (quote diary-face))
- '(ecb-create-layout-frame-width 42)
- '(ecb-layout-name "balle2")
- '(ecb-options-version "2.40")
- '(ecb-split-edit-window-after-start nil)
- '(ecb-windows-width 0.13)
- '(org-agenda-files (quote ("~/organize/TODO.org" "~/organize/projekte.org" "~/organize/emacs.org"))))
 
 (custom-set-faces
   ;; custom-set-faces was added by Custom.

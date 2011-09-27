@@ -273,7 +273,7 @@ esc+x package-list-packages   -> emacs erweiterung suchen / (de)installieren
 esc+x re-builder              -> regexp helper shows matches in buffer
 esc+x quoted-insert <key>     -> to get keycode to insert in set-key command
 alt  + x compare-windows      -> compare buffers of visible windows
-alt ;                         -> block comment
+ctrl + c + ;                         -> comment region
 alt  + x revert-buffer        -> reload the file
 alt  + x highlight-changes-mode
 ctrl + x esc esc              -> show executed commands as lisp code
