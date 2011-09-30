@@ -13,10 +13,14 @@
 ;(global-set-key (kbd "<M-left>")   'buf-move-left)
 ;(global-set-key (kbd "<M-right>")  'buf-move-right)
 
+; easier window switching
+(require 'win-switch)
+
 ; advaned undo
 (require 'undo-tree)
 (global-undo-tree-mode)
 
+; advanced bookmarks
 (require 'bookmark+)
 
 ; display tabbar

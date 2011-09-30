@@ -67,7 +67,7 @@ ctrl + x ü     -> translate a word
 alt  + $       -> check word under cursor
 alt  + tab     -> correct word under cursor
 
-* Buffer 							      :emacs:
+* Buffers & Windows 						      :emacs:
 ctrl + x 0 -> close current window
 ctrl + x 1 -> close all windows except current one
 ctrl + x 2 -> split horizontally
@@ -78,6 +78,7 @@ alt  + +   -> enlarge current window
 alt  + -   -> shrink current window
 ctrl + x m -> show messages buffer
 ctrl + x left / right  -> previous / next buffer
+ctrl + x up / down     -> move to the upper / downer window
 
 * Code folding							      :emacs:
 ctrl+c ctrl+o ctrl+t -> hide all but top level
@@ -125,9 +126,10 @@ ctrl + c =                 -> show toc to navigation
 * Git 								      :emacs:
 f1             -> show status
                -> s (stage == mark file for commit / add file)
+               -> ctrl + u S (stage all)
                -> c (commit)
                -> k (kill changes)
-               -> d (diff file)
+               -> d (diff)
                -> P (push)
                -> F (pull)
                -> l (log)

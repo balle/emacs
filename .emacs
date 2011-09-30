@@ -62,6 +62,8 @@
 (global-set-key (kbd "C-x <right>") 'previous-user-buffer)
 (global-set-key (kbd "C-c <up>") 'move-text-up)
 (global-set-key (kbd "C-c <down>") 'move-text-down)
+(global-set-key (kbd "C-x <up>") 'win-switch-up)
+(global-set-key (kbd "C-x <down>") 'win-switch-down)
 (global-set-key (kbd "C-c s") 'switch-to-buffer)
 (global-set-key (kbd "C-c ;") 'comment-or-uncomment-region)
 (global-set-key "\C-xü" 'babel)
