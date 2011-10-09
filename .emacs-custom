@@ -13,10 +13,10 @@
 
 (setq redmine-user "user")
 
-(setq org-feed-alist
-      '(("Redmine"
-         "http://redmine/projects/python-network-hacks/issues.atom?key=7329ca6354116a3d7a48015488e1f5df9e89c4a5"
-         "~/organize/feeds.org" "Redmine Entries")))
+;(setq org-feed-alist
+;      '(("Redmine"
+;         "http://some-url/to/feed.rss"
+;         "~/organize/feeds.org" "Redmine Entries")))
 
 ; color theme
 (require 'color-theme)
