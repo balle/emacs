@@ -1,5 +1,5 @@
 ; latex
-;(load "auctex.el" nil t t)
+(load "auctex.el" nil t t)
 (require 'reftex)
 
 ;(require "preview-latex.el" nil t t)
