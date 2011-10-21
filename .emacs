@@ -66,6 +66,7 @@
 (global-set-key (kbd "C-x <down>") 'win-switch-down)
 (global-set-key (kbd "C-c s") 'switch-to-buffer)
 (global-set-key (kbd "C-c ;") 'comment-or-uncomment-region)
+(global-set-key "\C-xw" 'wiki)
 (global-set-key "\C-xü" 'babel)
 (global-set-key [f1] 'magit-status)
 ;(global-set-key [f2] 'display-time-world)
