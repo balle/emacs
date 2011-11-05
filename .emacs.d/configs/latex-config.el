@@ -1,16 +1,12 @@
 ; latex
 (load "~/.emacs.d/extensions/auctex-11.86/auctex.el" nil t t)
 (require 'reftex)
+(require 'preview-latex)
 
-;(require "preview-latex.el" nil t t)
 (setq TeX-auto-save t)
 (setq TeX-parse-self t)
 (setq-default TeX-electric-escapy t)
 (setq-default TeX-master "../main")
-(add-hook 'LaTeX-mode-hook 'visual-line-mode)
-(add-hook 'LaTeX-mode-hook 'flyspell-mode)
-(add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
-(add-hook 'LaTeX-mode-hook 'turn-on-reftex)
 (setq reftex-plug-into-AUCTeX t)
 (setq TeX-PDF-mode t)
 (setq TeX-show-compilation nil)
@@ -18,6 +14,11 @@
 (setq file_line_error_style t)
 (setq TeX-view-program-list '(("Acrobat" "acroread %o")))
 (setq TeX-view-program-selection '((output-pdf "Acrobat")))
+
+(add-hook 'LaTeX-mode-hook 'visual-line-mode)
+(add-hook 'LaTeX-mode-hook 'flyspell-mode)
+(add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
+(add-hook 'LaTeX-mode-hook 'turn-on-reftex)
 
 ; auto-completion
 (require 'auto-complete-config nil t)
