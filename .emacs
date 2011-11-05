@@ -1,6 +1,7 @@
 ; Load modules and configs
 (add-to-list 'load-path "~/.emacs.d/configs")
 (add-to-list 'load-path "~/.emacs.d/extensions")
+(add-to-list 'load-path "~/.emacs.d/extensions/auctex-11.86")
 (add-to-list 'load-path "~/.emacs.d/extensions/org-redmine")
 (add-to-list 'load-path "~/.emacs.d/extensions/ac-math")
 (add-to-list 'load-path "~/.emacs.d/extensions/org-7.5/lisp")
