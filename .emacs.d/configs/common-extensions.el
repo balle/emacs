@@ -6,6 +6,9 @@
 (load-file "~/.emacs.d/extensions/xclip/xclip.el")
 (turn-on-xclip)
 
+; oddmuse wiki support
+(require 'yaoddmuse)
+
 ; buffer move
 ;(require 'buffer-move)
 ;(global-set-key (kbd "<M-up>")     'buf-move-up)

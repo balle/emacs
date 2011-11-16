@@ -2,7 +2,7 @@
 (add-to-list 'auto-mode-alist '("\\.\\(org\\|org_archive\\)$" . org-mode))
 (require 'org-install)
 
-(setq org-agenda-files (list "~/organize/TODO.org" "~/organize/projekte.org" "~/organize/backlog.org"  "~/organize/emacs.org"))
+(setq org-agenda-files (list "~/organize/shared/TODO.org" "~/organize/projekte.org" "~/organize/backlog.org"  "~/organize/emacs.org" "~/organize/shared/read.org"))
 (setq calendar-week-start-day 1)
 (setq org-agenda-ndays 7)
 (setq org-agenda-show-all-dates t)
