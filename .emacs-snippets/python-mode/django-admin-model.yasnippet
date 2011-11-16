@@ -2,5 +2,5 @@
 # key: admin
 # --
 class $1Admin(admin.ModelAdmin):
-
+    ordering = ('name',)
 admin.site.register($1, $1Admin)
