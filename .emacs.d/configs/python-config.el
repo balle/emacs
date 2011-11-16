@@ -3,6 +3,9 @@
 (epy-setup-checker "epylint %f --rcfile=~/.emacs.d/configs/pylint.rc | grep -v 'Class has no __init__ method' | grep -v '_ is not callable'")
 ;(epy-setup-checker "~/.emacs.d/extensions/balle_epylint.sh %f")
 
+(setq tab-width 4)
+(setq-default indent-tabs-mode nil)
+
 (add-hook 'python-mode-hook '(lambda ()
 	(define-key python-mode-map "\C-c \C-d" 'python-end-of-block)
 	(add-hook 'before-save-hook 'delete-trailing-whitespace)

@@ -12,7 +12,7 @@
 (load "balle-lib")
 (load "general-options")
 (load "common-extensions")
-(load "latex-config")
+;(load "latex-config")
 ;(autoload 'LaTeX-mode "latex-config")
 (load "python-config")
 (autoload 'html-mode "django-config" "" t)
