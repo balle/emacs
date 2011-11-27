@@ -38,7 +38,18 @@
                     )))
   )
 
-
+;; Ipython integration with fgallina/python.el
+(defun epy-setup-ipython ()
+  "Setup ipython integration with python-mode"
+  (interactive)
+  (setq
+   python-shell-interpreter "ipython"
+   python-shell-interpreter-args ""
+   python-shell-prompt-regexp "In \[[0-9]+\]: "
+   python-shell-prompt-output-regexp "Out\[[0-9]+\]: "
+   python-shell-completion-setup-code ""
+   python-shell-completion-string-code "';'.join(__IP.complete('''%s'''))\n")
+  )
 
 ;;=========================================================
 ;; Flymake additions, I have to put this one somwhere else?
@@ -109,6 +120,9 @@ The CMDLINE should be something like:
 (add-to-list 'auto-mode-alist '("\\.pyx\\'" . cython-mode))
 (add-to-list 'auto-mode-alist '("\\.pxd\\'" . cython-mode))
 (add-to-list 'auto-mode-alist '("\\.pxi\\'" . cython-mode))
+
+;; Py3 files
+(add-to-list 'auto-mode-alist '("\\.py3\\'" . python-mode))
 
 (add-hook 'python-mode-hook '(lambda () 
      (define-key python-mode-map "\C-m" 'newline-and-indent)))

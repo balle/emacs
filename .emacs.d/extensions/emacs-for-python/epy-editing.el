@@ -13,7 +13,7 @@
 
 ;; Auto Completion
 (require 'auto-complete-config)
-(add-to-list 'ac-dictionary-directories
+(add-to-list 'ac-dictionary-directories 
 	     (concat epy-install-dir "auto-complete/ac-dict"))
 (ac-config-default)
 
