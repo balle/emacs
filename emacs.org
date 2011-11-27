@@ -119,6 +119,10 @@ strg + c strg + r          -> compile region
 strg + c `                 -> goto error
 strg + c )                 -> list all labels and make ref entry
 strg + c =                 -> show toc to navigation
+esc + x
+   reftex-change-label     -> globally rename a label
+   reftex-goto-label       -> goto label definition
+   reftex-search-document  -> Grep a label through all files
 * Git 								      :emacs:
 f2             -> show status
                -> s (stage == mark file for commit / add file)
