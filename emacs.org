@@ -136,6 +136,8 @@ f2             -> show status
                  -> = diff HEAD to that commit
                  -> grep history
                -> t (tag)
+               -> v (revert a commit)
+               -> x (reset to version)
                -> z z (create stash)
                  -> A (pop from stash)
                  -> k (kill a stash)
