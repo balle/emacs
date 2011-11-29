@@ -26,6 +26,9 @@
 ; advanced bookmarks
 (require 'bookmark+)
 
+; dvorak
+(load-file "~/.emacs.d/extensions/dvorak-mode.el")
+
 ; display tabbar
 (require 'tabbar)
 (require 'tabbar-extension)

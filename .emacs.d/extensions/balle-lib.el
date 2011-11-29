@@ -1,3 +1,16 @@
+; load dvorak enhanced keys
+(defun balle-dvorak-on ()
+  (interactive)
+  (global-set-key (kbd "C-q") ctl-x-map)  
+  (global-set-key (kbd "C-j") ctl-c-map)  
+  (global-set-key (kbd "C-q C-o") save-buffer)
+  (global-set-key (kbd "C-q C-j") save-buffers-kill-terminal)
+  (global-set-key (kbd "C-q C-i") ido-find-file)
+  (global-set-key (kbd "") yank)
+  (global-set-key (kbd "C-,") kill-region)
+  (global-set-key (kbd "C-s") isearch-forward)
+)
+
 ; code search
 (defun balle-code-search (s)
   "search for code on koders.com"
