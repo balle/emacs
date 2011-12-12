@@ -7,8 +7,10 @@
 (setq-default indent-tabs-mode nil)
 
 (add-hook 'python-mode-hook '(lambda ()
-	(define-key python-mode-map "\C-c \C-d" 'python-end-of-block)
 	(add-hook 'before-save-hook 'delete-trailing-whitespace)
+        (outline-minor-mode)
+        (define-key python-mode-map "\C-c\C-u" 'outline-previous-heading)
+        (define-key python-mode-map "\C-c\C-d" 'outline-next-heading)
 ))
 
 (defun balle-python-shift-left ()

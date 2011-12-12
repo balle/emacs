@@ -46,6 +46,7 @@
   (switch-to-buffer-other-window "*Occur*")
 )
 
+
 (defun balle-show-message-buffer ()
   (interactive)
   (switch-to-buffer-other-window "*Messages*")

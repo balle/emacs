@@ -92,6 +92,8 @@ strg + x p f        -> find file in rope project
 strg + c strg + k   -> mark block
 strg + c strg + u   -> goto begin of block
 strg + c strg + d   -> goto end of block
+strg + alt + a      -> goto previous defun
+strg + alt + e      -> goto next defun
 strg + alt + p      -> jump back to bracket
 strg + alt + n      -> jump forward to bracket
 alt  + m            -> jump to first non-whitespace character
