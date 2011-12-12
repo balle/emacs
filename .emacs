@@ -13,7 +13,8 @@
 (load "balle-lib")
 (load "general-options")
 (load "common-extensions")
-(load "latex-config")
+;
+;(load "latex-config")
 ;(autoload 'LaTeX-mode "latex-config")
 (load "python-config")
 (load "django-config")
@@ -39,6 +40,7 @@
 (global-set-key "\M--" 'shrink-window)
 (global-unset-key "\C-xm")
 (global-set-key "\C-xm" 'balle-show-message-buffer)
+(global-set-key "\C-cm" 'balle-show-magit-process-buffer)
 (global-unset-key "\C-xrs")
 (global-set-key "\C-xrs" 'bookmark-save)
 (global-unset-key "\C-xrd")
