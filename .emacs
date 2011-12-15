@@ -13,8 +13,8 @@
 (load "balle-lib")
 (load "general-options")
 (load "common-extensions")
-;
-(load "latex-config")
+
+;(load "latex-config")
 ;(autoload 'LaTeX-mode "latex-config")
 (load "python-config")
 (load "django-config")
@@ -45,6 +45,8 @@
 (global-set-key "\C-xrs" 'bookmark-save)
 (global-unset-key "\C-xrd")
 (global-set-key "\C-xrd" 'bookmark-delete)
+(global-set-key "\C-x\C-k" 'kill-matching-buffers)
+(global-set-key "\C-xc" 'clean-buffer-list)
 (global-set-key "\C-xg" 'grep-mode)
 (global-unset-key "\M-,")
 (global-set-key "\M-," 'balle-comment-line)
