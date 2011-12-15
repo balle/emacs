@@ -26,6 +26,8 @@
 (add-to-list 'auto-mode-alist '("\\.html$" . django-html-mode))
 (add-to-list 'ac-modes 'django-html-mode)
 
+(setq django-indent-width 4)
+
 (load "~/.emacs.d/extensions/nxhtml/autostart.el")
 (setq mumamo-background-colors nil)
 (add-to-list 'auto-mode-alist '("\\.html$" . django-html-mumamo-mode))
