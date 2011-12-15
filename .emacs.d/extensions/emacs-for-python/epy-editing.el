@@ -19,6 +19,7 @@
 
 ;; Yasnippet - force the loading of the custom version of yasnippet
 (require 'yasnippet (concat epy-install-dir "extensions/yasnippet/yasnippet"))
+(load-file (concat epy-install-dir "extensions/snippet-helpers.el"))
 
 ;; this one is to activate django snippets
 (defun epy-django-snippets ()
@@ -34,7 +35,7 @@
 (setq yas/wrap-around-region 'cua)
 
 ;; Eproject project management with emacs
-(require 'eproject)
+;; (require 'eproject)
 
 ;; code borrowed from http://emacs-fu.blogspot.com/2010/01/duplicating-lines-and-commenting-them.html
 (defun djcb-duplicate-line (&optional commentfirst)
