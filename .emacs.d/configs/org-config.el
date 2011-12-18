@@ -8,7 +8,7 @@
 (setq org-agenda-show-all-dates t)
 (setq org-agenda-skip-deadline-if-done t)
 (setq org-agenda-skip-scheduled-if-done t)
-(setq org-deadline-warning-days 1)
+(setq org-deadline-warning-days 2)
 (setq appt-message-warning-time 30)
 (setq appt-display-mode-line t)
 ;(setq appt-display-format 'window)
