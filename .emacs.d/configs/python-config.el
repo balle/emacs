@@ -7,8 +7,10 @@
 (setq-default indent-tabs-mode nil)
 
 (add-hook 'python-mode-hook '(lambda ()
-	(define-key python-mode-map "\C-c \C-d" 'python-end-of-block)
 	(add-hook 'before-save-hook 'delete-trailing-whitespace)
+        (outline-minor-mode)
+        (define-key python-mode-map "\C-c\C-u" 'outline-previous-heading)
+        (define-key python-mode-map "\C-c\C-d" 'outline-next-heading)
 ))
 
 (defun balle-python-shift-left ()
@@ -44,7 +46,6 @@
 	    (define-key python-mode-map (kbd "C-c <left>") 'balle-python-shift-left)
 	    (define-key python-mode-map "\C-co" 'balle-show-python-functions)
 	    (define-key python-mode-map "\C-cd" 'rope-show-calltip)
-	    (define-key python-mode-map "\C-c\C-d" 'python-end-of-block)
 	    (define-key python-mode-map "\C-ci" 'rope-auto-import)
 	    (setq ropemacs-autoimport-modules '("os.*" "shutil.*" "string.*" "sys.*" "logging" "logging.*" "urllib" "urllib2" "django.*" "piston.*"))
 ))

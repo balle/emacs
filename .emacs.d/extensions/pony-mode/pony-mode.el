@@ -4,10 +4,11 @@
 
 ;; Author: David Miller <david@deadpansincerity.com>
 ;; Maintainer: David Miller <david@deadpansincerity.com>
-;; Created 2011-02-20
+;; Created: 2011-02-20
 ;; Keywords: python django
-;;
-;; Version: 0.2rc1
+;; URL: https://github.com/davidmiller/pony-mode
+;; Version: 0.3b
+
 ;;
 
 ;; This file is NOT part of GNU Emacs
@@ -51,6 +52,11 @@
   :group 'pony
   :type 'string)
 
+(defcustom pony-settings-module "settings"
+  "Settings file to use with manage.py"
+  :group 'pony
+  :type 'string)
+
 (defcustom pony-test-failfast t
   "Run pony tests with failfast?"
   :group 'pony
@@ -62,8 +68,21 @@ projects using sqlite."
   :group 'pony
   :type 'string)
 
+(defcustom pony-snippet-dir (expand-file-name
+                             (concat (file-name-directory load-file-name)
+                                     "/snippets"))
+  "Directory in which to locate Yasnippet snippets for Pony Mode"
+  :group 'pony
+  :type 'string)
+
+(defvar pony-filesystem-ceiling (if (eq 'windows-nt system-type)
+                                    "c:/" "/"))
+
 ;; Dependancies and environment sniffing
 (require 'cl)
+(require 'dired-aux)
+(ignore-errors ; files-x gets stripped from some Debian packages
+  (require 'files-x))
 (require 'sgml-mode)
 (require 'sql)
 (require 'thingatpt)
@@ -87,7 +106,7 @@ projects using sqlite."
           (dolist (filename (find-dot f-or-d pattern))
             (add-to-list 'files filename))
         (if (string-match pattern f-or-d)
-          (add-to-list 'files f-or-d))))
+            (add-to-list 'files f-or-d))))
     files))
 
 ;;;###autoload
@@ -96,25 +115,42 @@ projects using sqlite."
 but allows paths rather than filenames"
   (let ((dir (expand-file-name default-directory))
         (found nil))
-    (message dir)
-    (message "!")
-     (while (and (not (equal "/" dir))
-                 (not found))
-       (message dir)
-       (let ((check (concat dir filepath)))
-         (if (file-exists-p check)
-             (setq found check)))
-       (setq dir (file-name-directory
-                  (directory-file-name dir))))
-     found))
-
-;; Emacs
+    (while (and (not (equal pony-filesystem-ceiling dir))
+                (not found))
+      (let ((check (concat dir filepath)))
+        (if (file-exists-p check)
+            (setq found check)))
+      (setq dir (file-name-directory
+                 (directory-file-name dir))))
+    found))
 
 ;;;###autoload
-(defun pony-pop(buffer)
-  "Wrap pop-to and get buffer"
-  (pop-to-buffer (get-buffer buffer))
-  (pony-mode))
+(defun pony-read-file (filepath)
+  "Read the contents of `filepath'"
+  (with-temp-buffer
+    (insert-file-contents filepath)
+    (read (current-buffer))))
+
+;;
+;; Emacs
+;;
+
+;;;###autoload
+(defun* pony-pop(buffer &key dirlocals)
+  "Wrap pop-to and get buffer.
+
+If the optional argument DIR-LOCALS happens to be non-nil then set the
+variable `dir-local-variables-alist' in the target buffer to be
+equal to the value in the buffer we are popping to.
+
+This is useful because comint buffers without filenames associated
+will otherwise not pick up things like project settings in .dir-locals.el"
+  (let ((dlocals (if dirlocals
+                     dir-local-variables-alist)))
+    (pop-to-buffer (get-buffer buffer))
+    (pony-mode)
+    (if dlocals
+        (pony-local! 'dir-local-variables-alist dlocals))))
 
 ;;;###autoload
 (defun pony-comint-pop(name command args)
@@ -123,23 +159,29 @@ It creates a comint interaction buffer, called `name', running
 `command', called with `args'"
   (ansi-color-for-comint-mode-on)
   (apply 'make-comint name command nil args)
-  (pony-pop (concat "*" name "*")))
+  (pony-pop (concat "*" name "*") :dirlocals t))
 
 ;;;###autoload
 (defun pony-manage-pop (name command args)
-  "Run manage.py commands in a commint buffer. Intended as a wrapper around
-`pony-commint-pop', this function bypasses the need to construct manage.py
-calling sequences in command functions."
-  (let ((python-args (cons command args)))
+  "Run manage.py commands in a commint buffer. Intended as a
+wrapper around `pony-commint-pop', this function bypasses the
+need to construct manage.py calling sequences in command
+functions."
+  (let* ((settings (if (pony-project-newstructure-p)
+                       (concat (pony-project-package) "."
+                               (pony-get-settings-file-basename))
+                     (pony-get-settings-file-basename)))
+         (python-args
+          (cons command (append args (list (concat "--settings=" settings))))))
     (pony-comint-pop name (pony-active-python) python-args)))
 
 ;;;###autoload
 (defun pony-dir-excursion(dir &rest rest)
   "pony-comint-pop where we need to change into `dir` first"
   (let ((curdir default-directory))
-     (cd dir)
-     (apply 'pony-comint-pop rest)
-     (cd curdir)))
+    (cd dir)
+    (apply 'pony-comint-pop rest)
+    (cd curdir)))
 
 ;;;###autoload
 (defun pony-mini-file(prompt &optional startdir)
@@ -149,7 +191,13 @@ calling sequences in command functions."
                    (or startdir
                        (expand-file-name default-directory)))))
 
-;; WTF is this actually used for? I forget.
+;;;###autoload
+(defun pony-local! (var val)
+  "Set the buffer-local variable VAR to VAL.
+Destructive function with no state checking - see `pony-localise' for a
+more conservative local-var manipulation."
+  (set (make-local-variable var) val))
+
 ;;;###autoload
 (defun pony-localise (var func)
   "Return buffer local varible or get & set it"
@@ -162,12 +210,74 @@ calling sequences in command functions."
             (set var the-var))))))
 
 ;; Pony-mode
+
+;;
+;; Config files
+;;
+;; Commentary:
+;;
+;; Allow us to specify things per-project where our local
+;; setup is not one of the ones anticipated...
+;;
+;; We then read in the .ponyrc file in the `pony-project-root',
+;; which should define a pony-project variable
+;;
+
+(defstruct pony-project python settings)
+
+;;;###autoload
+(defun pony-configfile-p ()
+  "Establish whether this project has a .ponyrc file in the root"
+  (if (or
+       (dir-locals-find-file (pony-project-root))
+       (pony-rooted-sym-p '.ponyrc))
+      t nil))
+
+;;;###autoload
+(defun pony-rc ()
+  "Get The settings for the current project.
+
+Read the current pony-project variable from the current buffer's .dir-locals.el"
+  (let ((settings
+         (if (memq 'pony-settings
+                   (mapcar 'first dir-local-variables-alist))
+             (cdr (find-if (lambda (x) (equal (first x) 'pony-settings))
+                           dir-local-variables-alist))
+           ;; For backwards compatibility we also allow ourselves to use .ponyrc
+           (eval (pony-read-file (concat (pony-project-root) ".ponyrc"))))))
+    (eval settings)))
+
+(when (featurep 'files-x)
+;;;###autoload
+  (defun pony-define-project ()
+    "Create or alter the pony-project settings for the current project"
+    (interactive)
+    (let* ((localsfile (concat (pony-project-root) ".dir-locals.el"))
+           (current (if (pony-configfile-p)
+                        (pony-rc)
+                      (make-pony-project)))
+           (interpreter (read-from-minibuffer "Python: " (pony-project-python current)))
+           (settings (read-from-minibuffer "Settings module: "
+                                           (or (pony-project-settings current)
+                                               pony-settings-module))))
+      (if (not (file-exists-p localsfile))
+          (dired-do-touch localsfile))
+      (modify-dir-local-variable nil 'pony-settings '(write list here) 'delete)))
+  )
+
 ;;;###autoload
 (defun pony-reload-mode()
   (interactive)
   (load-library "pony-mode"))
 
+;;
 ;; Python
+;;
+;; Commentary:
+;;
+;; Functions for getting contextually aware information
+;; about the code near point
+;;
 
 ;;;###autoload
 (defun pony-get-func()
@@ -221,6 +331,52 @@ calling sequences in command functions."
         (if found (expand-file-name curdir))))))
 
 ;;;###autoload
+(defun pony-project-newstructure-p()
+  "Predicate to determine whether the project has new structure.
+
+In django ver. => 1.4 manage.py is in an upper directory relative to the
+project module."
+  (let ((settings-file
+         (concat (pony-project-root)
+                 (pony-get-settings-file-basename) ".py")))
+    (not (file-exists-p settings-file))))
+
+;;;###autoload
+(defun pony-project-package()
+  "Return the project package name."
+  (pony-localise
+   'pony-this-project-package
+   '(lambda ()
+      (let ((diffsettings nil)
+            (package ""))
+        (if (not (pony-project-newstructure-p))
+            (setq package (file-name-nondirectory
+                           (directory-file-name (pony-project-root))))
+          (progn
+            (setq diffsettings
+                  (shell-command-to-string
+                   (concat (pony-active-python) " "
+                           (pony-manage-cmd) " "
+                           "diffsettings")))
+            (if (string-match "SETTINGS_MODULE = '\\([^'.]+\\)" diffsettings)
+                (setq package (match-string 1 diffsettings)))))))))
+
+;;;###autoload
+(defun pony-project-package-root()
+  "Return the root of the project packege (dir with project
+settings.py in) or nil"
+  (pony-localise
+   'pony-this-project-package-root
+   '(lambda ()
+      (let ((package-root nil))
+        (if (not (pony-project-newstructure-p))
+            (setq package-root (pony-project-root))
+          (progn
+            (setq package-root (pony-project-package))
+            (if package-root
+                (expand-file-name (file-name-as-directory package-root)
+                                  (pony-project-root)))))))))
+;;;###autoload
 (defun pony-rooted-sym-p (symb)
   "Expand the concatenation of `symb` onto `pony-project-root` and determine whether
 that file exists"
@@ -242,23 +398,25 @@ This command will only work if you run with point in a buffer that is within you
               (setq found (expand-file-name
                            (concat (pony-project-root) (symbol-name test))))))
         (if found
-            (if (not (file-executable-p found))
-                (message "Please make your django manage.py file executable")
-              found))))))
+            found)))))
 
 ;;;###autoload
 (defun pony-active-python ()
   "Fetch the active Python interpreter for this Django project.
-Be aware of 'clean', buildout, and virtualenv situations"
-  (let ((venv-out (pony-locate "bin/python")))
-    (if venv-out
-        venv-out
-      (executable-find "python"))))
+Be aware of .ponyrc configfiles, 'clean', buildout, and
+ virtualenv situations"
+  (if (pony-configfile-p)
+      (pony-project-python (pony-rc))
+    (let ((venv-out (pony-locate "bin/python")))
+      (if venv-out
+          venv-out
+        (executable-find "python")))))
 
 ;;;###autoload
 (defun pony-command-exists(cmd)
   "Is cmd installed in this app"
-  (if (string-match cmd (shell-command-to-string (pony-manage-cmd)))
+  (if (string-match cmd (shell-command-to-string (concat (pony-active-python)
+                                                         " " (pony-manage-cmd))))
       (setq found-command t)
     nil))
 
@@ -276,13 +434,26 @@ Be aware of 'clean', buildout, and virtualenv situations"
     nil))
 
 ;;;###autoload
+(defun pony-get-settings-file-basename()
+  "Return the name of the settings file to use for this
+project. By default this is 'settings', but it can be changed
+locally with .dir-locals.el."
+  (if (pony-configfile-p)
+      (let ((settings (pony-project-settings (pony-rc))))
+        (if settings
+            settings
+          pony-settings-module))
+    pony-settings-module))
+
 (defun pony-get-settings-file()
   "Return the absolute path to the pony settings file"
-  (let ((settings (concat (pony-project-root) "settings.py"))
+  (let ((settings
+         (concat (pony-project-package-root)
+                 (concat (pony-get-settings-file-basename) ".py")))
         (isfile nil))
     (if (not (file-exists-p settings))
         (message "Settings file not found")
-        (setq isfile t))
+      (setq isfile t))
     (if isfile
         settings
       nil)))
@@ -365,10 +536,10 @@ Be aware of 'clean', buildout, and virtualenv situations"
   (let ((buildout (pony-buildout-cmd)))
     (if buildout
         (pony-comint-pop "buildout"
-                           (minibuffer-with-setup-hook 'minibuffer-complete
-                             (completing-read "bin/: "
-                                              (pony-buildout-list-bin)))
-                           nil))))
+                         (minibuffer-with-setup-hook 'minibuffer-complete
+                           (completing-read "bin/: "
+                                            (pony-buildout-list-bin)))
+                         nil))))
 
 ;; Database
 
@@ -413,7 +584,6 @@ Be aware of 'clean', buildout, and virtualenv situations"
       (pony-pop "*SQL*")
       (rename-buffer "*PonyDbShell*"))))
 
-
 ;; Fabric
 
 ;;;###autoload
@@ -429,7 +599,6 @@ Be aware of 'clean', buildout, and virtualenv situations"
 (defun pony-fabric-list-commands()
   "List of all fabric commands for project as strings"
   (split-string (shell-command-to-string "fab --list | awk '{print $1}'|grep -v Available")))
-
 
 ;;;###autoload
 (defun pony-fabric-run(cmd)
@@ -458,12 +627,12 @@ Be aware of 'clean', buildout, and virtualenv situations"
 (defun pony-template-decorator()
   "Hai"
   (save-excursion
-   (progn
-     (search-backward-regexp "^def")
-    (previous-line)
-    (if (looking-at "^@.*['\"]\\([a-z/_.]+html\\).*$")
-        (buffer-substring (match-beginning 1) (match-end 1))
-      nil))))
+    (progn
+      (search-backward-regexp "^def")
+      (previous-line)
+      (if (looking-at "^@.*['\"]\\([a-z/_.]+html\\).*$")
+          (buffer-substring (match-beginning 1) (match-end 1))
+        nil))))
 
 ;;;###autoload
 (defun pony-goto-template()
@@ -482,19 +651,52 @@ Be aware of 'clean', buildout, and virtualenv situations"
         (find-file filename)
       (message (format "Template %s not found" filename)))))
 
+;; TODO
+;;;###autoload?
+;; (defun pony-reverse-url ()
+;;   "Get the URL for this view"
+;;   (interactive)
+;;   (setq found nil)
+;;   (setq view (concat (pony-get-app) ".views." (pony-get-func)))
+;;   (message view)
+;;   (dolist
+;;       (fpath (find-file default-directory "urls.py$"))
+;;     (setq mybuffer (get-buffer-create " myTemp"))
+;;     (switch-to-buffer mybuffer)
+;;     (insert-file-contents fpath)
+;;     (search-forward view)))
+
 ;;;###autoload
-(defun pony-reverse-url ()
-  "Get the URL for this view"
-  (interactive)
-  (setq found nil)
-  (setq view (concat (pony-get-app) ".views." (pony-get-func)))
-  (message view)
-  (dolist
-   (fpath (find-file default-directory "urls.py$"))
-      (setq mybuffer (get-buffer-create " myTemp"))
-      (switch-to-buffer mybuffer)
-      (insert-file-contents fpath)
-      (search-forward view)))
+(defun pony-resolve (url)
+  "Jump to the view file that URL resolves to
+
+This feature is somewhat experimental and known to break in some cases.
+
+Bug reports welcome. Patches even more so :)"
+  (interactive "sUrl: ")
+  (let* ((workdir default-directory)
+         (program
+          (progn
+            (cd (pony-project-root))
+            (format (concat "python -c '"
+                            (mapconcat 'identity
+                                       '("import os"
+                                         "os.environ[\"DJANGO_SETTINGS_MODULE\"]=\"settings\""
+                                         "from django.core.urlresolvers import resolve"
+                                         "from django.utils.importlib import import_module"
+                                         "f=resolve(\"%s\")[0]"
+                                         "path=import_module(f.__module__).__file__"
+                                         "path=path[-1]==\"c\" and path[:-1] or path"
+                                         "print f.__name__, path")
+                                       "; ")
+                            "'") url)))
+         (output (shell-command-to-string program))
+         (fun (first (split-string output)))
+         (file (car (last (split-string output)))))
+    (cd workdir)
+    (find-file file)
+    ;; TODO Search for file. This currently doesn't work because of decorators
+    ))
 
 ;;;###autoload
 (defun pony-goto-settings()
@@ -507,14 +709,14 @@ Be aware of 'clean', buildout, and virtualenv situations"
 ;;;###autoload
 (defun pony-list-commands()
   "List of managment commands for the current project"
-  (with-temp-buffer
-    (insert (shell-command-to-string
-             (concat (pony-active-python) " " (pony-manage-cmd))))
-    (goto-char (point-min))
-    (if (looking-at
-         "\\(\\(.*\n\\)*Available subcommands:\\)\n\\(\\(.*\n\\)+?\\)Usage:")
-        (split-string (buffer-substring (match-beginning 3) (match-end 3)))
-      nil)))
+  (let ((command (concat (pony-active-python) " " (pony-manage-cmd) " --help")))
+    (with-temp-buffer
+      (insert (shell-command-to-string command))
+      (goto-char (point-min))
+      (if (looking-at
+           "\\(\\(.*\n\\)*Available subcommands:\\)\n\\(\\([^:]*\n\\)+?\\)")
+          (split-string (buffer-substring (match-beginning 3) (match-end 3)))
+        nil))))
 
 ;;;###autoload
 (defun pony-manage-run(args)
@@ -523,13 +725,19 @@ Be aware of 'clean', buildout, and virtualenv situations"
 
 ;;;###autoload
 (defun pony-manage()
-  "Interactively call the pony manage command"
+  "Interactively call the pony manage command.
+
+Second string that is read from minibuffer may be an actual
+list of space separated arguments for the previously chosen management
+command. If some of the arguments contain space itself they should be quoted
+with double quotes like \"...\"."
   (interactive)
-  (let ((command (minibuffer-with-setup-hook 'minibuffer-complete
+  (let* ((command (minibuffer-with-setup-hook 'minibuffer-complete
                               (completing-read "Manage: "
-                                               (pony-list-commands)))))
-    (pony-manage-run (list command
-                             (read-from-minibuffer (concat command ": "))))))
+                                               (pony-list-commands))))
+         (args (split-string-and-unquote
+                (read-from-minibuffer (concat command ": ")))))
+    (pony-manage-run (cons command args))))
 
 ;;;###autoload
 (defun pony-flush()
@@ -548,7 +756,7 @@ Be aware of 'clean', buildout, and virtualenv situations"
     (shell-command (concat
                     (pony-active-python) " "
                     (pony-manage-cmd) " dumpdata " dump " > " target))
-  (message (concat "Written to " target))))
+    (message (concat "Written to " target))))
 
 ;;;###autoload
 (defun pony-loaddata ()
@@ -563,21 +771,38 @@ Be aware of 'clean', buildout, and virtualenv situations"
 
 ;;;###autoload
 (defun pony-runserver()
-  "Start the dev server"
+  "Start the Django development server.
+
+If the server is currently running, just switch to the buffer.
+
+If you are currently in the *ponyserver* buffer, restart the server"
   (interactive)
-  (let ((proc (get-buffer-process "*ponyserver*"))
-        (working-dir default-directory))
+  (let* ((buffname "*ponyserver*")
+         (proc (get-buffer-process buffname))
+         (buff (get-buffer buffname))
+         (working-dir default-directory))
     (if proc
-        (message "Pony Dev Server already running")
-      (if (pony-command-exists "runserver_plus")
-          (setq command "runserver_plus")
-        (setq command "runserver"))
-      (progn
-        (cd (pony-project-root))
-        (pony-manage-pop "ponyserver" (pony-manage-cmd)
-               (list command
-                     (concat pony-server-host ":"  pony-server-port)))
-        (cd working-dir)))))
+        (progn
+          (message "Pony Dev Server already running")
+          (if (and buff (equalp buff (current-buffer)))
+              (pony-restart-server)
+            (pony-pop buffname)))
+      (pony-startserver))))
+
+(defun pony-startserver ()
+  "Start the Django development server.
+
+If the project has django_extras installed and the excellent `runserver_plus'
+command is available, use that, otherwise fall back to manage.py runserver."
+  (if (pony-command-exists "runserver_plus")
+      (setq command "runserver_plus")
+    (setq command "runserver"))
+  (progn
+    (cd (pony-project-root))
+    (pony-manage-pop "ponyserver" (pony-manage-cmd)
+                     (list command
+                           (concat pony-server-host ":"  pony-server-port)))
+    (cd working-dir)))
 
 ;;;###autoload
 (defun pony-stopserver()
@@ -585,6 +810,15 @@ Be aware of 'clean', buildout, and virtualenv situations"
   (interactive)
   (let ((proc (get-buffer-process "*ponyserver*")))
     (when proc (kill-process proc t))))
+
+;;;###autoload
+(defun pony-restart-server ()
+  "Restart the pony Django dev server.
+Django extras does this better with the Werkzeug server, but sometimes
+you can't have nice things."
+  (interactive)
+  (pony-stopserver)
+  (run-with-timer 1 nil 'pony-startserver))
 
 ;;;###autoload
 (defun pony-temp-server ()
@@ -603,22 +837,32 @@ This function allows you to run a server with a 'throwaway' host:port"
 (defun pony-browser()
   "Open a tab at the development server"
   (interactive)
-  (let ((url "http://localhost:8000")
+  (let ((url (concat "http://" pony-server-host ":"  pony-server-port))
         (proc (get-buffer-process "*ponyserver*")))
-    (if (not proc)
-        (pony-runserver))
+    ;; use actual url if process is already running
+    (if proc
+        (save-excursion
+          (progn
+            (set-buffer "*ponyserver*")
+            (goto-char (point-max))
+            (if (search-backward-regexp "Development server is running at \\(.+\\)\n")
+                (setq url (match-string-no-properties 1)))))
+      (pony-runserver))
     (run-with-timer 2 nil 'browse-url url)))
 
 ;; Shell
 
 ;;;###autoload
 (defun pony-shell()
-  "Open a shell with the current pony project's context loaded"
+  "Open a Python shell with the current pony project's context loaded.
+
+If the project has the django_extras package installed, then use the excellent
+`shell_plus' command. Otherwise, fall back to manage.py shell "
   (interactive)
   (if (pony-command-exists "shell_plus")
       (setq command "shell_plus")
     (setq command "shell"))
-  (pony-comint-pop "ponysh" (pony-manage-cmd) (list command)))
+  (pony-manage-pop "ponysh" (pony-manage-cmd) (list command)))
 
 ;; Startapp
 
@@ -772,9 +1016,6 @@ This function allows you to run a server with a 'throwaway' host:port"
 ;; Snippets
 
 ;;;###autoload
-(defvar pony-snippet-dir (expand-file-name
-                            (concat (file-name-directory load-file-name)
-                                    "/snippets")))
 
 ;;;###autoload
 (defun pony-load-snippets()
@@ -834,6 +1075,7 @@ This function allows you to run a server with a 'throwaway' host:port"
          ;; Server
          ["Run dev server for project" pony-runserver]
          ["Stop dev server for project" pony-stopserver]
+         ["Restart the dev server" pony-restart-server]
          ["Launch project in browser" pony-browser]
          "-"
          ("Models"
@@ -852,6 +1094,7 @@ This function allows you to run a server with a 'throwaway' host:port"
          ["Run tests" pony-test]
          ;; Goto
          "-"
+         ["Goto the view file for a given url (Beta)" pony-resolve]
          ["Goto settings file for project" pony-goto-settings]
          ["Goto template for view or at point" pony-goto-template]
          "-"
@@ -889,39 +1132,8 @@ This function allows you to run a server with a 'throwaway' host:port"
   (interactive)
   (pony-minor-mode))
 
-;; Pony-tpl-minor-mode
-
-(defvar pony-tpl-mode-hook nil)
-
-(defconst pony-tpl-font-lock-keywords
-  (append
-   sgml-font-lock-keywords
-   (list
-    '("{%.*\\(\\bor\\b\\).*%}" . (1 font-lock-builtin-face))
-
-    '("{% ?comment ?%}\\(\n?.*?\\)+?{% ?endcomment ?%}" . font-lock-comment-face)
-    '("{% ?\\(\\(end\\)?\\(extends\\|for\\|cache\\|cycle\\|filter\\|firstof\\|debug\\|if\\(changed\\|equal\\|notequal\\|\\)\\|include\\|load\\|now\\|regroup\\|spaceless\\|ssi\\|templatetag\\|widthratio\\|block\\|trans\\)\\) ?.*? ?%}" . 1)
-    '("{{ ?\\(.*?\\) ?}}" . (1 font-lock-variable-name-face))
-    '("{%\\|\\%}\\|{{\\|}}" . font-lock-builtin-face)
-    ))
-  "Highlighting for pony-tpl-mode")
-
-(define-minor-mode pony-tpl-minor-mode
-  "Pony-templatin-riffic"
-  :initial nil
-  :lighter " PonyTpl"
-  :keymap pony-minor-mode-map)
-
-(defun pony-tpl-mode()
-  "Minor mode for editing pony templates"
-  (interactive)
-  (pony-tpl-minor-mode t)
-  (run-hooks 'pony-tpl-mode-hook)
-  (set (make-local-variable 'font-lock-defaults)
-       '(pony-tpl-font-lock-keywords))
-   (pony-load-snippets))
-
-;; Pony-test minor mode
+;;; ###pony-tmpl
+(load-file (concat (file-name-directory load-file-name) "/pony-tpl.el"))
 
 (define-minor-mode pony-test-minor-mode
   "Pony Testin'"
@@ -953,3 +1165,4 @@ This function allows you to run a server with a 'throwaway' host:port"
                 (pony-mode))))
 
 (provide 'pony-mode)
+;;; pony-mode.el ends here

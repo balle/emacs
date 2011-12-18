@@ -71,13 +71,21 @@
   (interactive)
   (occur "^ *def ")
   (enlarge-window 7)
+  (switch-to-buffer-other-window "*Occur*")
 )
+
 
 (defun balle-show-message-buffer ()
   (interactive)
   (switch-to-buffer-other-window "*Messages*")
   (next-multiframe-window)
   (enlarge-window 10)
+)
+
+(defun balle-show-magit-process-buffer ()
+  (interactive)
+  (switch-to-buffer-other-window "*magit-process*")
+  (enlarge-window 5)
 )
 
 ; markiere das wort unter dem cursor im gesamten buffer

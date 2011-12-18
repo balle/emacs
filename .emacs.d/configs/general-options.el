@@ -95,6 +95,12 @@
  (remove 'process-kill-buffer-query-function
          kill-buffer-query-functions))
 
+; clean normal buffers not displayed for 3 days
+(setq clean-buffer-list-delay-general 3)
+
+; clean special buffers not displayed for 3 hours
+(setq clean-buffer-list-delay-special (* 3 3600))
+
 ; calendar / diary settings
 (setq diary-file "~/organize/shared/termine")
 ;(setq view-diary-entries-initially nil)

@@ -1,45 +1,45 @@
 * Save / Open / Close 						      :emacs:
-strg + x strg+s -> save
-strg + x strg+c -> close
-strg + x strg+f -> open file
-strg + x strg+w -> save as
-strg + x s      -> save all
+ctrl + x ctrl+s -> save
+ctrl + x ctrl+c -> close
+ctrl + x ctrl+f -> open file
+ctrl + x ctrl+w -> save as
+ctrl + x s      -> save all
 
 * Mark 								      :emacs:
-strg + space         -> set marker
-strg + x h           -> mark whole buffer
+ctrl + space         -> set marker
+ctrl + x h           -> mark whole buffer
 alt  + h             -> mark paragraph
 
 * Copy / Cut / Paste 						      :emacs:
-strg + w     -> cut from marker to cursor
+ctrl + w     -> cut from marker to cursor
 alt  + w     -> copy from marker to curser
-strg + k     -> cut line from corser till end
-strg + y     -> insert
-strg + d     -> cut whole line
-strg + c     -> copy current line
-strg + c y   -> copy current line direkt drunter einfügen
-strg + c c   -> duplicate line but comment out first
+ctrl + k     -> cut line from corser till end
+ctrl + y     -> insert
+ctrl + d     -> cut whole line
+ctrl + c     -> copy current line
+ctrl + c y   -> copy current line direkt drunter einfügen
+ctrl + c c   -> duplicate line but comment out first
 alt  + y     -> skip through kill-ring
 
 * Move 								      :emacs:
-strg+c <up>    -> move row or region upwards
-strg+c <down>  -> move row or region downwards
-strg+c <left>  -> move row or region left
-strg+c <right> -> move row or region right
+ctrl+c <up>    -> move row or region upwards
+ctrl+c <down>  -> move row or region downwards
+ctrl+c <left>  -> move row or region left
+ctrl+c <right> -> move row or region right
 
 * Search 							      :emacs:
 alt  + g g        -> goto line
-strg + s          -> search forward
-strg + r          -> search backward
+ctrl + s          -> search forward
+ctrl + r          -> search backward
 alt  + %          -> search and replace
-strg + s strg + w -> search word under cursor
-alt  + strg + s   -> regular expression search forward
+ctrl + s ctrl + w -> search word under cursor
+alt  + ctrl + s   -> regular expression search forward
 alt  + x          -> query-replace-regexp
-strg + x strg + q -> goto last change
+ctrl + x ctrl + q -> goto last change
 
 * Go to 							      :emacs:
-strg + a -> begin of row
-strg + e -> end of row
+ctrl + a -> begin of row
+ctrl + e -> end of row
 alt  + a -> begin of sentence
 alt  + e -> end of sentence
 alt  + < -> begin of buffer
@@ -57,68 +57,72 @@ F5             -> auto correct word before cursor
 F6             -> goto next ispell error
 F7             -> add word to dictionary
 alt + x ispell -> start spell checking of whole buffer
-strg + x ü     -> translate a word
+ctrl + x ü     -> translate a word
 alt  + $       -> check word under cursor
 alt  + tab     -> correct word under cursor
 
 * Buffer 							      :emacs:
-strg + x 0 -> close current window
-strg + x 1 -> close all windows except current one
-strg + x 2 -> split horizontally
-strg + x 3 -> split vertically
-strg + x o -> switch between windows
-strg + x k -> kill current buffer
+ctrl + x 0 -> close current window
+ctrl + x 1 -> close all windows except current one
+ctrl + x 2 -> split horizontally
+ctrl + x 3 -> split vertically
+ctrl + x o -> switch between windows
+ctrl + x k -> kill current buffer
+ctrl + x ctrl + k -> kill buffers matching regexp
+ctrl + x c  -> cleanup buffer list (kill unused)
 alt  + +   -> enlarge current window
 alt  + -   -> shrink current window
-strg + x m -> show messages buffer
-strg + x left / right  -> previous / next buffer
+ctrl + x m -> show messages buffer
+ctrl + x left / right  -> previous / next buffer
 
 * Code folding							      :emacs:
-strg+c strg+o strg+t -> hide all but top level
-strg+c strg+o strg+a -> show all
-strg+c strg+o strg+s -> show subtree at cursor
-strg+c strg+o strg+d -> hide subtree at cursor
-strg+c strg+o strg+f -> move forward at same level
-strg+c strg+o strg+b -> move backward at same level
+ctrl+c ctrl+o ctrl+t -> hide all but top level
+ctrl+c ctrl+o ctrl+a -> show all
+ctrl+c ctrl+o ctrl+s -> show subtree at cursor
+ctrl+c ctrl+o ctrl+d -> hide subtree at cursor
+ctrl+c ctrl+o ctrl+f -> move forward at same level
+ctrl+c ctrl+o ctrl+b -> move backward at same level
 
 * Python 							      :emacs:
-strg + c d          -> python doc for module / method
-strg + c g          -> goto definition
-strg + c i          -> auto import
-strg + c f          -> find occurencies
-strg + c r r        -> refactoring rename
-strg + x p o        -> open project
-strg + x p f        -> find file in rope project
-strg + c strg + k   -> mark block
-strg + c strg + u   -> goto begin of block
-strg + c strg + d   -> goto end of block
-strg + alt + p      -> jump back to bracket
-strg + alt + n      -> jump forward to bracket
+ctrl + c d          -> python doc for module / method
+ctrl + c g          -> goto definition
+ctrl + c i          -> auto import
+ctrl + c f          -> find occurencies
+ctrl + c r r        -> refactoring rename
+ctrl + x p o        -> open project
+ctrl + x p f        -> find file in rope project
+ctrl + c ctrl + k   -> mark block
+ctrl + c ctrl + u   -> goto begin of block
+ctrl + c ctrl + d   -> goto end of block
+ctrl + alt + a      -> goto previous defun
+ctrl + alt + e      -> goto next defun
+ctrl + alt + p      -> jump back to bracket
+ctrl + alt + n      -> jump forward to bracket
 alt  + m            -> jump to first non-whitespace character
-strg + c strg + z   -> open python console
-strg + c c          -> run script
-strg + c strg + p r -> run django server
-strg + c strg + p b -> run django project in browser
-strg + c strg + p gs -> goto django settings
-strg + c strg + p d  -> run django db shell
-strg + c strg + p s  -> run django shell
-strg + c strg + p m  -> run django migrate
-strg + c strg + p t  -> run django test
+ctrl + c ctrl + z   -> open python console
+ctrl + c c          -> run script
+ctrl + c ctrl + p r -> run django server
+ctrl + c ctrl + p b -> run django project in browser
+ctrl + c ctrl + p gs -> goto django settings
+ctrl + c ctrl + p d  -> run django db shell
+ctrl + c ctrl + p s  -> run django shell
+ctrl + c ctrl + p m  -> run django migrate
+ctrl + c ctrl + p t  -> run django test
 
 * LaTeX 							      :emacs:
-strg + c strg + c          -> compile / view
-strg + c strg + s          -> insert section with label
-strg + c strg + e          -> insert begin / end block
-strg + c u                 -> jump to begin block
-strg + c d                 -> jump to end block
-strg + c i                 -> \item
-strg + c strg + f strg + b -> font bold
-strg + c strg + f strg + i -> font italics
-strg + c strg + l          -> show compiler output
-strg + c strg + r          -> compile region
-strg + c `                 -> goto error
-strg + c )                 -> list all labels and make ref entry
-strg + c =                 -> show toc to navigation
+ctrl + c ctrl + c          -> compile / view
+ctrl + c ctrl + s          -> insert section with label
+ctrl + c ctrl + e          -> insert begin / end block
+ctrl + c u                 -> jump to begin block
+ctrl + c d                 -> jump to end block
+ctrl + c i                 -> \item
+ctrl + c ctrl + f ctrl + b -> font bold
+ctrl + c ctrl + f ctrl + i -> font italics
+ctrl + c ctrl + l          -> show compiler output
+ctrl + c ctrl + r          -> compile region
+ctrl + c `                 -> goto error
+ctrl + c )                 -> list all labels and make ref entry
+ctrl + c =                 -> show toc to navigation
 esc + x
    reftex-change-label     -> globally rename a label
    reftex-goto-label       -> goto label definition
@@ -149,16 +153,25 @@ f2             -> show status
                  -> b (switch to that branch)
                -> w (whazzup - show diff from current branch to others)
 * XML 								      :emacs:
-strg + c strg + f -> close current xml tag
+ctrl + c ctrl + f -> close current xml tag
 alt  + tab        -> xml autocomplete
-strg + alt+b      -> jump one xml tag back
-strg + alt+f      -> jump one xml tag forward
+ctrl + alt+b      -> jump one xml tag back
+ctrl + alt+f      -> jump one xml tag forward
 
 * HTML 								      :emacs:
-strg + c strg+d       -> delete tag
-strg + c left / right -> skip tag back / forward
-strg + c /            -> close tag
-strg + c strg + v     -> show buffer in browser
+ctrl + c ctrl+d       -> delete tag
+ctrl + c left / right -> skip tag back / forward
+ctrl + c /            -> close tag
+ctrl + c ctrl + v     -> show buffer in browser
+ctrl + c ctrl + c -   ->  html-horizontal-rule
+ctrl + c ctrl + c c   ->  html-checkboxes
+ctrl + c ctrl + c h   ->  html-href-anchor
+ctrl + c ctrl + c i   ->  html-image
+ctrl + c ctrl + c l   ->  html-list-item
+ctrl + c ctrl + c n   ->  html-name-anchor
+ctrl + c ctrl + c o   ->  html-ordered-list
+ctrl + c ctrl + c r   ->  html-radio-buttons
+ctrl + c ctrl + c u   ->  html-unordered-list
 
 * Calendar                                                            :emacs:
 f1 -> execute calendar
@@ -169,25 +182,25 @@ iy -> insert yearly task
 d  -> show task
 
 * Org Mode                                                            :emacs:
-strg + c tab            - collabse list
+ctrl + c tab            - collabse list
 shift + tab           - hide / show all
-strg + c strg + c     - tag an entry
-strg + c strg + t     - mark as todo / done
-strg + c strg + s     - insert schedule
-strg + c strg + d     - insert deadline
-strg + c up / down    - change priority
+ctrl + c ctrl + c     - tag an entry
+ctrl + c ctrl + t     - mark as todo / done
+ctrl + c ctrl + s     - insert schedule
+ctrl + c ctrl + d     - insert deadline
+ctrl + c up / down    - change priority
 
-strg + x t a          - show termin list
-strg + x t b          - show einkaufsliste
-strg + x t h          - show hacking list
-strg + t l            - show latex list
-strg + t e            - show emacs list
-strg + x t n          - show note list
-strg + x t p          - show python list
-strg + x t s          - show started list
-strg + x t t          - show todo list
-strg + x t w          - show wait list
-strg + x t x          - show next list
+ctrl + x t a          - show termin list
+ctrl + x t b          - show einkaufsliste
+ctrl + x t h          - show hacking list
+ctrl + t l            - show latex list
+ctrl + t e            - show emacs list
+ctrl + x t n          - show note list
+ctrl + x t p          - show python list
+ctrl + x t s          - show started list
+ctrl + x t t          - show todo list
+ctrl + x t w          - show wait list
+ctrl + x t x          - show next list
 f8                    - new entry
 alt + x org-tags-view - show todo list for one day
 alt + x org-agenda
@@ -208,8 +221,8 @@ $0 -> End of template
 /sudo::/etc/z.b.conf - sudo edit
 
 * retangle edit 						      :emacs:
-mark region, than strg+x r t and # (comment all lines in region)
-strg+x r k delete alle comment characters
+mark region, than ctrl+x r t and # (comment all lines in region)
+ctrl+x r k delete alle comment characters
 
 * Remote Edit 							      :emacs:
 # ftp edit
@@ -222,24 +235,24 @@ ctrl + alt  b syntax check backward
 mit ctrl + x ctrl + e execute statement
 
 * Bookmarks 							      :emacs:
-strg + x r m              -> set bookmark
-strg + x r b              -> goto bookmark
-strg + x r l              -> list bookmarks
-strg + x r d              -> delete bookmark
-strg + x r s              -> save bookmarks
-strg + space strg + space -> push pos to mark ring
-strg + x space            -> goto last pos in mark ring
+ctrl + x r m              -> set bookmark
+ctrl + x r b              -> goto bookmark
+ctrl + x r l              -> list bookmarks
+ctrl + x r d              -> delete bookmark
+ctrl + x r s              -> save bookmarks
+ctrl + space ctrl + space -> push pos to mark ring
+ctrl + x space            -> goto last pos in mark ring
 * Macros 							      :emacs:
-strg + x ( -> begin macro recording
-strg + x ) -> end macro recording
-strg + x e -> execute macro
+ctrl + x ( -> begin macro recording
+ctrl + x ) -> end macro recording
+ctrl + x e -> execute macro
 esc+x name-last-kbg-macro - to give macro a name for this session
 esc+x insert-kbd-macro - to save macro in a file
 
 * Repeat							      :emacs:
 esc <no> <shortcut> - repeat shortcut no times
-strg+u <shortcut> - do shortcut 4 times (strg+u strg+u 16 time and so on)
-strg+x z - repeat last command
+ctrl+u <shortcut> - do shortcut 4 times (ctrl+u ctrl+u 16 time and so on)
+ctrl+x z - repeat last command
 
 * Diff                                                                :emacs:
 \M-x ediff-buffers
@@ -259,9 +272,9 @@ emerge-merge-directories
 alt + 1 - turn dvorak mode off for one buffer
 alt + 2 - turn dvorak mode on for one buffer
 * Misc 								      :emacs:
-strg + g                      -> Cancel
-strg + x u                    -> UNDO tree
-strg + x U                    -> undo last change
+ctrl + g                      -> Cancel
+ctrl + x u                    -> UNDO tree
+ctrl + x U                    -> undo last change
 
 esc+x package-list-packages   -> emacs erweiterung suchen / (de)installieren
 esc+x re-builder              -> regexp helper shows matches in buffer
@@ -270,7 +283,7 @@ alt  + x compare-windows      -> compare buffers of visible windows
 alt ;                         -> block comment
 alt  + x revert-buffer        -> reload the file
 alt  + x highlight-changes-mode
-strg + x esc esc              -> show executed commands as lisp code
+ctrl + x esc esc              -> show executed commands as lisp code
 alt  + x text-scale-increase  -> increase font size
 alt  + x describe-face
 alt  + x eval-current-buffer
@@ -286,9 +299,9 @@ mark files with m (u for unmark)
 alt + x dired-do-query-replace-regexp
 
 * Help 								      :emacs:
-strg + h a        -> apropos (help keyword search)
-strg + h b        -> show all keyboard shortcuts
-strg + h k        -> show description of shortcut
-strg + h f        -> show documentation of function
-strg + c strg + h -> show keyboard shortcuts of current mode
-strg+h F - search in emacs faq
+ctrl + h a        -> apropos (help keyword search)
+ctrl + h b        -> show all keyboard shortcuts
+ctrl + h k        -> show description of shortcut
+ctrl + h f        -> show documentation of function
+ctrl + c ctrl + h -> show keyboard shortcuts of current mode
+ctrl+h F - search in emacs faq

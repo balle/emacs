@@ -22,6 +22,7 @@
 ; advaned undo
 (require 'undo-tree)
 (global-undo-tree-mode)
+(setq undo-limit 50000)
 
 ; advanced bookmarks
 (require 'bookmark+)
