@@ -75,6 +75,10 @@ alt  + -   -> shrink current window
 ctrl + x m -> show messages buffer
 ctrl + x left / right  -> previous / next buffer
 
+* Histoy                                                              :emacs:
+in a command like search-forward you can do
+alt + p / alt + n       -> get previous or next input you entered
+alt + r / alt + s       -> search history back- or forward
 * Code folding							      :emacs:
 ctrl+c ctrl+o ctrl+t -> hide all but top level
 ctrl+c ctrl+o ctrl+a -> show all
@@ -159,7 +163,7 @@ ctrl + alt+b      -> jump one xml tag back
 ctrl + alt+f      -> jump one xml tag forward
 
 * HTML 								      :emacs:
-ctrl + c ctrl+d       -> delete tag
+csStrl + c ctrl+d       -> delete tag
 ctrl + c left / right -> skip tag back / forward
 ctrl + c /            -> close tag
 ctrl + c ctrl + v     -> show buffer in browser
@@ -190,8 +194,10 @@ ctrl + c ctrl + s     - insert schedule
 ctrl + c ctrl + d     - insert deadline
 ctrl + c up / down    - change priority
 
+f9                    - fetch redmine tickets
+  tab                 - insert ticket into org file
+
 ctrl + x t a          - show termin list
-ctrl + x t b          - show einkaufsliste
 ctrl + x t h          - show hacking list
 ctrl + t l            - show latex list
 ctrl + t e            - show emacs list
@@ -305,4 +311,5 @@ ctrl + h b        -> show all keyboard shortcuts
 ctrl + h k        -> show description of shortcut
 ctrl + h f        -> show documentation of function
 ctrl + c ctrl + h -> show keyboard shortcuts of current mode
-ctrl+h F - search in emacs faq
+ctrl + h F - search in emacs faq
+ctrl + h i m      -> open documentation directory
