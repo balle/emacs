@@ -21,6 +21,7 @@
 (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
 
 ; auto-completion
+(add-to-list 'load-path "~/.emacs.d/extensions/auto-complete-1.3")
 (require 'auto-complete-config nil t)
 (require 'ac-math)
 (add-to-list 'ac-modes 'LaTeX-mode)

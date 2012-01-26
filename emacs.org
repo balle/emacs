@@ -275,9 +275,6 @@ Merging with \M-x emerge-buffers
 Want to see / merge differences in two directories?
 ediff-directories
 emerge-merge-directories
-* Dvorak                                                              :emacs:
-alt + 1 - turn dvorak mode off for one buffer
-alt + 2 - turn dvorak mode on for one buffer
 * Misc 								      :emacs:
 ctrl + g                      -> Cancel
 ctrl + x u                    -> UNDO tree

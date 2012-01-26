@@ -1,36 +1,20 @@
-(require 'pony-mode)
-(add-hook 'pony-minor-mode-hook '(lambda ()
-;	(define-key pony-minor-mode-map [f2] 'pony-syncdb)
-;	(define-key pony-minor-mode-map [f3] 'balle-django-migrate)
-))
-
-(require 'flymake)
-(defun flymake-html-init ()
-	  (let* ((temp-file (flymake-init-create-temp-buffer-copy
-	                     'flymake-create-temp-inplace))
-	         (local-file (file-relative-name
-	                      temp-file
-	                      (file-name-directory buffer-file-name))))
-	    (list "balle_tidy" (list local-file))))
-
-;(add-to-list 'flymake-allowed-file-name-masks
-;	     '("\\.html$\\|\\.htm" flymake-html-init))
-
-(add-to-list 'flymake-err-line-patterns
-	     '("line \\([0-9]+\\) column \\([0-9]+\\) - \\(Warning\\|Error\\): \\(.*\\)"
-	       nil 1 2 4))
-
+(add-to-list 'load-path "~/.emacs.d/extensions/auto-complete-1.3")
+(require 'auto-complete-config nil t)
 (require 'django-html-mode)
-;(require 'django-mode)
-;(add-to-list 'ac-modes 'django-mode)
-(add-to-list 'auto-mode-alist '("\\.html$" . django-html-mode))
+(add-to-list 'auto-mode-alist '("\\.html$" . django-html-mumamo-mode))
+(setq ac-dwim t)
+(ac-config-default)
+(auto-complete-mode)
+(add-to-list 'ac-modes 'django-mode)
 (add-to-list 'ac-modes 'django-html-mode)
-
+(add-to-list 'ac-modes 'django-html-mumamo-mode)
+(add-to-list 'ac-modes 'html-mode)
+(add-to-list 'ac-modes 'nxhtml-mode)
 (setq django-indent-width 4)
 
 (load "~/.emacs.d/extensions/nxhtml/autostart.el")
 (setq mumamo-background-colors nil)
-(add-to-list 'auto-mode-alist '("\\.html$" . django-html-mumamo-mode))
+
 
 ;; Mumamo is making emacs 23.3 freak out:
 (when (and (equal emacs-major-version 23)

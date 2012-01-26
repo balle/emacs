@@ -9,13 +9,6 @@
 ; oddmuse wiki support
 (require 'yaoddmuse)
 
-; buffer move
-;(require 'buffer-move)
-;(global-set-key (kbd "<M-up>")     'buf-move-up)
-;(global-set-key (kbd "<M-down>")   'buf-move-down)
-;(global-set-key (kbd "<M-left>")   'buf-move-left)
-;(global-set-key (kbd "<M-right>")  'buf-move-right)
-
 ; easier window switching
 (require 'win-switch)
 
@@ -26,9 +19,6 @@
 
 ; advanced bookmarks
 (require 'bookmark+)
-
-; dvorak
-(load-file "~/.emacs.d/extensions/dvorak-mode.el")
 
 ; display tabbar
 (require 'tabbar)
@@ -47,25 +37,7 @@
 ; show flymake errors in message buffer
 (load-library "flymake-cursor")
 
-; speedbar
-;(require 'sr-speedbar)
-;(setq sr-speedbar-right-side nil)
-;(sr-speedbar-toggle)
-
-; workgroups
-;(require 'workgroups)
-;(setq wg-prefix-key (kbd "C-c w"))
-;(workgroups-mode 1)
-;(wg-load "~/.emacs.d/workgroups")
-
-; autopair
-;(require 'autopair)
-;(autopair-global-mode)
-
 ; goto last change
 (require 'goto-last-change)
 
-; highlight todo and fixme comments
-;(require 'fic-ext-mode)
-;(add-hook 'python-mode-hook 'turn-on-fic-ext-mode)
 

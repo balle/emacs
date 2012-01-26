@@ -72,7 +72,7 @@
 (show-paren-mode t)
 
 ; dired settings
-(setq dired-listing-switches "")
+;(setq dired-listing-switches "")
 
 ; backup
 (setq
@@ -191,21 +191,5 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 ;(setq compare-ignore-case nil)
 (setq debug-on-error t)
-
-; outline mode (for folding)
-(add-hook 'outline-minor-mode-hook
-              (lambda ()
-		(local-set-key "\C-c\C-o" outline-mode-prefix-map)
-		(define-key outline-mode-prefix-map "a" 'show-all)
-	      )
-)
-
-; use this snippet to start in hidden mode
-;; (add-hook 'outline-minor-mode-hook
-;;   (lambda () (hide-body))
-;; )
-
-; load outline minor mode
-(outline-minor-mode 1)
 
 (set-face-background 'hl-line "green")
