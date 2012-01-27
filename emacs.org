@@ -218,9 +218,17 @@ alt + x org-agenda
 lines are indicated with @
 columns are indicated with $
 you can you numbers or chars for columns
+
 - ctrl + c ctrl + c will execute formula
 - ctrl + u ctrl + c * -> recalculate all columns
-- sum a column   -> =vsum(@2..@-1)
+
+- ctrl + { -> start formula debugger
+- ctrl + } -> show current line and column
+- ctrl + enter -> insert separator
+- super + meta + <up> / <down> -> move row up / down
+- super + meta + <left> / <right> -> move column left / right
+
+- sum a column =vsum(@2..@-1)
 - calc time durations ='(with-time t (- $3 $2))
 
 * YaSnippet 							      :emacs:
