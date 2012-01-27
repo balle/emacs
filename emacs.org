@@ -193,6 +193,7 @@ ctrl + c ctrl + t     - mark as todo / done
 ctrl + c ctrl + s     - insert schedule
 ctrl + c ctrl + d     - insert deadline
 ctrl + c up / down    - change priority
+ctrl + c ctrl + z     - take a note to an entry
 
 f9                    - fetch redmine tickets
   tab                 - insert ticket into org file
@@ -210,6 +211,13 @@ ctrl + x t x          - show next list
 f8                    - new entry
 alt + x org-tags-view - show todo list for one day
 alt + x org-agenda
+
+* Spreadsheet 							      :emacs:
+lines are indicated with @
+columns are indicated with $
+you can you numbers or chars for columns
+ctrl + c ctrl + c will execute formula
+- sum a column   -> =vsum(@2..@-1)
 
 * YaSnippet 							      :emacs:
 alt + x yas/new-snippet    -> create new template
