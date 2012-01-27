@@ -134,6 +134,7 @@ esc + x
 * Git 								      :emacs:
 f2             -> show status
                -> s (stage == mark file for commit / add file)
+               -> ctrl + u S (stage all)
                -> c (commit)
                -> d (diff file)
                -> P (push)
