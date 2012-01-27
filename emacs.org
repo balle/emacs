@@ -197,6 +197,8 @@ ctrl + c ctrl + z     - take a note to an entry
 
 f9                    - fetch redmine tickets
   tab                 - insert ticket into org file
+ctrl + c ctrl + x ctrl + i - start clocking time
+ctrl + c ctrl + x ctrl + o - stop clocking time
 
 ctrl + x t a          - show termin list
 ctrl + x t h          - show hacking list
@@ -216,8 +218,10 @@ alt + x org-agenda
 lines are indicated with @
 columns are indicated with $
 you can you numbers or chars for columns
-ctrl + c ctrl + c will execute formula
+- ctrl + c ctrl + c will execute formula
+- ctrl + u ctrl + c * -> recalculate all columns
 - sum a column   -> =vsum(@2..@-1)
+- calc time durations ='(with-time t (- $3 $2))
 
 * YaSnippet 							      :emacs:
 alt + x yas/new-snippet    -> create new template
