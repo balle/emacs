@@ -178,6 +178,16 @@ ctrl + c ctrl + c o   ->  html-ordered-list
 ctrl + c ctrl + c r   ->  html-radio-buttons
 ctrl + c ctrl + c u   ->  html-unordered-list
 
+* Po-Files							      :emacs:
+n -> next translation entry
+p -> previous translation entry
+u -> next untranslated entry
+enter -> enter tranlation text
+  ctrl + c ctrl + c -> save
+k -> cut translation to kill-ring
+w -> copy translation to kill-ring
+V -> validate file
+
 * Calendar                                                            :emacs:
 f1 -> execute calendar
 id -> insert daily task
