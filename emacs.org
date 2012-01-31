@@ -310,6 +310,7 @@ emerge-merge-directories
 ctrl + g                      -> Cancel
 ctrl + x u                    -> UNDO tree
 ctrl + x U                    -> undo last change
+ctrl + x =                    -> show position and character info
 
 esc+x package-list-packages   -> emacs erweiterung suchen / (de)installieren
 esc+x re-builder              -> regexp helper shows matches in buffer
