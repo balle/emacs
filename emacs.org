@@ -306,11 +306,18 @@ Merging with \M-x emerge-buffers
 Want to see / merge differences in two directories?
 ediff-directories
 emerge-merge-directories
+* Encoding							      :emacs:
+ctrl + x =                    -> show position and character info
+ctrl + shift + u              -> enter character by code
+ctrl + x ctrl + m f           -> set encoding for buffer
+ctrl + x ctrl + m F           -> set default encoding for all buffers
+esc + x describe-coding-system -> show current encodings
+
 * Misc 								      :emacs:
 ctrl + g                      -> Cancel
 ctrl + x u                    -> UNDO tree
 ctrl + x U                    -> undo last change
-ctrl + x =                    -> show position and character info
+
 
 esc+x package-list-packages   -> emacs erweiterung suchen / (de)installieren
 esc+x re-builder              -> regexp helper shows matches in buffer
