@@ -193,3 +193,5 @@
 (setq debug-on-error t)
 
 (set-face-background 'hl-line "green")
+
+(setq sentence-end-double-space nil)
