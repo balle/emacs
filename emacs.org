@@ -31,8 +31,8 @@ ctrl+c <right> -> move row or region right
 alt  + g g        -> goto line
 ctrl + s          -> search forward
 ctrl + r          -> search backward
+alt + s           -> search word under cursor
 alt  + %          -> search and replace
-ctrl + s ctrl + w -> search word under cursor
 alt  + ctrl + s   -> regular expression search forward
 alt  + x          -> query-replace-regexp
 ctrl + x ctrl + q -> goto last change
