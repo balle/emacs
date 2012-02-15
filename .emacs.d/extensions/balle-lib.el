@@ -60,6 +60,24 @@
   (global-set-key (kbd "C-s") 'isearch-forward)
 )
 
+; search word under cursor
+(defun balle-search-current-word-in-buffer ()
+  (interactive)
+  (require 'thingatpt)
+
+  (if (boundp 'balle-mark-current-sym)
+    (unhighlight-regexp balle-mark-current-sym)
+  )
+
+  (setq balle-mark-current-sym (thing-at-point 'symbol))
+
+  (unless (null balle-mark-current-sym)
+    (let ((case-fold-search nil))
+      (search-forward balle-mark-current-sym)
+    )
+  )
+)
+
 (defun wiki (page)
   (interactive "sPage: ")
   (yaoddmuse-edit "BaLu" page)

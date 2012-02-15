@@ -46,6 +46,7 @@
 (global-unset-key "\M-,")
 (global-set-key "\M-," 'balle-comment-line)
 (global-set-key (kbd "C-d") 'kill-whole-line)
+(global-set-key (kbd "M-s") 'balle-search-current-word-in-buffer)
 (global-set-key "\C-xU" 'undo)
 (global-set-key "\C-x\C-q" 'goto-last-change)
 (global-set-key "\C-xth" 'balle-show-hack-list)
