@@ -103,6 +103,7 @@ ctrl + alt + e      -> goto next defun
 ctrl + alt + p      -> jump back to bracket
 ctrl + alt + n      -> jump forward to bracket
 alt  + m            -> jump to first non-whitespace character
+ctrl + f f          -> format code
 ctrl + c ctrl + z   -> open python console
 ctrl + c c          -> run script
 ctrl + c ctrl + p r -> run django server
