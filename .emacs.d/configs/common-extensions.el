@@ -21,9 +21,9 @@
 (require 'bookmark+)
 
 ; display tabbar
-(require 'tabbar)
-(require 'tabbar-extension)
-(tabbar-mode)
+;(require 'tabbar)
+;(require 'tabbar-extension)
+;(tabbar-mode)
 
 ; save window configuration
 ;(require 'windows)

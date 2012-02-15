@@ -7,6 +7,15 @@ User buffers are those not starting with *."
     (while (and (string-match "^*" (buffer-name)) (< i 50))
       (setq i (1+ i)) (previous-buffer) )))
 
+(defun next-user-buffer ()
+  "Switch to the previous user buffer in cyclic order.\n
+User buffers are those not starting with *."
+  (interactive)
+  (next-buffer)
+  (let ((i 0))
+    (while (and (string-match "^*" (buffer-name)) (< i 50))
+      (setq i (1+ i)) (next-buffer) )))
+
 (defvar my-desktop-session-dir
 (concat (getenv "HOME") "/.emacs-desktop-sessions/")
 "*Directory to save desktop sessions in")
