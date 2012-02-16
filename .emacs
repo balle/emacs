@@ -17,6 +17,7 @@
 ;(autoload 'LaTeX-mode "latex-config")
 (load "python-config")
 (load "django-config")
+(load "javascript-config")
 ;(autoload 'html-mode "django-config" "" t)
 (load "spell-checking-config")
 (load "org-config")
