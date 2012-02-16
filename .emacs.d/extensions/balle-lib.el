@@ -78,6 +78,11 @@
   )
 )
 
+(defun json-validate ()
+  (interactive)
+  (json-read)
+)
+
 (defun wiki (page)
   (interactive "sPage: ")
   (yaoddmuse-edit "BaLu" page)
