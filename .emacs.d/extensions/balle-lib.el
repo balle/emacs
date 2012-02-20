@@ -78,6 +78,11 @@
   )
 )
 
+(defun balle-transpose-word-backwards (arg)
+  (interactive "*p")
+  (transpose-subr 'backward-word arg)
+)
+
 (defun json-validate ()
   (interactive)
   (json-read)
