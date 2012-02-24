@@ -10,6 +10,15 @@
   (enlarge-window 7)
 )
 
+; comment out current line
+(defun balle-comment-line ()
+   (interactive)
+  (beginning-of-line)
+  (push-mark)
+  (end-of-line)
+  (comment-region (region-beginning) (region-end))
+)
+
 (defun balle-show-python-functions ()
   "Show all defs in current Python-mode buffer"
   (interactive)
