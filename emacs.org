@@ -62,18 +62,14 @@ alt  + $       -> check word under cursor
 alt  + tab     -> correct word under cursor
 
 * Buffer 							      :emacs:
-ctrl + x 0 -> close current window
-ctrl + x 1 -> close all windows except current one
-ctrl + x 2 -> split horizontally
-ctrl + x 3 -> split vertically
-ctrl + x o -> switch between windows
-ctrl + x k -> kill current buffer
-ctrl + x ctrl + k -> kill buffers matching regexp
-ctrl + x c  -> cleanup buffer list (kill unused)
-alt  + +   -> enlarge current window
-alt  + -   -> shrink current window
-ctrl + x m -> show messages buffer
-ctrl + x left / right  -> previous / next buffer
+ctrl + x 0 -> close current window ctrl + x 1 -> close all windows
+except current one ctrl + x 2 -> split horizontally ctrl + x 3 ->
+split vertically ctrl + x o -> switch between windows ctrl + x k ->
+kill current buffer ctrl + x ctrl + k -> kill buffers matching regexp
+esc + x clean-buffer-list -> cleanup buffer list (kill unused)
+alt + + -> enlarge
+current window alt + - -> shrink current window ctrl + x m -> show
+messages buffer ctrl + x left / right -> previous / next buffer
 
 * Histoy                                                              :emacs:
 in a command like search-forward you can do
