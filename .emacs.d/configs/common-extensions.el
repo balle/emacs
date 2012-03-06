@@ -2,6 +2,9 @@
 (require 'browse-kill-ring)
 (global-set-key (kbd "M-y") 'browse-kill-ring)
 
+; alarm clock
+(require 'alarm)
+
 ; X clipboard support
 (load-file "~/.emacs.d/extensions/xclip/xclip.el")
 (turn-on-xclip)
