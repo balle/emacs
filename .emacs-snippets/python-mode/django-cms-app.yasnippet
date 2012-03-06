@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# key: cmsapp
+# --
+from cms.app_base import CMSApp
+from cms.apphook_pool import apphook_pool
+
+
+class $1App(CMSApp):
+    name = '$1'
+    urls = ['$2.urls']
+
+apphook_pool.register($1App)
