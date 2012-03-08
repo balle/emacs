@@ -9,6 +9,14 @@ configuration however are very similar to emacs-starter-kit and I
 suggest you to give it a try, emacs-for-python is designed to work
 with it (instruction below).
 
+To get in contact or ask for help you have many possibilities:
+
+github issue tracker: [[https://github.com/gabrielelanaro/emacs-for-python/issues]]
+
+google+ page: [[https://plus.google.com/u/0/b/108723367526390492977/]]
+
+email me: [[mailto:gabriele.lanaro@gmail.com]]
+
 ** Features 
 The package is splitted in various files, in this way it's very easy
 to include what you really need.
@@ -106,11 +114,19 @@ instead of a python one. To enable the feature put this line in your .emacs:
 : (epy-setup-ipython)
 
 *** line highlighting
-You may wanto to disable this feature or to set another color, to do
+You may wanto to enable this feature with the color you prefer, to do
 so, drop one of the following lines in your .emacs
-: (global-hl-line-mode nil) ;; To disable
+: (global-hl-line-mode t) ;; To enable
 : (set-face-background 'hl-line "black") ;; change with the color that you like
 :                                        ;; for a list of colors: http://raebear.net/comp/emacscolors.html
+*** Highlight Indentation
+Interesting way to have a visual clue on how the code is indented:
+
+[[https://github.com/gabrielelanaro/emacs-for-python/raw/master/doc/highlight_line_ind.png]]
+
+: (require 'highlight-indentation)
+: (add-hook 'python-mode-hook 'highlight-indentation)
+
 
 *** disabling the auto-pairing of parenthesis
 To disable the auto-pairing, drop the following line:

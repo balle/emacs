@@ -1,10 +1,10 @@
 import glob
 import itertools
 import os
-from scripting.commands import rm,cp,mkdir,sh_cmdln, sh_args, archive,find, unpack, basename
+from scripting.commands import rm,cp,mkdir,sh, sh_args, archive,find, unpack, basename
 from scripting.runner import command, run
 
-VERSION = "0.2"
+VERSION = "0.3"
 
 # Globs that represents the file included in the distribution
 MANIFEST = """
@@ -16,6 +16,7 @@ extensions
 doc
 python-libs
 scripts
+snippets
 """
 
 def compile_el(fn, load=None):
@@ -65,7 +66,7 @@ def package(VERSION):
 
 @command
 def test_run():
-    sh_cmdln('emacs -Q -l epy-init.el', [])
+    sh('emacs -Q -l epy-init.el')
 
 @command
 def test_pkg(package):
@@ -74,7 +75,7 @@ def test_pkg(package):
     mkdir('dist/test', parent=True)
     unpack(package, 'dist/test/')
     dirname = basename( ".".join(package.split(".")[:-2]))
-    sh_cmdln('emacs -Q -l dist/test/'+dirname+'/epy-init.el', [])
+    sh('emacs -Q -l dist/test/'+dirname+'/epy-init.el')
 
 @command
 def test_02():
