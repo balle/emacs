@@ -3,4 +3,8 @@
 # --
 class $1Admin(admin.ModelAdmin):
     ordering = ('name',)
+    list_display = ["name"]
+    list_filter = ["name"]
+    search_fields  = ["name"]
+
 admin.site.register($1, $1Admin)
