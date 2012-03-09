@@ -21,20 +21,19 @@
 (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
 
 ; auto-completion
-(add-to-list 'load-path "~/.emacs.d/extensions/auto-complete-1.3")
-(require 'auto-complete-config nil t)
 (require 'ac-math)
 (add-to-list 'ac-modes 'LaTeX-mode)
 (add-to-list 'ac-modes 'latex-mode)
 
 (defun ac-latex-mode-setup ()         ; add ac-sources to default ac-sources
   (setq ac-sources
-     (append '(ac-source-math-latex ac-source-latex-commands  ac-source-math-unicode)
+     ;(append '(ac-source-semantic ac-source-math-latex ac-source-latex-commands  ac-source-math-unicode ac-source-yasnippet)
+     (append '(ac-source-latex-commands  ac-source-yasnippet)
                ac-sources))
 )
 
-(auto-complete-mode)
 (ac-config-default)
+
 
 ;; Make RefTeX faster
 (setq reftex-enable-partial-scans t)
@@ -46,6 +45,7 @@
     (ac-latex-mode-setup)
     (reftex-mode)
     (flyspell-mode)
+    (ac-flyspell-workaround)
     (define-key LaTeX-mode-map "\C-cu" 'LaTeX-find-matching-begin)
     (define-key LaTeX-mode-map "\C-cd" 'LaTeX-find-matching-end)
     (define-key LaTeX-mode-map "\C-ci" 'LaTeX-insert-item)
