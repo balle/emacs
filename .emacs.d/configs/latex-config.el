@@ -46,6 +46,7 @@
     (reftex-mode)
     (flyspell-mode)
     (ac-flyspell-workaround)
+    (setq ac-delay 0.2)
     (define-key LaTeX-mode-map "\C-cu" 'LaTeX-find-matching-begin)
     (define-key LaTeX-mode-map "\C-cd" 'LaTeX-find-matching-end)
     (define-key LaTeX-mode-map "\C-ci" 'LaTeX-insert-item)
