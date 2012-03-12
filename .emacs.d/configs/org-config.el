@@ -2,7 +2,11 @@
 (add-to-list 'auto-mode-alist '("\\.\\(org\\|org_archive\\)$" . org-mode))
 (require 'org-install)
 
-(setq org-agenda-files (list "~/organize/shared/TODO.org" "~/organize/projekte.org" "~/organize/backlog.org"  "~/organize/emacs.org" "~/organize/shared/read.org"))
+;(setq org-agenda-files (list "~/organize/shared/TODO.org" "~/organize/projekte.org" "~/organize/backlog.org"  "~/organize/emacs.org" "~/organize/shared/read.org"))
+(setq org-agenda-files '("~/organize/"))
+(setq org-agenda-include-diary t)
+(setq org-agenda-diary-file "~/organize/shared/termine")
+
 (setq calendar-week-start-day 1)
 (setq org-deadline-warning-days 2)
 (setq appt-message-warning-time 30)
