@@ -5,6 +5,15 @@
 ; alarm clock
 (require 'alarm)
 
+; git settings
+(setq magit-process-popup-time 3)
+
+; yasnippets
+(if (fboundp 'yas/load-directory)
+      (yas/load-directory "~/.emacs-snippets")
+      (yas/load-directory "~/.emacs.d/extensions/emacs-for-python/extensions/yasnippet/snippets")
+      (yas/load-directory "~/.emacs.d/extensions/emacs-for-python/snippets/"))
+
 ; X clipboard support
 (load-file "~/.emacs.d/extensions/xclip/xclip.el")
 (turn-on-xclip)
