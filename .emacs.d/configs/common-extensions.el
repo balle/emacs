@@ -1,6 +1,5 @@
 ; kill ring browser
 (require 'browse-kill-ring)
-(global-set-key (kbd "M-y") 'browse-kill-ring)
 
 ; alarm clock
 (require 'alarm)
