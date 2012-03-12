@@ -203,6 +203,11 @@ ctrl + c ctrl + d     - insert deadline
 ctrl + c up / down    - change priority
 ctrl + c ctrl + z     - take a note to an entry
 
+f3                    - agenda view
+  a - weekly / daily view
+  v m - view month
+  f - next
+  p - prev
 f9                    - fetch redmine tickets
   tab                 - insert ticket into org file
 ctrl + c ctrl + x ctrl + i - start clocking time
