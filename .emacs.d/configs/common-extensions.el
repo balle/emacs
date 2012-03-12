@@ -45,6 +45,8 @@
 ;	(resume-windows)
 ;))
 
+(require 'fill-column-indicator)
+
 ; show flymake errors in message buffer
 (load-library "flymake-cursor")
 
