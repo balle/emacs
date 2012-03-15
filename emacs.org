@@ -316,6 +316,12 @@ ctrl + x ctrl + m f           -> set encoding for buffer
 ctrl + x ctrl + m F           -> set default encoding for all buffers
 esc + x describe-coding-system -> show current encodings
 
+* Eshell                                                              :emacs:
+grep output goes to grep buffer
+> #<buffer muh> - redirect to buffer
+> /dev/clip - copy to clipboard
+> /dev/kill - copy to kill ring
+
 * Misc 								      :emacs:
 ctrl + g                      -> Cancel
 ctrl + x u                    -> UNDO tree
