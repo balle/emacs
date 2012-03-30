@@ -304,13 +304,22 @@ Merging with \M-x emerge-buffers
 Want to see / merge differences in two directories?
 ediff-directories
 emerge-merge-directories
-* Encoding							      :emacs:
+* Encoding 							      :emacs:
 ctrl + x =                    -> show position and character info
 ctrl + shift + u              -> enter character by code
 ctrl + x ctrl + m f           -> set encoding for buffer
 ctrl + x ctrl + m F           -> set default encoding for all buffers
 esc + x describe-coding-system -> show current encodings
 
+* Dired								      :emacs:
+m - mark file
+t - mark all
+r - rename
+R - move marked files
+C - copy
+D - delete
++ - mkdir
+^ - go dir up
 * Misc 								      :emacs:
 ctrl + g                      -> Cancel
 ctrl + x u                    -> UNDO tree
