@@ -3,9 +3,9 @@
 (require 'org-install)
 
 ;(setq org-agenda-files (list "~/organize/shared/TODO.org" "~/organize/projekte.org" "~/organize/backlog.org"  "~/organize/emacs.org" "~/organize/shared/read.org"))
-(setq org-agenda-files '("~/organize/"))
+(setq org-agenda-files '("~/organize/" "~/organize/shared/"))
 (setq org-agenda-include-diary t)
-(setq org-agenda-diary-file "~/organize/shared/termine")
+(setq org-agenda-diary-file "~/organize/termine")
 
 (setq calendar-week-start-day 1)
 (setq org-deadline-warning-days 2)

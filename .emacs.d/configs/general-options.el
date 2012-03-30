@@ -102,7 +102,7 @@
 (setq clean-buffer-list-delay-special (* 3 3600))
 
 ; calendar / diary settings
-(setq diary-file "~/organize/shared/termine")
+(setq diary-file "~/organize/termine")
 ;(setq view-diary-entries-initially nil)
 (setq calendar-week-start-day 1)
 (setq mark-diary-entries-in-calendar t)
