@@ -6,3 +6,4 @@
 .emacs.d/extensions/emacs-for-python/python-libs/*/*/*/*.pyc
 .emacs.d/eproject.lst
 .emacs.d/org-clock-save.el
+.emacs.d/extensions/nxhtml/etc/schema/xhtml-loader.rnc
