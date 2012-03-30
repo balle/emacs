@@ -5,7 +5,7 @@
 (require 'alarm)
 
 ; git settings
-(setq magit-process-popup-time 3)
+; (setq magit-process-popup-time 3)
 
 ; yasnippets
 (if (fboundp 'yas/load-directory)
