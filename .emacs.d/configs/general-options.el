@@ -90,6 +90,14 @@
 (setq auto-save-interval 300)
 (setq auto-save-timeout 300)
 
+; outline mode (for folding)
+(add-hook 'outline-minor-mode-hook
+              (lambda ()
+		(local-set-key "\C-c\C-o" outline-mode-prefix-map)
+		(define-key outline-mode-prefix-map "a" 'show-all)
+	      )
+)
+
 ; suspress kill process questions
 (setq kill-buffer-query-functions
  (remove 'process-kill-buffer-query-function
