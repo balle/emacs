@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# key: generic-form
+# --
+
+class $1FormView(FormView):
+    form_class = $1Form
+    template_name = "$2"
+    success_url = reverse("$3")
+
+    def form_valid(self, form):
+        return super($1FormView, self).form_valid(form)
