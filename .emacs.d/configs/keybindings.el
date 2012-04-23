@@ -3,6 +3,7 @@
 (global-unset-key "\C-xm")
 (global-set-key "\C-xm" 'balle-show-message-buffer)
 (global-set-key "\C-cm" 'balle-show-magit-process-buffer)
+(define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
 (global-unset-key "\C-xrs")
 (global-set-key "\C-xrs" 'bookmark-save)
 (global-unset-key "\C-xrd")

@@ -9,6 +9,7 @@ ctrl + x s      -> save all
 ctrl + space         -> set marker
 ctrl + x h           -> mark whole buffer
 alt  + h             -> mark paragraph
+ctrl + x ctrl + x    -> exchange mark and cursor
 
 * Copy / Cut / Paste 						      :emacs:
 ctrl + w     -> cut from marker to cursor

@@ -12,6 +12,7 @@
       (yas/load-directory "~/.emacs-snippets")
       (yas/load-directory "~/.emacs.d/extensions/emacs-for-python/extensions/yasnippet/snippets")
       (yas/load-directory "~/.emacs.d/extensions/emacs-for-python/snippets/"))
+(setq yas/indent-line nil)
 
 ; X clipboard support
 (load-file "~/.emacs.d/extensions/xclip/xclip.el")
@@ -19,6 +20,9 @@
 
 ; oddmuse wiki support
 (require 'yaoddmuse)
+
+; ace jump mode
+(require 'ace-jump-mode)
 
 ; easier window switching
 (require 'win-switch)
