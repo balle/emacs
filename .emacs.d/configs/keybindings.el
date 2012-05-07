@@ -37,6 +37,8 @@
 (global-set-key (kbd "C-c <down>") 'move-text-down)
 (global-set-key (kbd "C-x <up>") 'win-switch-up)
 (global-set-key (kbd "C-x <down>") 'win-switch-down)
+(global-set-key "\C-c\C-u" 'outline-backward-same-level)
+(global-set-key "\C-c\C-d" 'outline-forward-same-level)
 (global-set-key (kbd "C-c s") 'switch-to-buffer)
 (global-set-key (kbd "C-c ;") 'comment-or-uncomment-region)
 (global-set-key "\C-xw" 'wiki)

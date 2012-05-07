@@ -4,8 +4,6 @@
 (add-hook 'python-mode-hook '(lambda ()
 	(add-hook 'before-save-hook 'delete-trailing-whitespace)
         (outline-minor-mode)
-        (define-key python-mode-map "\C-c\C-u" 'outline-previous-heading)
-        (define-key python-mode-map "\C-c\C-d" 'outline-next-heading)
 	    (global-set-key [f10] 'flymake-goto-prev-error)
 	    (global-set-key [f11] 'flymake-goto-next-error)
 	    (define-key python-mode-map (kbd "C-c <right>") 'balle-python-shift-right)
