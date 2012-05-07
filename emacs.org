@@ -287,7 +287,7 @@ ctrl + u ctrl + space     -> goto last pos in mark ring in current buffer
 ctrl + x ( -> begin macro recording
 ctrl + x ) -> end macro recording
 ctrl + x e -> execute last macro on current line
-ctrl + x ctrl + k r -> run last macro on each line of region
+esc + x apply-macro-to-region-lines -> run last macro on each line of region
 esc+x name-last-kbg-macro - to give macro a name for this session
 esc+x insert-kbd-macro - to save macro in a file
 
