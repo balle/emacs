@@ -14,6 +14,9 @@
       (yas/load-directory "~/.emacs.d/extensions/emacs-for-python/snippets/"))
 (setq yas/indent-line nil)
 
+; ido menu
+(autoload 'idomenu "idomenu" nil t)
+
 ; X clipboard support
 (load-file "~/.emacs.d/extensions/xclip/xclip.el")
 (turn-on-xclip)

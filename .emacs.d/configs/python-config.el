@@ -3,6 +3,7 @@
 
 (add-hook 'python-mode-hook '(lambda ()
 	(add-hook 'before-save-hook 'delete-trailing-whitespace)
+	(setq imenu-create-index-function 'python-imenu-create-index)
         (outline-minor-mode)
 	    (global-set-key [f10] 'flymake-goto-prev-error)
 	    (global-set-key [f11] 'flymake-goto-next-error)

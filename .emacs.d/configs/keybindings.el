@@ -25,6 +25,7 @@
 (global-set-key "\C-jw" 'ace-jump-word-mode)
 (global-set-key "\C-jb" 'pop-global-mark)
 (global-set-key "\C-jm" 'pop-global-mark)
+(global-set-key "\C-js" 'ido-goto-symbol)
 (global-set-key "\C-xth" 'balle-show-hack-list)
 (global-set-key "\C-xti" 'org-redmine-get-issue)
 (global-set-key "\C-xtn" 'balle-show-note-list)
