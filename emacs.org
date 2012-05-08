@@ -45,6 +45,9 @@ alt  + a -> begin of sentence
 alt  + e -> end of sentence
 alt  + < -> begin of buffer
 alt  + > -> end of buffer
+ctrl + j l -> ace jump line mode
+ctrl + j w -> ace jump word mode
+ctrl + j b -> jump to last mark
 
 * Auto Complete 						      :emacs:
 tab                -> auto complete yasnippets
