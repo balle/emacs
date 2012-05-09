@@ -45,10 +45,16 @@ alt  + a -> begin of sentence
 alt  + e -> end of sentence
 alt  + < -> begin of buffer
 alt  + > -> end of buffer
-ctrl + j l -> ace jump line mode
-ctrl + j w -> ace jump word mode
 ctrl + j b -> jump to last mark
+ctrl + j c -> goto last change
+ctrl + j l -> ace jump line mode
+ctrl + j m -> jump to last mark
 ctrl + j s -> jump to symbol
+ctrl + j w -> ace jump word mode
+ctrl + j <left> - jump bracket back
+ctrl + j <right> - jump bracket down
+ctrl + j <up> - jump block up
+ctrl + j <down> - jump block down
 
 * Auto Complete 						      :emacs:
 tab                -> auto complete yasnippets
