@@ -17,8 +17,7 @@
 
 
 ;; Mumamo is making emacs 23.3 freak out:
-(when (and (equal emacs-major-version 23)
-           (equal emacs-minor-version 3))
+(when (equal emacs-major-version 23)
   (eval-after-load "bytecomp"
     '(add-to-list 'byte-compile-not-obsolete-vars
                   'font-lock-beginning-of-syntax-function))
