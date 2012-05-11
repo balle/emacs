@@ -44,6 +44,8 @@
 ;(tabbar-mode)
 
 ; save window configuration
+(winner-mode 1)
+
 ;(require 'windows)
 ;(add-hook 'kill-emacs-hook '(lambda ()
 ;	(save-current-configuration)
