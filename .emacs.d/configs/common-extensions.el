@@ -44,6 +44,7 @@
 ;(tabbar-mode)
 
 ; save window configuration
+(setq winner-dont-bind-my-keys t)
 (winner-mode 1)
 
 ;(require 'windows)
