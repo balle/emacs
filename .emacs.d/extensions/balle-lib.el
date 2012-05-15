@@ -19,6 +19,13 @@
   (comment-region (region-beginning) (region-end))
 )
 
+; goto next whitespace
+(defun balle-goto-next-whitespace ()
+   (interactive)
+   (search-forward " ")
+   (backward-char)
+)
+
 (defun balle-show-python-functions ()
   "Show all defs in current Python-mode buffer"
   (interactive)

@@ -45,11 +45,13 @@ alt  + a -> begin of sentence
 alt  + e -> end of sentence
 alt  + < -> begin of buffer
 alt  + > -> end of buffer
+alt  + m   -> jump to first non-whitespace character
 ctrl + j b -> jump to last mark
 ctrl + j c -> goto last change
+ctrl + j s -> jump to function or symbol
 ctrl + j l -> ace jump line mode
 ctrl + j m -> jump to last mark
-ctrl + j s -> jump to symbol
+ctrl + j s -> goto next whitespace
 ctrl + j w -> ace jump word mode
 ctrl + j <left> - jump bracket back
 ctrl + j <right> - jump bracket down
