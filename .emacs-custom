@@ -43,6 +43,10 @@
      (ediff-current-diff-B ((t (:background "yellow" :foreground "black"))))
      (ediff-fine-diff-B ((t (:background "yellow" :foreground "black"))))
 
+     (rst-level-1-face ((t (:background "yellow" :foreground "black"))))
+     (rst-level-2-face ((t (:background "yellow" :foreground "black"))))
+     (rst-level-3-face ((t (:background "yellow" :foreground "black"))))
+
      (highlight ((t (:background "#7eff00" :foreground "black"))))
 ;     (hl-line ((t (:foreground "#ffffff" :background "#311784"))))
      (hl-line ((t (:foreground "#000000" :background "green"))))
