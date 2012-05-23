@@ -27,6 +27,7 @@
 (global-set-key "\C-jf" 'ido-goto-symbol)
 (global-set-key "\C-jl" 'ace-jump-line-mode)
 (global-set-key "\C-jm" 'pop-global-mark)
+(global-set-key "\C-jS" 'balle-goto-prev-whitespace)
 (global-set-key "\C-js" 'balle-goto-next-whitespace)
 (global-set-key "\C-jw" 'ace-jump-word-mode)
 (global-set-key (kbd "C-j <left>") 'backward-list)
