@@ -305,6 +305,8 @@ ctrl + x e -> execute last macro on current line
 esc + x apply-macro-to-region-lines -> run last macro on each line of region
 esc+x name-last-kbg-macro - to give macro a name for this session
 esc+x insert-kbd-macro - to save macro in a file
+ctrl + c k p - previous macro in macro-ring
+ctrl + c k n - next macro in macro-ring
 
 * Repeat							      :emacs:
 esc <no> <shortcut> - repeat shortcut no times
