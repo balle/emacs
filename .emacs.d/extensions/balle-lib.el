@@ -26,6 +26,13 @@
    (backward-char)
 )
 
+; goto previous whitespace
+(defun balle-goto-prev-whitespace ()
+   (interactive)
+   (search-backward " ")
+   (forward-char)
+)
+
 (defun balle-show-python-functions ()
   "Show all defs in current Python-mode buffer"
   (interactive)

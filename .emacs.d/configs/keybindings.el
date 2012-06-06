@@ -27,12 +27,18 @@
 (global-set-key "\C-jf" 'ido-goto-symbol)
 (global-set-key "\C-jl" 'ace-jump-line-mode)
 (global-set-key "\C-jm" 'pop-global-mark)
+(global-set-key "\C-jS" 'balle-goto-prev-whitespace)
 (global-set-key "\C-js" 'balle-goto-next-whitespace)
 (global-set-key "\C-jw" 'ace-jump-word-mode)
 (global-set-key (kbd "C-j <left>") 'backward-list)
 (global-set-key (kbd "C-j <right>") 'forward-list)
 (global-set-key (kbd "C-j <up>") 'outline-backward-same-level)
 (global-set-key (kbd "C-j <down>") 'outline-forward-same-level)
+
+(global-set-key "\C-cke" 'kmacro-end-or-call-macro)
+(global-set-key "\C-ckn" 'kmacro-cycle-ring-next)
+(global-set-key "\C-ckp" 'kmacro-cycle-ring-previous)
+
 (global-set-key "\C-xth" 'balle-show-hack-list)
 (global-set-key "\C-xti" 'org-redmine-get-issue)
 (global-set-key "\C-xtn" 'balle-show-note-list)
