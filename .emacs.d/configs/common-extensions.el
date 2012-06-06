@@ -5,6 +5,7 @@
 (require 'alarm)
 
 ; git settings
+(require 'magit)
 ; (setq magit-process-popup-time 3)
 
 ; yasnippets

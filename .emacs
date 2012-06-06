@@ -1,11 +1,13 @@
 ; Load modules and configs
 (add-to-list 'load-path "~/.emacs.d/configs")
 (add-to-list 'load-path "~/.emacs.d/extensions")
+(add-to-list 'load-path "~/.emacs.d/extensions/magit")
 (add-to-list 'load-path "~/.emacs.d/extensions/ac-math")
 (add-to-list 'load-path "~/.emacs.d/extensions/auctex-11.86")
 (add-to-list 'load-path "~/.emacs.d/extensions/org-7.8.03/lisp")
 (add-to-list 'load-path "~/.emacs.d/extensions/org-redmine")
 (add-to-list 'load-path "~/.emacs.d/extensions/django-mode")
+(add-to-list 'load-path "~/.emacs.d/extensions/pony-mode")
 (load-file "~/.emacs.d/extensions/emacs-for-python/epy-init.el")
 (load "custom-lib")
 (load "balle-lib")
