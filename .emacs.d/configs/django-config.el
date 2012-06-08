@@ -1,6 +1,5 @@
 (add-to-list 'load-path "~/.emacs.d/extensions/auto-complete-1.3")
 (require 'auto-complete-config nil t)
-(require 'django-mode)
 (require 'django-html-mode)
 (add-to-list 'auto-mode-alist '("\\.html$" . django-html-mumamo-mode))
 (setq ac-dwim t)
@@ -9,7 +8,7 @@
 (add-to-list 'ac-modes 'django-mode)
 (add-to-list 'ac-modes 'django-html-mode)
 (add-to-list 'ac-modes 'django-html-mumamo-mode)
-;(add-to-list 'ac-modes 'html-mode)
+(add-to-list 'ac-modes 'html-mode)
 (add-to-list 'ac-modes 'nxhtml-mode)
 (setq django-indent-width 4)
 
