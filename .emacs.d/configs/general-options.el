@@ -78,6 +78,9 @@
   (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 )
 
+; suspress warnings
+(setq warning-minimum-level :error)
+
 ; dired settings
 ;(setq dired-listing-switches "")
 
