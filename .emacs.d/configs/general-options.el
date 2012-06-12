@@ -73,6 +73,8 @@
 
 ; package manager
 (if (> emacs-major-version 23)
+  (require 'package)
+  (add-to-list 'package-archives '("elpa" . "http://tromey.com/elpa/"))
   (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 )
 
