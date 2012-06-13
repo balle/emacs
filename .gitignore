@@ -7,3 +7,6 @@
 .emacs.d/eproject.lst
 .emacs.d/org-clock-save.el
 .emacs.d/extensions/nxhtml/etc/schema/xhtml-loader.rnc
+.emacs.d/elpa/archive-contents
+.emacs.d/elpa/builtin-packages
+.emacs.d/extensions/nxhtml/etc/schema/xhtml-loader.rnc
