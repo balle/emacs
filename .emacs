@@ -16,6 +16,7 @@
 
 (load "latex-config")
 ;(autoload 'LaTeX-mode "latex-config")
+(load "rst-config")
 (load "python-config")
 (load "django-config")
 (load "database-config")
