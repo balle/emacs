@@ -48,6 +48,9 @@
 (setq winner-dont-bind-my-keys t)
 (winner-mode 1)
 
+(require 'wc-mode)
+(wc-mode 1)
+
 ;(require 'windows)
 ;(add-hook 'kill-emacs-hook '(lambda ()
 ;	(save-current-configuration)
