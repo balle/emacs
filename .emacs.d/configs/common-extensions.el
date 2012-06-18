@@ -18,7 +18,7 @@
 ; ido menu
 (autoload 'idomenu "idomenu" nil t)
 
-; X clipboard support
+; X clipboard support on console
 (load-file "~/.emacs.d/extensions/xclip/xclip.el")
 (turn-on-xclip)
 
@@ -48,9 +48,6 @@
 (setq winner-dont-bind-my-keys t)
 (winner-mode 1)
 
-(require 'wc-mode)
-(wc-mode 1)
-
 ;(require 'windows)
 ;(add-hook 'kill-emacs-hook '(lambda ()
 ;	(save-current-configuration)
@@ -72,3 +69,12 @@
 (setq auto-mode-alist
            (cons '("\\.po\\'\\|\\.po\\.|\\.po" . po-mode) auto-mode-alist))
      (autoload 'po-mode "po-mode" "Major mode for translators to edit PO files" t)
+
+; wc
+(require 'wc-mode)
+(wc-mode)
+
+; write or die mode
+(require 'write-or-die)
+(setq write-or-die-target-words 2300)
+(setq write-or-die-target-time 1200)
