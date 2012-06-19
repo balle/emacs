@@ -28,6 +28,8 @@
 ;;; History:
 ;;
 ;; - 2009-12-09 incorporated Tom Breton's suggested change to word-count (see wiki page)
+;;
+;; - 2012-06-19 patched by balle - i dont like that background changing stuff
 
 ;;; Code:
 
@@ -109,8 +111,8 @@ warning routine or stimulus routine."
     (setq write-or-die-mode-text " write!"))
   ;; If we're being warned about not concentrating on our writing....
   (if (> write-or-die-state 1)
-      (write-or-die-warning)
-    (modify-frame-parameters nil '((background-color . "White"))))
+      (write-or-die-warning))
+
   ;; If we're being punished for not writing for too long!
   (if (> write-or-die-state 2)
       (write-or-die-stimulus))
@@ -173,12 +175,11 @@ warning routine or stimulus routine."
   (cancel-timer write-or-die-timer)
   (cancel-timer write-or-die-warning-timer)
   (cancel-timer write-or-die-grace-timer)
-  (modify-frame-parameters nil '((background-color . "White")))
   (write-or-die-update)
 )
 
 (defun write-or-die-warning ()
-  (modify-frame-parameters nil '((background-color . "Red")))
+  (message "Write faster, write more!")
 )
 
 (defun write-or-die-stimulus ()
