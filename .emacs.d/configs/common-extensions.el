@@ -78,3 +78,9 @@
 (require 'write-or-die)
 (setq write-or-die-target-words 2300)
 (setq write-or-die-target-time 1200)
+
+
+; lisp
+(setq inferior-lisp-program "/usr/bin/sbcl")
+(require 'slime)
+(slime-setup)
