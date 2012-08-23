@@ -5,7 +5,9 @@
 class $1FormView(FormView):
     form_class = $1Form
     template_name = "$2"
-    success_url = reverse("$3")
+
+    def get_success_url(self):
+        return reverse("$3")
 
     def form_valid(self, form):
         return super($1FormView, self).form_valid(form)
