@@ -1,7 +1,8 @@
+(require 'perl-completion)
+(load "pde-load")
+
 (add-hook 'cperl-mode-hook
-          (lambda()
-            (load "pde-load")
-            (require 'perl-completion)
+          (lambda()         
             (perl-completion-mode t)))
 
 (add-hook 'cperl-mode-hook 'flymake-mode)
