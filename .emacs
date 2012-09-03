@@ -21,7 +21,7 @@
 (load "rst-config")
 (load "perl-config")
 (load "python-config")
-(load "django-config")
+(load "html-config")
 (load "database-config")
 (load "javascript-config")
 ;(autoload 'html-mode "django-config" "" t)
@@ -42,14 +42,3 @@
  '(diary ((t (:background "#243d9b" :foreground "white" :bold true)))))
 
 (load-file "~/.emacs-custom")
-
-
-;;; This was installed by package-install.el.
-;;; This provides support for the package system and
-;;; interfacing with ELPA, the package archive.
-;;; Move this code earlier if you want to reference
-;;; packages in your .emacs.
-(when
-    (load
-     (expand-file-name "~/.emacs.d/elpa/package.el"))
-  (package-initialize))
