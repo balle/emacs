@@ -1,6 +1,6 @@
 Just a tiny repository to keep my emacs environment in sync.
-Features: Python, Django, Latex + Ispell, Flyspell, Flymake, Auto-Completion, Yasnippets, Ido, Bookmark+,
-Kill-Ring-Browser, Undo-Tree, Magit, SLIME, printing, project management, org-mode with redmine support and more
+Features: Python, Django, Perl, C, Latex + Ispell, Flyspell, Flymake, Auto-Completion, Yasnippets, Ido,
+Kill-Ring-Browser, Undo-Tree, Magit, printing, project management, org-mode with redmine support and more
 Customizations should be saved in ~/.emacs-custom
 
 Installation:

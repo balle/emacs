@@ -15,15 +15,9 @@
       (yas/load-directory "~/.emacs.d/extensions/emacs-for-python/snippets/"))
 (setq yas/indent-line nil)
 
-; ido menu
-(autoload 'idomenu "idomenu" nil t)
-
 ; X clipboard support on console
 (load-file "~/.emacs.d/extensions/xclip/xclip.el")
 (turn-on-xclip)
-
-; oddmuse wiki support
-(require 'yaoddmuse)
 
 ; ace jump mode
 (require 'ace-jump-mode)
@@ -36,27 +30,14 @@
 (global-undo-tree-mode)
 (setq undo-limit 50000)
 
-; advanced bookmarks
+; advanced bookmarking features
 (require 'bookmark+)
 
-; display tabbar
-;(require 'tabbar)
-;(require 'tabbar-extension)
-;(tabbar-mode)
-
-; save window configuration
-(setq winner-dont-bind-my-keys t)
-(winner-mode 1)
-
-;(require 'windows)
-;(add-hook 'kill-emacs-hook '(lambda ()
-;	(save-current-configuration)
-;))
-;(add-hook 'window-setup-hook '(lambda ()
-;	(resume-windows)
-;))
-
+; show fill column
 (require 'fill-column-indicator)
+
+; activate ido mode
+(ido-mode)
 
 ; show flymake errors in message buffer
 (load-library "flymake-cursor")
@@ -70,17 +51,3 @@
            (cons '("\\.po\\'\\|\\.po\\.|\\.po" . po-mode) auto-mode-alist))
      (autoload 'po-mode "po-mode" "Major mode for translators to edit PO files" t)
 
-; wc
-(require 'wc-mode)
-(wc-mode)
-
-; write or die mode
-(require 'write-or-die)
-(setq write-or-die-target-words 2300)
-(setq write-or-die-target-time 1200)
-
-
-; lisp
-(setq inferior-lisp-program "/usr/bin/sbcl")
-(require 'slime)
-(slime-setup)

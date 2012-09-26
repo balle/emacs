@@ -2,20 +2,21 @@
 (global-set-key [f2] 'calendar)
 
 ; default browser
-(setq browse-url-browser-function 'browse-url-generic
-      browse-url-generic-program "chromium")
+;(setq browse-url-browser-function 'browse-url-generic
+;      browse-url-generic-program "chromium")
 
 ; redmine
-(setq org-redmine-uri "http://www.redmine.org")
+;(setq org-redmine-uri "http://www.redmine.org")
 
- ;; REST API Key (optional). default nil
- (setq org-redmine-api-key "xxxxxxxxxxxxxxxxxxx")
-(setq redmine-user "user")
+;; REST API Key (optional). default nil
+;(setq org-redmine-api-key "xxxxxxxxxxxxxxxxxxx")
+;(setq redmine-user "user")
+
+(set-face-background 'hl-line "orange")
 
 ; color theme
 (if (< emacs-major-version 24)
   (
-    (add-to-list 'load-path "~/.emacs.d/extensions/color-theme")
     (require 'color-theme)
 
     (defun color-theme-balle ()
@@ -58,7 +59,8 @@
 
       (color-theme-balle)
   )
-;  (
-;   (load-theme 'wombat t)
-;  )
+  (
+   (load-theme 'wombat t)
+  )
 )
+

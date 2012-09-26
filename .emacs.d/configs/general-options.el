@@ -1,4 +1,3 @@
-
 ; set undo buffer size
 (setq undo-limit 500000)
 (setq undo-strong-limit 1000000)

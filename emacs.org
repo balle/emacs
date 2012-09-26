@@ -87,7 +87,7 @@ messages buffer ctrl + x left / right -> previous / next buffer
 ctrl + x r w <char>  - save window config
 ctrl + x r j <char>  - restore window config
 
-* Histoy                                                              :emacs:
+* History                                                             :emacs:
 in a command like search-forward you can do
 alt + p / alt + n       -> get previous or next input you entered
 alt + r / alt + s       -> search history back- or forward

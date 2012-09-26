@@ -1,4 +1,7 @@
 ; latex
+(add-to-list 'load-path "~/.emacs.d/extensions/auctex-11.86")
+(add-to-list 'load-path "~/.emacs.d/extensions/ac-math")
+
 (load "~/.emacs.d/extensions/auctex-11.86/auctex.el" nil t t)
 (require 'reftex)
 (require 'preview-latex)
@@ -40,7 +43,7 @@
 (setq reftex-save-parse-info t)
 (setq reftex-use-multiple-selection-buffers t)
 
-(setq LaTeX-mode-hook
+(setq latex-mode-hook
  '(lambda ()
     (ac-latex-mode-setup)
     (reftex-mode)

@@ -1,16 +1,20 @@
-(add-to-list 'load-path "~/.emacs.d/extensions/auto-complete-1.3")
-(require 'auto-complete-config nil t)
-(require 'django-html-mode)
-;(add-to-list 'auto-mode-alist '("\\.html$" . django-html-mumamo-mode))
+(add-to-list 'load-path "~/.emacs.d/extensions/zencoding")
+
 (setq ac-dwim t)
 (ac-config-default)
 (auto-complete-mode)
-(add-to-list 'ac-modes 'django-mode)
-(add-to-list 'ac-modes 'django-html-mode)
-(add-to-list 'ac-modes 'django-html-mumamo-mode)
-(add-to-list 'ac-modes 'html-mode)
-(add-to-list 'ac-modes 'nxhtml-mode)
+(add-to-list 'ac-modes 'sgml-mode)
 (setq django-indent-width 4)
 
-(load "~/.emacs.d/extensions/nxhtml/autostart.el")
-(setq mumamo-background-colors nil)
+(require 'zencoding-mode)
+(add-hook 'sgml-mode-hook 'zencoding-mode)
+(add-hook 'sgml-mode-hook '(lambda ()
+   (undefine-key sgml-mode-map "\C-j")
+   (define-key sgml-mode-map "\C-je" 'zencoding-expand-line)
+))
+
+(defadvice sgml-delete-tag (after reindent-buffer activate)
+  (cleanup-buffer)
+)
+
+
