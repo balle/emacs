@@ -209,7 +209,7 @@ im -> insert monthly task
 iy -> insert yearly task
 d  -> show task
 
-* Org Mode                                                            :emacs:
+* Org Mode                                                            :emacs:    
 ctrl + c tab            - collabse list
 shift + tab           - hide / show all
 ctrl + c ctrl + c     - tag an entry
@@ -219,11 +219,14 @@ ctrl + c ctrl + d     - insert deadline
 ctrl + c up / down    - change priority
 ctrl + c ctrl + z     - take a note to an entry
 
-f3                    - agenda view
+f2                    - agenda view
   a - weekly / daily view
-  v m - view month
-  f - next
-  p - prev
+  d - day view
+  w - week view
+  m - month view
+  y - year view
+  right - next
+  left - prev
 f9                    - fetch redmine tickets
   tab                 - insert ticket into org file
 ctrl + c ctrl + x ctrl + i - start clocking time
@@ -285,9 +288,23 @@ ctrl+x r k delete alle comment characters
 
 * debugging lisp 						      :emacs:
 alt  + x edebug-all-defs than alt + x edebug-defun behind function
+  <SPC> - execute next expression
+  n - next debuggable statement
+  c - continue
+  i - step into
+  b - set breackpoint
+  u - unset breakpoint
+  g - goto next breakpoint
+  h - goto here
+  d - backtrace
+  e - eval expression e.g. (symbol-value 'some-var)
+
 ctrl + alt  f syntax check forward
 ctrl + alt  b syntax check backward
-mit ctrl + x ctrl + e execute statement
+ctrl + x ctrl + e execute statement
+M-x toggle-debug-on-error
+M-x debug-on-entry <function-name>
+  d - execute next statement
 
 * Bookmarks 							      :emacs:
 ctrl + x r m              -> set bookmark
@@ -333,6 +350,7 @@ ctrl + shift + u              -> enter character by code
 ctrl + x ctrl + m f           -> set encoding for buffer
 ctrl + x ctrl + m F           -> set default encoding for all buffers
 esc + x describe-coding-system -> show current encodings
+(setq default-buffer-file-coding-system 'utf-8)
 
 * Dired								      :emacs:
 m - mark file
