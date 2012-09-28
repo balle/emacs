@@ -1,19 +1,39 @@
 ; spell checking
 (require 'ispell)
-(setq ispell-program-name "aspell")
-(setq ispell-local-dictionary-alist nil)
-(add-to-list 'ispell-local-dictionary-alist
-	     '("de_DE"
- 	       "[[:alpha:]]" "[^[:alpha:]]"
-	       "[']" t
-	       ("-C" "-d" "de_DE")
- 	        "~latin1" iso-8859-1)
- 	     )
 
-(setq ispell-dictionary "de_DE")
-(setq ispell-local-dictionary "de_DE")
-(setq ispell-default-dictionary "de_DE")
-(setq flyspell-default-dictionary "de_DE")
+(setq ispell-dictionary-base-alist
+  '(
+ 	("de_DE"
+ 	 "[a-zäöüßA-ZÄÖÜ]" "[^a-zäöüßA-ZÄÖÜ]" "[']" nil
+ 	 ("-d" "de_DE") nil utf-8)
+	
+ 	("de_CH"
+ 	 "[a-zäöüA-ZÄÖÜ]" "[^a-zäöüA-ZÄÖÜ]" "[']" nil
+ 	 ("-d" "de_CH") nil utf-8)
+	
+ 	("en_US"
+ 	 "[a-zA-Z]" "[^a-zA-Z]" "[']" nil
+ 	 ("-d" "en_US") nil utf-8)
+	
+ 	("en_GB"
+ 	 "[a-zA-Z]" "[^a-zA-Z]" "[']" nil
+ 	 ("-d" "en_GB") nil utf-8)
+	
+    )
+)
+
+(eval-after-load "ispell"
+    (progn
+         (setq ispell-dictionary "de_DE")
+	 (setq ispell-extra-args '("-i" "utf-8"))
+	 (setq ispell-silently-savep t)
+     )
+)
+
+;(setq flyspell-default-dictionary "swissgerman")
+(setq-default ispell-program-name "hunspell")
+(setq ispell-really-hunspell t)
+
 (defun turn-on-flyspell-mode ()
    (flyspell-mode 1)
 )
