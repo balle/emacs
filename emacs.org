@@ -10,7 +10,13 @@ ctrl + space         -> set marker
 ctrl + x h           -> mark whole buffer
 alt  + h             -> mark paragraph
 ctrl + x ctrl + x    -> exchange mark and cursor
-ctrl + c e           -> expand region
+
+ctrl + m b           -> Mark whole buffer
+ctrl + m e           -> Expand region
+ctrl + m l           -> Mark line
+ctrl + m m           -> Mark all like this
+ctrl + m w           -> Mark word
+
 * Copy / Cut / Paste 						      :emacs:
 ctrl + w     -> cut from marker to cursor
 alt  + w     -> copy from marker to curser
@@ -70,7 +76,7 @@ F5             -> auto correct word before cursor
 F6             -> goto next ispell error
 F7             -> add word to dictionary
 alt + x ispell -> start spell checking of whole buffer
-ctrl + x ü     -> translate a word
+ctrl + x a     -> translate a word
 alt  + $       -> check word under cursor
 alt  + tab     -> correct word under cursor
 

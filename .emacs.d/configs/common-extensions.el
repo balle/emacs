@@ -49,6 +49,11 @@
 (add-to-list 'load-path "~/.emacs.d/extensions/expand-region")
 (require 'expand-region)
 
+; mark multiple
+(add-to-list 'load-path "~/.emacs.d/extensions/mark-multiple")
+(require 'mark-multiple)
+(require 'mark-more-like-this)
+(require 'rename-sgml-tag)
 
 ; po-file editor
 (require 'po-mode)
