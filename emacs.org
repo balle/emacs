@@ -10,7 +10,7 @@ ctrl + space         -> set marker
 ctrl + x h           -> mark whole buffer
 alt  + h             -> mark paragraph
 ctrl + x ctrl + x    -> exchange mark and cursor
-
+ctrl + c e           -> expand region
 * Copy / Cut / Paste 						      :emacs:
 ctrl + w     -> cut from marker to cursor
 alt  + w     -> copy from marker to curser
@@ -209,7 +209,7 @@ im -> insert monthly task
 iy -> insert yearly task
 d  -> show task
 
-* Org Mode                                                            :emacs:    
+* Org Mode                                                            :emacs:
 ctrl + c tab            - collabse list
 shift + tab           - hide / show all
 ctrl + c ctrl + c     - tag an entry

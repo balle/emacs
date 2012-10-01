@@ -45,6 +45,11 @@
 ; goto last change
 (require 'goto-last-change)
 
+; expand region
+(add-to-list 'load-path "~/.emacs.d/extensions/expand-region")
+(require 'expand-region)
+
+
 ; po-file editor
 (require 'po-mode)
 (setq auto-mode-alist

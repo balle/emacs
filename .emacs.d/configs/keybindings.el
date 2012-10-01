@@ -21,6 +21,7 @@
 (global-set-key "\C-xU" 'undo)
 (define-key (current-global-map) (kbd "C-x r w") 'window-configuration-to-register)
 (global-set-key "\C-x\C-q" 'goto-last-change)
+(global-set-key "\C-ce" 'er/expand-region)
 (global-unset-key "\C-j")
 (global-set-key "\C-jb" 'pop-global-mark)
 (global-set-key "\C-jc" 'goto-last-change)
