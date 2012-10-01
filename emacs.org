@@ -219,7 +219,7 @@ ctrl + c ctrl + d     - insert deadline
 ctrl + c up / down    - change priority
 ctrl + c ctrl + z     - take a note to an entry
 
-f2                    - agenda view
+f3                    - agenda view
   a - weekly / daily view
   d - day view
   w - week view
