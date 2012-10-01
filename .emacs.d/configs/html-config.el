@@ -11,6 +11,7 @@
 (add-hook 'sgml-mode-hook '(lambda ()
    (undefine-key sgml-mode-map "\C-j")
    (define-key sgml-mode-map "\C-je" 'zencoding-expand-line)
+   (define-key sgml-mode-map "\C-c\C-r" 'rename-sgml-tag)
 ))
 
 (defadvice sgml-delete-tag (after reindent-buffer activate)
