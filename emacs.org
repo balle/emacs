@@ -15,6 +15,7 @@ ctrl + m b           -> Mark whole buffer
 ctrl + m e           -> Expand region
 ctrl + m l           -> Mark line
 ctrl + m m           -> Mark all like this
+ctrl + m n           -> Mark next like this
 ctrl + m w           -> Mark word
 
 * Copy / Cut / Paste 						      :emacs:

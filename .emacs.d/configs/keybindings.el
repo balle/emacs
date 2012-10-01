@@ -36,6 +36,7 @@
 (global-set-key "\C-me" 'expand-region)
 (global-set-key "\C-ml" 'mark-line)
 (global-set-key "\C-mm" 'mark-all-like-this)
+(global-set-key "\C-mn" 'mark-next-like-this)
 (global-set-key "\C-mw" 'mark-word)
 (global-set-key (kbd "C-j <left>") 'backward-list)
 (global-set-key (kbd "C-j <right>") 'forward-list)
