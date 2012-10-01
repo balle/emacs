@@ -183,11 +183,11 @@
 (setq appt-disp-window-function (function balle-org-alarm))
 
 ; add schedules and deadlines to appt on save
-;(add-hook 'org-mode-hook '(lambda nil (
-;    add-hook 'before-save-hook '(lambda nil
-;        (org-agenda-to-appt 'refresh nil)
-;    )
-;)))
+(add-hook 'org-mode-hook '(lambda nil (
+    add-hook 'before-save-hook '(lambda nil
+        (org-agenda-to-appt 'refresh nil)
+    )
+)))
 (appt-activate)
 (display-time)
 
