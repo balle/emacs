@@ -1,4 +1,5 @@
 (add-to-list 'load-path "~/.emacs.d/extensions/zencoding")
+(require 'rename-sgml-tag)
 
 (setq ac-dwim t)
 (ac-config-default)

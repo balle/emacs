@@ -37,7 +37,7 @@
 (require 'fill-column-indicator)
 
 ; activate ido mode
-(ido-mode)
+(ido-mode t)
 
 ; show flymake errors in message buffer
 (load-library "flymake-cursor")
@@ -49,11 +49,10 @@
 (add-to-list 'load-path "~/.emacs.d/extensions/expand-region")
 (require 'expand-region)
 
-; mark multiple
+; mark multiple / multiple cursors
+(add-to-list 'load-path "~/.emacs.d/extensions/multiple-cursors")
 (add-to-list 'load-path "~/.emacs.d/extensions/mark-multiple")
-(require 'mark-multiple)
-(require 'mark-more-like-this)
-(require 'rename-sgml-tag)
+(require 'multiple-cursors)
 
 ; po-file editor
 (require 'po-mode)

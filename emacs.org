@@ -12,10 +12,11 @@ alt  + h             -> mark paragraph
 ctrl + x ctrl + x    -> exchange mark and cursor
 
 ctrl + c m b         -> Mark whole buffer
-ctrl + c m e         -> Expand region
+ctrl + c m e         -> Expand region / Cursor for all regions
 ctrl + c m l         -> Mark line
 ctrl + c m m         -> Mark all like this
 ctrl + c m n         -> Mark next like this
+ctrl + c m p         -> Mark previous like this
 ctrl + c m w         -> Mark word
 
 * Copy / Cut / Paste 						      :emacs:
