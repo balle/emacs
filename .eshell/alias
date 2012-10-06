@@ -1,0 +1,2 @@
+alias emacs find-file $*
+alias ssh cd /ssh:$1:~
