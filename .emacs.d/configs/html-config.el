@@ -5,13 +5,14 @@
 (ac-config-default)
 (auto-complete-mode)
 (add-to-list 'ac-modes 'sgml-mode)
-(setq django-indent-width 4)
+
+
+(add-to-list 'auto-mode-alist '("\\.html?$" . sgml-mode))
 
 (require 'zencoding-mode)
 (add-hook 'sgml-mode-hook 'zencoding-mode)
 (add-hook 'sgml-mode-hook '(lambda ()
-   (undefine-key sgml-mode-map "\C-j")
-   (define-key sgml-mode-map "\C-je" 'zencoding-expand-line)
+   (define-key sgml-mode-map "\C-ce" 'zencoding-expand-line)
    (define-key sgml-mode-map "\C-c\C-r" 'rename-sgml-tag)
 ))
 
