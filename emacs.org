@@ -376,8 +376,8 @@ grep output goes to grep buffer
 > #<buffer muh> - redirect to buffer
 > /dev/clip - copy to clipboard
 > /dev/kill - copy to kill ring
-
->>>>>>> 624273f2c356d7626e3d10c2f8641c60626608dd
+alias ssh "cd /ssh:$1:~"
+alias emacs "find-file $1"
 * Misc 								      :emacs:
 ctrl + g                      -> Cancel
 ctrl + x u                    -> UNDO tree
