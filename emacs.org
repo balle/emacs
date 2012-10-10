@@ -300,7 +300,8 @@ alt  + x edebug-all-defs than alt + x edebug-defun behind function
   n - next debuggable statement
   c - continue
   i - step into
-  b - set breackpoint
+  b - set breakpoint
+  x - set conditional breakpoint
   u - unset breakpoint
   g - goto next breakpoint
   h - goto here
