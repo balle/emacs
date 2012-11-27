@@ -22,6 +22,7 @@
 )
 
 (require 'perl-completion)
+(require 'perlcritic)
 (load "pde-load")
 
 (setq skeleton-pair t)
