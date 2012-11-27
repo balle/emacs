@@ -13,19 +13,17 @@
     (setq cperl-indent-level 4)
     (setq cperl-continued-statement-offset 0)
     (setq cperl-extra-newline-before-brace t)
+    (setq cperl-auto-newline nil)
+    (setq cperl-autoindent-on-semi t)
     (set-face-background 'cperl-array-face "wheat")
     (set-face-background 'cperl-hash-face "wheat")
+    (perl-completion-mode t)
+    (flymake-mode)
 )
 
 (require 'perl-completion)
 (load "pde-load")
 
-(add-hook 'cperl-mode-hook
-  (lambda()
-    (perl-completion-mode t)
-    (flymake-mode)
-  )
-)
 
 
 
