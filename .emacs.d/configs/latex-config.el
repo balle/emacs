@@ -1,5 +1,5 @@
 ; latex
-(add-to-list 'load-path "~/.emacs.d/extensions/auctex-11.86")
+(add-to-list 'load-path "~/.emacs.d/extensions/auctex-11.87")
 (add-to-list 'load-path "~/.emacs.d/extensions/ac-math")
 
 (load "~/.emacs.d/extensions/auctex-11.86/auctex.el" nil t t)
