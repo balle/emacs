@@ -43,7 +43,7 @@ ctrl + r          -> search backward
 alt + s           -> search word under cursor
 alt  + %          -> search and replace
 alt  + ctrl + s   -> regular expression search forward
-alt  + x          -> query-replace-regexp
+alt + x replace-regexp -> regexp search replace
 ctrl + x ctrl + q -> goto last change
 
 * Go to 							      :emacs:
