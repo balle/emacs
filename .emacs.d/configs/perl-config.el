@@ -1,5 +1,5 @@
 (add-to-list 'load-path "~/.emacs.d/extensions/Emacs-PDE-0.2.16/lisp")
-(add-to-list 'load-path "~/.emacs.d/extensions/stylish-elisp")
+;(add-to-list 'load-path "~/.emacs.d/extensions/stylish-elisp")
 
 ;; Use cperl-mode instead of the default perl-mode
 (add-to-list 'auto-mode-alist '("\\.\\([pP][Llm]\\|al\\)\\'" . cperl-mode))
@@ -7,7 +7,7 @@
 (add-to-list 'interpreter-mode-alist '("perl5" . cperl-mode))
 (add-to-list 'interpreter-mode-alist '("miniperl" . cperl-mode))
 
-(require 'stylish)
+;(require 'stylish)
 (require 'perl-completion)
 (require 'perlcritic)
 (load "pde-load")
