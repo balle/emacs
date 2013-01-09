@@ -43,4 +43,4 @@
 )
 
 
-;(add-to-list 'semantic-lex-c-preprocessor-symbol-file "/usr/include/stdlib.h")
+(add-to-list 'semantic-lex-c-preprocessor-symbol-file "/usr/include/stdlib.h")
