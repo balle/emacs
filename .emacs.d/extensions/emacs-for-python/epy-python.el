@@ -8,10 +8,23 @@
 
 (defun setup-ropemacs ()
   "Setup the ropemacs harness"
-  (setenv "PYTHONPATH"
-          (concat
-           (getenv "PYTHONPATH") path-separator
-           (concat epy-install-dir "python-libs/")))
+  (message "****************************")
+  (if (and (getenv "PYTHONPATH") (not (string= (getenv "PYTHONPATH") "")))
+      (message "true")
+    (message "false"))
+  (message "****************************")
+  ;; If PYTHONPATH is set and not an empty string
+  (if (and (getenv "PYTHONPATH") (not (string= (getenv "PYTHONPATH") "")))
+      ;; append at the end with separator
+      (setenv "PYTHONPATH"
+	      (concat
+	       (getenv "PYTHONPATH") path-separator
+	       (concat epy-install-dir "python-libs/")))
+    ;; else set it without separator
+    (setenv "PYTHONPATH"
+	    (concat epy-install-dir "python-libs/"))
+    )
+  
   (pymacs-load "ropemacs" "rope-")
   
   ;; Stops from erroring if there's a syntax err
@@ -29,7 +42,7 @@
 
   ;; Adding hook to automatically open a rope project if there is one
   ;; in the current or in the upper level directory
-  (add-hook 'python-mode-hook
+   (add-hook 'python-mode-hook
             (lambda ()
               (cond ((file-exists-p ".ropeproject")
                      (rope-open-project default-directory))
@@ -42,23 +55,27 @@
 (defun epy-setup-ipython ()
   "Setup ipython integration with python-mode"
   (interactive)
+
   (setq
    python-shell-interpreter "ipython"
    python-shell-interpreter-args ""
    python-shell-prompt-regexp "In \[[0-9]+\]: "
    python-shell-prompt-output-regexp "Out\[[0-9]+\]: "
    python-shell-completion-setup-code ""
-   python-shell-completion-string-code "';'.join(__IP.complete('''%s'''))\n")
+   python-shell-completion-string-code "';'.join(get_ipython().complete('''%s''')[1])\n")
   )
 
 ;;=========================================================
 ;; Flymake additions, I have to put this one somwhere else?
 ;;=========================================================
 
+(defun flymake-create-temp-in-system-tempdir (filename prefix)
+  (make-temp-file (or prefix "flymake")))
+
 (defun flymake-create-copy-file ()
   "Create a copy local file"
   (let* ((temp-file (flymake-init-create-temp-buffer-copy 
-                     'flymake-create-temp-inplace)))
+                     'flymake-create-temp-in-system-tempdir)))
     (file-relative-name 
      temp-file 
      (file-name-directory buffer-file-name))))     
@@ -109,7 +126,16 @@ The CMDLINE should be something like:
      
      
      ;; Not on all modes, please
-     (add-hook 'python-mode-hook 'flymake-find-file-hook)
+     ;; Be careful of mumamo, buffer file name nil
+     (add-hook 'python-mode-hook (lambda () (if (buffer-file-name)
+						(flymake-mode))))
+
+     ;; when we swich on the command line, switch in Emacs
+     ;;(desktop-save-mode 1)
+     (defun workon-postactivate (virtualenv)
+       (require 'virtualenv)
+       (virtualenv-activate virtualenv)
+       (desktop-change-dir virtualenv))
 
      
      )
@@ -126,5 +152,7 @@ The CMDLINE should be something like:
 
 (add-hook 'python-mode-hook '(lambda () 
      (define-key python-mode-map "\C-m" 'newline-and-indent)))
-
+(add-hook 'ein:notebook-python-mode-hook 
+	  (lambda ()
+	    (define-key python-mode-map "\C-m" 'newline)))
 (provide 'epy-python)
