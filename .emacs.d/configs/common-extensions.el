@@ -22,6 +22,9 @@
 ; ace jump mode
 (require 'ace-jump-mode)
 
+(load-file "~/.emacs.d/extensions/emacs-for-python/extensions/highlight-indentation.el")
+(require 'highlight-indentation)
+
 ; easier window switching
 (require 'win-switch)
 
