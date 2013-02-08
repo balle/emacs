@@ -1,8 +1,19 @@
+(add-to-list 'load-path "~/.emacs.d/extensions/emacs-ctable")
+(add-to-list 'load-path "~/.emacs.d/extensions/emacs-epc")
+(add-to-list 'load-path "~/.emacs.d/extensions/emacs-deferred")
+(add-to-list 'load-path "~/.emacs.d/extensions/emacs-jedi")
+
 ;(epy-setup-checker "pyflakes %f")
 (epy-setup-checker "epylint %f --rcfile=~/.emacs.d/configs/pylint.rc | grep -v 'Class has no __init__ method' | grep -v '_ is not callable'")
 (epy-setup-ipython)
 
+(require 'jedi)
+
 (add-hook 'python-mode-hook 'highlight-indentation)
+(add-hook 'python-mode-hook 'jedi:setup)
+(add-hook 'python-mode-hook 'jedi:ac-setup)
+(setq jedi:complete-on-dot t)
+(setq jedi:setup-keys t)
 
 (add-hook 'python-mode-hook '(lambda ()
 	(add-hook 'before-save-hook 'delete-trailing-whitespace)
