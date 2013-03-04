@@ -19,6 +19,7 @@
 (load "django-config")
 (load "database-config")
 (load "javascript-config")
+(load "lisp-config")
 (load "spell-checking-config")
 (load "org-config")
 (load "latex-config")
