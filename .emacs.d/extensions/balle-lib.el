@@ -111,7 +111,16 @@
   (json-read)
 )
 
-(defun wiki (page)
-  (interactive "sPage: ")
-  (yaoddmuse-edit "BaLu" page)
-)
+
+
+;(defadvice ispell-show-choices (after convert-choices)
+   ; (save-excursion
+;  (switch-to-buffer ispell-choices-buffer)
+;  (beginning-of-buffer)
+;  (push-mark)
+;  (end-of-buffer)
+;  (setq new-encoding 'utf-8)
+;  (setq old-encoding 'iso-8859-1)
+;  (recode-region (region-beginning) (region-end) new-encoding old-encoding)
+   ; )
+;)
