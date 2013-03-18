@@ -12,11 +12,7 @@
     (progn
       (add-to-list 'load-path "~/.emacs.d/extensions/emacs-git-gutter")
       (require 'git-gutter)
-      (global-git-gutter-mode t)
-
-      (add-to-list 'load-path "~/.emacs.d/extensions/helm")
-      (require 'helm-config)
-      (helm-mode 1)))
+      (global-git-gutter-mode t)))
 
 ; yasnippets
 (if (fboundp 'yas/load-directory)
