@@ -11,6 +11,8 @@
 ;(slime-setup '(slime-repl))
 (slime-setup '(slime-fancy))
 
+(add-to-list 'auto-mode-alist '("\\.cl$" . lisp-mode))
+
 (add-hook 'lisp-mode-hook (lambda () (slime-mode t)))
 (add-hook 'interferior-lisp-mode-hook (lambda () (interferior-slime-mode t)))
 
