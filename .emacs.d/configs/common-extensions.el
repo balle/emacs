@@ -5,12 +5,17 @@
 (require 'alarm)
 
 ; git settings
+(add-to-list 'load-path "~/.emacs.d/extensions/magit")
 (require 'magit)
 ; (setq magit-process-popup-time 3)
 (if (> emacs-major-version 23)
    (add-to-list 'load-path "~/.emacs.d/extensions/emacs-git-gutter")
    (require 'git-gutter)
-   (global-git-gutter-mode t))
+   (global-git-gutter-mode t)
+
+   (add-to-list 'load-path "~/.emacs.d/extensions/helm")
+   (require 'helm-config)
+   (helm-mode 1))
 
 ; yasnippets
 (if (fboundp 'yas/load-directory)
