@@ -45,13 +45,6 @@
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'forward)
 
-; break long lines visually?
-;(global-visual-line-mode 1)
-
-; case-sensitive search and replace
-; (setq case-fold-search t)
-; (setq case-replace t)
-
 ; exit search mode with any key
 (setq search-exit-option t)
 
@@ -73,11 +66,11 @@
 (show-paren-mode t)
 
 ; package manager
-;(if (equal emacs-major-version 24)
-;  (require 'package)
-;  (add-to-list 'package-archives '("elpa" . "http://tromey.com/elpa/"))
-;  (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
-;)
+(if (> emacs-major-version 23)
+    (progn
+      ((require  ) 'package)
+      (add-to-list 'package-archives '("elpa" . "http://tromey.com/elpa/"))
+      (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))))
 
 ; suspress warnings
 (setq warning-minimum-level :error)

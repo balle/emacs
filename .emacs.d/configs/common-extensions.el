@@ -8,14 +8,15 @@
 (add-to-list 'load-path "~/.emacs.d/extensions/magit")
 (require 'magit)
 ; (setq magit-process-popup-time 3)
-(if (> emacs-major-version 23)
-   (add-to-list 'load-path "~/.emacs.d/extensions/emacs-git-gutter")
-   (require 'git-gutter)
-   (global-git-gutter-mode t)
+(if (>= emacs-major-version 24)
+    (progn
+      (add-to-list 'load-path "~/.emacs.d/extensions/emacs-git-gutter")
+      (require 'git-gutter)
+      (global-git-gutter-mode t)
 
-   (add-to-list 'load-path "~/.emacs.d/extensions/helm")
-   (require 'helm-config)
-   (helm-mode 1))
+      (add-to-list 'load-path "~/.emacs.d/extensions/helm")
+      (require 'helm-config)
+      (helm-mode 1)))
 
 ; yasnippets
 (if (fboundp 'yas/load-directory)
@@ -31,9 +32,6 @@
 ; ace jump mode
 (require 'ace-jump-mode)
 
-(load-file "~/.emacs.d/extensions/emacs-for-python/extensions/highlight-indentation.el")
-(require 'highlight-indentation)
-
 ; easier window switching
 (require 'win-switch)
 
@@ -41,9 +39,6 @@
 (require 'undo-tree)
 (global-undo-tree-mode)
 (setq undo-limit 50000)
-
-; advanced bookmarking features
-(require 'bookmark+)
 
 ; show fill column
 (require 'fill-column-indicator)
