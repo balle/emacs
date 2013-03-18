@@ -182,6 +182,10 @@
 
 (setq appt-disp-window-function (function balle-org-alarm))
 
+(add-hook 'org-mode-hook '(lambda ()
+                           (define-key org-mode-map (kbd "M-<left>") 'org-agenda-do-date-earlier)
+                           (define-key org-mode-map (kbd "M-<right>") 'org-agenda-do-date-later)))
+
 ; add schedules and deadlines to appt on save
 (add-hook 'org-mode-hook '(lambda nil (
     add-hook 'before-save-hook '(lambda nil
@@ -190,6 +194,39 @@
 )))
 (appt-activate)
 (display-time)
+
+
+;; mylyn mode
+;; remember open files to tasks
+(defun org-recentf-save-and-empty ()
+    "Save and empty recentf"
+      (if (not recentf-mode)
+                (recentf-mode)
+                    (recentf-save-list)
+                        (setq recentf-list nil)
+                            (message "Recentf list reinitialized")))
+
+(defun org-recentf-dblock-update ()
+    "Insert and/or update #+BEGIN: recentf block"
+      (save-excursion
+            (org-back-to-heading)
+                (if (search-forward "#+BEGIN: recentf")
+                    (org-dblock-update)
+                          (outline-next-heading)
+                                (insert "#+BEGIN: recentf\n#+END:\n")
+                                      (search-backward "#+BEGIN")
+                                            (org-dblock-update))))
+
+(defun org-dblock-write:recentf (params)
+    "Write the RECENTF dblock."
+      (interactive)
+        (let* ((rf "(setq recentf-list %s)")
+                (rfl (format rf (prin1-to-string recentf-list))))
+              (insert "#+begin_src emacs-lisp\n" rfl
+                          "\n(recentf-load-list)\n#+end_src")))
+
+(add-hook 'org-clock-in-hook 'org-recentf-save-and-empty)
+(add-hook 'org-clock-out-hook 'org-recentf-dblock-update)
 
 
 ;
