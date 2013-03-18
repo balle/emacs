@@ -7,6 +7,10 @@
 ; git settings
 (require 'magit)
 ; (setq magit-process-popup-time 3)
+(if (> emacs-major-version 23)
+   (add-to-list 'load-path "~/.emacs.d/extensions/emacs-git-gutter")
+   (require 'git-gutter)
+   (global-git-gutter-mode t))
 
 ; yasnippets
 (if (fboundp 'yas/load-directory)
