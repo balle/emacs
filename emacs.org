@@ -30,6 +30,11 @@ ctrl + c y   -> copy current line direkt drunter einfügen
 ctrl + c c   -> duplicate line but comment out first
 alt  + y     -> skip through kill-ring
 
+* Rectangle                                                           :emacs:
+ctrl + x r t - rectangle edit
+ctrl + x r k - rectangle kill
+ctrl + x r y - rectangle insert
+
 * Move 								      :emacs:
 ctrl+c <up>    -> move row or region upwards
 ctrl+c <down>  -> move row or region downwards
@@ -378,7 +383,14 @@ grep output goes to grep buffer
 > /dev/kill - copy to kill ring
 alias ssh "cd /ssh:$1:~"
 alias emacs "find-file $1"
-* Misc 								      :emacs:
+* Ido mode                                                            :emacs:
+ctrl + f - disable completion
+ctrl + s - search forward
+ctrl + r - search backward
+alt + n - next in history
+alt + p - previous in history
+
+* Misc                                                                :emacs:
 ctrl + g                      -> Cancel
 ctrl + x u                    -> UNDO tree
 ctrl + x U                    -> undo last change
