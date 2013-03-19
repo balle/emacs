@@ -124,3 +124,8 @@
 ;  (recode-region (region-beginning) (region-end) new-encoding old-encoding)
    ; )
 ;)
+
+(global-set-key (kbd "M-j")
+                (lambda ()  
+                  (interactive)
+                  (join-line -1)))
