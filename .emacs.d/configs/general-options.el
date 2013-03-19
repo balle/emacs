@@ -9,6 +9,11 @@
 ; hide menubar
 (menu-bar-mode 0)
 
+; ido mode
+(setq ido-enable-flex-matching t)
+(setq ido-everywhere t)
+(ido-mode 1)
+
 ; save desktop sessions
 (desktop-save-mode 1)
 (setq desktop-globals-to-save
