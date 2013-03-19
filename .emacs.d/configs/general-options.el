@@ -65,13 +65,6 @@
 ; highlight brackets
 (show-paren-mode t)
 
-; package manager
-(if (> emacs-major-version 23)
-    (progn
-      ((require  ) 'package)
-      (add-to-list 'package-archives '("elpa" . "http://tromey.com/elpa/"))
-      (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))))
-
 ; suspress warnings
 (setq warning-minimum-level :error)
 
