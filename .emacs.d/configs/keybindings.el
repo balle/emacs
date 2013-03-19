@@ -36,6 +36,7 @@
 (global-set-key "\C-cmc" 'mc/edit-lines)
 (global-set-key "\C-cme" 'er/expand-region)
 (global-set-key "\C-cml" 'mark-line)
+(global-set-key "\C-cmm" 'mc/mark-all-like-this)
 (global-set-key "\C-cmn" 'mc/mark-next-like-this)
 (global-set-key "\C-cmp" 'mc/mark-previous-like-this)
 (global-set-key "\C-cmw" 'mark-word)
