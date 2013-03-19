@@ -31,9 +31,6 @@ ctrl + c c   -> duplicate line but comment out first
 alt  + y     -> skip through kill-ring
 
 * Rectangle                                                           :emacs:
-ctrl + x r t - rectangle edit
-ctrl + x r k - rectangle kill
-ctrl + x r y - rectangle insert
 
 * Move 								      :emacs:
 ctrl+c <up>    -> move row or region upwards
@@ -291,9 +288,11 @@ $0 -> End of template
 * sudo 								      :emacs:
 /sudo::/etc/z.b.conf - sudo edit
 
-* retangle edit 						      :emacs:
-mark region, than ctrl+x r t and # (comment all lines in region)
-ctrl+x r k delete alle comment characters
+* rectangle edit                                                      :emacs:
+mark region, than goto end and
+ctrl + x r t - rectangle edit
+ctrl + x r k - rectangle kill
+ctrl + x r y - rectangle insert
 
 * Remote Edit 							      :emacs:
 # ftp edit
