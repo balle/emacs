@@ -43,13 +43,7 @@
     (flymake-mode t)
     (outline-minor-mode)
     (linum-mode t)
-    (setq skeleton-pair t)
 
     (global-set-key [f10] 'flymake-goto-prev-error)
     (global-set-key [f11] 'flymake-goto-next-error)
-
-    (global-set-key "(" 'skeleton-pair-insert-maybe)
-    (global-set-key "[" 'skeleton-pair-insert-maybe)
-    (global-set-key "{" 'skeleton-pair-insert-maybe)
-    (global-set-key "\"" 'skeleton-pair-insert-maybe)
 )

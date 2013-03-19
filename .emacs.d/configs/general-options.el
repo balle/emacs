@@ -14,6 +14,9 @@
 (setq ido-everywhere t)
 (ido-mode 1)
 
+; skeleton pairs
+(setq skeleton-pair nil)
+
 ; save desktop sessions
 (desktop-save-mode 1)
 (setq desktop-globals-to-save
