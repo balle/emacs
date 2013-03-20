@@ -17,6 +17,7 @@ ctrl + c m l         -> Mark line
 ctrl + c m m         -> Mark all like this
 ctrl + c m n         -> Mark next like this
 ctrl + c m p         -> Mark previous like this
+ctrl + c m P         -> Mark paragraph
 ctrl + c m w         -> Mark word
 
 * Copy / Cut / Paste 						      :emacs:
