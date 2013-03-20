@@ -381,8 +381,8 @@ grep output goes to grep buffer
 > #<buffer muh> - redirect to buffer
 > /dev/clip - copy to clipboard
 > /dev/kill - copy to kill ring
-alias ssh "cd /ssh:$1:~"
-alias emacs "find-file $1"
+alias ssh 'cd /ssh:$1:~'
+alias emacs 'find-file-other-window $1'
 * Ido mode                                                            :emacs:
 ctrl + f - disable completion
 ctrl + s - search forward
