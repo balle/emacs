@@ -48,6 +48,12 @@
 ; goto last change
 (require 'goto-last-change)
 
+; ido goto symbol
+(load-library "ido-goto-symbol")
+
+; eval and replace
+(load-library "eval-and-replace")
+
 ; expand region
 (add-to-list 'load-path "~/.emacs.d/extensions/expand-region")
 (require 'expand-region)

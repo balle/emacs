@@ -41,6 +41,7 @@
 (global-set-key "\C-cmp" 'mc/mark-previous-like-this)
 (global-set-key "\C-cmP" 'mark-paragraph)
 (global-set-key "\C-cmw" 'mark-word)
+(global-set-key "\C-ce" 'fc-eval-and-replace)
 (global-set-key (kbd "C-j <left>") 'backward-list)
 (global-set-key (kbd "C-j <right>") 'forward-list)
 (global-set-key (kbd "C-j <up>") 'outline-backward-same-level)

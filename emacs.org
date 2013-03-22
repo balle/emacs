@@ -346,7 +346,7 @@ ctrl + c k n - next macro in macro-ring
 * Repeat							      :emacs:
 esc <no> <shortcut> - repeat shortcut no times
 ctrl+u <shortcut> - do shortcut 4 times (ctrl+u ctrl+u 16 time and so on)
-ctrl+x z - repeat last command
+ctrl+x z - repeat last command (again with z z z ...)
 
 * Diff                                                                :emacs:
 \M-x ediff-buffers
