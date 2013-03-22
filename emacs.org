@@ -399,6 +399,26 @@ ctrl + r - search backward
 alt + n - next in history
 alt + p - previous in history
 
+* GNUS                                                                :emacs:
+A A - see all groups / mail dirs
+u - subscribe to a group / maildir
+C-k - unsubscribe
+g - fetch messages / show group buffer
+c - mark groups as read
+C-k - mark article as read
+B delete - delete article
+T-s - show thread
+T-S - show all threads
+T-# - mark thread
+r - reply
+f - forward
+m - compose new mail
+C-c C-c - send composed mail
+C-c C-k - cancel mail
+C-c C-m f - add attachment
+B e - expire articles
+j - jump to a group
+
 * Misc                                                                :emacs:
 ctrl + g                      -> Cancel
 ctrl + x u                    -> UNDO tree
