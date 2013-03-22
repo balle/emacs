@@ -33,6 +33,11 @@ alt  + y     -> skip through kill-ring
 
 * Rectangle                                                           :emacs:
 
+* Recursive edit                                                      :emacs:
+Let you pause a macro / command
+C-u C-x q - enter recursive edit
+C-M-c     - leave recursive edit
+
 * Move 								      :emacs:
 ctrl+c <up>    -> move row or region upwards
 ctrl+c <down>  -> move row or region downwards

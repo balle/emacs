@@ -75,7 +75,7 @@
 (global-set-key (kbd "C-c ;") 'comment-or-uncomment-region)
 (global-set-key "\C-xw" 'wiki)
 (global-set-key [f1] 'magit-status)
-(global-set-key [f2] 'calendar)
+(global-set-key [f2] 'kmacro-end-and-call-macro)
 (global-set-key [f3] 'org-agenda)
 (global-set-key [f4] 'balle-grep-todos-in-dir)
 (global-set-key [f5] 'flyspell-auto-correct-word)
