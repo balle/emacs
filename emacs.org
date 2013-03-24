@@ -407,6 +407,10 @@ g - fetch messages / show group buffer
 c - mark groups as read
 C-k - mark article as read
 B delete - delete article
+x - delete article
+C-c g s - mark as spam
+C-c g h - mark as ham
+= - close article buffer
 T-s - show thread
 T-S - show all threads
 T-# - mark thread
