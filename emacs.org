@@ -417,9 +417,12 @@ T-# - mark thread
 r - reply
 f - forward
 m - compose new mail
+C-c C-b - jump to mail body
 C-c C-c - send composed mail
 C-c C-k - cancel mail
 C-c C-m f - add attachment
+C-c C-d - save as draft
+D e - edit draft
 B e - expire articles
 j - jump to a group
 
