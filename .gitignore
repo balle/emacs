@@ -11,3 +11,4 @@
 .emacs.d/elpa/builtin-packages
 .emacs.d/extensions/nxhtml/etc/schema/xhtml-loader.rnc
 .emacs.d/.mc-lists.el
+.emacs.d/bbdb
