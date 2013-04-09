@@ -1,0 +1,38 @@
+(setq user-mail-address "me@domain.tld")
+(setq user-full-name "Your name")
+(setq user-gpgid 'Your_GPG_ID)
+
+(setq gnus-select-method '(nnimap "name_of_account"
+                           (nnimap-address "mail.domain.tld")
+                           (nnimap-server-port 143)
+                           (nnimap-stream starttls)
+                           (nnimap-authenticator login)))
+
+;(setq send-mail-function 'smtpmail-send-it)
+;(setq message-send-mail-function 'smtpmail-send-it)
+(setq smtpmail-default-smtp-server "mail.domain.tld")
+
+; use gpg
+;(setq gnus-treat-x-pgp-sig t
+;      epg-user-id user-gpgid
+;      mm-verify-option 'always
+;      mm-decrypt-option 'always)
+;(add-hook 'message-setup-hook 'mml-secure-sign-pgpmime)
+
+; save send mails on server
+(setq gnus-message-archive-group "nnimap:INBOX/Sent")
+
+; filter mail
+(gnus-registry-initialize)
+(setq nnimap-split-rule 'nnmail-split-fancy)
+(setq nnmail-split-methods 'nnmail-split-fancy) 
+(setq nnmail-split-fancy
+      '(|
+          (: gnus-registry-split-fancy-with-parent)
+          (: spam-split)
+          (any "nagios-users@lists.sourceforge.net" "INBOX/Mailinglist/Nagios")
+          (any "wireshark-users@wireshark.org" "INBOX/Mailinglist/Wireshark")
+          (any "help-gnu-emacs@gnu.org" "INBOX/Mailinglist/Emacs")
+          (any "sbcl-help@lists.sourceforge.net" "INBOX/Mailinglist/SBCL")
+          "INBOX"    ;; or "mail.misc" for nnml/POP3
+      ))
