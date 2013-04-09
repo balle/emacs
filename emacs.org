@@ -402,17 +402,16 @@ alt + p - previous in history
 * GNUS                                                                :emacs:
 A A - see all groups / mail dirs
 A u - see all subscribed groups
-u - subscribe to a group / maildir
-C-k - unsubscribe
+u - (un)subscribe to a group / maildir
 g - fetch messages / show group buffer
 c - mark groups as read
 C-k - mark article as read
-B delete - delete article
 x - delete article
 B m - move article
 C-c g s - mark as spam
 C-c g h - mark as ham
 = - close article buffer
+/ o - display old articles
 T-s - show thread
 T-S - show all threads
 T-# - mark thread
@@ -427,6 +426,8 @@ C-c C-d - save as draft
 D e - edit draft
 B e - expire articles
 j - jump to a group
+K v - view attachment
+K o - save attachment
 
 * Misc                                                                :emacs:
 ctrl + g                      -> Cancel
