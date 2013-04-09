@@ -10,7 +10,7 @@
 (load "common-extensions")
 (load "org-config")
 
-(autoload 'rst-mode "rst-config" "RST mode" t)
+(load "rst-config")
 (autoload 'c-mode "c-config" "C mode" t)
 (autoload 'perl-mode "perl-config" "Perl mode" t)
 (autoload 'python-mode "python-config" "Python mode" t)
