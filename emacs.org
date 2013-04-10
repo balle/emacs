@@ -405,19 +405,29 @@ A u - see all subscribed groups
 u - (un)subscribe to a group / maildir
 g - fetch messages / show group buffer
 c - mark groups as read
-C-k - mark article as read
+L - show all subscribed groups
+l - show groups with unread articles
+C-k - mark article as read / kill a group
 x - delete article
 B m - move article
 C-c g s - mark as spam
 C-c g h - mark as ham
 = - close article buffer
 / o - display old articles
+/ a - display articles of specified author
+/ s - display articles with specified subject
+/ b - display articles with specified body
+/ x - display articles with specified header
+G G - search all marked groups or group under cursor
 T-s - show thread
 T-S - show all threads
 T-# - mark thread
 r - reply
+R - reply including copy
 f - forward
+t - show all header
 m - compose new mail
+C-c m - Send mail to address under cursor
 C-c C-b - jump to mail body
 C-c C-c - send composed mail
 C-c C-k - cancel mail
@@ -428,6 +438,9 @@ B e - expire articles
 j - jump to a group
 K v - view attachment
 K o - save attachment
+G m - make directory / group
+G r - rename directory / group
+G <del> - delete directory / group
 
 * Misc                                                                :emacs:
 ctrl + g                      -> Cancel

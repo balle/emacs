@@ -1,0 +1,6 @@
+audio/*; /usr/bin/rhythmbox %s
+image/*; /usr/bin/eog %s
+pplication/msword; /usr/bin/oowriter %s
+application/msexcel; /usr/bin/oocalc %s
+application/pdf; /usr/bin/acroread %s
+text/html; /usr/bin/firefox %s

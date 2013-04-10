@@ -6,6 +6,7 @@
                            (nnimap-address "mail.domain.tld")
                            (nnimap-server-port 143)
                            (nnimap-stream starttls)
+                           (nnir-search-engine imap)
                            (nnimap-authenticator login)))
 
 ;(setq send-mail-function 'smtpmail-send-it)
