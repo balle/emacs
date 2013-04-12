@@ -69,3 +69,16 @@
            (cons '("\\.po\\'\\|\\.po\\.|\\.po" . po-mode) auto-mode-alist))
      (autoload 'po-mode "po-mode" "Major mode for translators to edit PO files" t)
 
+; calendar
+(add-to-list 'load-path "~/.emacs.d/extensions/emacs-calfw")
+(require 'calfw-cal)
+(require 'calfw-ical)
+(require 'calfw-org)
+(defun my-open-calendar ()
+  (interactive)
+  (cfw:open-calendar-buffer
+   :contents-sources
+   (list
+    (cfw:org-create-source "Green")  ; orgmode source
+    (cfw:cal-create-source "Orange") ; diary source
+    )))
