@@ -407,6 +407,8 @@ g - fetch messages / show group buffer
 c - mark groups as read
 L - show all subscribed groups
 l - show groups with unread articles
+# - mark article / group
+M-# - unmark
 C-k - mark article as read / kill a group
 x - delete article
 B m - move article
