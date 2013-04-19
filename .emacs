@@ -19,7 +19,7 @@
 (autoload 'sql-interactive-mode "database-config" "SQL mode" t)
 (autoload 'json-mode "javascript-config" "Javascript mode" t)
 (autoload 'js-mode "javascript-config" "Javascript mode" t)
-(autoload 'lisp-mode "lisp-config" "Lisp mode" t)
+(load "lisp-config")
 (autoload 'latex-mode "latex-config" "Latex mode" t)
 (autoload 'latex-mode "spell-checking-config" "Spell checking mode" t)
 
