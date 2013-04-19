@@ -1,4 +1,8 @@
 (add-to-list 'load-path "~/.emacs.d/extensions/zencoding")
+(add-to-list 'load-path "~/.emacs.d/extensions/htmlize-20130207.2102")
+(add-to-list 'load-path "~/.emacs.d/extensions/simple-httpd-20121224.1121")
+(add-to-list 'load-path "~/.emacs.d/extensions/impatient-mode-20130127.1656")
+(require 'impatient-mode)
 (require 'rename-sgml-tag)
 
 (setq ac-dwim t)
