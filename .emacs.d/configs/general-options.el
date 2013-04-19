@@ -200,6 +200,15 @@
 ; drucken via cups
 (setq lpr-command "xpp")
 
+; package management
+(if (> emacs-major-version 23)
+    (progn
+      (require 'package)
+      (package-initialize)
+      (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+      (add-to-list 'package-archives '("marmelade" . "http://marmelade-repo.org/packages/") t)
+))
+
 (setq confirm-kill-emacs nil)
 (fset 'yes-or-no-p 'y-or-n-p)
 ;(setq compare-ignore-case nil)

@@ -13,4 +13,6 @@
 .emacs.d/.mc-lists.el
 .emacs.d/bbdb
 .emacs.d/url/cache
+.emacs.d/elpa/archives
+.emacs.d/server/server
 

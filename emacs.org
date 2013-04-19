@@ -211,6 +211,12 @@ ctrl + c ctrl + c o   ->  html-ordered-list
 ctrl + c ctrl + c r   ->  html-radio-buttons
 ctrl + c ctrl + c u   ->  html-unordered-list
 
+* Live Web coding                                                     :emacs:
+M-x httpd-start
+M-x impatient-mode
+Point your browser to http://localhost:8080/imp
+Start coding
+
 * Po-Files							      :emacs:
 n -> next translation entry
 p -> previous translation entry

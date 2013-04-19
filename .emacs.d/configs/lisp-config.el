@@ -14,7 +14,7 @@
 (add-to-list 'auto-mode-alist '("\\.cl$" . lisp-mode))
 
 (add-hook 'lisp-mode-hook (lambda () (slime-mode t)))
-(add-hook 'lisp-mode-hook (lambda () (add-hook 'before-save-hook 'elint-current-buffer nil 'make-it-local)))
+;(add-hook 'lisp-mode-hook (lambda () (add-hook 'before-save-hook 'elint-current-buffer nil 'make-it-local)))
 (add-hook 'interferior-lisp-mode-hook (lambda () (interferior-slime-mode t)))
 
 (define-key slime-mode-map "\C-cx" 'slime-selector)
