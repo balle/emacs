@@ -33,8 +33,16 @@
   (interactive)
   (my-bogofilter "-n"))
 
+(defadvice gnus-summary-delete-article (after gnus-next-line-after-delete (&optional N))
+  (next-line))
+
+(defun my-gnus-summary-delete-article ()
+  (interactive)
+  (gnus-summary-delete-article)
+  (next-line))
+
 (let ((map gnus-summary-mode-map))
-  (define-key map (kbd "x") 'gnus-summary-delete-article)
+  (define-key map (kbd "x") 'my-gnus-summary-delete-article)
   (define-key map (kbd "c") 'my-gnus-summary-catchup-and-exit))
 (setq gnus-novice-user nil)
 
@@ -103,7 +111,7 @@
 (autoload 'bbdb/send-hook "moy-bbdb" "Function to be added to `message-send-hook' to notice records when sending messages" t)
 (add-hook 'message-send-hook 'bbdb/send-hook)
 (add-hook 'message-mode-hook
-	  (function (lambda() 
+	  (function (lambda()
 		      (local-set-key (kbd "<tab>") 'bbdb-complete-name)
 		      )))
 
@@ -120,7 +128,7 @@
 (if (< emacs-major-version 24)
     (progn
       (setq imap-ping-timer nil)
-      
+
       (defun imap-ping-handler ()
         ;; ping all active IMAP servers in `nnimap-server-buffer-alist'
         (when (boundp 'nnimap-server-buffer-alist)

@@ -24,9 +24,10 @@
 (setq gnus-message-archive-group "nnimap:INBOX/Sent")
 
 ; filter mail
+(setq nnimap-split-inbox "INBOX")
 (gnus-registry-initialize)
 (setq nnimap-split-rule 'nnmail-split-fancy)
-(setq nnmail-split-methods 'nnmail-split-fancy) 
+(setq nnmail-split-methods 'nnmail-split-fancy)
 (setq nnmail-split-fancy
       '(|
           (: gnus-registry-split-fancy-with-parent)
