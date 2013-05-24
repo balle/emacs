@@ -1,7 +1,7 @@
 (add-to-list 'load-path "~/.emacs.d/extensions/slime")
 (require 'slime)
 
-(setq inferior-lisp-program "/usr/bin/sbcl")
+(setq inferior-lisp-program "/usr/bin/sbcl --noinform --no-linedit")
 ;(setq inferior-lisp-program "/usr/bin/clisp")
 
 (setq slime-net-coding-system 'utf-8-unix)
