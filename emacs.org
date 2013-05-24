@@ -30,6 +30,7 @@ ctrl + c     -> copy current line
 ctrl + c y   -> copy current line direkt drunter einfügen
 ctrl + c c   -> duplicate line but comment out first
 alt  + y     -> skip through kill-ring
+esc + ^      -> delete indention (join with previous line)
 
 * Rectangle                                                           :emacs:
 
@@ -449,6 +450,8 @@ K o - save attachment
 G m - make directory / group
 G r - rename directory / group
 G <del> - delete directory / group
+T n - Create new topic in group buffer
+T m - Move folder to topic
 
 * Misc                                                                :emacs:
 ctrl + g                      -> Cancel
