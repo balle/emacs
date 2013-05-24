@@ -26,7 +26,9 @@
         (define-key python-mode-map "\C-co" 'balle-show-python-functions)
         (define-key python-mode-map "\C-cd" 'rope-show-calltip)
         (define-key python-mode-map "\C-ci" 'rope-auto-import)
+        (define-key python-mode-map "\C-x\C-e" 'python-shell-send-defun)
         (define-key python-mode-map "\C-ff" 'python-fill-paragraph-function)
         (setq ropemacs-autoimport-modules '("os.*" "shutil.*" "string.*" "sys.*" "logging" "logging.*" "urllib" "urllib2"))
+        (setq ansi-color-for-comint-mode t)
 ))
 
