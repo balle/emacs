@@ -112,8 +112,15 @@
 (add-hook 'message-send-hook 'bbdb/send-hook)
 (add-hook 'message-mode-hook
 	  (function (lambda()
-		      (local-set-key (kbd "<tab>") 'bbdb-complete-name)
-		      )))
+            (progn
+              (flyspell-mode)
+              (local-set-key (kbd "<tab>") 'bbdb-complete-name)
+		      ))))
+
+;; enable auto completion
+(add-to-list 'ac-modes 'message-mode)
+(setq ac-sources '(ac-source-semantic ac-source-yasnippet))
+(ac-config-default)
 
 ;; delete mail immediately
 (setq nnmail-expiry-wait 'immediate)
