@@ -82,7 +82,7 @@
 (epa-file-enable)
 
 ;; remember addresses
-(add-to-list 'load-path "~/.emacs.d/extensions/bbdb-2.34/lisp")
+(add-to-list 'load-path "~/.emacs.d/extensions/bbdb-2.35/lisp")
 (setq bbdb-file "~/.emacs.d/bbdb")
 (require 'bbdb)
 (bbdb-initialize)
