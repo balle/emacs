@@ -21,7 +21,9 @@
 ;(add-hook 'message-setup-hook 'mml-secure-sign-pgpmime)
 
 ; save send mails on server
-(setq gnus-message-archive-group "nnimap:INBOX/Sent")
+(setq gnus-message-archive-method '(nnimap "your.server.net"))
+(setq gnus-message-archive-group "Sent")
+(setq gnus-gcc-mark-as-read t)
 
 ; filter mail
 (setq nnimap-split-inbox "INBOX")
