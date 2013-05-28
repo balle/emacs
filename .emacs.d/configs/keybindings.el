@@ -50,7 +50,7 @@
 (global-set-key "\C-cke" 'kmacro-end-or-call-macro)
 (global-set-key "\C-ckn" 'kmacro-cycle-ring-next)
 (global-set-key "\C-ckp" 'kmacro-cycle-ring-previous)
-
+(global-set-key "\C-xte" 'balle-show-emacs-list)
 (global-set-key "\C-xth" 'balle-show-hack-list)
 (global-set-key "\C-xti" 'org-redmine-get-issue)
 (global-set-key "\C-xtn" 'balle-show-note-list)

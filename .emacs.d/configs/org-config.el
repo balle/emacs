@@ -49,6 +49,13 @@
 
 
 ; functions to show todos / notes / appointments
+(defun balle-show-emacs-list ()
+  (interactive)
+  (balle-org-tags-view "emacs")
+  (next-multiframe-window)
+  (enlarge-window 10)
+)
+
 (defun balle-show-todo-list ()
   (interactive)
   (org-todo-list nil)
