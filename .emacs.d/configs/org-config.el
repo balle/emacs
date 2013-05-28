@@ -1,5 +1,4 @@
 ; org mode for todo lists and "project management"
-(add-to-list 'load-path "~/.emacs.d/extensions/org-7.8.03/lisp")
 (add-to-list 'load-path "~/.emacs.d/extensions/org-redmine")
 
 (add-to-list 'auto-mode-alist '("\\.\\(org\\|org_archive\\)$" . org-mode))
