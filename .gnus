@@ -122,6 +122,11 @@
 (setq ac-sources '(ac-source-semantic ac-source-yasnippet))
 (ac-config-default)
 
+;; show all old messages in mail (INBOX) groups
+(defadvice gnus-summary-mode (after show-all-mails (&optional group))
+  (if (search "INBOX" group)
+      (gnus-summary-insert-old-articles t)))
+
 ;; delete mail immediately
 (setq nnmail-expiry-wait 'immediate)
 
