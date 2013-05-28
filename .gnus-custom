@@ -26,6 +26,9 @@
 (setq gnus-message-archive-group "INBOX/Sent")
 (setq gnus-gcc-mark-as-read t)
 
+; always show all mail folders
+(setq gnus-permanently-visible-groups "INBOX")
+
 ; filter mail
 (setq nnimap-split-inbox "INBOX")
 (gnus-registry-initialize)
