@@ -121,6 +121,7 @@
 (add-to-list 'ac-modes 'message-mode)
 (setq ac-sources '(ac-source-semantic ac-source-yasnippet))
 (ac-config-default)
+(setq ac-delay 0.2)
 
 ;; show all old messages in mail (INBOX) groups
 (defadvice gnus-summary-mode (after show-all-mails (&optional group))
@@ -129,6 +130,9 @@
 
 ;; delete mail immediately
 (setq nnmail-expiry-wait 'immediate)
+
+;; vcard support
+(require 'vcard)
 
 ;; Read usenet news and RSS feeds with gwene.org
 (setq gnus-secondary-select-methods '((nntp "news.gwene.org")))
