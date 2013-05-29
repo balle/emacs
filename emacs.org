@@ -384,11 +384,15 @@ esc + x describe-coding-system -> show current encodings
 
 * Dired								      :emacs:
 m - mark file
+u - unmark
 t - mark all
+~ - mark backup files
 r - rename
+Q - rename with regexp
 R - move marked files
 C - copy
 D - delete
+X - execute shell command on marked files
 + - mkdir
 ^ - go dir up
 =======
