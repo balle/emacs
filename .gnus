@@ -1,37 +1,23 @@
 ; filter spam
+(gnus-registry-initialize)
 (spam-initialize)
-(require 'gnus-bogofilter)
-(setq bogofilter-spam-group "INBOX.Junk")
+(setq spam-split-group "INBOX/Junk")
 (setq spam-use-bogofilter t)
+(setq
+ spam-log-to-registry t     ; for spam autodetection
+ spam-use-BBDB t
+ spam-use-regex-headers t   ; catch X-Spam-Flag (SpamAssassin)
+ ;; all groups with ‘spam’ or 'junk' in the name contain spam
+ gnus-spam-(newsgroup-contents
+            '(("spam" gnus-group-spam-classification-spam)
+              ("junk" gnus-group-spam-classification-spam)))
+ spam-mark-only-unseen-as-spam t
+ spam-mark-ham-unread-before-move-from-spam-group t)
 
 ;; delete mail with x key
 (defun my-gnus-summary-catchup-and-exit ()
   (interactive)
   (gnus-summary-catchup-and-exit t t))
-
-(defun my-bogofilter (arg)
-  (interactive)
-  (let ((articles (sort (copy-sequence (gnus-summary-work-articles nil)) '<))
-	(save-excursion
-	  (while articles
-	    (gnus-summary-remove-process-mark (car articles))
-	    (let ((article (car articles))
-		   (tl/gnus-article-buffer article)
-		   (with-temp-buffer
-		     (insert-buffer art)
-		     (call-process-region (point-min) (point-max) "bogofilter"
-					  nil nil nil arg)
-		     (if (eq arg "-s")
-			 (gnus-summary-move-article 1 bogofilter-spam-group)))
-		   (setq articles (cdr articles)))))))))
-
-(defun my-bogofilter-register-spam ()
-  (interactive)
-  (my-bogofilter "-s"))
-
-(defun my-bogofilter-register-ham ()
-  (interactive)
-  (my-bogofilter "-n"))
 
 (defadvice gnus-summary-delete-article (after gnus-next-line-after-delete (&optional N))
   (next-line))
