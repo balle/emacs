@@ -5,7 +5,6 @@
 (setq spam-use-bogofilter t)
 (setq
  spam-log-to-registry t     ; for spam autodetection
- spam-use-BBDB t
  spam-use-regex-headers t   ; catch X-Spam-Flag (SpamAssassin)
  ;; all groups with ‘spam’ or 'junk' in the name contain spam
  gnus-spam-newsgroup-contents

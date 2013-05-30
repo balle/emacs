@@ -423,8 +423,9 @@ M-# - unmark
 C-k - mark article as read / kill a group
 x - delete article
 B m - move article
-C-c g s - mark as spam
-C-c g h - mark as ham
+S x - mark as spam
+M c - clear all marks on article
+d - mark article as read
 = - close article buffer
 / o - display old articles
 / a - display articles of specified author
