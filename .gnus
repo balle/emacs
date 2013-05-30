@@ -8,9 +8,9 @@
  spam-use-BBDB t
  spam-use-regex-headers t   ; catch X-Spam-Flag (SpamAssassin)
  ;; all groups with ‘spam’ or 'junk' in the name contain spam
- gnus-spam-(newsgroup-contents
+ gnus-spam-newsgroup-contents
             '(("spam" gnus-group-spam-classification-spam)
-              ("junk" gnus-group-spam-classification-spam)))
+              ("junk" gnus-group-spam-classification-spam))
  spam-mark-only-unseen-as-spam t
  spam-mark-ham-unread-before-move-from-spam-group t)
 
