@@ -383,8 +383,10 @@ esc + x describe-coding-system -> show current encodings
 (setq default-buffer-file-coding-system 'utf-8)
 
 * Dired								      :emacs:
+ctrl + x d - open dired
 m - mark file
 u - unmark
+U - unmark all
 t - mark all
 ~ - mark backup files
 r - rename
@@ -436,9 +438,11 @@ G G - search all marked groups or group under cursor
 T-s - show thread
 T-S - show all threads
 T-# - mark thread
+n - next unread
+p - previous unread
 r - reply
 R - reply including copy
-f - forward
+f - forward article
 t - show all header
 m - compose new mail
 C-c m - Send mail to address under cursor
