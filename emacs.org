@@ -166,7 +166,7 @@ esc + x
    reftex-goto-label       -> goto label definition
    reftex-search-document  -> Grep a label through all files
 * Git 								      :emacs:
-f2             -> show status
+f1             -> show status
                -> s (stage == mark file for commit / add file)
                -> ctrl + u S (stage all)
                -> c (commit)
