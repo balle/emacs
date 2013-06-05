@@ -31,6 +31,9 @@
 ; easier window switching
 (require 'win-switch)
 
+; sunrise commander as file manager
+(require 'sunrise-commander)
+
 ; advaned undo
 (require 'undo-tree)
 (global-undo-tree-mode)
