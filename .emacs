@@ -19,9 +19,12 @@
 (autoload 'sql-interactive-mode "database-config" "SQL mode" t)
 (autoload 'json-mode "javascript-config" "Javascript mode" t)
 (autoload 'js-mode "javascript-config" "Javascript mode" t)
-(load "lisp-config")
+(add-to-list 'auto-mode-alist '("\\.cl$" . lisp-mode))
+(autoload 'lisp-mode "lisp-config" "lisp mode" t)
 (autoload 'latex-mode "latex-config" "Latex mode" t)
 (autoload 'latex-mode "spell-checking-config" "Spell checking mode" t)
+(add-to-list 'auto-mode-alist '("\\.pp$" . puppet-mode))
+(autoload 'puppet-mode "puppet-config" "puppet mode" t)
 
 ;(load "re-builder-with-pcre")
 ;(setq reb-re-syntax 'perl)
