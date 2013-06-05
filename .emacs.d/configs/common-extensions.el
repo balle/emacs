@@ -33,7 +33,10 @@
 
 ; sunrise commander as file manager
 (require 'sunrise-commander)
-
+(add-hook 'sr-mode-hook
+          (lambda ()
+               (define-key dired-mode-map (kbd "<left>") 'sr-history-prev)
+               (define-key dired-mode-map (kbd "<right>") 'sr-history-next)))
 ; advaned undo
 (require 'undo-tree)
 (global-undo-tree-mode)

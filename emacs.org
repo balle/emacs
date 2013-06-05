@@ -398,6 +398,16 @@ X - execute shell command on marked files
 + - mkdir
 ^ - go dir up
 =======
+* Sunrise commander                                                   :emacs:
+Has same shortcuts as dired
+ctrl + alt = - compare directories
+ctrl + c ctrl + s - change layout of panes
+left / right - go back / forward in directory history
+ctrl + / - fuzzy matching for directory listing
+j - jump to directory
+o - open directory in other pane
+ctrl + c ctrl + l - locate file
+
 * Eshell                                                              :emacs:
 grep output goes to grep buffer
 > #<buffer muh> - redirect to buffer
