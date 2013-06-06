@@ -37,10 +37,15 @@
           (lambda ()
                (define-key dired-mode-map (kbd "<left>") 'sr-history-prev)
                (define-key dired-mode-map (kbd "<right>") 'sr-history-next)))
+
 ; advaned undo
 (require 'undo-tree)
 (global-undo-tree-mode)
 (setq undo-limit 50000)
+
+; better bookmarking support
+(add-to-list 'load-path "~/.emacs.d/extensions/bookmark-plus")
+(require 'bookmark+)
 
 ; show fill column
 (require 'fill-column-indicator)
