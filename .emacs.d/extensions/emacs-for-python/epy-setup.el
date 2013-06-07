@@ -11,9 +11,9 @@
 ;; Adding paths to the variable load-path
 (dolist (relpath '(""
                    "extensions/"
-                   "extensions/yasnippet"
+;                   "extensions/yasnippet"
                    "extensions/auto-complete"
-		   "extensions/eproject"
+;		   "extensions/eproject"
                    )
                  )
   (add-to-list 'load-path (concat epy-install-dir relpath)))

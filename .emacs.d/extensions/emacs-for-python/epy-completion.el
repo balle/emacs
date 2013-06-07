@@ -42,7 +42,7 @@
       )))
 
 (defun epy-get-all-snips ()
-  (require 'yasnippet) ;; FIXME: find a way to conditionally load it
+  ;(require 'yasnippet) ;; FIXME: find a way to conditionally load it
   (let (candidates)
     (maphash
      (lambda (kk vv) (push (epy-snips-from-table vv) candidates)) yas/tables)

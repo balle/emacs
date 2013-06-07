@@ -15,11 +15,19 @@
       (global-git-gutter-mode t)))
 
 ; yasnippets
-(if (fboundp 'yas/load-directory)
-      (yas/load-directory "~/.emacs-snippets")
-      (yas/load-directory "~/.emacs.d/extensions/emacs-for-python/extensions/yasnippet/snippets")
-      (yas/load-directory "~/.emacs.d/extensions/emacs-for-python/snippets/"))
+(add-to-list 'load-path "~/.emacs.d/extensions/yasnippet")
+(load-file "~/.emacs.d/extensions/yasnippet/yasnippet.el")
+(setq yas-snippet-dirs
+      '("~/.emacs.d/snippets"
+	"~/.emacs-snippets-custom"
+	"~/.emacs-snippets"
+	"~/.emacs.d/extensions/yasnippet/snippets"
+	"~/.emacs.d/extensions/emacs-for-python/extensions/yasnippet/snippets"
+	"~/.emacs.d/extensions/emacs-for-python/snippets/"
+	))
+
 (setq yas/indent-line nil)
+(yas-global-mode 1)
 
 ; X clipboard support on console
 (load-file "~/.emacs.d/extensions/xclip/xclip.el")
