@@ -374,6 +374,10 @@ Merging with \M-x emerge-buffers
 Want to see / merge differences in two directories?
 ediff-directories
 emerge-merge-directories
+* Formatting                                                          :emacs:
+alt + q - fill paragraph
+ctrl + alt + \ - format code
+
 * Encoding 							      :emacs:
 ctrl + x =                    -> show position and character info
 ctrl + shift + u              -> enter character by code
