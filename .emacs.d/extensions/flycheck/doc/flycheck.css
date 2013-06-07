@@ -1,0 +1,73 @@
+body {
+    font-family: "HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 11pt;
+    background: #eee;
+    color: #666;
+    line-height: 2;
+    padding: 30px 0;
+    margin: 0 auto;
+    max-width: 1000px;
+}
+
+@media screen and (max-width: 800px) {
+    body {
+        margin: 0 15px;
+    }
+}
+
+a {
+    text-decoration: none;
+    color: #258fb8;
+}
+
+p {
+    margin: 1em 0;
+    display: block;
+}
+
+h1 {
+    margin-top: 10px;
+    font-size: 1.8em;
+}
+
+h2 {
+    font-size: 1.5em;
+}
+
+h3 {
+    font-size: 1.3em;
+}
+
+samp, code, kbd {
+    background: #ddd;
+    border: 1px solid #ccc;
+    font-family: Menlo,Monaco,"Andale Mono","lucida console","Courier New",monospace;
+    font-size: 0.9em;
+    padding: 1px 3px;
+    margin: 0 3px;
+    border-radius: 5px;
+    font-style: normal;
+}
+
+pre {
+     background: #ddd;
+    border: 1px solid #ccc;
+    font-family: Menlo,Monaco,"Andale Mono","lucida console","Courier New",monospace;
+    font-size: 0.9em;
+    padding: 1px 3px;
+    margin: 0 3px;
+    border-radius: 5px;
+    font-style: normal;
+    overflow-x: auto;
+    line-height: 1.5;
+}
+
+#frontmatter {
+    width: 700px;
+    margin: 0 auto;
+}
+
+#frontmatter div {
+    display: block;
+    margin: 1em 0;
+}

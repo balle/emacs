@@ -29,6 +29,12 @@
 (setq yas/indent-line nil)
 (yas-global-mode 1)
 
+; flycheck - better syntax checking
+(if (>= emacs-major-version 24)
+    (progn
+      (add-to-list 'load-path "~/.emacs.d/extensions/flycheck")
+      (add-hook 'after-init-hook #'global-flycheck-mode)))
+
 ; X clipboard support on console
 (load-file "~/.emacs.d/extensions/xclip/xclip.el")
 (turn-on-xclip)
