@@ -32,8 +32,13 @@
 ; flycheck - better syntax checking
 (if (>= emacs-major-version 24)
     (progn
+      (add-to-list 'load-path "~/.emacs.d/extensions/s")
+      (add-to-list 'load-path "~/.emacs.d/extensions/cl-lib")
+      (add-to-list 'load-path "~/.emacs.d/extensions/dash")
       (add-to-list 'load-path "~/.emacs.d/extensions/flycheck")
-      (add-hook 'after-init-hook #'global-flycheck-mode)))
+      (require 'flycheck)
+      (add-hook 'after-init-hook #'global-flycheck-mode)
+))
 
 ; X clipboard support on console
 (load-file "~/.emacs.d/extensions/xclip/xclip.el")
