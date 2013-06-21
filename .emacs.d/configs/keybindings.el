@@ -51,7 +51,7 @@
 (global-set-key "\C-cke" 'kmacro-end-or-call-macro)
 (global-set-key "\C-ckn" 'kmacro-cycle-ring-next)
 (global-set-key "\C-ckp" 'kmacro-cycle-ring-previous)
-(global-set-key (kbd "C-c!") 'shell-command-on-buffer-file)
+(global-set-key (kbd "C-c !") 'shell-command-on-buffer-file)
 (global-unset-key (kbd "M-!"))
 (global-set-key (kbd "M-!") 'shell-command-on-buffer)
 (global-set-key "\C-xte" 'balle-show-emacs-list)
