@@ -461,6 +461,13 @@ t - show all header
 m - compose new mail
 C-c m - Send mail to address under cursor
 C-c C-b - jump to mail body
+C-c C-f C-b - goto bcc header
+C-c C-f C-c - goto cc header
+C-c C-f C-t - goto to header
+C-c C-f C-s - goto subject
+C-c C-f C-r - goto reply-to header
+C-c C-i - goto signature
+C-c C-t - add a header
 C-c C-c - send composed mail
 C-c C-k - cancel mail
 C-c C-m f - add attachment
@@ -470,6 +477,8 @@ B e - expire articles
 j - jump to a group
 K v - view attachment
 K o - save attachment
+2 K o - save seconds attachment
+a - post article to newsgroup
 G m - make directory / group
 G r - rename directory / group
 G <del> - delete directory / group
