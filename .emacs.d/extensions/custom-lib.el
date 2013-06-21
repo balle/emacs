@@ -113,7 +113,8 @@ as input."
   (interactive)
   (shell-command-on-region
    (point-min) (point-max)
-   (read-shell-command "Shell command on buffer: ")))
+   (read-shell-command "Shell command on buffer: ")
+   (buffer-name)))
 
 (defun shell-command-on-buffer-file ()
   "Asks for a command and executes it in inferior shell with current buffer filename

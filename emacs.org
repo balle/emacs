@@ -415,7 +415,7 @@ ctrl + c ctrl + l - locate file
 
 * Shell                                                               :emacs:
 ctrl + c ! - run shell command on buffer filename
-esc + ! - run shell command on buffer content
+esc + ! - run shell command on buffer content and replace it with output
 
 * Eshell                                                              :emacs:
 grep output goes to grep buffer
