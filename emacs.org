@@ -413,6 +413,10 @@ j - jump to directory
 o - open directory in other pane
 ctrl + c ctrl + l - locate file
 
+* Shell                                                               :emacs:
+ctrl + c ! - run shell command on buffer filename
+esc + ! - run shell command on buffer content
+
 * Eshell                                                              :emacs:
 grep output goes to grep buffer
 > #<buffer muh> - redirect to buffer
