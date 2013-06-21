@@ -107,4 +107,18 @@ Including indent-buffer, which should not be called automatically on save."
         (cleanup-buffer-safe)
           (indent-buffer))
 
+(defun shell-command-on-buffer ()
+  "Asks for a command and executes it in inferior shell with current buffer
+as input."
+  (interactive)
+  (shell-command-on-region
+   (point-min) (point-max)
+   (read-shell-command "Shell command on buffer: ")))
 
+(defun shell-command-on-buffer-file ()
+  "Asks for a command and executes it in inferior shell with current buffer filename
+as input."
+  (interactive)
+  (shell-command-on-region
+   (point-min) (point-max)
+   (concatenate 'string (read-shell-command "Shell command on buffer: ") " " (buffer-file-name))))
