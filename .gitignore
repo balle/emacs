@@ -15,4 +15,5 @@
 .emacs.d/url/cache
 .emacs.d/elpa/archives
 .emacs.d/server/server
+.emacs.d/sql/*.sql
 
