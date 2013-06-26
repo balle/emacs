@@ -75,6 +75,8 @@ ctrl + j <left> - jump bracket back
 ctrl + j <right> - jump bracket down
 ctrl + j <up> - jump block up
 ctrl + j <down> - jump block down
+ctrl + u ctrl + space - jump to last mark in buffer
+ctrl + x ctrl + space - jump to last global mark
 
 * Auto Complete 						      :emacs:
 tab                -> auto complete yasnippets
@@ -219,6 +221,9 @@ M-x impatient-mode
 Point your browser to http://localhost:8080/imp
 Start coding
 
+* RST-Files                                                           :emacs
+ctrl+c a - adjust (auto-insert markup)
+
 * Po-Files							      :emacs:
 n -> next translation entry
 p -> previous translation entry
@@ -346,6 +351,8 @@ ctrl + x r s              -> save bookmarks
 ctrl + space ctrl + space -> push pos to mark ring
 ctrl + x ctrl + space     -> globally goto last pos in mark ring
 ctrl + u ctrl + space     -> goto last pos in mark ring in current buffer
+ctrl + x p <return> - make anonymous bookmark
+
 * Macros 							      :emacs:
 ctrl + x ( -> begin macro recording
 ctrl + x ) -> end macro recording

@@ -6,4 +6,5 @@
     (flyspell-mode)
     (ac-flyspell-workaround)
     (setq ac-delay 0.2)
+    (define-key rst-mode-map (kbd "C-c a") 'rst-adjust)
 ))
