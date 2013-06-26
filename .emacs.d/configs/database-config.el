@@ -1,15 +1,20 @@
 (setq sql-sqlite-program "sqlite3")
 (add-to-list 'ac-modes 'sql-interactive-mode)
-(setq ac-sources '(ac-source-semantic ac-source-yasnippet))
+(setq ac-sources '(ac-source-words-in-buffer ac-source-yasnippet))
 
 (add-hook 'sql-interactive-mode-hook '(lambda ()
   (yas/minor-mode)
+  (auto-complete-mode)
+
   (cond
-    ((equal 'sql-product "sqlite")
+    ((eq sql-product 'sqlite)
       (sql-send-string ".tables")
     )
-    ((equal 'sql-product "postgres")
+    ((eq sql-product 'postgres)
       (sql-send-string "\dt")
+    )
+    ((eq sql-product 'mysql)
+      (sql-send-string "show tables;")
     )
   )
 ))
