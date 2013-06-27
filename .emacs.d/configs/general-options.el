@@ -38,6 +38,9 @@
 (setq desktop-dirname "~/")
 (setq desktop-base-file-name ".emacs-desktop")
 
+; enable wildcard open files
+(setq find-file-wildcards t)
+
 ; save desktop on auto save hook
 (defun my-desktop-save ()
     (interactive)

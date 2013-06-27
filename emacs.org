@@ -4,6 +4,10 @@ ctrl + x ctrl+c -> close
 ctrl + x ctrl+f -> open file
 ctrl + x ctrl+w -> save as
 ctrl + x s      -> save all
+ctrl + f -> switch to old file open mode in ido mode
+*.py -> open all py files
+ctrl + d -> open current directory in dired in open file mode
+ctrl + t -> match with regexp in ido file open mode
 
 * Mark 								      :emacs:
 ctrl + space         -> set marker
@@ -221,7 +225,7 @@ M-x impatient-mode
 Point your browser to http://localhost:8080/imp
 Start coding
 
-* RST-Files                                                           :emacs
+* RST-Files                                                           :emacs:
 ctrl+c a - adjust (auto-insert markup)
 
 * Po-Files							      :emacs:
@@ -431,6 +435,7 @@ grep output goes to grep buffer
 > /dev/kill - copy to kill ring
 alias ssh 'cd /ssh:$1:~'
 alias emacs 'find-file-other-window $1'
+
 * Ido mode                                                            :emacs:
 ctrl + f - disable completion
 ctrl + s - search forward
