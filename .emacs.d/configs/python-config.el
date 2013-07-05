@@ -6,6 +6,7 @@
 ;(epy-setup-checker "pyflakes %f")
 (epy-setup-checker "epylint %f --rcfile=~/.emacs.d/configs/pylint.rc | grep -v 'Class has no __init__ method' | grep -v '_ is not callable'")
 (epy-setup-ipython)
+(setq python-shell-interpreter "ipython")
 
 (require 'jedi)
 
