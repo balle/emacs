@@ -3,7 +3,8 @@
 (setq undo-strong-limit 1000000)
 
 ; disable tool- and scrollbar
-(toggle-scroll-bar -1)
+(if (boundp 'toggle-scroll-bar)
+  (toggle-scroll-bar -1))
 (tool-bar-mode -1)
 
 ; hide menubar
