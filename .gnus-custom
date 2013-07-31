@@ -30,7 +30,11 @@
 (setq gnus-permanently-visible-groups "INBOX")
 
 ; filter mail
-(setq nnimap-split-inbox "INBOX")
+(set (if (< emacs-major-version 24)
+         'nnimap-split-inbox
+       'nnimap-inbox)
+     "INBOX") 
+
 (gnus-registry-initialize)
 (setq nnimap-split-rule 'nnmail-split-fancy)
 (setq nnmail-split-methods 'nnmail-split-fancy)
