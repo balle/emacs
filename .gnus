@@ -3,6 +3,7 @@
 (spam-initialize)
 (setq spam-split-group "INBOX/Junk")
 (setq spam-use-bogofilter t)
+(setq send-mail-function (quote smtpmail-send-it))
 (setq
  spam-log-to-registry t     ; for spam autodetection
  spam-use-regex-headers t   ; catch X-Spam-Flag (SpamAssassin)
