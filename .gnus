@@ -36,7 +36,7 @@
 (setq gnus-read-active-file 'some)
 
 ;; what header to display in article
-(setq gnus-visible-headers "^From:\\|^Subject:\\|^Newsgroups:\\|^Date:\\|^User-Agent:")
+(setq gnus-visible-headers "^From:\\|^To:\\|^CC:\\|^BCC:\\|^Subject:\\|^Newsgroups:\\|^Date:\\|^User-Agent:")
 
 ;; columns in summary buffer
 (setq gnus-summary-line-format "%U%R%d%I%(%[%4L: %-23,23f%]%) %s\n")
