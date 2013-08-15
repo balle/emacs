@@ -43,9 +43,25 @@ This is an *abstract* with ordinary =Org-mode= /markup/.
 - some more
 #+INCLUDE: "~/test.org"
 * Executing code
+** Show results
 #+begin_src sh :exports results :results output
 echo "Hoorray today is " `date`
 #+end_src
+
+** Inline code 
+
+The cow says src_sh{echo "MOOOH"}
+
+** code                                                            :noexport:
+#+NAME: hello
+#+begin_src python :exports results :results output :var name=""
+print "Hello " + name
+#+end_src
+
+** Working with functions and parameters
+
+Test function call call_hello("Lilu")
+
 * Finish
 [[http://www.codekid.net][Just the blog of some code kiddy]]
 [[~/Pictures/balle_baeh.jpg]]
