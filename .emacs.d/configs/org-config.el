@@ -22,6 +22,16 @@
 ; alert on clock mode if idle for 15 minutes
 (setq org-clock-idle-time 15)
 
+; supported programming languages
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((python . t)
+   (perl . t)
+   (ruby . t)
+   (lisp . t)
+   (emacs-lisp . t)
+))
+
 ; org-mode redmine interface
 (require 'org-redmine)
 (setq org-redmine-template-header "[%p_n%] #%i% %s% by %as_n%")
