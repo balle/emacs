@@ -1,0 +1,52 @@
+#+TITLE: Test presentation in org-mode
+#+AUTHOR: Bastian Ballmann
+#+LaTeX_CLASS: beamer
+#+LaTeX_CLASS_OPTIONS: [presentation,smaller]
+#+BEAMER_THEME: default
+#+OPTIONS: toc:2 H:2
+ 
+* What is org-mode?
+** org-mode is awesome!
+* Features
+- Feature 1
+- Feature 2
+  - Better than this
+  - Good for +everything+ something
+- Feature 3 _important_
+* How to do TODO lists
+
+#+BEGIN_CENTER
+Just a simple table with a caption
+#+END_CENTER
+
+| Keyword | Description |
+|---------+-------------|
+| MUH     | MAEH        |
+| FOO     | BAR         |
+#+caption: example table
+
+** TODO: define header :noexport:
+
+* GTD
+#+BEGIN_ABSTRACT
+This is an *abstract* with ordinary =Org-mode= /markup/. 
+#+END_ABSTRACT
+* Code examples
+- subproject org-babel
+- configure =org-babel-do-load-languages=
+
+#+begin_example
+  ,#+begin_src python :results output
+  print("Hello world")
+  ,#+end_src
+#+end_example
+- some more
+#+INCLUDE: "~/test.org"
+* Executing code
+#+begin_src sh :exports results :results output
+echo "Hoorray today is " `date`
+#+end_src
+* Finish
+[[http://www.codekid.net][Just the blog of some code kiddy]]
+[[~/Pictures/balle_baeh.jpg]]
+

@@ -255,6 +255,8 @@ ctrl + c ctrl + s     - insert schedule
 ctrl + c ctrl + d     - insert deadline
 ctrl + c up / down    - change priority
 ctrl + c ctrl + z     - take a note to an entry
+ctrl + c ctrl + l     - insert link
+ctrl + c ctrl + o     - open thing at pointer
 
 f3                    - agenda view
   a - weekly / daily view

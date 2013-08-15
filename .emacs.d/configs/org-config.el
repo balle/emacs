@@ -28,9 +28,21 @@
  '((python . t)
    (perl . t)
    (ruby . t)
+   (sh . t)
    (lisp . t)
    (emacs-lisp . t)
 ))
+
+; org praesentation
+(require 'org-beamer)
+(require 'ox-latex)
+(add-to-list 'org-latex-classes
+             '("beamer"
+               "\\documentclass\[presentation\]\{beamer\}"
+               ("\\section\{%s\}" . "\\section*\{%s\}")
+               ("\\subsection\{%s\}" . "\\subsection*\{%s\}")
+               ("\\subsubsection\{%s\}" . "\\subsubsection*\{%s\}")))
+
 
 ; org-mode redmine interface
 (require 'org-redmine)
