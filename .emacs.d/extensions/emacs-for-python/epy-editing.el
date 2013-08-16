@@ -65,7 +65,7 @@ original" (interactive)
   (push-mark (point) nil t)
   (end-of-line))
 
-(global-set-key (kbd "C-c l") 'mark-line)
+;(global-set-key (kbd "C-c l") 'mark-line)
 
 
 ; code copied from http://stackoverflow.com/questions/2423834/move-line-region-up-and-down-in-emacs

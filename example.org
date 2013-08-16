@@ -13,16 +13,23 @@
   - Better than this
   - Good for +everything+ something
 - Feature 3 _important_
-* How to do TODO lists
+* How to do calculation
 
 #+BEGIN_CENTER
-Just a simple table with a caption
+Just a simple table calculation with a caption
 #+END_CENTER
 
-| Keyword | Description |
-|---------+-------------|
-| MUH     | MAEH        |
-| FOO     | BAR         |
+| Name  | Amount |
+|-------+--------|
+| MAEH  |  17.99 |
+| MIAU  |  89.17 |
+| MUH   |  23.75 |
+| FOO   |   9.99 |
+|-------+--------|
+| Total |  140.9 |
+| test  |        |
+
+#+TBLFM: $2=vsum(@2..@-1)
 #+caption: example table
 
 ** TODO: define header :noexport:
@@ -57,6 +64,12 @@ The cow says src_sh{echo "MOOOH"}
 #+begin_src python :exports results :results output :var name=""
 print "Hello " + name
 #+end_src
+
+** remote
+#+begin_src sh :results output :dir /ssh:user@host:~
+ps ax
+#+end_src
+
 
 ** Working with functions and parameters
 

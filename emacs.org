@@ -247,16 +247,18 @@ iy -> insert yearly task
 d  -> show task
 
 * Org Mode                                                            :emacs:
-ctrl + c tab            - collabse list
 shift + tab           - hide / show all
-ctrl + c ctrl + c     - tag an entry
+ctrl + c ctrl + c     - tag an entry / execute code in src block
 ctrl + c ctrl + t     - mark as todo / done
 ctrl + c ctrl + s     - insert schedule
 ctrl + c ctrl + d     - insert deadline
 ctrl + c up / down    - change priority
 ctrl + c ctrl + z     - take a note to an entry
+ctrl + c l            - store link location in file
 ctrl + c ctrl + l     - insert link
 ctrl + c ctrl + o     - open thing at pointer
+ctrl + c /            - filter document
+ctrl + c '            - open src block in new buffer
 
 f3                    - agenda view
   a - weekly / daily view
@@ -290,17 +292,21 @@ lines are indicated with @
 columns are indicated with $
 you can you numbers or chars for columns
 
-- ctrl + c ctrl + c will execute formula
-- ctrl + u ctrl + c * -> recalculate all columns
+- ctrl + c ctrl + c -> execute formula
+- ctrl + c = -> edit formula
+- ctrl + c * -> recalculate all columns
 
 - ctrl + { -> start formula debugger
 - ctrl + } -> show current line and column
 - ctrl + enter -> insert separator
-- super + meta + <up> / <down> -> move row up / down
-- super + meta + <left> / <right> -> move column left / right
+- alt + <up> / <down> -> move row up / down
+- alt + <left> / <right> -> move column left / right
 
 - sum a column =vsum(@2..@-1)
+- average of column =vmean(@2..@-1)
 - calc time durations ='(with-time t (- $3 $2))
+
+- ctrl + c ^ - sort table
 
 * YaSnippet 							      :emacs:
 alt + x yas/new-snippet    -> create new template

@@ -2,7 +2,7 @@
 (add-to-list 'load-path "~/.emacs.d/extensions/auctex-11.87")
 (add-to-list 'load-path "~/.emacs.d/extensions/ac-math")
 
-(load "~/.emacs.d/extensions/auctex-11.87/auctex.el" nil t t)
+(load "~/.emacs.d/extensions/auctex-11.87/tex-site.el" nil t t)
 (require 'reftex)
 (require 'preview-latex)
 

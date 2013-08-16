@@ -3,6 +3,7 @@
 
 (add-to-list 'auto-mode-alist '("\\.\\(org\\|org_archive\\)$" . org-mode))
 (require 'org-install)
+(require 'org-table)
 
 ;(setq org-agenda-files (list "~/organize/shared/TODO.org" "~/organize/projekte.org" "~/organize/backlog.org"  "~/organize/emacs.org" "~/organize/shared/read.org"))
 (setq org-agenda-files '("~/organize/" "~/organize/shared/"))
@@ -32,17 +33,7 @@
    (lisp . t)
    (emacs-lisp . t)
 ))
-
-; org praesentation
-(require 'org-beamer)
-(require 'ox-latex)
-(add-to-list 'org-latex-classes
-             '("beamer"
-               "\\documentclass\[presentation\]\{beamer\}"
-               ("\\section\{%s\}" . "\\section*\{%s\}")
-               ("\\subsection\{%s\}" . "\\subsection*\{%s\}")
-               ("\\subsubsection\{%s\}" . "\\subsubsection*\{%s\}")))
-
+(setq org-confirm-babel-evaluate nil)
 
 ; org-mode redmine interface
 (require 'org-redmine)
@@ -145,6 +136,7 @@
 (setq appt-disp-window-function (function balle-org-alarm))
 
 (add-hook 'org-mode-hook '(lambda ()
+                           (define-key org-mode-map (kbd "C-c l") 'org-store-link)
                            (define-key org-mode-map (kbd "M-<left>") 'org-agenda-do-date-earlier)
                            (define-key org-mode-map (kbd "M-<right>") 'org-agenda-do-date-later)))
 
