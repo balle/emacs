@@ -26,8 +26,10 @@
  	  
  '(hl-line ((t (:foreground "#ffffff" :background "#666666"))))
  '(fci-rule-color ((t (:foreground "#ffffff"))))
+ '(flycheck-error ((t (:foreground "#ffffff" :background "#cd0f06"))))
  '(flymake-errline ((t (:foreground "#ffffff" :background "#cd0f06"))))
- '(flymake-warnline ((t (:foreground "black" :background "yellow"))))
+ '(flymake-warnline ((t (:foreground "white" :background "yellow"))))
+ '(flycheck-warning ((t (:foreground "white" :background "yellow"))))
  '(mode-line ((t (:foreground "#ffffff" :background "#000000"))))
  '(region ((t (:background "#2e4ad7" :foreground "#ffffff"))))
  '(minibuffer-prompt ((t (:foreground "#7299ff" :bold t))))
