@@ -16,4 +16,7 @@
 .emacs.d/elpa/archives
 .emacs.d/server/server
 .emacs.d/sql/*.sql
+.emacs.d/*/*.elc
+.emacs.d/*/*/*.elc
+.emacs.d/*/*/*/*.elc
 
