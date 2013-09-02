@@ -1568,8 +1568,8 @@ customizable in the Preview Latex group.
 
 File: preview-latex.info,  Node: ToDo,  Next: Frequently Asked Questions,  Prev: For advanced users,  Up: Top
 
-Appendix A ToDo
-***************
+Anhang A ToDo
+*************
 
    * Support other formats than just LaTeX
 
@@ -1686,8 +1686,8 @@ Appendix A ToDo
 
 File: preview-latex.info,  Node: Frequently Asked Questions,  Next: Copying this Manual,  Prev: ToDo,  Up: Top
 
-Appendix B Frequently Asked Questions
-*************************************
+Anhang B Frequently Asked Questions
+***********************************
 
 * Menu:
 
@@ -2024,8 +2024,8 @@ file looking like the following:
 
 File: preview-latex.info,  Node: Copying this Manual,  Next: Index,  Prev: Frequently Asked Questions,  Up: Top
 
-Appendix C Copying this Manual
-******************************
+Anhang C Copying this Manual
+****************************
 
 The copyright notice for this manual is:
 
@@ -2686,15 +2686,15 @@ Node: The Emacs interface55099
 Node: The preview images64279
 Node: Misplaced previews67761
 Node: ToDo71204
-Node: Frequently Asked Questions75989
-Node: Introduction to FAQ76312
-Node: Requirements76651
-Node: Installation Trouble79615
-Node: Customization82177
-Node: Troubleshooting85725
-Node: Other formats88242
-Node: Copying this Manual89559
-Node: GNU Free Documentation License90484
-Node: Index115625
+Node: Frequently Asked Questions75985
+Node: Introduction to FAQ76304
+Node: Requirements76643
+Node: Installation Trouble79607
+Node: Customization82169
+Node: Troubleshooting85717
+Node: Other formats88234
+Node: Copying this Manual89551
+Node: GNU Free Documentation License90472
+Node: Index115613
 
 End Tag Table

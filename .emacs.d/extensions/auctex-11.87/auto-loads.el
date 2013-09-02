@@ -4,8 +4,9 @@
 
 
 ;;;### (autoloads (turn-on-bib-cite bib-cite-minor-mode) "bib-cite"
-;;;;;;  "bib-cite.el" (18341 54637))
-;;; Generated autoloads from bib-cite.el
+;;;;;;  "../../../../.emacs.d/extensions/auctex-11.87/bib-cite.el"
+;;;;;;  (20755 53026 0 0))
+;;; Generated autoloads from ../../../../.emacs.d/extensions/auctex-11.87/bib-cite.el
 
 (autoload 'bib-cite-minor-mode "bib-cite" "\
 Toggle bib-cite mode.
@@ -22,8 +23,9 @@ Unconditionally turn on Bib Cite mode.
 
 ;;;***
 
-;;;### (autoloads (context-mode) "context" "context.el" (19707 64211))
-;;; Generated autoloads from context.el
+;;;### (autoloads (context-mode) "context" "../../../../.emacs.d/extensions/auctex-11.87/context.el"
+;;;;;;  (20755 53031 0 0))
+;;; Generated autoloads from ../../../../.emacs.d/extensions/auctex-11.87/context.el
 
 (defalias 'ConTeXt-mode 'context-mode)
 
@@ -41,9 +43,9 @@ of context-mode-hook.
 
 ;;;***
 
-;;;### (autoloads (context-en-mode) "context-en" "context-en.el"
-;;;;;;  (19618 16518))
-;;; Generated autoloads from context-en.el
+;;;### (autoloads (context-en-mode) "context-en" "../../../../.emacs.d/extensions/auctex-11.87/context-en.el"
+;;;;;;  (20755 53029 0 0))
+;;; Generated autoloads from ../../../../.emacs.d/extensions/auctex-11.87/context-en.el
 
 (autoload 'context-en-mode "context-en" "\
 Major mode for editing files for ConTeXt using its english interface.
@@ -59,9 +61,9 @@ of context-mode-hook.
 
 ;;;***
 
-;;;### (autoloads (context-nl-mode) "context-nl" "context-nl.el"
-;;;;;;  (19618 16529))
-;;; Generated autoloads from context-nl.el
+;;;### (autoloads (context-nl-mode) "context-nl" "../../../../.emacs.d/extensions/auctex-11.87/context-nl.el"
+;;;;;;  (20755 53030 0 0))
+;;; Generated autoloads from ../../../../.emacs.d/extensions/auctex-11.87/context-nl.el
 
 (autoload 'context-nl-mode "context-nl" "\
 Major mode for editing files for ConTeXt using its dutch interface.
@@ -77,9 +79,9 @@ of context-mode-hook.
 
 ;;;***
 
-;;;### (autoloads (font-latex-setup) "font-latex" "font-latex.el"
-;;;;;;  (20561 45562))
-;;; Generated autoloads from font-latex.el
+;;;### (autoloads (font-latex-setup) "font-latex" "../../../../.emacs.d/extensions/auctex-11.87/font-latex.el"
+;;;;;;  (20755 53060 0 0))
+;;; Generated autoloads from ../../../../.emacs.d/extensions/auctex-11.87/font-latex.el
 
 (autoload 'font-latex-setup "font-latex" "\
 Setup this buffer for LaTeX font-lock.  Usually called from a hook.
@@ -89,8 +91,9 @@ Setup this buffer for LaTeX font-lock.  Usually called from a hook.
 ;;;***
 
 ;;;### (autoloads (docTeX-mode TeX-latex-mode BibTeX-auto-store)
-;;;;;;  "latex" "latex.el" (20659 51557))
-;;; Generated autoloads from latex.el
+;;;;;;  "latex" "../../../../.emacs.d/extensions/auctex-11.87/latex.el"
+;;;;;;  (20755 53084 0 0))
+;;; Generated autoloads from ../../../../.emacs.d/extensions/auctex-11.87/latex.el
 
 (autoload 'BibTeX-auto-store "latex" "\
 This function should be called from `bibtex-mode-hook'.
@@ -127,8 +130,9 @@ runs the hooks in `docTeX-mode-hook'.
 ;;;***
 
 ;;;### (autoloads (multi-prompt-key-value multi-prompt) "multi-prompt"
-;;;;;;  "multi-prompt.el" (18915 28236))
-;;; Generated autoloads from multi-prompt.el
+;;;;;;  "../../../../.emacs.d/extensions/auctex-11.87/multi-prompt.el"
+;;;;;;  (20755 53087 0 0))
+;;; Generated autoloads from ../../../../.emacs.d/extensions/auctex-11.87/multi-prompt.el
 
 (autoload 'multi-prompt "multi-prompt" "\
 Completing prompt for a list of strings.  
@@ -156,9 +160,9 @@ The return value is the string as entered in the minibuffer.
 
 ;;;***
 
-;;;### (autoloads (ams-tex-mode TeX-plain-tex-mode) "plain-tex" "plain-tex.el"
-;;;;;;  (19707 64159))
-;;; Generated autoloads from plain-tex.el
+;;;### (autoloads (ams-tex-mode TeX-plain-tex-mode) "plain-tex" "../../../../.emacs.d/extensions/auctex-11.87/plain-tex.el"
+;;;;;;  (20755 53087 0 0))
+;;; Generated autoloads from ../../../../.emacs.d/extensions/auctex-11.87/plain-tex.el
 
 (autoload 'TeX-plain-tex-mode "plain-tex" "\
 Major mode in AUCTeX for editing plain TeX files.
@@ -189,8 +193,9 @@ of `AmS-TeX-mode-hook'.
 ;;;***
 
 ;;;### (autoloads (TeX-submit-bug-report TeX-auto-generate-global
-;;;;;;  TeX-auto-generate TeX-tex-mode) "tex" "tex.el" (20665 1626))
-;;; Generated autoloads from tex.el
+;;;;;;  TeX-auto-generate TeX-tex-mode) "tex" "../../../../.emacs.d/extensions/auctex-11.87/tex.el"
+;;;;;;  (20755 53180 0 0))
+;;; Generated autoloads from ../../../../.emacs.d/extensions/auctex-11.87/tex.el
 
 (autoload 'TeX-tex-mode "tex" "\
 Major mode in AUCTeX for editing TeX or LaTeX files.
@@ -231,8 +236,9 @@ information about your AUCTeX version and AUCTeX configuration.
 ;;;***
 
 ;;;### (autoloads (LaTeX-install-toolbar TeX-install-toolbar) "tex-bar"
-;;;;;;  "tex-bar.el" (18580 49499))
-;;; Generated autoloads from tex-bar.el
+;;;;;;  "../../../../.emacs.d/extensions/auctex-11.87/tex-bar.el"
+;;;;;;  (20755 53176 0 0))
+;;; Generated autoloads from ../../../../.emacs.d/extensions/auctex-11.87/tex-bar.el
 
 (autoload 'TeX-install-toolbar "tex-bar" "\
 Install toolbar buttons for TeX mode.
@@ -246,17 +252,18 @@ Install toolbar buttons for LaTeX mode.
 
 ;;;***
 
-;;;### (autoloads nil "tex-fold" "tex-fold.el" (19887 15736))
-;;; Generated autoloads from tex-fold.el
+;;;### (autoloads nil "tex-fold" "../../../../.emacs.d/extensions/auctex-11.87/tex-fold.el"
+;;;;;;  (20755 53177 0 0))
+;;; Generated autoloads from ../../../../.emacs.d/extensions/auctex-11.87/tex-fold.el
  (autoload 'TeX-fold-mode "tex-fold" "Minor mode for hiding and revealing macros and environments." t)
 
 (defalias 'tex-fold-mode 'TeX-fold-mode)
 
 ;;;***
 
-;;;### (autoloads (tex-font-setup) "tex-font" "tex-font.el" (18341
-;;;;;;  54636))
-;;; Generated autoloads from tex-font.el
+;;;### (autoloads (tex-font-setup) "tex-font" "../../../../.emacs.d/extensions/auctex-11.87/tex-font.el"
+;;;;;;  (20755 53177 0 0))
+;;; Generated autoloads from ../../../../.emacs.d/extensions/auctex-11.87/tex-font.el
 
 (autoload 'tex-font-setup "tex-font" "\
 Setup font lock support for TeX.
@@ -265,9 +272,9 @@ Setup font lock support for TeX.
 
 ;;;***
 
-;;;### (autoloads (TeX-texinfo-mode) "tex-info" "tex-info.el" (20659
-;;;;;;  23181))
-;;; Generated autoloads from tex-info.el
+;;;### (autoloads (TeX-texinfo-mode) "tex-info" "../../../../.emacs.d/extensions/auctex-11.87/tex-info.el"
+;;;;;;  (20755 53177 0 0))
+;;; Generated autoloads from ../../../../.emacs.d/extensions/auctex-11.87/tex-info.el
 
 (defalias 'Texinfo-mode 'texinfo-mode)
 
@@ -285,8 +292,9 @@ value of `Texinfo-mode-hook'.
 ;;;***
 
 ;;;### (autoloads (japanese-latex-mode japanese-plain-tex-mode) "tex-jp"
-;;;;;;  "tex-jp.el" (20588 36944))
-;;; Generated autoloads from tex-jp.el
+;;;;;;  "../../../../.emacs.d/extensions/auctex-11.87/tex-jp.el"
+;;;;;;  (20755 53178 0 0))
+;;; Generated autoloads from ../../../../.emacs.d/extensions/auctex-11.87/tex-jp.el
 
 (autoload 'japanese-plain-tex-mode "tex-jp" "\
 Major mode in AUCTeX for editing Japanese plain TeX files.
@@ -302,9 +310,9 @@ Set `japanese-TeX-mode' to t, and enter `TeX-latex-mode'.
 
 ;;;***
 
-;;;### (autoloads (texmathp-match-switch texmathp) "texmathp" "texmathp.el"
-;;;;;;  (18489 3128))
-;;; Generated autoloads from texmathp.el
+;;;### (autoloads (texmathp-match-switch texmathp) "texmathp" "../../../../.emacs.d/extensions/auctex-11.87/texmathp.el"
+;;;;;;  (20755 53182 0 0))
+;;; Generated autoloads from ../../../../.emacs.d/extensions/auctex-11.87/texmathp.el
 
 (autoload 'texmathp "texmathp" "\
 Determine if point is inside (La)TeX math mode.
@@ -323,8 +331,9 @@ Limit searched to BOUND.
 
 ;;;***
 
-;;;### (autoloads nil "toolbar-x" "toolbar-x.el" (18580 49487))
-;;; Generated autoloads from toolbar-x.el
+;;;### (autoloads nil "toolbar-x" "../../../../.emacs.d/extensions/auctex-11.87/toolbar-x.el"
+;;;;;;  (20755 53183 0 0))
+;;; Generated autoloads from ../../../../.emacs.d/extensions/auctex-11.87/toolbar-x.el
  (autoload 'toolbarx-install-toolbar "toolbar-x")
 
 ;;;***

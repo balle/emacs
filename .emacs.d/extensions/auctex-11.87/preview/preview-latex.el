@@ -4,8 +4,9 @@
 
 
 ;;;### (autoloads (preview-report-bug LaTeX-preview-setup preview-install-styles)
-;;;;;;  "preview" "preview.el" (19772 31043))
-;;; Generated autoloads from preview.el
+;;;;;;  "preview" "../../../../../.emacs.d/extensions/auctex-11.87/preview/preview.el"
+;;;;;;  (20755 53110 0 0))
+;;; Generated autoloads from ../../../../../.emacs.d/extensions/auctex-11.87/preview/preview.el
 
 (autoload 'preview-install-styles "preview" "\
 Installs the TeX style files into a permanent location.
@@ -44,6 +45,6 @@ Report a bug in the preview-latex package.
 ;; End:
 ;;; preview-latex.el ends here
 
-(add-to-list 'load-path (expand-file-name "auctex" (file-name-directory load-file-name)))
-(defvar preview-datadir (expand-file-name "auctex" (file-name-directory load-file-name)))
+(add-to-list 'load-path (expand-file-name "../preview" (file-name-directory load-file-name)))
+(defvar preview-datadir (expand-file-name "../preview" (file-name-directory load-file-name)))
 

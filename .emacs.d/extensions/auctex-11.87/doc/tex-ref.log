@@ -1,10 +1,9 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdftex 2012.11.25)  30 NOV 2012 20:35
+This is pdfTeXk, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=pdftex 2012.9.3)  16 AUG 2013 09:45
 entering extended mode
- restricted \write18 enabled.
  %&-line parsing enabled.
 **tex-ref.tex
 (./tex-ref.tex
-\columnsperpage=\count27
+\columnsperpage=\count26
 \intercolumnskip=\dimen16
 \columna=\box16
 \columnb=\box17
@@ -124,22 +123,18 @@ Underfull \vbox (badness 10000) detected at line 436
 ..\glue(\tabskip) 0.0 plus 1.0fil
 .etc.
 
-[1{/home/angeli/.texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2] )</usr/shar
-e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texl
-ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr/share/texlive/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/texlive/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fon
-ts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1
-/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
-amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmsl8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cms
-y6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti8.pfb></usr/s
-hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb>
-Output written on tex-ref.pdf (2 pages, 153648 bytes).
+[1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] )</usr/share/texmf/f
+onts/type1/bluesky/cm/cmbx10.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmbx8
+.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmcsc10.pfb></usr/share/texmf/fon
+ts/type1/bluesky/cm/cmmi10.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmr6.pf
+b></usr/share/texmf/fonts/type1/bluesky/cm/cmr7.pfb></usr/share/texmf/fonts/typ
+e1/bluesky/cm/cmr8.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmsl8.pfb></usr
+/share/texmf/fonts/type1/bluesky/cm/cmsy6.pfb></usr/share/texmf/fonts/type1/blu
+esky/cm/cmsy8.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmti8.pfb></usr/shar
+e/texmf/fonts/type1/bluesky/cm/cmtt8.pfb>
+Output written on tex-ref.pdf (2 pages, 96660 bytes).
 PDF statistics:
- 59 PDF objects out of 1000 (max. 8388607)
- 42 compressed objects within 1 object stream
- 0 named destinations out of 1000 (max. 500000)
+ 57 PDF objects out of 1000 (max. 8388607)
+ 0 named destinations out of 1000 (max. 131072)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
