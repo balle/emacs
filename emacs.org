@@ -523,6 +523,8 @@ V e - edit current score
 V t - display all score rules 
 V f - edit score file
 G p - To edit group properties. Insert ((score-file . "emacs.SCORE")) to define a score file for whole group
+G V - create virtual group
+G v - add topic or group to virtual group
 
 * Misc                                                                :emacs:
 ctrl + g                      -> Cancel

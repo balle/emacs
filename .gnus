@@ -178,6 +178,7 @@
 ; scoring
 (setq gnus-use-scoring t)
 (setq bbdb/gnus-score-default 2000) 
+(setq max-specpdl-size 100000)
 
 ; load custom settings
 (load-file "~/.gnus-custom")
