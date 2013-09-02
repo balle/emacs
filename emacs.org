@@ -506,6 +506,8 @@ K v - view attachment
 K o - save attachment
 2 K o - save seconds attachment
 O o - save article
+M b - bookmark article
+M B - remove bookmark
 a - post article to newsgroup
 G m - make directory / group
 G r - rename directory / group
@@ -520,6 +522,7 @@ L - lower score
 V e - edit current score
 V t - display all score rules 
 V f - edit score file
+G p - To edit group properties. Insert ((score-file . "emacs.SCORE")) to define a score file for whole group
 
 * Misc                                                                :emacs:
 ctrl + g                      -> Cancel
@@ -554,6 +557,8 @@ ctrl + h a        -> apropos (help keyword search)
 ctrl + h b        -> show all keyboard shortcuts
 ctrl + h k        -> show description of shortcut
 ctrl + h f        -> show documentation of function
+ctrl + h r        -> open emacs documentation
+ctrl + h n        -> show emacs changelog
 ctrl + c ctrl + h -> show keyboard shortcuts of current mode
 ctrl + h F - search in emacs faq
 ctrl + h i m      -> open documentation directory
