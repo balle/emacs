@@ -474,6 +474,8 @@ d - mark article as read
 / b - display articles with specified body
 / x - display articles with specified header
 G G - search all marked groups or group under cursor
+C-M-h - show / hide thread
+C-M-k - kill thread
 T-s - show thread
 T-S - show all threads
 T-# - mark thread
@@ -503,12 +505,21 @@ j - jump to a group
 K v - view attachment
 K o - save attachment
 2 K o - save seconds attachment
+O o - save article
 a - post article to newsgroup
 G m - make directory / group
 G r - rename directory / group
 G <del> - delete directory / group
 T n - Create new topic in group buffer
 T m - Move folder to topic
+T i - Increase score of thread
+T l - Lower score of thread
+/ v - Filter messages by score
+I - increase score
+L - lower score
+V e - edit current score
+V t - display all score rules 
+V f - edit score file
 
 * Misc                                                                :emacs:
 ctrl + g                      -> Cancel
