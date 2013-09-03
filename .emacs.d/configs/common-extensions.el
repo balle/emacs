@@ -39,9 +39,6 @@
       (add-to-list 'load-path "~/.emacs.d/extensions/flycheck")
       (require 'flycheck)
       (add-hook 'after-init-hook #'global-flycheck-mode)
-)
-(progn
-  (load-file "~/.emacs.d/extensions/cl-lib-0.3.el")
 ))
 
 ; X clipboard support on console

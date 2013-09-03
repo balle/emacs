@@ -1,0 +1,22 @@
+*.elc
+
+# Packages installed for development
+/.cask/
+
+# Generated package archive
+/flycheck-pkg.el
+/flycheck-*.tar
+
+# Vagrant cache
+/.vagrant
+
+# Librarian Puppet cache and modules
+/.tmp/
+/puppet/lib
+
+# Info documentation
+/doc/flycheck.info
+/doc/dir
+
+# HTML documentation
+/doc/html/
