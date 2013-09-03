@@ -1,4 +1,4 @@
-(add-to-list 'load-path "~/.emacs.d/extensions/zencoding")
+(add-to-list 'load-path "~/.emacs.d/extensions/emmet-mode")
 (add-to-list 'load-path "~/.emacs.d/extensions/htmlize-20130207.2102")
 (add-to-list 'load-path "~/.emacs.d/extensions/simple-httpd-20121224.1121")
 (add-to-list 'load-path "~/.emacs.d/extensions/impatient-mode-20130127.1656")
@@ -10,18 +10,14 @@
 (auto-complete-mode)
 (add-to-list 'ac-modes 'sgml-mode)
 
-
-(add-to-list 'auto-mode-alist '("\\.html?$" . sgml-mode))
-
-(require 'zencoding-mode)
-(add-hook 'sgml-mode-hook 'zencoding-mode)
+(require 'emmet-mode)
+(add-hook 'sgml-mode-hook 'emmet-mode) ;; Auto-start on any markup modes
+(add-hook 'css-mode-hook  'emmet-mode) ;; enable Emmet's css abbreviation.
 (add-hook 'sgml-mode-hook '(lambda ()
-   (define-key sgml-mode-map "\C-ce" 'zencoding-expand-line)
+   (define-key sgml-mode-map "\C-ce" 'emmet-expand-line)
    (define-key sgml-mode-map "\C-c\C-r" 'rename-sgml-tag)
 ))
 
 (defadvice sgml-delete-tag (after reindent-buffer activate)
   (cleanup-buffer)
 )
-
-

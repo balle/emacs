@@ -13,17 +13,23 @@
 (load "rst-config")
 (autoload 'c-mode "c-config" "C mode" t)
 (autoload 'perl-mode "perl-config" "Perl mode" t)
-(autoload 'python-mode "python-config" "Python mode" t)
-(autoload 'sgml-mode "html-config" "HTML mode" t)
-(autoload 'sgml-mode "django-config" "Django mode" t)
+(add-to-list 'auto-mode-alist '("\\.py$" . python-mode))
+;(autoload 'python-mode "python-config" "Python mode" t)
+(load "python-config")
+(add-to-list 'auto-mode-alist '("\\.html?$" . sgml-mode))
+;(autoload 'sgml-mode "html-config" "HTML mode" t)
+;(autoload 'sgml-mode "django-config" "Django mode" t)
+(load "html-config")
+(load "django-config")
 (load "database-config")
 ;(autoload 'sql-interactive-mode "database-config" "SQL mode" t)
 (autoload 'json-mode "javascript-config" "Javascript mode" t)
 (autoload 'js-mode "javascript-config" "Javascript mode" t)
 (add-to-list 'auto-mode-alist '("\\.cl$" . lisp-mode))
-(autoload 'lisp-mode "lisp-config" "lisp mode" t)
+;(autoload 'lisp-mode "lisp-config" "lisp mode" t)
+(load "lisp-mode")
 (autoload 'latex-mode "latex-config" "Latex mode" t)
-(autoload 'latex-mode "spell-checking-config" "Spell checking mode" t)
+(load "spell-checking-config")
 (add-to-list 'auto-mode-alist '("\\.pp$" . puppet-mode))
 (autoload 'puppet-mode "puppet-config" "puppet mode" t)
 
@@ -34,3 +40,17 @@
 (load "keybindings")
 
 (load-file "~/.emacs-custom")
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(auth-source-save-behavior nil)
+ '(custom-safe-themes (quote ("fa818f831ef6b6e73642eb8508b9591d36d72f054db674628e85c3806b8e48a3" "ff5db02f8eda12dbc85ba3b0ebcfa2bdfbf7f417453cdb9f25f29a5263097d6d" default)))
+ '(send-mail-function (quote smtpmail-send-it)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
