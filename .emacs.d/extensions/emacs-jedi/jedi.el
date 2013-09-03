@@ -4,7 +4,7 @@
 
 ;; Author: Takafumi Arakaki <aka.tkf at gmail.com>
 ;; Package-Requires: ((epc "0.1.0") (auto-complete "1.4"))
-;; Version: 0.1.2alpha0
+;; Version: 0.1.3alpha2
 
 ;; This file is NOT part of GNU Emacs.
 
@@ -28,6 +28,8 @@
 
 ;;; Code:
 
+(require 'ring)
+
 (require 'epc)
 (require 'auto-complete)
 (declare-function pos-tip-show "pos-tip")
@@ -38,7 +40,7 @@
   :group 'completion
   :prefix "jedi:")
 
-(defconst jedi:version "0.1.2alpha0")
+(defconst jedi:version "0.1.3alpha2")
 
 (defvar jedi:source-dir (if load-file-name
                             (file-name-directory load-file-name)
@@ -116,8 +118,8 @@ like this::
   (defun my-jedi-server-setup ()
     (let ((cmds (GET-SOME-PROJECT-SPECIFIC-COMMAND))
           (args (GET-SOME-PROJECT-SPECIFIC-ARGS)))
-      (when cmds (set (make-local-variable 'jedi:server-command cmds)))
-      (when args (set (make-local-variable 'jedi:server-args args)))))
+      (when cmds (set (make-local-variable 'jedi:server-command) cmds))
+      (when args (set (make-local-variable 'jedi:server-args) args))))
 
   (add-hook 'python-mode-hook 'my-jedi-server-setup)
 
@@ -154,6 +156,49 @@ specified in in millisecond."
 tooltip in millisecond."
   :group 'jedi)
 
+(defcustom jedi:goto-definition-config
+  '((nil nil        nil)
+    (t   nil        nil)
+    (nil definition nil)
+    (t   definition nil)
+    (nil nil        t  )
+    (t   nil        t  )
+    (nil definition t  )
+    (t   definition t  ))
+  "Configure how prefix argument modifies `jedi:goto-definition' behavior.
+
+Each element of the list is arguments (list) passed to
+`jedi:goto-definition'.  Note that this variable has no effect on
+`jedi:goto-definition' when it is used as a lisp function
+
+The following setting is default (last parts are omitted).
+Nth element is used as the argument when N universal prefix
+arguments (``C-u``) are given.::
+
+    (setq jedi:goto-definition-config
+          '((nil nil        nil)        ; C-.
+            (t   nil        nil)        ; C-u C-.
+            (nil definition nil)        ; C-u C-u C-.
+            (t   definition nil)        ; C-u C-u C-u C-.
+            ...))
+
+For example, if you want to follow \"substitution path\" by default,
+use the setting like this::
+
+    (setq jedi:goto-definition-config
+          '((nil definition nil)
+            (t   definition nil)
+            (nil nil        nil)
+            (t   nil        nil)
+            (nil definition t  )
+            (t   definition t  )
+            (nil nil        t  )
+            (t   nil        t  )))
+
+You can rearrange the order to have most useful sets of arguments
+at the top."
+  :group 'jedi)
+
 (defcustom jedi:doc-mode 'rst-mode
   "Major mode to use when showing document."
   :group 'jedi)
@@ -167,8 +212,27 @@ tooltip in millisecond."
   "A function to be called with a buffer to show document."
   :group 'jedi)
 
+(defcustom jedi:install-imenu nil
+  "[EXPERIMENTAL] If `t', use Jedi to create `imenu' index.
+To use this feature, you need to install the developmental
+version (\"dev\" branch) of Jedi."
+  :group 'jedi)
+
+(defcustom jedi:imenu-create-index-function 'jedi:create-nested-imenu-index
+  "`imenu-create-index-function' for Jedi.el.
+It must be a function that takes no argument and return an object
+described in `imenu--index-alist'.
+This can be set to `jedi:create-flat-imenu-index'.
+Default is `jedi:create-nested-imenu-index'."
+  :group 'jedi)
+
+(make-obsolete-variable 'jedi:setup-keys nil "0.1.3")
 (defcustom jedi:setup-keys nil
   "Setup recommended keybinds.
+
+.. warning:: Use of this value is obsolete now.  As of 0.1.3,
+   jedi.el has default keybinds, which are different than these. See also
+   `jedi-mode'.
 
 .. admonition:: Default keybinds
 
@@ -234,11 +298,34 @@ avoid collision by something like this::
 `anything-jedi-related-names'."
   :group 'jedi)
 
+(defcustom jedi:key-goto-definition-pop-marker (kbd "C-,")
+  "Keybind for command `jedi:goto-definition-pop-marker'."
+  :group 'jedi)
+
+(defcustom jedi:use-shortcuts nil
+  "If non-`nil', enable the following shortcuts:
+
+| ``M-.``  `jedi:goto-definition'
+| ``M-,``  `jedi:goto-definition-pop-marker'
+"
+  :group 'jedi)
+
+(defcustom jedi:import-python-el-settings t
+  "Automatically import setting from python.el variables."
+  :group 'jedi)
+
+(defcustom jedi:goto-definition-marker-ring-length 16
+  "Length of marker ring to store `jedi:goto-definition' call positions"
+  :group 'jedi)
+
 
 ;;; Internal variables
 
 (defvar jedi:get-in-function-call--d nil
   "Bounded to deferred object while requesting get-in-function-call.")
+
+(defvar jedi:defined-names--singleton-d nil
+  "Bounded to deferred object while requesting defined_names.")
 
 
 ;;; Jedi mode
@@ -257,22 +344,47 @@ toolitp when inside of function call.
   :keymap jedi-mode-map
   :group 'jedi
   (let ((map jedi-mode-map))
+    (when jedi:use-shortcuts
+      (define-key map (kbd "M-.") 'jedi:goto-definition)
+      (define-key map (kbd "M-,") 'jedi:goto-definition-pop-marker))
     (if jedi:complete-on-dot
         (define-key map "." 'jedi:dot-complete)
       (define-key map "." nil)))
   (if jedi-mode
       (progn
+        (when jedi:install-imenu
+          (add-hook 'after-change-functions 'jedi:after-change-handler nil t)
+          (jedi:defined-names-deferred)
+          (setq imenu-create-index-function jedi:imenu-create-index-function))
         (add-hook 'post-command-hook 'jedi:handle-post-command nil t)
         (add-hook 'kill-buffer-hook 'jedi:server-pool--gc-when-idle nil t))
     (remove-hook 'post-command-hook 'jedi:handle-post-command t)
+    (remove-hook 'after-change-functions 'jedi:after-change-handler t)
     (remove-hook 'kill-buffer-hook 'jedi:server-pool--gc-when-idle t)
     (jedi:server-pool--gc-when-idle)))
+
+;; Define keybinds.
+;; See: https://github.com/tkf/emacs-jedi/issues/47
+(let ((map jedi-mode-map))
+  (define-key map (kbd "<C-tab>") 'jedi:complete)
+  (define-key map (kbd "C-c ?") 'jedi:show-doc)
+  (define-key map (kbd "C-c .") 'jedi:goto-definition)
+  (define-key map (kbd "C-c ,") 'jedi:goto-definition-pop-marker)
+  (let ((command (cond
+                  ((featurep 'helm) 'helm-jedi-related-names)
+                  ((featurep 'anything) 'anything-jedi-related-names)
+                  ((locate-library "helm") 'helm-jedi-related-names)
+                  ((locate-library "anything") 'anything-jedi-related-names))))
+    (when command
+      (define-key map (kbd "C-c /") command))))
 
 (when jedi:setup-keys
   (let ((map jedi-mode-map))
     (define-key map jedi:key-complete        'jedi:complete)
     (define-key map jedi:key-goto-definition 'jedi:goto-definition)
     (define-key map jedi:key-show-doc        'jedi:show-doc)
+    (define-key map jedi:key-goto-definition-pop-marker
+      'jedi:goto-definition-pop-marker)
     (let ((command (cond
                     ((featurep 'helm) 'helm-jedi-related-names)
                     ((featurep 'anything) 'anything-jedi-related-names))))
@@ -353,7 +465,7 @@ key, or start new one if there is none."
 ;;; Server management
 
 (defun jedi:start-server ()
-  (if jedi:epc
+  (if (jedi:epc--live-p jedi:epc)
       (message "Jedi server is already started!")
     (setq jedi:epc (jedi:server-pool--start
                     (append jedi:server-command jedi:server-args))))
@@ -369,8 +481,9 @@ later when it is needed."
       (epc:stop-epc jedi:epc)
     (message "Jedi server is already killed."))
   (setq jedi:epc nil)
-  ;; If could be non-nil due to some error.  Rescue it in that case.
-  (setq jedi:get-in-function-call--d nil))
+  ;; It could be non-nil due to some error.  Rescue it in that case.
+  (setq jedi:get-in-function-call--d nil)
+  (setq jedi:defined-names--singleton-d nil))
 
 (defun jedi:get-epc ()
   (if (jedi:epc--live-p jedi:epc)
@@ -407,12 +520,18 @@ See also: `jedi:server-args'."
   (set (make-local-variable 'jedi:server-args) nil)
   (jedi:start-server))
 
+(defun jedi:-buffer-file-name ()
+  "Return `buffer-file-name' without text properties.
+See: https://github.com/tkf/emacs-jedi/issues/54"
+  (when (stringp buffer-file-name)
+    (substring-no-properties buffer-file-name)))
+
 (defun jedi:call-deferred (method-name)
   "Call ``Script(...).METHOD-NAME`` and return a deferred object."
   (let ((source      (buffer-substring-no-properties (point-min) (point-max)))
         (line        (count-lines (point-min) (min (1+ (point)) (point-max))))
         (column      (current-column))
-        (source-path buffer-file-name))
+        (source-path (jedi:-buffer-file-name)))
     (epc:call-deferred (jedi:get-epc)
                        method-name
                        (list source line column source-path))))
@@ -443,13 +562,16 @@ See also: `jedi:server-args'."
     (deferred:nextc (jedi:complete-request)
       (lambda ()
         (let ((ac-expand-on-auto-complete expand))
-          (auto-complete '(ac-source-jedi-direct)))))))
+          (ac-start))))))
+;; Calling `auto-complete' or `ac-update-greedy' instead of `ac-start'
+;; here did not work.
 
 (defun jedi:dot-complete ()
   "Insert dot and complete code at point."
   (interactive)
   (insert ".")
-  (jedi:complete :expand nil))
+  (unless (ac-cursor-on-diable-face-p)
+    (jedi:complete :expand nil)))
 
 
 ;;; AC source
@@ -479,9 +601,20 @@ See also: `jedi:server-args'."
 
 ;;;###autoload
 (defun jedi:ac-setup ()
-  "Add Jedi AC sources to `ac-sources'."
+  "Add Jedi AC sources to `ac-sources'.
+
+If auto-completion is all you need, you can call this function instead
+of `jedi:setup', like this::
+
+   (add-hook 'python-mode-hook 'jedi:ac-setup)
+
+Note that this function calls `auto-complete-mode' if it is not
+already enabled, for people who don't call `global-auto-complete-mode'
+in their Emacs configuration."
   (interactive)
-  (add-to-list 'ac-sources 'ac-source-jedi-direct))
+  (add-to-list 'ac-sources 'ac-source-jedi-direct)
+  (unless auto-complete-mode
+    (auto-complete-mode)))
 
 
 ;;; Call signature (get_in_function_call)
@@ -554,32 +687,129 @@ See also: `jedi:server-args'."
 
 ;;; Goto
 
-(defun jedi:goto-definition (&optional other-window)
-  "Goto the definition of the object at point."
+(defvar jedi:goto-definition--index nil)
+(defvar jedi:goto-definition--cache nil)
+(defvar jedi:goto-definition--marker-ring
+  (make-ring jedi:goto-definition-marker-ring-length)
+  "Marker ring that stores `jedi:goto-definition' call positions")
+
+(defun jedi:goto-definition (&optional other-window deftype use-cache index)
+  "Goto the definition of the object at point.
+
+See `jedi:goto-definition-config' for how this function works
+when universal prefix arguments \(``C-u``) are given.  If
+*numeric* prefix argument(s) \(e.g., ``M-0``) are given, goto
+point of the INDEX-th result.  Note that you cannot mix universal
+and numeric prefixes.  It is Emacs's limitation.  If you mix both
+kinds of prefix, you get numeric prefix.
+
+When used as a lisp function, popup a buffer when OTHER-WINDOW is
+non-nil.  DEFTYPE must be either `assignment' (default) or
+`definition'.  When USE-CACHE is non-nil, use the locations of
+the last invocation of this command.  If INDEX is specified, goto
+INDEX-th result."
+  (interactive
+   (if (integerp current-prefix-arg)
+       (list nil nil nil current-prefix-arg)
+     (nth (let ((i (car current-prefix-arg)))
+            (if i (floor (log i 4)) 0))
+          jedi:goto-definition-config)))
+  (cond
+   ((and (or use-cache index)
+         jedi:goto-definition--cache)
+    (setq jedi:goto-definition--index (or index 0))
+    (jedi:goto-definition--nth other-window))
+   ((and (eq last-command 'jedi:goto-definition)
+         (> (length jedi:goto-definition--cache) 1))
+    (jedi:goto-definition-next other-window))
+   (t
+    (setq jedi:goto-definition--index (or index 0))
+    (lexical-let ((other-window other-window))
+      (deferred:nextc (jedi:call-deferred
+                       (case deftype
+                         ((assignment nil) 'goto)
+                         (definition 'get_definition)
+                         (t (error "Unsupported deftype: %s" deftype))))
+        (lambda (reply)
+          (jedi:goto-definition--callback reply other-window)))))))
+
+(defun jedi:goto-definition-push-marker ()
+  "Push point onto goto-definition marker ring."
+  (ring-insert jedi:goto-definition--marker-ring (point-marker)))
+
+(defun jedi:goto-definition-pop-marker ()
+  "Goto the last point where `jedi:goto-definition' was called."
+  (interactive)
+  (if (ring-empty-p jedi:goto-definition--marker-ring)
+      (error "Jedi marker ring is empty, can't pop")
+    (let ((marker (ring-remove jedi:goto-definition--marker-ring 0)))
+      (switch-to-buffer (or (marker-buffer marker)
+                            (error "Buffer has been deleted")))
+      (goto-char (marker-position marker))
+      ;; Cleanup the marker so as to avoid them piling up.
+      (set-marker marker nil nil))))
+
+(defun jedi:goto-definition-next (&optional other-window)
+  "Goto the next cached definition.  See: `jedi:goto-definition'."
   (interactive "P")
-  (lexical-let ((other-window other-window))
-    (deferred:nextc (jedi:call-deferred 'goto)
-      (lambda (reply)
-        (jedi:goto-definition--callback reply other-window)))))
+  (let ((len (length jedi:goto-definition--cache))
+        (n (1+ jedi:goto-definition--index)))
+    (setq jedi:goto-definition--index (if (>= n len) 0 n))
+    (jedi:goto-definition--nth other-window)))
 
 (defun jedi:goto-definition--callback (reply other-window)
   (if (not reply)
       (message "Definition not found.")
+    (setq jedi:goto-definition--cache reply)
+    (jedi:goto-definition--nth other-window t)))
+
+(defun jedi:goto--line-column (line column)
+  "Like `goto-char' but specify the position by LINE and COLUMN."
+  (goto-char (point-min))
+  (forward-line (1- line))
+  (forward-char column))
+
+(defun jedi:goto-definition--nth (other-window &optional try-next)
+  (let* ((len (length jedi:goto-definition--cache))
+         (n jedi:goto-definition--index)
+         (next (lambda ()
+                 (when (< n (1- len))
+                   (incf jedi:goto-definition--index)
+                   (jedi:goto-definition--nth other-window)
+                   t))))
     (destructuring-bind (&key line_nr column module_path module_name
                               &allow-other-keys)
-        (car reply)
+        (nth n jedi:goto-definition--cache)
       (cond
        ((equal module_name "__builtin__")
-        (message "Cannot see the definition of __builtin__."))
+        (unless (and try-next (funcall next))
+          (message "Cannot see the definition of __builtin__.")))
        ((not (and module_path (file-exists-p module_path)))
-        (message "File '%s' does not exist." module_path))
+        (unless (and try-next (funcall next))
+          (message "File '%s' does not exist." module_path)))
        (t
-        (push-mark)
+        (jedi:goto-definition-push-marker)
         (funcall (if other-window #'find-file-other-window #'find-file)
                  module_path)
-        (goto-char (point-min))
-        (forward-line (1- line_nr))
-        (forward-char column))))))
+        (jedi:goto--line-column line_nr column)
+        (jedi:goto-definition--notify-alternatives len n))))))
+
+(defun jedi:goto-definition--notify-alternatives (len n)
+  (unless (= len 1)
+    (message
+     "%d-th point in %d candidates.%s"
+     (1+ n)
+     len
+     ;; Note: It must be `last-command', not `last-command' because
+     ;;       this function is called in deferred at the first time.
+     (if (eq last-command 'jedi:goto-definition)
+         (format "  Type %s to go to the next point."
+                 (key-description
+                  (car (where-is-internal 'jedi:goto-definition))))
+       ""))))
+
+
+;;; Full name
 
 (defun jedi:get-full-name-deferred ()
   (deferred:$
@@ -655,9 +885,10 @@ See also: `jedi:server-args'."
   (deferred:nextc (jedi:call-deferred 'get_definition)
     (lambda (reply)
       (with-current-buffer (get-buffer-create jedi:doc-buffer-name)
-        (erase-buffer)
         (loop with has-doc = nil
               with first = t
+              with inhibit-read-only = t
+              initially (erase-buffer)
               for def in reply
               do (destructuring-bind
                      (&key doc desc_with_module line_nr module_path
@@ -680,13 +911,84 @@ See also: `jedi:server-args'."
                   (funcall jedi:doc-display-buffer (current-buffer)))))))))
 
 
+;;; Defined names (imenu)
+
+(defvar jedi:defined-names--cache nil)
+(make-variable-buffer-local 'jedi:defined-names--cache)
+
+(defun jedi:defined-names-deferred ()
+  (deferred:nextc
+    (epc:call-deferred
+     (jedi:get-epc)
+     'defined_names
+     (list (buffer-substring-no-properties (point-min) (point-max))
+           (jedi:-buffer-file-name)))
+    (lambda (reply)
+      (setq jedi:defined-names--cache reply))))
+
+(defun jedi:defined-names--singleton-deferred ()
+  "Like `jedi:defined-names-deferred', but make sure that only
+one request at the time is emitted."
+  (unless jedi:defined-names--singleton-d
+    (setq jedi:defined-names--singleton-d
+          (deferred:watch (jedi:defined-names-deferred)
+            (lambda (_) (setq jedi:defined-names--singleton-d nil))))))
+
+(defun jedi:defined-names--sync ()
+  (unless jedi:defined-names--cache
+    (epc:sync (jedi:get-epc) (jedi:defined-names--singleton-deferred)))
+  jedi:defined-names--cache)
+
+(defun jedi:after-change-handler (&rest _)
+  (unless (or (ac-menu-live-p) (ac-inline-live-p))
+    (jedi:defined-names--singleton-deferred)))
+
+(defun jedi:imenu-make-marker (def)
+  (destructuring-bind (&key line_nr column &allow-other-keys) def
+    (save-excursion (jedi:goto--line-column line_nr column)
+                    (point-marker))))
+
+(defun jedi:create-nested-imenu-index--item (def)
+  (cons (plist-get def :name) (jedi:imenu-make-marker def)))
+
+(defun jedi:create-nested-imenu-index ()
+  "`imenu-create-index-function' for Jedi.el.
+See also `jedi:imenu-create-index-function'."
+  (when (called-interactively-p 'interactive) (jedi:defined-names--sync))
+  (jedi:create-nested-imenu-index-1))
+
+(defun jedi:create-nested-imenu-index-1 (&optional items)
+  (loop for (def . subdefs) in (or items jedi:defined-names--cache)
+        if subdefs
+        collect (append
+                 (list (plist-get def :local_name)
+                       (jedi:create-nested-imenu-index--item def))
+                 (jedi:create-nested-imenu-index-1 subdefs))
+        else
+        collect (jedi:create-nested-imenu-index--item def)))
+
+(defun jedi:create-flat-imenu-index ()
+  "`imenu-create-index-function' for Jedi.el to create flatten index.
+See also `jedi:imenu-create-index-function'."
+  (when (called-interactively-p 'interactive) (jedi:defined-names--sync))
+  (jedi:create-flat-imenu-index-1))
+
+(defun jedi:create-flat-imenu-index-1 (&optional items)
+  (loop for (def . subdefs) in (or items jedi:defined-names--cache)
+        collect (cons (plist-get def :local_name) (jedi:imenu-make-marker def))
+        when subdefs
+        append (jedi:create-flat-imenu-index-1 subdefs)))
+
+
 ;;; Meta info
 
 (defun jedi:get-jedi-version-request ()
   "Request version of Python modules and return a deferred object."
   (epc:call-deferred (jedi:get-epc) 'get_jedi_version nil))
 
-(defun jedi:show-jedi-version ()
+(defun jedi:show-version-info ()
+  "Show version info of Python modules used by the server.
+Paste the result of this function in bug report."
   (interactive)
   (deferred:nextc (jedi:get-jedi-version-request)
     (lambda (reply)
@@ -694,14 +996,37 @@ See also: `jedi:server-args'."
         (with-current-buffer standard-output
           (emacs-lisp-mode)
           (erase-buffer)
+          (pp `(:emacs-version ,emacs-version :jedi-version ,jedi:version))
           (pp reply)
           (display-buffer standard-output))))))
+
+(define-obsolete-function-alias
+  'jedi:show-jedi-version 'jedi:show-version-info "0.1.3")
 
 (defun jedi:print-jedi-version ()
   (pp (epc:sync (jedi:get-epc) (jedi:get-jedi-version-request))))
 
 
 ;;; Setup
+
+(defun jedi:import-python-el-settings-setup ()
+  "Make jedi aware of python.el virtualenv and path settings.
+This is automatically added to the `jedi-mode-hook' when
+`jedi:import-python-el-settings' is non-nil."
+  (let ((args))
+    (when (bound-and-true-p python-shell-extra-pythonpaths)
+      (mapc
+       (lambda (path)
+         (setq args (append (list "--sys-path" path) args)))
+       python-shell-extra-pythonpaths))
+    (when (bound-and-true-p python-shell-virtualenv-path)
+      (setq args
+            (append
+             (list "--virtual-env" python-shell-virtualenv-path)
+             args)))
+    (when args
+      (set (make-local-variable 'jedi:server-args)
+           (append args jedi:server-args)))))
 
 ;;;###autoload
 (defun jedi:setup ()
@@ -718,11 +1043,42 @@ You can also call this function as a command, to quickly test
 what jedi can do."
   (interactive)
   (jedi:ac-setup)
+  (when jedi:import-python-el-settings
+    ;; Hack to access buffer/dir-local vars: http://bit.ly/Y5IfMV.
+    ;; Given that `jedi:setup' is added to the `python-mode-hook'
+    ;; this will modify `hack-local-variables-hook' on python
+    ;; buffers only and will allow us to access buffer/directory
+    ;; local variables in `jedi:import-python-el-settings-setup'.
+    (add-hook 'hack-local-variables-hook
+              #'jedi:import-python-el-settings-setup nil t))
   (jedi-mode 1))
 
 
 ;;; Debugging
 
+(defun jedi:pop-to-epc-buffer ()
+  "Open the buffer associated with EPC server process.
+Use this command to see the output (e.g., traceback) of the server process."
+  (interactive)
+  (pop-to-buffer (process-buffer (epc:manager-server-process jedi:epc))))
+
+(defun jedi:toggle-log-traceback ()
+  "Toggle on/off traceback logging for EPC server for the current buffer.
+When there is an error during traceback logging is enabled, traceback
+is printed in the EPC buffer.  You can use `jedi:pop-to-epc-buffer' to
+open that buffer.
+
+You can also pass ``--log-traceback`` option to jediepcserver.py
+to start server with traceback logging turned on.  This is useful when
+there is a problem in communication (thus this command does not work).
+You can use `jedi:start-dedicated-server' to restart EPC server for the
+current buffer with specific arguments."
+  (interactive)
+  (deferred:$
+    (epc:call-deferred (jedi:get-epc) 'toggle_log_traceback nil)
+    (deferred:nextc it
+      (lambda (flag)
+        (message "Traceback logging is %s" (if flag "enabled" "disabled"))))))
 
 (defvar jedi:server-command--backup nil)
 (defvar jedi:server-args--backup nil)
@@ -757,6 +1113,7 @@ running server."
   (if jedi:server-command--backup
       (progn
         (setq jedi:server-command jedi:server-command--backup
+              jedi:server-command--backup nil
               jedi:server-args jedi:server-args--backup)
         (jedi:stop-server)
         (message "Quit debugging.  Original setting restored."))

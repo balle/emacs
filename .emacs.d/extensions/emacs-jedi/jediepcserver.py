@@ -28,6 +28,7 @@ import sys
 import re
 import itertools
 import logging
+import site
 
 jedi = None  # I will load it later
 
@@ -126,15 +127,46 @@ def related_names(*args):
     return _goto(jedi.Script.related_names, *args)
 
 
-def get_definition(*args):
-    definitions = jedi_script(*args).get_definition()
-    return [dict(
+def definition_to_dict(d):
+    return dict(
         doc=d.doc,
+        description=d.description,
         desc_with_module=d.desc_with_module,
         line_nr=d.line_nr,
+        column=d.column,
         module_path=d.module_path,
-        full_name=getattr(d, 'full_name', [])
-    ) for d in definitions]
+        name=getattr(d, 'name', []),
+        full_name=getattr(d, 'full_name', []),
+        type=getattr(d, 'type', []),
+    )
+
+
+def get_definition(*args):
+    definitions = jedi_script(*args).get_definition()
+    return list(map(definition_to_dict, definitions))
+
+
+def get_names_recursively(definition, parent=None):
+    """
+    Fetch interesting defined names in sub-scopes under `definition`.
+
+    :type names: jedi.api_classes.Definition
+
+    """
+    d = definition_to_dict(definition)
+    try:
+        d['local_name'] = parent['local_name'] + '.' + d['name']
+    except (AttributeError, TypeError):
+        d['local_name'] = d['name']
+    if definition.type == 'class':
+        ds = definition.defined_names()
+        return [d] + [get_names_recursively(c, d) for c in ds]
+    else:
+        return [d]
+
+
+def defined_names(*args):
+    return list(map(get_names_recursively, jedi.api.defined_names(*args)))
 
 
 def get_module_version(module):
@@ -166,7 +198,8 @@ def get_jedi_version():
 
 def jedi_epc_server(address='localhost', port=0, port_file=sys.stdout,
                     sys_path=[], virtual_env=[],
-                    debugger=None, log=None, log_level=None):
+                    debugger=None, log=None, log_level=None,
+                    log_traceback=None):
     add_virtualenv_path()
     for p in virtual_env:
         add_virtualenv_path(p)
@@ -183,13 +216,24 @@ def jedi_epc_server(address='localhost', port=0, port_file=sys.stdout,
     server.register_function(goto)
     server.register_function(related_names)
     server.register_function(get_definition)
+    server.register_function(defined_names)
     server.register_function(get_jedi_version)
+
+    @server.register_function
+    def toggle_log_traceback():
+        server.log_traceback = not server.log_traceback
+        return server.log_traceback
 
     port_file.write(str(server.server_address[1]))  # needed for Emacs client
     port_file.write("\n")
     port_file.flush()
     if port_file is not sys.stdout:
         port_file.close()
+
+    # This is not supported Python-EPC API, but I am using this for
+    # backward compatibility for Python-EPC < 0.0.4.  In the future,
+    # it should be passed to the constructor.
+    server.log_traceback = bool(log_traceback)
 
     if log:
         handler = logging.FileHandler(filename=log, mode='w')
@@ -215,6 +259,7 @@ def import_jedi():
     import jedi
     import jedi.parsing
     import jedi.evaluate
+    import jedi.api
     return jedi
 
 
@@ -226,6 +271,7 @@ def add_virtualenv_path(venv=os.getenv('VIRTUAL_ENV')):
     path = os.path.join(
         venv, 'lib', 'python%d.%d' % sys.version_info[:2], 'site-packages')
     sys.path.insert(0, path)
+    site.addsitedir(path)
 
 
 def main(args=None):
@@ -252,6 +298,9 @@ def main(args=None):
         '--log-level',
         choices=['CRITICAL', 'ERROR', 'WARN', 'INFO', 'DEBUG'],
         help='logging level for log file.')
+    parser.add_argument(
+        '--log-traceback', action='store_true', default=False,
+        help='Include traceback in logging output.')
     parser.add_argument(
         '--pdb', dest='debugger', const='pdb', action='store_const',
         help='start pdb when error occurs.')

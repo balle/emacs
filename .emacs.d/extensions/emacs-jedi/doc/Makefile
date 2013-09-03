@@ -14,11 +14,9 @@ ALLSPHINXOPTS   = -d $(BUILDDIR)/doctrees $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) sou
 # the i18n builder cannot share the environment and doctrees with the others
 I18NSPHINXOPTS  = $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) source
 
-.PHONY: help clean source html dirhtml singlehtml pickle \
+.PHONY: help clean html dirhtml singlehtml pickle \
 	json htmlhelp qthelp devhelp epub latex latexpdf \
 	text man changes linkcheck doctest gettext \
-	_gh-pages-assert-repo gh-pages-update gh-pages-push \
-	gh-pages-clone gh-pages-pull
 
 help:
 	@echo "Please use \`make <target>' where <target> is one of"
@@ -45,11 +43,7 @@ help:
 clean:
 	-rm -rf $(BUILDDIR)/*/*
 
-source: source/index.rst
-source/index.rst: ../README.rst source/tail.rest
-	sed -r 's% <http://tkf.github.com/emacs-jedi#[[:alnum:]]+>%%' $^ > $@
-
-html: source
+html:
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
 	@echo
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
@@ -161,30 +155,31 @@ doctest:
 	      "results in $(BUILDDIR)/doctest/output.txt."
 
 
-## GitHub Pages
-REPO_URL = git@github.com:tkf/emacs-jedi.git
+
+## Generate contributions list
+RELEASES = $(wildcard source/releases/v*)
+RELEASES_AUTHORS = $(addsuffix /authors.txt, $(RELEASES))
+RELEASES_CLOSED = $(addsuffix /closed.txt, $(RELEASES))
+ISSUE_URL = https://github.com/tkf/emacs-jedi/issues
 
-# Check if build/html is really a git repository.  Otherwise,
-# committing files in there is pretty dangerous as it might goes into
-# Jedi's master branch.
-_gh-pages-assert-repo:
-	test -d build/html/.git
+releases: $(RELEASES_AUTHORS) $(RELEASES_CLOSED)
 
-gh-pages-clone:
-	rm -rf build/html
-	git clone --branch gh-pages $(REPO_URL) build/html
+source/releases/%/authors.txt: source/releases/%/range Makefile
+	git log --format='format:%an' $$(cat $<) \
+		| grep --invert-match "Takafumi Arakaki" \
+		| sort --unique \
+		| sed 's/\(.*\)/- `\1`_/' \
+		> $@
 
-gh-pages-pull: _gh-pages-assert-repo
-	cd build/html && git pull
+source/releases/%/closed.txt: source/releases/%/range Makefile
+	git log --format='format:%s %b' --grep='#[0-9]\+' $$(cat $<) \
+		| grep -e 'fix\(es\)\?' -e 'pull request' \
+		| grep --extended-regexp --only-matching '#[0-9]+' \
+		| grep --extended-regexp --only-matching '[0-9]+' \
+		| sort --unique \
+		| sort --numeric-sort \
+		| sed 's%\(.*\)%`#\1 <$(ISSUE_URL)/\1>`_%' \
+		> $@
 
-gh-pages-update: _gh-pages-assert-repo clean html
-	@echo "Update gh-pages"
-	cd build/html/ && \
-		git add . && \
-		if [ -n "$$(git ls-files --deleted)" ]; then \
-			git ls-files --deleted | xargs git rm; \
-		fi && \
-		git commit -m "Update"
-
-gh-pages-push: _gh-pages-assert-repo
-	cd build/html && git push -u origin gh-pages
+# Load other makefiles.  See: (info "(make) Include")
+include *.mk

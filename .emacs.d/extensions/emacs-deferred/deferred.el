@@ -3,7 +3,7 @@
 ;; Copyright (C) 2010, 2011, 2012  SAKURAI Masashi
 
 ;; Author: SAKURAI Masashi <m.sakurai at kiwanami.net>
-;; Version: 0.3.1
+;; Version: 0.3.2
 ;; Keywords: deferred, async
 ;; URL: https://github.com/kiwanami/emacs-deferred
 
@@ -69,7 +69,7 @@
   (require 'cl))
 
 (defvar deferred:version nil "deferred.el version")
-(setq deferred:version "0.3")
+(setq deferred:version "0.3.2")
 
 ;;; Code:
 
@@ -115,7 +115,12 @@
 The lambda function can define with zero and one argument."
   (condition-case err
       (funcall f arg)
-    ('wrong-number-of-arguments 
+    ('wrong-number-of-arguments
+     (display-warning 'deferred "\
+Callback that takes no argument may be specified.
+Passing callback with no argument is deprecated.
+Callback must take one argument.
+Or, this error is coming from somewhere inside of the callback: %S" err)
      (condition-case err2 
          (funcall f)
        ('wrong-number-of-arguments
@@ -414,7 +419,7 @@ an argument value for execution of the deferred task."
 (defun deferred:fail (&optional arg)
   "Create a synchronous deferred object."
   (let ((d (deferred:new)))
-    (deferred:exec-task d 'ok arg)
+    (deferred:exec-task d 'ng arg)
     d))
 
 (defun deferred:next (&optional callback arg)
@@ -780,12 +785,13 @@ process."
         ((f f) (command command) (args args)
          (proc-name (format "*deferred:*%s*:%s" command uid))
          (buf-name (format " *deferred:*%s*:%s" command uid))
+         (pwd default-directory)
          (nd (deferred:new)) proc-buf proc)
       (deferred:nextc d
         (lambda (x)
           (setq proc-buf (get-buffer-create buf-name))
           (condition-case err
-              (progn
+              (let ((default-directory pwd))
                 (setq proc
                       (if (null (car args))
                           (apply f proc-name buf-name command nil)
