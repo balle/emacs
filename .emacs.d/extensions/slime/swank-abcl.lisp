@@ -55,7 +55,7 @@
   (mop::class-direct-methods spec))
 
 (defun slot-definition-name (slot)
-  (mop::%slot-definition-name slot))
+  (mop::slot-definition-name slot))
 
 (defun class-slots (class)
   (mop:class-slots class))
@@ -91,6 +91,7 @@
    mop::class-direct-superclasses
    mop::eql-specializer
    mop::class-finalized-p 
+   mop:finalize-inheritance
    cl:class-name
    mop::class-precedence-list
    class-prototype ;;dummy

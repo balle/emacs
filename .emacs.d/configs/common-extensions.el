@@ -6,6 +6,7 @@
 
 ; git settings
 (add-to-list 'load-path "~/.emacs.d/extensions/magit")
+(add-to-list 'load-path "~/.emacs.d/extensions/git-modes")
 (require 'magit)
 ; (setq magit-process-popup-time 3)
 (if (>= emacs-major-version 24)
@@ -38,6 +39,9 @@
       (add-to-list 'load-path "~/.emacs.d/extensions/flycheck")
       (require 'flycheck)
       (add-hook 'after-init-hook #'global-flycheck-mode)
+)
+(progn
+  (load-file "~/.emacs.d/extensions/cl-lib-0.3.el")
 ))
 
 ; X clipboard support on console
