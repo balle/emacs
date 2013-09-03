@@ -52,6 +52,7 @@
 (require 'win-switch)
 
 ; sunrise commander as file manager
+(add-to-list 'load-path "~/.emacs.d/extensions/sunrise-commander")
 (require 'sunrise-commander)
 (add-hook 'sr-mode-hook
           (lambda ()
