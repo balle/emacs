@@ -88,5 +88,5 @@
 (global-set-key [f7] 'balle-flyspell-add-word)
 (global-set-key [f8] 'org-capture)
 (global-set-key [f9] 'balle-redmine-tickets)
-(global-set-key [f10] 'flymake-goto-prev-error)
-(global-set-key [f11] 'flymake-goto-next-error)
+(global-set-key [f10] 'flycheck-prev-error)
+(global-set-key [f11] 'flycheck-next-error)

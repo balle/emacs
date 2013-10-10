@@ -65,9 +65,6 @@
 ; activate ido mode
 (ido-mode t)
 
-; show flymake errors in message buffer
-(load-library "flymake-cursor")
-
 ; goto last change
 (require 'goto-last-change)
 

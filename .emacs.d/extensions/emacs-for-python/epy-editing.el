@@ -13,7 +13,7 @@
 
 ;; Auto Completion
 (require 'auto-complete-config)
-(add-to-list 'ac-dictionary-directories 
+(add-to-list 'ac-dictionary-directories
 	     (concat epy-install-dir "auto-complete/ac-dict"))
 (ac-config-default)
 
@@ -35,7 +35,7 @@
 (setq yas/wrap-around-region 'cua)
 
 ;; Eproject project management with emacs
-(require 'eproject)
+;;(require 'eproject)
 
 ;; code borrowed from http://emacs-fu.blogspot.com/2010/01/duplicating-lines-and-commenting-them.html
 (defun djcb-duplicate-line (&optional commentfirst)

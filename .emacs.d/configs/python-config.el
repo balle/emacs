@@ -4,7 +4,7 @@
 (add-to-list 'load-path "~/.emacs.d/extensions/emacs-jedi")
 
 ;(epy-setup-checker "pyflakes %f")
-(epy-setup-checker "epylint %f --rcfile=~/.emacs.d/configs/pylint.rc | grep -v 'Class has no __init__ method' | grep -v '_ is not callable'")
+;(epy-setup-checker "epylint %f --rcfile=~/.emacs.d/configs/pylint.rc | grep -v 'Class has no __init__ method' | grep -v '_ is not callable'")
 
 ;; auto completion for jedi knights :)
 (require 'jedi)
@@ -84,8 +84,6 @@ in the current *Python* session."
 	(setq imenu-create-index-function 'python-imenu-create-index)
         (outline-minor-mode)
         ;(linum-mode t)
-        (global-set-key [f10] 'flymake-goto-prev-error)
-        (global-set-key [f11] 'flymake-goto-next-error)
         (define-key python-mode-map (kbd "C-c <right>") 'balle-python-shift-right)
         (define-key python-mode-map (kbd "C-c <left>") 'balle-python-shift-left)
         (define-key python-mode-map "\C-co" 'balle-show-python-functions)

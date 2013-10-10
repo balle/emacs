@@ -30,7 +30,6 @@
 ;    (local-set-key "C-c g" 'semantic-ia-fast-jump)
 ;    (define-key c-mode-map "C-d" 'kill-whole-line)
 ;    (linum-mode t)
-;    (flymake-mode)
 ;))
 
 ;; Autocomplete

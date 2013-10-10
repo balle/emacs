@@ -24,9 +24,9 @@
     (setenv "PYTHONPATH"
 	    (concat epy-install-dir "python-libs/"))
     )
-  
+
   (pymacs-load "ropemacs" "rope-")
-  
+
   ;; Stops from erroring if there's a syntax err
   (setq ropemacs-codeassist-maxfixes 3)
 
@@ -38,7 +38,7 @@
   (setq ropemacs-autoimport-modules '("os" "shutil" "sys" "logging"
 				      "django.*"))
 
- 
+
 
   ;; Adding hook to automatically open a rope project if there is one
   ;; in the current or in the upper level directory
@@ -74,11 +74,11 @@
 
 (defun flymake-create-copy-file ()
   "Create a copy local file"
-  (let* ((temp-file (flymake-init-create-temp-buffer-copy 
+  (let* ((temp-file (flymake-init-create-temp-buffer-copy
                      'flymake-create-temp-in-system-tempdir)))
-    (file-relative-name 
-     temp-file 
-     (file-name-directory buffer-file-name))))     
+    (file-relative-name
+     temp-file
+     (file-name-directory buffer-file-name))))
 
 (defun flymake-command-parse (cmdline)
   "Parses the command line CMDLINE in a format compatible
@@ -97,10 +97,10 @@ The CMDLINE should be something like:
     ))
 
 
-(when (load-file (concat epy-install-dir "extensions/flymake-patch.el"))
-  (setq flymake-info-line-regex
-        (append flymake-info-line-regex '("unused$" "^redefinition" "used$")))
-  (load-library "flymake-cursor"))
+;; (when (load-file (concat epy-install-dir "extensions/flymake-patch.el"))
+;;   (setq flymake-info-line-regex
+;;         (append flymake-info-line-regex '("unused$" "^redefinition" "used$")))
+;;   (load-library "flymake-cursor"))
 
 (defun epy-setup-checker (cmdline)
   (add-to-list 'flymake-allowed-file-name-masks
@@ -123,8 +123,8 @@ The CMDLINE should be something like:
        "Activate a Virtual Environment specified by PATH" t)
      (autoload 'virtualenv-workon "virtualenv"
        "Activate a Virtual Environment present using virtualenvwrapper" t)
-     
-     
+
+
      ;; Not on all modes, please
      ;; Be careful of mumamo, buffer file name nil
      (add-hook 'python-mode-hook (lambda () (if (buffer-file-name)
@@ -137,7 +137,7 @@ The CMDLINE should be something like:
        (virtualenv-activate virtualenv)
        (desktop-change-dir virtualenv))
 
-     
+
      )
   )
 ;; Cython Mode
@@ -150,9 +150,9 @@ The CMDLINE should be something like:
 ;; Py3 files
 (add-to-list 'auto-mode-alist '("\\.py3\\'" . python-mode))
 
-(add-hook 'python-mode-hook '(lambda () 
+(add-hook 'python-mode-hook '(lambda ()
      (define-key python-mode-map "\C-m" 'newline-and-indent)))
-(add-hook 'ein:notebook-python-mode-hook 
+(add-hook 'ein:notebook-python-mode-hook
 	  (lambda ()
 	    (define-key python-mode-map "\C-m" 'newline)))
 (provide 'epy-python)

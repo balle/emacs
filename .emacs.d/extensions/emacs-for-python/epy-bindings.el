@@ -9,9 +9,6 @@
 ; Ctrl+tab mapped to Alt+tab
 (define-key function-key-map [(control tab)] [?\M-\t])
 
-(global-set-key [f10] 'flymake-goto-prev-error)
-(global-set-key [f11] 'flymake-goto-next-error)
-
 ;; Rope bindings
 (add-hook 'python-mode-hook
 	  (lambda ()
