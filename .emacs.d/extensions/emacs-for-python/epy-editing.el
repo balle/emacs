@@ -18,7 +18,7 @@
 (ac-config-default)
 
 ;; Yasnippet - force the loading of the custom version of yasnippet
-;(require 'yasnippet (concat epy-install-dir "extensions/yasnippet/yasnippet"))
+(require 'yasnippet (concat epy-install-dir "extensions/yasnippet/yasnippet"))
 (load-file (concat epy-install-dir "extensions/snippet-helpers.el"))
 
 ;; this one is to activate django snippets
@@ -29,13 +29,13 @@
   )
 
 
-;(yas/initialize)
-;(yas/load-directory (concat epy-install-dir "extensions/yasnippet/snippets"))
-;(setq yas/prompt-functions '(yas/dropdown-prompt yas/ido-prompt yas/x-prompt))
-;(setq yas/wrap-around-region 'cua)
+(yas/initialize)
+(yas/load-directory (concat epy-install-dir "extensions/yasnippet/snippets"))
+(setq yas/prompt-functions '(yas/dropdown-prompt yas/ido-prompt yas/x-prompt))
+(setq yas/wrap-around-region 'cua)
 
 ;; Eproject project management with emacs
-;;(require 'eproject)
+(require 'eproject)
 
 ;; code borrowed from http://emacs-fu.blogspot.com/2010/01/duplicating-lines-and-commenting-them.html
 (defun djcb-duplicate-line (&optional commentfirst)
