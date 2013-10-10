@@ -190,8 +190,7 @@ current repl's (as per slime-output-buffer) window."
   (let ((stream (open-network-stream "*lisp-output-stream*" 
                                      (slime-with-connection-buffer ()
                                        (current-buffer))
-				     (car (process-contact (slime-connection)))
-                                     port))
+				     slime-lisp-host port))
         (emacs-coding-system (car (find coding-system
                                         slime-net-valid-coding-systems
                                         :key #'third))))
@@ -453,8 +452,7 @@ joined together."))
   ("\C-c\C-u" 'slime-repl-kill-input)
   ("\C-c\C-n" 'slime-repl-next-prompt)
   ("\C-c\C-p" 'slime-repl-previous-prompt)
-  ("\C-c\C-z" 'slime-nop)
-  ("\C-cI" 'slime-repl-inspect))
+  ("\C-c\C-z" 'slime-nop))
 
 (slime-define-keys slime-inspector-mode-map
   ((kbd "M-RET") 'slime-inspector-copy-down-to-repl))
@@ -1743,21 +1741,6 @@ If the current buffer is not a REPL, don't do anything."
   (remove-hook 'slime-connected-hook 'slime-repl-connected-hook-function)
   (remove-hook 'slime-cycle-connections-hook
                'slime-change-repl-to-default-connection))
-
-(defun slime-repl-sexp-at-point ()
-  "Returns the current sexp at point (or NIL if none is found)
-while ignoring the repl prompt text."
-  (if (<= slime-repl-input-start-mark (point))
-      (save-restriction
-        (narrow-to-region slime-repl-input-start-mark (point-max))
-        (slime-sexp-at-point))
-    (slime-sexp-at-point)))
-
-(defun slime-repl-inspect (string)
-  (interactive 
-   (list (slime-read-from-minibuffer "Inspect value (evaluated): "
-                                     (slime-repl-sexp-at-point))))
-  (slime-inspect string))
 
 (let ((byte-compile-warnings '()))
   (mapc #'byte-compile

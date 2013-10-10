@@ -140,11 +140,6 @@
     (:class
      (describe (find-class symbol)))))
 
-(defimplementation type-specifier-p (symbol)
-  (or (ignore-errors
-       (subtypep nil symbol))
-      (not (eq (type-specifier-arglist symbol) :not-available))))
-
 ;;;; Debugger
 
 (defvar *sldb-topframe*)
@@ -169,11 +164,11 @@
                               (find-package :swank)))
         (top-frame (excl::int-newest-frame (excl::current-thread))))
     (loop for frame = top-frame then (next-frame frame)
+          for name  = (debugger:frame-name frame)
           for i from 0
-          while (and frame (< i 30))
-          when (eq (debugger:frame-name frame) magic-symbol)
+          when (eq name magic-symbol)
             return (next-frame frame)
-          finally (return top-frame))))
+          until (= i 10) finally (return top-frame))))
 
 (defun next-frame (frame)
   (let ((next (excl::int-next-older-frame frame)))
@@ -237,8 +232,7 @@
           (t
            (let* ((code-loc (find-if (lambda (c)
                                        (<= (- pc (sys::natural-width))
-                                           (let ((x (excl::ldb-code-pc c)))
-                                             (or x -1))
+                                           (excl::ldb-code-pc c)
                                            pc))
                                      debug-info)))
              (cond ((not code-loc)
@@ -251,7 +245,7 @@
   (declare (optimize debug))
   (let* ((func (excl::ldb-code-func code))
          (debug-info (excl::function-source-debug-info func))
-         (start (loop for i from (excl::ldb-code-index code) downto 0
+         (start (loop for i downfrom (excl::ldb-code-index code) 
                       for bpt = (aref debug-info i)
                       for start = (excl::ldb-code-start-char bpt)
                       when start return start))
@@ -300,9 +294,9 @@
     ;; let-bind lexical variables
     (let ((vars (loop for i below (debugger:frame-number-vars frame)
                       for name = (debugger:frame-var-name frame i)
-                      if (typep name '(and symbol (not null) (not keyword)))
+                      if (symbolp name)
                       collect `(,name ',(debugger:frame-var-value frame i)))))
-      (debugger:eval-form-in-context
+      (debugger:eval-form-in-context 
        `(let* ,vars ,form)
        (debugger:environment-of-frame frame)))))
 
@@ -363,16 +357,9 @@
 
 (defun handle-compiler-warning (condition)
   (declare (optimize (debug 3) (speed 0) (space 0)))
-  (cond ((and (not *buffer-name*)
+  (cond ((and (not *buffer-name*) 
               (compiler-undefined-functions-called-warning-p condition))
          (handle-undefined-functions-warning condition))
-        ((and (typep condition 'excl::compiler-note)
-              (let ((format (slot-value condition 'excl::format-control)))
-                (and (search "Closure" format)
-                     (search "will be stack allocated" format))))
-         ;; Ignore "Closure <foo> will be stack allocated" notes.
-         ;; That occurs often but is usually uninteresting.
-         )
         (t
          (signal-compiler-condition
           :original-condition condition
@@ -384,7 +371,7 @@
                       (reader-error  :read-error)
                       (error         :error))
           :message (format nil "~A" condition)
-          :location (if (typep condition 'reader-error)
+          :location (if (typep condition 'reader-error) 
                         (location-for-reader-error condition)
                         (location-for-warning condition))))))
 

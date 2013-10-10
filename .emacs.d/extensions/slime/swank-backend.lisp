@@ -781,11 +781,6 @@ additional information on the specifiers defined in ANSI Common Lisp.")
                   :not-available))
       (t :not-available))))
 
-(definterface type-specifier-p (symbol)
-  "Determine if SYMBOL is a type-specifier."
-  (or (documentation symbol 'type)
-      (not (eq (type-specifier-arglist symbol) :not-available))))
-
 (definterface function-name (function)
   "Return the name of the function object FUNCTION.
 
@@ -1352,7 +1347,6 @@ Don't execute unwind-protected sections, don't raise conditions.
 
 (definterface send (thread object)
   "Send OBJECT to thread THREAD."
-  (declare (ignore thread))
   object)
 
 (definterface receive (&optional timeout)
@@ -1372,7 +1366,6 @@ If THREAD is nil delete the association."
 (definterface find-registered (name)
   "Find the thread that was registered for the symbol NAME.
 Return nil if the no thread was registred or if the tread is dead."
-  (declare (ignore name))
   nil)
 
 (definterface set-default-initial-binding (var form)

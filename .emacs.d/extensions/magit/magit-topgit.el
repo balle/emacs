@@ -1,13 +1,8 @@
 ;;; magit-topgit.el --- topgit plug-in for Magit
 
-;; Copyright (C) 2010-2013  The Magit Project Developers.
+;; Copyright (C) 2010  Nathan Weizenbaum
+;; Copyright (C) 2010  Yann Hodique
 ;;
-;; For a full list of contributors, see the AUTHORS.md file
-;; at the top-level directory of this distribution and at
-;; https://raw.github.com/magit/magit/master/AUTHORS.md
-
-;; Author: Yann Hodique <yann.hodique@gmail.com>
-
 ;; Magit is free software; you can redistribute it and/or modify it
 ;; under the terms of the GNU General Public License as published by
 ;; the Free Software Foundation; either version 3, or (at your option)
@@ -23,13 +18,13 @@
 
 ;;; Commentary:
 
-;; This plug-in provides topgit functionality as a separate component
-;; of Magit.
+;; This plug-in provides topgit functionality as a separate component of Magit
 
 ;;; Code:
 
 (require 'magit)
-(eval-when-compile (require 'cl-lib))
+(eval-when-compile
+  (require 'cl))
 
 (defcustom magit-topgit-executable "tg"
   "The name of the TopGit executable."
@@ -83,17 +78,18 @@
   (when (magit-topgit-in-topic-p)
     (let* ((remote (magit-get "topgit" "remote"))
            (remote-update (if (or current-prefix-arg (not remote))
-                              (magit-read-remote "Update remote")
+                              (magit-read-remote)
                             remote)))
-      (when (and (not remote)
-                 (not current-prefix-arg))
-        (magit-set remote-update "topgit" "remote")
-        (magit-run magit-topgit-executable "remote"
-                   "--populate" remote-update))
-      (magit-run magit-topgit-executable "remote" remote-update)))
-  ;; We always return nil, as we also want
-  ;; regular "git remote update" to happen.
-  nil)
+      (if (and (not remote)
+               (not current-prefix-arg))
+          (progn
+            (magit-set remote-update "topgit" "remote")
+            (magit-run magit-topgit-executable "remote"
+                       "--populate" remote-update)))
+      (magit-run magit-topgit-executable "remote" remote-update))
+    ;; We return nil anyway, as we also want regular "git remote update" to
+    ;; happen
+    nil))
 
 (defun magit-topgit-parse-flags (flags-string)
   (let ((flags (string-to-list flags-string))
@@ -117,9 +113,7 @@
               (when (plist-get flags :current)
                 (put-text-property beg end 'face 'magit-topgit-current))
               (when (plist-get flags :empty)
-                (put-text-property
-                 beg end 'face
-                 `(:strike-through t :inherit ,(get-text-property beg 'face)))))
+                (put-text-property beg end 'face `(:strike-through t :inherit ,(get-text-property beg 'face)))))
             (forward-line)))
       (delete-region (line-beginning-position) (1+ (line-end-position))))
     t))
@@ -139,13 +133,13 @@
                         "Topics:" 'magit-topgit-wash-topics
                         "summary"))
 
-(magit-add-action-clauses (item info "discard")
+(magit-add-action (item info "discard")
   ((topic)
    (when (yes-or-no-p "Discard topic? ")
      (magit-run* (list magit-topgit-executable "delete" "-f" info)
                  nil nil nil t))))
 
-(magit-add-action-clauses (item info "visit")
+(magit-add-action (item info "visit")
   ((topic)
    (magit-checkout info)))
 
@@ -164,25 +158,27 @@
   :lighter " Topgit" :require 'magit-topgit
   (or (derived-mode-p 'magit-mode)
       (error "This mode only makes sense with magit"))
-  (cond
-   (magit-topgit-mode
-    (add-hook 'magit-after-insert-stashes-hook 'magit-insert-topics nil t)
-    (add-hook 'magit-create-branch-command-hook 'magit-topgit-create-branch nil t)
-    (add-hook 'magit-pull-command-hook 'magit-topgit-pull nil t)
-    (add-hook 'magit-remote-update-command-hook 'magit-topgit-remote-update nil t)
-    (add-hook 'magit-push-command-hook 'magit-topgit-push nil t)
-    ;; hide refs for top-bases namespace in any remote
-    (add-hook 'magit-log-remotes-color-hook 'magit-topgit-get-remote-top-bases-color)
-    ;; hide refs in the top-bases namespace, as they're not meant for the user
-    (add-to-list 'magit-refs-namespaces magit-topgit-ignored-namespace))
-   (t
-    (remove-hook 'magit-after-insert-stashes-hook 'magit-insert-topics t)
-    (remove-hook 'magit-create-branch-command-hook 'magit-topgit-create-branch t)
-    (remove-hook 'magit-pull-command-hook 'magit-topgit-pull t)
-    (remove-hook 'magit-remote-update-command-hook 'magit-topgit-remote-update t)
-    (remove-hook 'magit-push-command-hook 'magit-topgit-push t)
-    (remove-hook 'magit-log-remotes-color-hook 'magit-topgit-get-remote-top-bases-color)
-    (delete magit-topgit-ignored-namespace magit-refs-namespaces)))
+  (if magit-topgit-mode
+      (progn
+        (add-hook 'magit-after-insert-stashes-hook 'magit-insert-topics nil t)
+        (add-hook 'magit-create-branch-command-hook 'magit-topgit-create-branch nil t)
+        (add-hook 'magit-pull-command-hook 'magit-topgit-pull nil t)
+        (add-hook 'magit-remote-update-command-hook 'magit-topgit-remote-update nil t)
+        (add-hook 'magit-push-command-hook 'magit-topgit-push nil t)
+        ;; hide refs for top-bases namespace in any remote
+        (add-hook 'magit-log-remotes-color-hook
+                  'magit-topgit-get-remote-top-bases-color)
+        ;; hide refs in the top-bases namespace, as they're not meant for the user
+        (add-to-list 'magit-refs-namespaces magit-topgit-ignored-namespace))
+    (progn
+        (remove-hook 'magit-after-insert-stashes-hook 'magit-insert-topics t)
+        (remove-hook 'magit-create-branch-command-hook 'magit-topgit-create-branch t)
+        (remove-hook 'magit-pull-command-hook 'magit-topgit-pull t)
+        (remove-hook 'magit-remote-update-command-hook 'magit-topgit-remote-update t)
+        (remove-hook 'magit-push-command-hook 'magit-topgit-push t)
+        (remove-hook 'magit-log-remotes-color-hook
+                     'magit-topgit-get-remote-top-bases-color)
+        (delete magit-topgit-ignored-namespace magit-refs-namespaces)))
   (when (called-interactively-p 'any)
     (magit-refresh)))
 

@@ -6,7 +6,6 @@
 
 ; git settings
 (add-to-list 'load-path "~/.emacs.d/extensions/magit")
-(add-to-list 'load-path "~/.emacs.d/extensions/git-modes")
 (require 'magit)
 ; (setq magit-process-popup-time 3)
 (if (>= emacs-major-version 24)

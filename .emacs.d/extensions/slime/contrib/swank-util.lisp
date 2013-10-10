@@ -44,7 +44,10 @@ keywords: :BOUNDP, :FBOUNDP, :CONSTANT, :GENERIC-FUNCTION,
 boundp fboundp generic-function class macro special-operator package"
   (let ((letters "bfgctmsp")
         (result (copy-seq "--------")))
-    (flet ((flip (letter)
+    (flet ((type-specifier-p (s)
+             (or (documentation s 'type)
+                 (not (eq (type-specifier-arglist s) :not-available))))
+           (flip (letter)
              (setf (char result (position letter letters))
                    letter)))
       (when (boundp symbol) (flip #\b))
