@@ -40,12 +40,17 @@
   (require 'jka-compr)                  ; For JKA workarounds in
                                         ; `flycheck-temp-file-system'
   (require 'compile)                    ; Compile Mode integration
-  (require 'sh-script))                 ; `sh-shell' for sh checker predicates
+  (require 'sh-script)                  ; `sh-shell' for sh checker predicates
+)
+
+;; Declare `pkg-info-format-version' to be defined, to avoid a byte compiler
+;; warning.  We know that this function is only called after `pkg-info' is
+;; auto-loaded, so we can safely silence the compiler warning.
+(declare-function pkg-info-format-version "pkg-info.el" (version))
 
 (require 's)
 (require 'dash)
 (require 'f)
-(require 'pkg-info)          ; Package and library version information
 (require 'rx)                ; Regexp fanciness in `flycheck-define-checker'
 (require 'cl-lib)            ; `cl-defstruct'
 (require 'help-mode)         ; `define-button-type'
@@ -220,8 +225,8 @@ Flycheck error to process.
 All functions in this hook are called in order of appearance,
 until a function returns non-nil.  Thus, a function in this hook
 may return nil, to allow for further processing of the error, or
-t, to indicate that the error was fully processed and inhibit any
-further processing.
+any non-nil value, to indicate that the error was fully processed
+and inhibit any further processing.
 
 The functions are called for each newly parsed error immediately
 after the corresponding syntax checker finished.  At this stage,
@@ -486,13 +491,13 @@ This variable is a normal hook."
   '((t :inherit error))
   "Flycheck face for fringe error indicators."
   :package-version '(flycheck . "0.13")
-  :group 'flycheck-face)
+  :group 'flycheck-faces)
 
 (defface flycheck-fringe-warning
   '((t :inherit warning))
   "Flycheck face for fringe warning indicators."
   :package-version '(flycheck . "0.13")
-  :group 'flycheck-face)
+  :group 'flycheck-faces)
 
 
 ;;;; Minor mode definition
@@ -671,19 +676,16 @@ just return nil."
 (defun flycheck-may-enable-mode ()
   "Determine whether Flycheck mode may be enabled.
 
-Flycheck mode is not enabled under any of the following
-conditions
+Flycheck mode is not enabled for
 
-The current buffer is a temporary buffer as determined by
-`flycheck-temporary-buffer-p'.
-
-The current buffer refers to a remote file, as determined by
-`file-remote-p'.
-
-No suitable syntax checker exists for the current buffer.
+- ephemeral buffers (see `flycheck-ephemeral-buffer-p'),
+- encrypted buffers (see `flycheck-encrypted-buffer-p'),
+- remote files (see `file-remote-p'),
+- or if no suitable syntax checker exists.
 
 Return t if Flycheck mode may be enabled, and nil otherwise."
-  (and (not (flycheck-temporary-buffer-p))
+  (and (not (flycheck-ephemeral-buffer-p))
+       (not (flycheck-encrypted-buffer-p))
        (not (and (buffer-file-name) (file-remote-p (buffer-file-name) 'method)))
        (flycheck-get-checker-for-buffer)))
 
@@ -803,7 +805,7 @@ Read-only buffers may never be checked automatically.
 If CONDITION is non-nil, determine whether syntax may checked
 automatically according to
 `flycheck-check-syntax-automatically'."
-  (and (not buffer-read-only)
+  (and (not (or buffer-read-only (flycheck-ephemeral-buffer-p)))
        (or (not condition)
            (memq condition flycheck-check-syntax-automatically))))
 
@@ -861,10 +863,8 @@ buffer."
 ;;;; Mode line reporting
 (defun flycheck-report-status (status)
   "Report Flycheck STATUS."
-  (let ((mode-line flycheck-mode-line-lighter))
-    (setq mode-line (concat mode-line status))
-    (setq flycheck-mode-line mode-line)
-    (force-mode-line-update)))
+  (setq flycheck-mode-line (concat flycheck-mode-line-lighter status))
+  (force-mode-line-update))
 
 (defun flycheck-report-error ()
   "Report a Flycheck error status.
@@ -1013,12 +1013,29 @@ ITEMS."
     (setq prepend-fn #'list))
   (-flatten (--map (funcall prepend-fn option it) items)))
 
-(defun flycheck-temporary-buffer-p ()
-  "Determine whether the current buffer is a temporary buffer.
+(defun flycheck-ephemeral-buffer-p ()
+  "Determine whether the current buffer is an ephemeral buffer.
 
-Buffers whose names start with a space are considered temporary
-buffers."
+See Info node `(elisp)Buffer Names' for information about
+ephemeral buffers."
   (s-starts-with? " " (buffer-name)))
+
+(defun flycheck-encrypted-buffer-p ()
+  "Determine whether the current buffer is an encrypted file.
+
+See Info node `(epa)Top' for Emacs' interface to encrypted
+files."
+  ;; The EPA file handler sets this variable locally to remember the recipients
+  ;; of the encrypted file for re-encryption.  Hence, a local binding of this
+  ;; variable is a good indication that the buffer is encrypted.  I haven't
+  ;; found any better indicator anyway.
+  (local-variable-p 'epa-file-encrypt-to))
+
+(defun flycheck-autoloads-file-p ()
+  "Determine whether the current buffer is a autoloads file.
+
+Autoloads are generated by package.el during installation."
+  (s-ends-with? "-autoloads.el" (buffer-name)))
 
 (defun flycheck-in-user-emacs-directory-p (filename)
   "Whether FILENAME is in `user-emacs-directory'."
@@ -1296,6 +1313,9 @@ error if not."
       (`(,(or `option `option-list) ,option-name ,option-var)
        (and (stringp option-name)
             (symbolp option-var)))
+      (`(option-flag ,option-name ,option-var)
+       (and (stringp option-name)
+            (symbolp option-var)))
       (`(,(or `option `option-list) ,option-name ,option-var ,prepender-or-filter)
        (and (stringp option-name)
             (-all? #'symbolp (list option-var prepender-or-filter))))
@@ -1402,8 +1422,6 @@ value."
       (error "Missing :error-pattern or :error-parser"))
     (unless (or (null parser) (functionp parser))
       (error "%S is not a function" parser))
-    (unless (--all? (memq (car it) '(warning error)) patterns)
-      (error "Patterns %S have invalid levels" patterns))
     (unless (or modes predicate)
       (error "Missing :modes or :predicate"))
     (unless (or (symbolp modes) (-all? #'symbolp modes))
@@ -1456,10 +1474,13 @@ commands."
      (defcustom ,symbol ,file-name
        ,(format "Configuration file for `%s'.
 
-Locate the configuration file using the functions from
-`flycheck-locate-config-file-functions'.  If the file is found
-pass it to the syntax checker as configuration file.  Otherwise
-invoke the syntax checker without a configuration file.
+If set to a string, locate the configuration file using the
+functions from `flycheck-locate-config-file-functions'.  If the
+file is found pass it to the syntax checker as configuration
+file.
+
+If no configuration file is found, or if this variable is set to
+nil, invoke the syntax checker without a configuration file.
 
 Use this variable as file-local variable if you need a specific
 configuration file a buffer." checker)
@@ -1676,6 +1697,10 @@ STRING
      return a list `(OPTION ITEM1 OPTION ITEM2 ...)'.  Otherwise
      return nil.
 
+`(option-flag OPTION VARIABLE)'
+     Retrieve the value of VARIABLE and return OPTION, if the
+     value is non-nil.  Otherwise return nil.
+
 `(eval FORM)
      Return the result of evaluating FORM in the buffer to be
      checked.  FORM must either return a string or a list of
@@ -1733,6 +1758,9 @@ are substituted within the body of cells!"
          (error "Value %S of %S for option %S is not a list of strings"
                 value variable option-name))
        (flycheck-prepend-with-option option-name value prepend-fn)))
+    (`(option-flag ,option-name ,variable)
+     (when (symbol-value variable)
+       option-name))
     (`(eval ,form)
      (let ((result (eval form)))
        (if (or (null result)
@@ -2271,6 +2299,109 @@ _not_ include the file name."
       (s-lex-format "${line}:${level}: ${message} (${checker})"))))
 
 
+;;;; Error levels
+
+;;;###autoload
+(defun flycheck-define-error-level (level &rest properties)
+  "Define a new error LEVEL with PROPERTIES.
+
+The following PROPERTIES constitute an error level:
+
+`:overlay-category CATEGORY'
+     A symbol denoting the overlay category to use for error
+     highlight overlays for this level.  See Info
+     node `(elisp)Overlay properties' for more information about
+     overlay categories.
+
+`:fringe-bitmap BITMAP'
+     A fringe bitmap symbol denoting the bitmap to use for fringe
+     indicators for this level.  See Info node `(elisp)Fringe
+     Bitmaps' for more information about fringe bitmaps.
+
+`:fringe-face FACE'
+     A face symbol denoting the face to use for fringe indicators
+     for this level."
+  (declare (indent 1))
+  (put level :flycheck-error-level t)
+  (put level :flycheck-overlay-category
+       (plist-get properties :overlay-category))
+  (put level :flycheck-fringe-bitmap
+       (plist-get properties :fringe-bitmap))
+  (put level :flycheck-fringe-face
+       (plist-get properties :fringe-face)))
+
+(defun flycheck-error-level-p (level)
+  "Determine whether LEVEL is a Flycheck error level."
+  (get level :flycheck-error-level))
+
+(defun flycheck-error-level-overlay-category (level)
+  "Get the overlay category for LEVEL."
+  (get level :flycheck-overlay-category))
+
+(defun flycheck-error-level-fringe-bitmap (level)
+  "Get the fringe bitmap for LEVEL."
+  (get level :flycheck-fringe-bitmap))
+
+(defun flycheck-error-level-fringe-face (level)
+  "Get the fringe face for LEVEL."
+  (get level :flycheck-fringe-face))
+
+(defun flycheck-error-level-make-fringe-icon (level side)
+  "Create the fringe icon for LEVEL at SIDE.
+
+Return a propertized string that shows a fringe bitmap according
+to LEVEL and the given fringe SIDE.
+
+LEVEL is a Flycheck error level defined with
+`flycheck-define-error-level', and SIDE is either `left-fringe'
+or `right-fringe'.
+
+Return a propertized string representing the fringe icon,
+intended for use as `before-string' of an overlay to actually
+show the icon."
+  (unless (memq side '(left-fringe right-fringe))
+    (error "Invalid fringe side: %S" side))
+  (propertize "!" 'display
+              (list side
+                    (flycheck-error-level-fringe-bitmap level)
+                    (flycheck-error-level-fringe-face level))))
+
+
+;;;; Built-in error levels
+(when (fboundp 'define-fringe-bitmap)
+  ;; define-fringe-bitmap is not available if Emacs is built without GUI
+  ;; support, see https://github.com/flycheck/flycheck/issues/57
+  (define-fringe-bitmap 'flycheck-fringe-exclamation-mark
+    [24 60 60 24 24 0 0 24 24] nil nil 'center))
+
+(defconst flycheck-fringe-exclamation-mark
+  (if (get 'exclamation-mark 'fringe)
+      'exclamation-mark
+    'flycheck-fringe-exclamation-mark)
+  "The symbol to use as exclamation mark bitmap.
+
+Defaults to the built-in exclamation mark if available or to the
+flycheck exclamation mark otherwise.")
+
+(put 'flycheck-error-overlay 'face 'flycheck-error)
+(put 'flycheck-error-overlay 'priority 110)
+(put 'flycheck-error-overlay 'help-echo "Unknown error.")
+
+(flycheck-define-error-level 'error
+  :overlay-category 'flycheck-error-overlay
+  :fringe-bitmap flycheck-fringe-exclamation-mark
+  :fringe-face 'flycheck-fringe-error)
+
+(put 'flycheck-warning-overlay 'face 'flycheck-warning)
+(put 'flycheck-warning-overlay 'priority 100)
+(put 'flycheck-warning-overlay 'help-echo "Unknown warning.")
+
+(flycheck-define-error-level 'warning
+  :overlay-category 'flycheck-warning-overlay
+  :fringe-bitmap 'question-mark
+  :fringe-face 'flycheck-fringe-warning)
+
+
 ;;;; General error parsing
 (defun flycheck-parse-output (output checker buffer)
   "Parse OUTPUT from CHECKER in BUFFER.
@@ -2599,76 +2730,32 @@ If LEVEL is omitted if the current buffer has any errors at all."
 
 
 ;;;; Error overlay management
-(when (fboundp 'define-fringe-bitmap)
-  ;; define-fringe-bitmap is not available if Emacs is built without GUI
-  ;; support, see https://github.com/flycheck/flycheck/issues/57
-  (define-fringe-bitmap 'flycheck-fringe-exclamation-mark
-    [24 60 60 24 24 0 0 24 24] nil nil 'center))
-
-(defconst flycheck-fringe-exclamation-mark
-  (if (get 'exclamation-mark 'fringe)
-      'exclamation-mark
-    'flycheck-fringe-exclamation-mark)
-  "The symbol to use as exclamation mark bitmap.
-
-Defaults to the built-in exclamation mark if available or to the
-flycheck exclamation mark otherwise.")
-
-(put 'flycheck-error-overlay 'flycheck-overlay t)
-(put 'flycheck-error-overlay 'face 'flycheck-error)
-(put 'flycheck-error-overlay 'priority 110)
-(put 'flycheck-error-overlay 'help-echo "Unknown error.")
-(put 'flycheck-error-overlay 'flycheck-fringe-face 'flycheck-fringe-error)
-(put 'flycheck-error-overlay 'flycheck-fringe-bitmap
-     flycheck-fringe-exclamation-mark)
-
-(put 'flycheck-warning-overlay 'flycheck-overlay t)
-(put 'flycheck-warning-overlay 'face 'flycheck-warning)
-(put 'flycheck-warning-overlay 'priority 100)
-(put 'flycheck-warning-overlay 'help-echo "Unknown warning.")
-(put 'flycheck-warning-overlay 'flycheck-fringe-face 'flycheck-fringe-warning)
-(put 'flycheck-warning-overlay 'flycheck-fringe-bitmap 'question-mark)
-
-(defun flycheck-make-fringe-icon (category)
-  "Create the fringe icon for CATEGORY.
-
-Return a propertized string that shows a fringe bitmap according
-to CATEGORY and the side specified `flycheck-indication-mode'.
-Use this string as `before-string' of an overlay to actually show
-the icon.
-
-If `flycheck-indication-mode' is neither `left-fringe' nor
-`right-fringe', returned nil."
-  (when (memq flycheck-indication-mode '(left-fringe right-fringe))
-    (let ((bitmap (get category 'flycheck-fringe-bitmap))
-          (face (get category 'flycheck-fringe-face)))
-      (propertize "!" 'display (list flycheck-indication-mode bitmap face)))))
-
 (defun flycheck-add-overlay (err)
   "Add overlay for ERR.
 
 Return the created overlay."
   (flycheck-error-with-buffer err
-    (pcase-let* ((mode flycheck-highlighting-mode)
-                 ;; Default to lines highlighting.  If MODE is nil, we want the
-                 ;; line for the sake of indication and error messages.  We erase
-                 ;; the highlighting later on
-                 (`(,beg . ,end) (flycheck-error-region-for-mode
-                                  err (or mode 'lines)))
+    ;; We must have a proper error region for the sake of fringe indication,
+    ;; error display and error navigation, even if the highlighting is disabled.
+    ;; We erase the highlighting later on in this case
+    (pcase-let* ((`(,beg . ,end) (flycheck-error-region-for-mode
+                                  err (or flycheck-highlighting-mode'lines)))
                  (overlay (make-overlay beg end))
                  (level (flycheck-error-level err))
-                 (category (pcase level
-                             (`warning 'flycheck-warning-overlay)
-                             (`error 'flycheck-error-overlay)
-                             (_ (error "Invalid error level %S" level)))))
+                 (category (flycheck-error-level-overlay-category level)))
+      (unless (flycheck-error-level-p level)
+        (error "Undefined error level: %S" level))
+      (overlay-put overlay 'flycheck-overlay t)
       (overlay-put overlay 'flycheck-error err)
       ;; TODO: Consider hooks to re-check if overlay contents change
       (overlay-put overlay 'category category)
-      (unless mode
+      (unless flycheck-highlighting-mode
         ;; Erase the highlighting from the overlay if requested by the user
         (overlay-put overlay 'face nil))
-      (-when-let (icon (flycheck-make-fringe-icon category))
-        (overlay-put overlay 'before-string icon))
+      (when flycheck-indication-mode
+        (overlay-put overlay 'before-string
+                     (flycheck-error-level-make-fringe-icon
+                      level flycheck-indication-mode)))
       (overlay-put overlay 'help-echo (flycheck-error-message err))
       overlay)))
 
@@ -3215,6 +3302,55 @@ See URL `http://www.gnu.org/software/bash/'."
   :modes sh-mode
   :predicate (lambda () (eq sh-shell 'bash)))
 
+(flycheck-def-option-var flycheck-clang-definitions nil c/c++-clang
+  "Additional preprocessor definitions for Clang.
+
+The value of this variable is a list of strings, where each
+string is an additional definition to pass to Clang, via the `-D'
+option."
+  :type '(repeat (string :tag "Definition"))
+  :safe #'flycheck-string-list-p
+  :package-version '(flycheck . "0.15"))
+
+(flycheck-def-option-var flycheck-clang-include-path nil c/c++-clang
+  "A list of include directories for Clang.
+
+The value of this variable is a list of strings, where each
+string is a directory to add to the include path of Clang.
+Relative paths are relative to the file being checked."
+  :type '(repeat (directory :tag "Include directory"))
+  :safe #'flycheck-string-list-p
+  :package-version '(flycheck . "0.14"))
+
+(flycheck-def-option-var flycheck-clang-includes nil c/c++-clang
+  "A list of additional include files for Clang.
+
+The value of this variable is a list of strings, where each
+string is a file to include before syntax checking.  Relative
+paths are relative to the file being checked."
+  :type '(repeat (file :tag "Include file"))
+  :safe #'flycheck-string-list-p
+  :package-version '(flycheck . "0.15"))
+
+(flycheck-def-option-var flycheck-clang-language-standard nil c/c++-clang
+  "The language standard to use in Clang.
+
+The value of this variable is either a string denoting a language
+standard, or nil, to use the default standard.  When non-nil,
+pass the language standard via the `-std' option."
+  :type '(choice (const :tag "Default standard" nil)
+                 (string :tag "Language standard"))
+  :safe #'stringp
+  :package-version '(flycheck . "0.15"))
+
+(flycheck-def-option-var flycheck-clang-no-rtti nil c/c++-clang
+  "Whether to disable RTTI in Clang.
+
+When non-nil, disable RTTI for syntax checks, via `-fno-rtti'."
+  :type 'boolean
+  :safe #'booleanp
+  :package-version '(flycheck . "0.15"))
+
 (flycheck-def-option-var flycheck-clang-warnings '("all" "extra") c/c++-clang
   "A list of additional warnings to enable in Clang.
 
@@ -3232,16 +3368,6 @@ information about warnings."
   :safe #'flycheck-string-list-p
   :package-version '(flycheck . "0.14"))
 
-(flycheck-def-option-var flycheck-clang-include-path nil c/c++-clang
-  "A list of include directories for Clang.
-
-The value of this variable is a list of strings, where each
-string is a directory to add to the include path of Clang.
-Relative paths are relative to the file being checked."
-  :type '(repeat (directory :tag "Include directory"))
-  :safe #'flycheck-string-list-p
-  :package-version '(flycheck . "0.14"))
-
 (flycheck-define-checker c/c++-clang
   "A C/C++ syntax checker using Clang.
 
@@ -3253,12 +3379,19 @@ See URL `http://clang.llvm.org/'."
                                         ; location
             "-fno-diagnostics-show-option" ; Do not show the corresponding
                                         ; warning group
+            (option "-std=" flycheck-clang-language-standard)
+            (option-flag "-fno-rtti" flycheck-clang-no-rtti)
+            (option-list "-include" flycheck-clang-includes)
             (option-list "-W" flycheck-clang-warnings s-prepend)
+            (option-list "-D" flycheck-clang-definitions s-prepend)
             (option-list "-I" flycheck-clang-include-path)
             "-x" (eval
                   (cl-case major-mode
                     (c++-mode "c++")
-                    (c-mode "c"))) source)
+                    (c-mode "c")))
+            ;; We must stay in the same directory, to properly resolve #include
+            ;; with quotes
+            source-inplace)
   :error-patterns
   ((warning line-start (file-name) ":" line ":" column
             ": warning: " (message) line-end)
@@ -3296,10 +3429,6 @@ See URL `http://cppcheck.sourceforge.net/'."
   :error-parser flycheck-parse-cppcheck
   :modes (c-mode c++-mode))
 
-(flycheck-def-config-file-var flycheck-coffeelintrc coffee-coffeelint
-                              ".coffeelint.json"
-  :safe #'stringp)
-
 (flycheck-define-checker coffee
   "A CoffeeScript syntax checker using coffee.
 
@@ -3311,6 +3440,10 @@ See URL `http://coffeescript.org/'."
           ": error: " (message) line-end))
   :modes coffee-mode
   :next-checkers ((warnings-only . coffee-coffeelint)))
+
+(flycheck-def-config-file-var flycheck-coffeelintrc coffee-coffeelint
+                              ".coffeelint.json"
+  :safe #'stringp)
 
 (flycheck-define-checker coffee-coffeelint
   "A CoffeeScript style checker using coffeelint.
@@ -3412,14 +3545,6 @@ See URL `http://elixir-lang.org/'."
 (defconst flycheck-emacs-command
   `(,(concat invocation-directory invocation-name) "-Q" "--batch")
   "A command to execute an Emacs Lisp form in a background process.")
-
-(defun flycheck-temp-compilation-buffer-p ()
-  "Determine whether the current buffer is a temporary buffer.
-
-Return t if the current buffer is a temporary buffer created
-during byte-compilation or autoloads generation, or nil otherwise."
-  (or (member (buffer-name) '(" *Compiler Input*" " *autoload-file*"))
-      (s-ends-with? "-autoloads.el" (buffer-name))))
 
 (defconst flycheck-emacs-lisp-check-form
   '(progn
@@ -3530,19 +3655,22 @@ This variable has no effect, if
   ;; properly resolved, because `byte-compile-file' emits file names *relative
   ;; to the directory of the checked file* instead of the working directory.
   ;; Hence our backwards-substitution will fail, because the checker process has
-  ;; a different base directory to resolve relative file names than the flycheck
+  ;; a different base directory to resolve relative file names than the Flycheck
   ;; code working on the buffer to check.
   :predicate
   (lambda ()
     (and (buffer-file-name)
-         ;; Do not check buffers which should not be byte-compiled.  The
-         ;; checker process will refuse to compile these anyway
-         (not (and (boundp 'no-byte-compile) no-byte-compile))
-         ;; Checking temporary buffers from `byte-compile-file' or autoload
-         ;; buffers interferes with package installation. See
-         ;; https://github.com/flycheck/flycheck/issues/45 and
-         ;; https://github.com/bbatsov/prelude/issues/248
-         (not (flycheck-temp-compilation-buffer-p))))
+         ;; Do not check buffers which should not be byte-compiled.  The checker
+         ;; process will refuse to compile these, which would confuse Flycheck
+         (not (or (bound-and-true-p no-byte-compile)
+                  ;; Do not check buffers used for autoloads generation during
+                  ;; package installation.  These buffers are too short-lived
+                  ;; for being checked, and doing so causes spurious errors.
+                  ;; See https://github.com/flycheck/flycheck/issues/45 and
+                  ;; https://github.com/bbatsov/prelude/issues/248.  We must
+                  ;; also not check compilation buffers, but as these are
+                  ;; ephemeral, Flycheck won't check them anyway.
+                  (flycheck-autoloads-file-p)))))
   :next-checkers (emacs-lisp-checkdoc))
 
 (defconst flycheck-emacs-lisp-checkdoc-form
@@ -3574,12 +3702,12 @@ The checker runs `checkdoc-current-buffer'."
   :modes (emacs-lisp-mode)
   :predicate
   (lambda ()
-    (and (not (flycheck-temp-compilation-buffer-p))
-         ;; Do not check Cask/Carton files.  These really don't need to follow
-         ;; Checkdoc conventions
-         (not (and (buffer-file-name)
-                   (member (f-filename (buffer-file-name))
-                           '("Cask" "Carton")))))))
+    (not (or (flycheck-autoloads-file-p)
+             ;; Do not check Cask/Carton and dir-locals files.  These really
+             ;; don't need to follow Checkdoc conventions
+             (and (buffer-file-name)
+                  (member (f-filename (buffer-file-name))
+                          '("Cask" "Carton" ".dir-locals.el")))))))
 
 (flycheck-define-checker erlang
   "An Erlang syntax checker using the Erlang interpreter."
@@ -3940,6 +4068,10 @@ See URL `http://pypi.python.org/pypi/flake8'."
    (error line-start (file-name) ":" line ":" (message) line-end))
   :modes python-mode)
 
+(flycheck-def-config-file-var flycheck-pylintrc python-pylint
+                              ".pylintrc"
+  :safe #'stringp)
+
 (flycheck-define-checker python-pylint
   "A Python syntax and style checker using Pylint.
 
@@ -3949,13 +4081,13 @@ See URL `http://pypi.python.org/pypi/pylint'."
   ;; -r n disables the scoring report
   :command ("pylint" "-r" "n"
             "--msg-template" "{path}:{line}:{C}:{msg} ({msg_id})"
-            source-inplace)
+            (config-file "--rcfile=" flycheck-pylintrc)
+            source)
   :error-patterns
   ((error line-start (file-name) ":" line ":"
           (or "E" "F") ":" (message) line-end)
-   ;; We ignore Convention level messages
    (warning line-start (file-name) ":" line ":"
-            (or "W" "R") ":" (message) line-end))
+            (or "W" "R" "C") ":" (message) line-end))
   :modes python-mode)
 
 (flycheck-define-checker rst

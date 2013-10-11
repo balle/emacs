@@ -46,7 +46,6 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(auth-source-save-behavior nil)
- '(custom-safe-themes (quote ("fa818f831ef6b6e73642eb8508b9591d36d72f054db674628e85c3806b8e48a3" "ff5db02f8eda12dbc85ba3b0ebcfa2bdfbf7f417453cdb9f25f29a5263097d6d" default)))
  '(send-mail-function (quote smtpmail-send-it)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

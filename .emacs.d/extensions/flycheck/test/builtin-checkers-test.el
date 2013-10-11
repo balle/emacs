@@ -92,20 +92,55 @@
   :expected-result (flycheck-testsuite-fail-unless-checker 'c/c++-clang)
   (flycheck-testsuite-should-syntax-check
    "checkers/c_c++-clang-fatal-error.c" 'c-mode nil
-   '(1 10 "'c_c++-clang-header.h' file not found" error)))
+   '(2 10 "'c_c++-clang-library-header.h' file not found" error)))
 
 (ert-deftest checker-c/c++-clang-include-path ()
   :expected-result (flycheck-testsuite-fail-unless-checker 'c/c++-clang)
   (flycheck-testsuite-with-hook c-mode-hook
-      (setq flycheck-clang-include-path '("."))
+      (setq flycheck-clang-include-path '("./include"))
     (flycheck-testsuite-should-syntax-check
      "checkers/c_c++-clang-fatal-error.c" 'c-mode nil)))
+
+(ert-deftest checker-c/c++-clang-includes ()
+  :expected-result (flycheck-testsuite-fail-unless-checker 'c/c++-clang)
+  (flycheck-testsuite-with-hook c++-mode-hook
+      (setq flycheck-clang-includes
+            (list (flycheck-testsuite-resource-filename "checkers/include/c_c++-clang-library-header.h")))
+    (flycheck-testsuite-should-syntax-check
+     "checkers/c_c++-clang-error.cpp" 'c++-mode nil
+     '(10 16 "use of undeclared identifier 'nullptr'" error))))
 
 (ert-deftest checker-c/c++-clang-error ()
   :expected-result (flycheck-testsuite-fail-unless-checker 'c/c++-clang)
   (flycheck-testsuite-should-syntax-check
    "checkers/c_c++-clang-error.cpp" 'c++-mode nil
-   '(5 18 "implicit instantiation of undefined template 'test<false>'" error)))
+   '(8 17 "implicit instantiation of undefined template 'test<false>'" error)
+   '(10 16 "use of undeclared identifier 'nullptr'" error)))
+
+(ert-deftest checker-c/c++-clang-error-language-standard ()
+  :expected-result (flycheck-testsuite-fail-unless-checker 'c/c++-clang)
+  (flycheck-testsuite-with-hook c++-mode-hook
+      (setq flycheck-clang-language-standard "c++11")
+    (flycheck-testsuite-should-syntax-check
+     "checkers/c_c++-clang-error.cpp" 'c++-mode nil
+     '(8 17 "implicit instantiation of undefined template 'test<false>'" error))))
+
+(ert-deftest checker-c/c++-clang-error-definitions ()
+  :expected-result (flycheck-testsuite-fail-unless-checker 'c/c++-clang)
+  (flycheck-testsuite-with-hook c++-mode-hook
+      (setq flycheck-clang-definitions '("FLYCHECK_LOCAL" "FLYCHECK_LIBRARY"))
+    (flycheck-testsuite-should-syntax-check
+     "checkers/c_c++-clang-error.cpp" 'c++-mode nil
+     '(10 16 "use of undeclared identifier 'nullptr'" error))))
+
+(ert-deftest checker-c/c++-clang-error-no-rtti ()
+  :expected-result (flycheck-testsuite-fail-unless-checker 'c/c++-clang)
+  (flycheck-testsuite-with-hook c++-mode-hook
+      (setq flycheck-clang-no-rtti t)
+    ;; Clang doesn't throw errors for RTTI operators :|, so we basically just
+    ;; test that the option flag doesn't cause any issues
+    (flycheck-testsuite-should-syntax-check
+     "checkers/c_c++-clang-error-rtti.cpp" 'c++-mode nil)))
 
 (ert-deftest checker-c/c++-cppcheck-error ()
   :expected-result (flycheck-testsuite-fail-unless-checker 'c/c++-cppcheck)
@@ -276,22 +311,6 @@ https://github.com/bbatsov/prelude/issues/259."
     (rename-buffer "foo-autoloads.el")
     (should-not (flycheck-may-use-checker 'emacs-lisp-checkdoc))))
 
-(ert-deftest checker-emacs-lisp-checkdoc-inhibited-autoloads-source ()
-  "Test that CheckDoc does no check temporary autoload buffers."
-  (flycheck-testsuite-with-resource-buffer "checkers/emacs-lisp-checkdoc-warning.el"
-    (emacs-lisp-mode)
-    (should (flycheck-may-use-checker 'emacs-lisp-checkdoc))
-    (rename-buffer " *autoload-file*")
-    (should-not (flycheck-may-use-checker 'emacs-lisp-checkdoc))))
-
-(ert-deftest checker-emacs-lisp-checkdoc-inhibited-compiler-input ()
-  "Test that CheckDoc does not check byte compiler input buffers."
-  (flycheck-testsuite-with-resource-buffer "checkers/emacs-lisp-checkdoc-warning.el"
-    (emacs-lisp-mode)
-    (should (flycheck-may-use-checker 'emacs-lisp-checkdoc))
-    (rename-buffer " *Compiler Input*")
-    (should-not (flycheck-may-use-checker 'emacs-lisp-checkdoc))))
-
 (ert-deftest checker-emacs-lisp-checkdoc-inhibited-cask ()
   (flycheck-testsuite-with-resource-buffer "checkers/emacs-lisp-checkdoc-warning.el"
     (emacs-lisp-mode)
@@ -389,20 +408,6 @@ See URL `https://github.com/flycheck/flycheck/issues/45' and URL
     (emacs-lisp-mode)
     (should (flycheck-may-use-checker 'emacs-lisp))
     (rename-buffer "foo-autoloads.el")
-    (should (not (flycheck-may-use-checker 'emacs-lisp)))))
-
-(ert-deftest checker-emacs-lisp-inhibited-compiler-input ()
-  "Test that Emacs Lisp does not check byte compiler input buffers.
-
-These temporary buffers are created during byte compilation, and
-checking them interfers with package installation.
-
-See URL `https://github.com/flycheck/flycheck/issues/45' and URL
-`https://github.com/bbatsov/prelude/issues/253'."
-(flycheck-testsuite-with-resource-buffer "checkers/emacs-lisp-warning.el"
-    (emacs-lisp-mode)
-    (should (flycheck-may-use-checker 'emacs-lisp))
-    (rename-buffer " *Compiler Input*")
     (should (not (flycheck-may-use-checker 'emacs-lisp)))))
 
 (ert-deftest checker-erlang-error ()
@@ -690,18 +695,25 @@ See URL `https://github.com/flycheck/flycheck/issues/45' and URL
    '(3 nil "invalid syntax (E0001)" error)))
 
 (ert-deftest checker-python-pylint-error ()
-  "Test an unknown module with pylint."
   :expected-result (flycheck-testsuite-fail-unless-checker 'python-pylint)
   (flycheck-testsuite-should-syntax-check
    "checkers/python-pylint-error.py" 'python-mode 'python-flake8
+   '(1 nil "Invalid module name \"python-pylint-error\" (C0103)" warning)
+   '(1 nil "Missing module docstring (C0111)" warning)
    '(3 nil "Unable to import 'spam' (F0401)" error)))
 
-(ert-deftest checker-python-pylint-used-map ()
-  "Test usage of the map() builtin with the pylint checker."
+(ert-deftest checker-python-pylint-warning ()
   :expected-result (flycheck-testsuite-fail-unless-checker 'python-pylint)
   (flycheck-testsuite-should-syntax-check
    "checkers/python-pylint-warning.py" 'python-mode 'python-flake8
-   '(3 nil "Used builtin function 'map' (W0141)" warning)))
+   '(1 nil "Invalid module name \"python-pylint-warning\" (C0103)" warning)
+   '(1 nil "Missing module docstring (C0111)" warning)
+   '(3 nil "Missing class docstring (C0111)" warning)
+   '(5 nil "Invalid argument name \"n\" (C0103)" warning)
+   '(5 nil "Missing method docstring (C0111)" warning)
+   '(6 nil "Used builtin function 'map' (W0141)" warning)
+   '(5 nil "Method could be a function (R0201)" warning)
+   '(3 nil "Too few public methods (1/2) (R0903)" warning)))
 
 (ert-deftest checker-rst-warning ()
   :expected-result (flycheck-testsuite-fail-unless-checker 'rst)
@@ -754,7 +766,7 @@ See URL `https://github.com/flycheck/flycheck/issues/45' and URL
   (flycheck-testsuite-should-syntax-check
    "checkers/ruby-rubocop-warnings.rb" 'ruby-mode nil
    '(1 1 "Missing utf-8 encoding comment." warning)
-   '(3 1 "Assigned but unused variable - arr" warning)
+   '(3 1 "Useless assignment to variable - arr" warning)
    '(3 14 "Use snake_case for symbols." warning)
    '(4 6 "Prefer single-quoted strings when you don't need string interpolation or special symbols." warning)))
 
@@ -765,7 +777,7 @@ See URL `https://github.com/flycheck/flycheck/issues/45' and URL
     (flycheck-testsuite-should-syntax-check
      "checkers/ruby-rubocop-warnings.rb" 'ruby-mode nil
      '(1 1 "Missing utf-8 encoding comment." warning)
-     '(3 1 "Assigned but unused variable - arr" warning)
+     '(3 1 "Useless assignment to variable - arr" warning)
      '(4 6 "Prefer single-quoted strings when you don't need string interpolation or special symbols." warning))))
 
 (ert-deftest checker-ruby-syntax-error ()

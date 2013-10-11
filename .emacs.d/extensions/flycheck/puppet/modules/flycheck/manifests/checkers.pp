@@ -5,12 +5,19 @@ class flycheck::checkers {
   include flycheck::checkers::erlang
   include flycheck::checkers::go
   include flycheck::checkers::haskell
-  include flycheck::checkers::nodejs
   include flycheck::checkers::php
   include flycheck::checkers::python
   include flycheck::checkers::ruby
 
   # Various other syntax checkers
+
+  # This PPA provides Clang 3.2 for Ubuntu 12.04
+  apt::ppa { 'ppa:kxstudio-team/builds': }
+
+  package { 'clang':
+    ensure  => latest,
+    require => Apt::Ppa['ppa:kxstudio-team/builds'],
+  }
 
   apt::ppa { 'ppa:kevincantu/rust': }
 
@@ -19,8 +26,25 @@ class flycheck::checkers {
     require => Apt::Ppa['ppa:kevincantu/rust']
   }
 
+  class { 'nodejs':
+    manage_repo => true,
+    version     => latest
+  }
+
+  $node_packages = ['coffee-script', # coffee
+                    'coffeelint',    # coffee-coffeelint
+                    'csslint',       # css-csslint
+                    'jshint',        # javascript-jshint
+                    'jsonlint',      # json-jsonlint
+                    'less',          # less
+                    ]
+  package { $node_packages:
+    ensure   => present,
+    provider => npm,
+    require  => Class['nodejs'],
+  }
+
   $packages = [ 'bash',            # bash/sh-bash
-                'clang',           # c/c++-clang
                 'cppcheck',        # c/c++-cpppcheck
                 'tidy',            # html-tidy
                 'lua5.2',          # lua

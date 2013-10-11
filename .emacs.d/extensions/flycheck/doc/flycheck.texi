@@ -1,6 +1,7 @@
 \input texinfo
 @setfilename flycheck.info
 @settitle The Flycheck manual
+@documentencoding UTF-8
 @documentlanguage en
 
 @c Macros
@@ -25,23 +26,46 @@
 @ifhtml
 @html
 <div id="frontmatter">
+
+<p class="text-center lead">
+Modern on-the-fly syntax checking for GNU Emacs 24
+<small>(aka “Flymake done right”)</small>
+</p>
+
+<p class="text-center">
+<small>Copyright © 2013 Sebastian Wiesner</small>
+</p>
+
+<p class="text-center">
+<small>Distributed under the
+terms of the <a href="http://www.gnu.org/licenses/gpl-3.0.en.html"
+target="_blank">GNU GPL 3 or any later version</a>.</small>
+</p>
+
+<p class="text-center">
+<small>This manual is distributed under the terms of the <a
+href="http://www.gnu.org/licenses/fdl-1.3.en.html" target="_blank">GNU
+FDL 1.3 or any later version</a>, with no Invariant Sections, no
+Front-Cover Texts, and no Back-Cover Texts.</small>
+<p>
+
+<p class="text-center">
+<a class="btn btn-info btn-large" href="Introduction.html#Introduction">
+Introduction
+</a>
+<a class="btn btn-primary btn-large"
+   href="https://github.com/flycheck/flycheck"
+   target="_blank">
+Github
+</a>
+</p>
 @end html
-
-@center Flycheck is a modern on-the-fly syntax checker for GNU Emacs 24
-@center (aka ``Flymake done right'')
-
-@center Proceed to the @ref{Introduction} for more information
 
 @center @image{screenshot,,,Flycheck in action}
 
 @html
 </div>
 @end html
-
-@c Local Variables:
-@c mode: texinfo
-@c TeX-master: "flycheck"
-@c End:
 
 @end ifhtml
 
@@ -232,12 +256,16 @@ The following extensions provide additional cool features for Flycheck:
 
 @itemize @bullet
 @item
-@uref{https://github.com/syl20bnr/flycheck-color-mode-line,
+@uref{https://github.com/flycheck/flycheck-cask} makes Flycheck use Cask
+packages in @uref{https://github.com/cask/cask, Cask} projects.
+
+@item
+@uref{https://github.com/flycheck/flycheck-color-mode-line,
 flycheck-color-mode-line.el} colors the mode line according to the
 Flycheck status.
 
 @item
-@uref{https://github.com/tom-tan/flycheck-d-unittest,
+@uref{https://github.com/flycheck/flycheck-d-unittest,
 flycheck-d-unittests} adds a Flycheck checker to run unit tests for D
 programs on the fly.
 
@@ -263,7 +291,7 @@ MELPA repository, add the following code to @file{init.el}:
 (package-initialize)
 @end lisp
 
-If you use @uref{https://github.com/rejeep/cask.el, Cask}, add the
+If you use @uref{https://github.com/cask/cask, Cask}, add the
 following to your @file{Cask} file:
 
 @lisp
@@ -300,6 +328,10 @@ add the following to your @file{init.el} file:
 @lisp
 (add-hook 'after-init-hook #'global-flycheck-mode)
 @end lisp
+
+Flycheck will not check syntax in buffers for remote or encrypted
+files.  The former is potentially slow, and the latter might leak
+confidential data to temporary directories.
 
 @node Usage, Extending, Introduction, Top
 @comment  node-name,  next,  previous,  up
@@ -578,12 +610,30 @@ Show the documentation of a syntax checker.
 @comment  node-name,  next,  previous,  up
 @section Syntax checker configuration
 
+@subsection Syntax checker options
+
 Some syntax checkers can be configured via options.  The following
 options are provided by Flycheck (use @kbd{C-h v} or @kbd{M-x
 describe-variable} on the variable name for detailed help):
 
+@defopt flycheck-clang-definitions
+Additional preprocessor definitions for @code{c/c++-clang}.
+@end defopt
+
 @defopt flycheck-clang-include-path
 Include search path for @code{c/c++-clang}.
+@end defopt
+
+@defopt flycheck-clang-includes
+Additional include files for @code{c/c++-clang}.
+@end defopt
+
+@defopt flycheck-clang-language-standard
+The language standard for @code{c/c++-clang}.
+@end defopt
+
+@defopt flycheck-clang-no-rtti
+Whether to disable RTTI in @code{c/c++-clang}.
 @end defopt
 
 @defopt flycheck-clang-warnings
@@ -633,6 +683,8 @@ syntax checker allows without reporting an error.
 The coding standard the syntax checker @code{php-phpcs} shall use.
 @end defopt
 
+@subsection Syntax checker configuration files
+
 Some syntax checkers also read configuration files denoted by associated
 @dfn{configuration file variables}.  The following configuration files
 are provided by Flycheck:
@@ -653,6 +705,10 @@ The configuration file for the @code{python-flake8} syntax checker.
 The configuration file for the @code{javascript-jshint} syntax checker.
 @end defopt
 
+@defopt flycheck-pylintrc
+The configuration file for the @code{python-pylint} syntax checker.
+@end defopt
+
 @defopt flycheck-rubocoprc
 The configuration file for the @code{ruby-rubocop} syntax checker.
 @end defopt
@@ -661,21 +717,8 @@ The configuration file for the @code{ruby-rubocop} syntax checker.
 The configuration file for the @code{html-tidy} syntax checker.
 @end defopt
 
-Customize these variables using @kbd{M-x customize-group RET
-flycheck-config-files}.  Use @code{flycheck-describe-checker} to find
-out whether a syntax checker has a configuration file.
-
-You may also use these variables as file-local variables.  For instance,
-the following checks the Javascript file always with @file{.jshintrc}
-from the parent directory:
-
-@example
-// Local variables:
-// flycheck-jshintrc: "../.jshintrc"
-// End:
-@end example
-
-These configuration files are located using the functions in
+The value of these variables is either a string or nil.  In the former
+case, locate the configuration file using the functions in
 @code{flycheck-locate-config-file-functions}:
 
 @defopt flycheck-locate-config-file-functions
@@ -712,6 +755,26 @@ directory.
 @end enumerate
 
 If any of these steps succeeds, the subsequent steps are not executed.
+
+If the configuration file is found, pass it to the syntax checker upon
+invocation.
+
+If the configuration file is not found, or if the value of the variable
+is nil, invoke the syntax checker without a configuration file.
+
+Customize these variables using @kbd{M-x customize-group RET
+flycheck-config-files}.  Use @code{flycheck-describe-checker} to find
+out whether a syntax checker has a configuration file.
+
+You may also use these variables as file-local variables.  For instance,
+the following checks the Javascript file always with @file{.jshintrc}
+from the parent directory:
+
+@example
+// Local variables:
+// flycheck-jshintrc: "../.jshintrc"
+// End:
+@end example
 
 @node Reporting, Navigation, Configuration, Usage
 @comment  node-name,  next,  previous,  up
@@ -982,13 +1045,14 @@ Flycheck to make it available to other users, too.  @xref{Contributing
 syntax checkers}, for more information.
 
 @menu
-* Definition::          How to define syntax checkers
-* Error parsers::       Built-in error parsers
-* Option filters::      Built-in option filters
-* Examples::            Examples on how to define syntax checkers
+* Definition::                  How to define syntax checkers
+* Error levels::                Built-in error levels and how to define new
+* Error parsers::               Built-in error parsers
+* Option filters::              Built-in option filters
+* Examples::                    Examples on how to define syntax checkers
 @end menu
 
-@node Definition, Error parsers, Extending, Extending
+@node Definition, Error levels, Extending, Extending
 @comment  node-name,  next,  previous,  up
 @section Definition of syntax checkers
 
@@ -1128,6 +1192,11 @@ string.  If omitted, it defaults to @code{list}, so by default,
 list before substitution.  Items for which the filter returns nil are
 dropped.  @xref{Option filters}, for a list of built-in option filters.
 
+@item (option-flag @var{option} @var{variable})
+This cell is substituted with @var{option}, if the value of
+@var{variable} is non-nil.  Otherwise it is simply dropped from the
+argument list.
+
 @item (eval @var{form})
 This cell is substituted with a result of evaluating @var{form}.
 @var{form} must either return a string or a list of strings, or
@@ -1146,8 +1215,13 @@ This property is @b{mandatory}.
 An unquoted list of one or more error patterns to parse the output of
 the syntax checker @code{:command}.
 
-@var{level} is either @code{warning} or @code{error} and denotes the
-severity of errors matched by the pattern.
+@var{level} is a Flycheck error level, and denotes the severity of
+errors matched by the pattern.  This mainly affects the visual
+representation of matched errors in buffers.
+
+Flycheck provides the built-in error levels @code{error} and
+@code{warning}.  You can define your own error levels with
+@code{flycheck-define-error-level}.
 
 The @var{level} is followed by one or more @code{rx} @var{sexp}
 elements.  See the docstring of the function @code{rx} for more
@@ -1294,7 +1368,52 @@ Use this macro together with the @code{option} cell in the command of a
 syntax checker.
 @end defmac
 
-@node Error parsers, Option filters, Definition, Extending
+@node Error levels, Error parsers, Definition, Extending
+@comment  node-name,  next,  previous,  up
+@section Error levels
+
+Flycheck provides two built-in error levels:
+
+@table @code
+@item error
+Severe errors which cannot be ignored
+@item warning
+Potential errors which can be ignored
+@end table
+
+You can define your own error levels with
+@code{flycheck-define-error-level}:
+
+@deffn flycheck-define-error-level @var{level} &rest @var{properties}
+Define a new error @var{level} with @var{properties}.
+
+The following @var{properties} constitute an error level:
+
+@table @code
+@item :overlay-category @var{category}
+The overlay @var{category} for @var{level}, as symbol.
+
+An overlay category is a symbol whose properties provide the default
+values for overlays of this category.  @xref{Overlay properties, ,
+,elisp}, for more information about overlay properties and categories.
+
+A category for an error level overlay should at least define the
+@code{face} property, for error highlighting.  Other useful properties
+for error level categories are @code{priority} to influence the stacking
+of multiple error level overlays, and @code{help-echo} to define a
+default error messages for errors without messages.
+@item :fringe-face @var{face}
+A face to use for fringe indicators for @var{level}, as symbol.
+@item :fringe-bitmap @var{bitmap}
+A fringe bitmap to use for fringe indicators for @var{level}, as symbol.
+
+@xref{Fringe Bitmaps, , ,elisp}, for a list of built-in fringe bitmaps,
+and instructions on how to define new bitmaps.
+@end table
+
+@end deffn
+
+@node Error parsers, Option filters, Error levels, Extending
 @comment  node-name,  next,  previous,  up
 @section Error parsers
 
@@ -1429,7 +1548,7 @@ Next we give the list of @code{:error-patterns} to parse errors.  These
 patterns extract the error location and the error message from the
 output of @command{epylint}.  An error pattern is a list containing a
 regular expression with match groups to extract the error information,
-and an error level (either @code{warning} or @code{error}).
+and an error level.
 
 Eventually we enable the syntax checker in @code{python-mode}.
 
@@ -1517,7 +1636,7 @@ the @option{--config} option.
 
 To use a configuration file with jshint, we first declare the variable
 @code{flycheck-jshintrc} that provides the name of the file, as
-explained in @ref{Configuration}.
+oexplained in @ref{Configuration}.
 
 In the @code{:command} we use a @code{config-file} element to pass the
 configuration file to the syntax checker.  If the configuration file is
@@ -1646,8 +1765,8 @@ whole line.
 The human-readable error message as string.
 
 @item level
-The severity of the error message, as either @code{error} or
-@code{warning}.
+The error level of the message, as symbol denoting an error level
+defined with @code{flycheck-define-error-level}.
 @end table
 
 There are two constructors you may use to create errors:
@@ -1776,7 +1895,7 @@ contribution.
 * Unit tests::                  How to write unit tests for your code
 @end menu
 
-@node Reporting issues, Contributing syntax checkers, ,Contribution
+@node Reporting issues, Contributing syntax checkers, Contribution, Contribution
 @comment  node-name,  next,  previous,  up
 @section Reporting issues
 
@@ -1870,7 +1989,7 @@ Merge poorly written or incomplete code.
 @noindent
 You will be asked to improve your pull request in these cases.
 
-@node Unit tests, , Contributing code, Contribution
+@node Unit tests,  , Contributing code, Contribution
 @comment  node-name,  next,  previous,  up
 @section Writing unit tests
 
@@ -1906,9 +2025,9 @@ You may also run the tests locally during development.  To do so:
 
 @itemize @bullet
 @item
-Install @uref{https://github.com/rejeep/carton, Carton}.
+Install @uref{https://github.com/cask/cask, Cask}.
 @item
-Setup your development environment with @command{carton install}.
+Setup your development environment with @command{cask install}.
 @item
 Run the tests with @command{tests/run.sh}.  Use @command{tests/run.sh
 flake8} to run only tests whose names contain the string @code{flake8}.
@@ -1945,7 +2064,7 @@ This appendix provides a comprehensive changelog of all releases:
 @gh{flycheck/flycheck/issues/\number\, \text\}
 @end macro
 
-@node 0.1, 0.2, , Changes
+@node 0.1, 0.2, Changes, Changes
 @comment  node-name,  next,  previous,  up
 @unnumberedsec 0.1 (Oct 11, 2012)
 
@@ -2769,7 +2888,7 @@ Bug fixes:
 
 @end itemize
 
-@node master, , 0.14.1, Changes
+@node master,  , 0.14.1, Changes
 @comment  node-name,  next,  previous,  up
 @unnumberedsec master (unreleased)
 
@@ -2788,15 +2907,56 @@ load path
 @end itemize
 
 @item
-New features
+New features:
 
-@itemize
+@itemize @bullet
 @item
 Support IDO or @uref{https://github.com/d11wtq/grizzl, Grizzl} as
 completion systems for @code{flycheck-select-checker} at @kbd{C-c ! s}
 @item
 @ghissue{202, Disable standard error navigation with
 @code{flycheck-standard-error-navigation}}
+@item
+@ghissue{207, Add @code{flycheck-clang-language-standard} to choose the
+language standard for C/C++ syntax checking}
+@item
+@ghissue{207, Add @code{flycheck-clang-definitions} to set additional
+definitions for C/C++ syntax checking}
+@item
+@ghissue{207, Add @code{flycheck-clang-no-rtti} to disable RTTI for
+C/C++ syntax checking}
+@item
+Add new option cell @code{option-flag} for boolean flags in syntax
+checker commands
+@item
+@ghissue{207, Add @code{flycheck-clang-includes} to include additional
+files for C/C++ syntax checking}
+@item
+Add configuration file variable @code{flycheck-pylintrc} for Pylint
+@item
+@ghissue{212, Define new error levels with
+@code{flycheck-define-error-level}}
+@end itemize
+
+@item
+Improvements:
+
+@itemize @bullet
+@item
+@ghissue{204, Do not ignore convention warnings by @command{pylint}}
+@item
+@code{emacs-lisp-checkdoc} does not longer check @file{.dir-locals.el}
+files
+@item
+@ghissue{222, Do not automatically check syntax in encrypted files}
+@end itemize
+
+@item
+Bug fixes:
+
+@itemize @bullet
+@item
+@ghissue{225, Find local includes in the Clang syntax checker}
 @end itemize
 
 @end itemize
@@ -2875,8 +3035,8 @@ worthwhile discussion to shape this project.
 
 @item
 @gh{syl20bnr, Sylvain Benner} added syntax checkers for Elixir and
-Erlang, and wrote the cool @gh{syl20bnr/flycheck-color-mode-line,
-flycheck-color-mode-line.el} extension.
+Erlang, and wrote the cool @gh{flycheck/flycheck-color-mode-line,
+flycheck-color-mode-line} extension.
 
 @item
 @gh{thisirs, Sylvain Rousseau} added a syntax checker for POSIX shell
@@ -2885,7 +3045,8 @@ script syntax checker.
 
 @item
 @gh{tom-tan, tom tan} added a syntax checker for the D programming
-language using @command{dmd}.
+language using @command{dmd}, and wrote the cool
+@gh{flycheck/flycheck-d-unittest, flycheck-d-unittest} extension.
 
 @item
 @gh{yannick1974, Yannick Roehlly} added support for PEP8 naming errors
@@ -2976,4 +3137,5 @@ the syntax checker under point.
 @c mode: texinfo
 @c TeX-master: t
 @c TeX-command-default: "Makeinfo"
+@c coding: utf-8
 @c End:
