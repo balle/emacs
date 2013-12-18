@@ -4,6 +4,10 @@
 ; alarm clock
 (require 'alarm)
 
+(add-to-list 'load-path "~/.emacs.d/extensions/outline-magic")
+(require 'outline-magic)
+(outline-minor-mode)
+
 ; git settings
 (add-to-list 'load-path "~/.emacs.d/extensions/magit")
 (require 'magit)

@@ -82,7 +82,7 @@
 (global-set-key [f2] 'sunrise)
 ;(global-set-key [f3] 'org-agenda)
 (global-set-key [f3] 'my-open-calendar)
-(global-set-key [f4] 'balle-grep-todos-in-dir)
+(global-set-key [f4] 'outline-cycle)
 (global-set-key [f5] 'flyspell-auto-correct-word)
 (global-set-key [f6] 'flyspell-goto-next-error)
 (global-set-key [f7] 'balle-flyspell-add-word)
