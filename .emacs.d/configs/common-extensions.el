@@ -4,9 +4,26 @@
 ; alarm clock
 (require 'alarm)
 
+; code folding
 (add-to-list 'load-path "~/.emacs.d/extensions/outline-magic")
 (require 'outline-magic)
 (outline-minor-mode)
+
+; project management
+(add-to-list 'load-path "~/.emacs.d/extensions/s")
+(add-to-list 'load-path "~/.emacs.d/extensions/epl")
+(add-to-list 'load-path "~/.emacs.d/extensions/dash")
+(add-to-list 'load-path "~/.emacs.d/extensions/pkg-info")
+;(add-to-list 'load-path "~/.emacs.d/extensions/recentf")
+(add-to-list 'load-path "~/.emacs.d/extensions/projectile")
+;(require 'recentf-ext)
+(require 'recentf)
+(recentf-mode 1)
+;(setq recentf-max-menu-items 25)
+(require 'projectile)
+(projectile-global-mode)
+(setq projectile-indexing-method 'native)
+(setq projectile-enable-caching t)
 
 ; git settings
 (add-to-list 'load-path "~/.emacs.d/extensions/magit")

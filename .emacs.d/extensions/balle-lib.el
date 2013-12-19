@@ -10,6 +10,12 @@
   (enlarge-window 7)
 )
 
+(defun balle-projectile-open-all-recent ()
+  "Open a project with all recent files"
+  (interactive)
+  (projectile-switch-project)
+  (mapc (lambda (pfile) (find-file (concatenate 'string (projectile-project-root) pfile))) (projectile-recentf-files)))
+
 ; comment out current line
 (defun balle-comment-line ()
    (interactive)
@@ -126,6 +132,6 @@
 ;)
 
 (global-set-key (kbd "M-j")
-                (lambda ()  
+                (lambda ()
                   (interactive)
                   (join-line -1)))

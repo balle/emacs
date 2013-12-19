@@ -120,12 +120,24 @@ in a command like search-forward you can do
 alt + p / alt + n       -> get previous or next input you entered
 alt + r / alt + s       -> search history back- or forward
 * Code folding							      :emacs:
+ctrl+c tab -> hide / show block
 ctrl+c ctrl+o ctrl+q -> hide all but top level
 ctrl+c ctrl+o a -> show all
 ctrl+c ctrl+o ctrl+s -> show subtree at cursor
 ctrl+c ctrl+o ctrl+d -> hide subtree at cursor
 ctrl+c ctrl+o ctrl+f -> move forward at same level
 ctrl+c ctrl+o ctrl+b -> move backward at same level
+
+* Projectile                                                          :emacs:
+touch .projectile to make a dir and subdirs to a project
+ctrl+c p s - switch to project
+ctrl+c p f - open a new project file
+ctrl+c p g - grep through project
+ctrl+c p o - occur through project
+ctrl+c p b - show all project buffers
+ctrl+c p k - kill all project buffers
+ctrl+c p r - search and replace through project
+ctrl+c p D - open dired in project
 
 * Python 							      :emacs:
 ctrl + c d          -> python doc for module / method
@@ -519,9 +531,8 @@ T l - Lower score of thread
 / v - Filter messages by score
 I - increase score
 L - lower score
-V e - edit current score
-V t - display all score rules 
 V f - edit score file
+V t - display all score rules
 G p - To edit group properties. Insert ((score-file . "emacs.SCORE")) to define a score file for whole group
 G V - create virtual group
 G v - add topic or group to virtual group
@@ -564,4 +575,3 @@ ctrl + h n        -> show emacs changelog
 ctrl + c ctrl + h -> show keyboard shortcuts of current mode
 ctrl + h F - search in emacs faq
 ctrl + h i m      -> open documentation directory
-
