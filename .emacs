@@ -22,6 +22,7 @@
 (load "html-config")
 (load "django-config")
 (load "database-config")
+(load "prolog-config")
 ;(autoload 'sql-interactive-mode "database-config" "SQL mode" t)
 (autoload 'json-mode "javascript-config" "Javascript mode" t)
 (autoload 'js-mode "javascript-config" "Javascript mode" t)
