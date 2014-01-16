@@ -5,18 +5,20 @@
 ; disable tool- and scrollbar
 (if (boundp 'toggle-scroll-bar)
   (toggle-scroll-bar -1))
-(tool-bar-mode -1)
 
 ; hide menubar
-(menu-bar-mode 0)
+(if (boundp 'menu-bar-mode)
+  (menu-bar-mode 0))
 
 ; ido mode
 (setq ido-enable-flex-matching t)
 (setq ido-everywhere t)
 (ido-mode 1)
 
-; skeleton pairs
-(setq skeleton-pair nil)
+; automatically close pairs
+(if (boundp 'electric-pair-mode)
+  (electric-pair-mode 1)
+  (setq skeleton-pair t))
 
 ; save desktop sessions
 (desktop-save-mode 1)
@@ -38,6 +40,10 @@
 (setq desktop-path '("~/"))
 (setq desktop-dirname "~/")
 (setq desktop-base-file-name ".emacs-desktop")
+
+(if (boundp 'desktop-auto-save-timeout)
+  (setq desktop-auto-save-timeout (* 60 15))
+
 
 ; enable wildcard open files
 (setq find-file-wildcards t)
