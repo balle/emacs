@@ -28,7 +28,7 @@
 (autoload 'js-mode "javascript-config" "Javascript mode" t)
 (add-to-list 'auto-mode-alist '("\\.cl$" . lisp-mode))
 ;(autoload 'lisp-mode "lisp-config" "lisp mode" t)
-(load "lisp-mode")
+(load "lisp-config")
 (autoload 'latex-mode "latex-config" "Latex mode" t)
 (load "spell-checking-config")
 (add-to-list 'auto-mode-alist '("\\.pp$" . puppet-mode))
@@ -47,6 +47,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(auth-source-save-behavior nil)
+ '(org-agenda-files nil)
  '(send-mail-function (quote smtpmail-send-it)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
