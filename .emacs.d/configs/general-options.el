@@ -42,7 +42,7 @@
 (setq desktop-base-file-name ".emacs-desktop")
 
 (if (boundp 'desktop-auto-save-timeout)
-  (setq desktop-auto-save-timeout (* 60 15))
+  (setq desktop-auto-save-timeout (* 60 15)))
 
 
 ; enable wildcard open files
