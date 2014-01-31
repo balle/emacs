@@ -40,6 +40,9 @@
                     (TeX-fold-paragraph)))))
                t t)))
 
+; automatically fill and indent
+(add-hook 'LaTeX-mode-hook 'LaTeX-fill-environment)
+
 ; auto-completion
 (require 'ac-math)
 (add-to-list 'ac-modes 'LaTeX-mode)

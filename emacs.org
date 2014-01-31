@@ -168,18 +168,26 @@ ctrl + c ctrl + p t  -> run django test
 
 * LaTeX 							      :emacs:
 ctrl + c ctrl + c          -> compile / view
+ctrl + c ctrl + p ctrl + p -> preview thing at cursor
+ctrl + c ctrl + p ctrl + b -> preview current buffer
 ctrl + c ctrl + s          -> insert section with label
-ctrl + c ctrl + e          -> insert begin / end block
+ctrl + c ctrl + e          -> insert new environment
+ctrl + u ctrl + c ctrl + e -> change current environment
 ctrl + c u                 -> jump to begin block
 ctrl + c d                 -> jump to end block
-ctrl + c i                 -> \item
+ctrl + c *                 -> mark current section
+ctrl + c .                 -> mark current environment
+ctrl + c i                 -> insert \item
+ctrl + c <                 -> insert \index
 ctrl + c ctrl + f ctrl + b -> font bold
 ctrl + c ctrl + f ctrl + i -> font italics
 ctrl + c ctrl + l          -> show compiler output
 ctrl + c ctrl + r          -> compile region
 ctrl + c `                 -> goto error
+ctrl + c (                 -> insert a label
 ctrl + c )                 -> list all labels and make ref entry
 ctrl + c =                 -> show toc to navigation
+ctrl + c return            -> insert macro
 esc + x
    reftex-change-label     -> globally rename a label
    reftex-goto-label       -> goto label definition
