@@ -23,6 +23,23 @@
 (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
 (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
 
+; fold some latex code for better reading
+; cool stuff from http://www.flannaghan.com/2013/01/11/tex-fold-mode
+(add-hook 'LaTeX-mode-hook 
+      (lambda () 
+        (TeX-fold-mode 1)
+        (add-hook 'find-file-hook 'TeX-fold-buffer t t)
+        (add-hook 'after-change-functions 
+              (lambda (start end oldlen) 
+                (when (= (- end start) 1)
+                  (let ((char-point 
+                                 (buffer-substring-no-properties 
+                                  start end)))
+                   (when (or (string= char-point "}")
+                         (string= char-point "$"))
+                    (TeX-fold-paragraph)))))
+               t t)))
+
 ; auto-completion
 (require 'ac-math)
 (add-to-list 'ac-modes 'LaTeX-mode)
@@ -54,4 +71,3 @@
     (define-key LaTeX-mode-map "\C-cd" 'LaTeX-find-matching-end)
     (define-key LaTeX-mode-map "\C-ci" 'LaTeX-insert-item)
 ))
-
