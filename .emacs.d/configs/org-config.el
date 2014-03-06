@@ -5,8 +5,8 @@
 (require 'org-install)
 (require 'org-table)
 
-;(setq org-agenda-files (list "~/organize/shared/TODO.org" "~/organize/projekte.org" "~/organize/backlog.org"  "~/organize/emacs.org" "~/organize/shared/read.org"))
-(setq org-agenda-files '("~/organize/" "~/organize/shared/"))
+;(setq org-agenda-files (list "~/organize/TODO.org" "~/organize/projekte.org" "~/organize/backlog.org"  "~/organize/emacs.org" "~/organize/read.org"))
+(setq org-agenda-files '("~/organize/"))
 (setq org-agenda-include-diary t)
 (setq org-agenda-diary-file "~/organize/termine")
 

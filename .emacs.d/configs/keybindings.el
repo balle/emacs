@@ -31,6 +31,7 @@
 (global-set-key "\C-jS" 'balle-goto-prev-whitespace)
 (global-set-key "\C-js" 'balle-goto-next-whitespace)
 (global-set-key "\C-jw" 'ace-jump-word-mode)
+(define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
 (global-set-key "\C-cma" 'mc/mark-all-like-this)
 (global-set-key "\C-cmb" 'mark-whole-buffer)
 (global-set-key "\C-cmc" 'mc/edit-lines)

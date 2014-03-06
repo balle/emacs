@@ -48,13 +48,12 @@
 (add-to-list 'ac-modes 'LaTeX-mode)
 (add-to-list 'ac-modes 'latex-mode)
 
-(defun ac-latex-mode-setup ()         ; add ac-sources to default ac-sources
-  (setq ac-sources
-     ;(append '(ac-source-semantic ac-source-math-latex ac-source-latex-commands  ac-source-math-unicode ac-source-yasnippet)
-     (append '(ac-source-latex-commands  ac-source-yasnippet)
-               ac-sources))
-)
-
+(defun ac-LaTeX-mode-setup () ; add ac-sources to default ac-sources
+   (setq ac-sources
+         (append '(ac-source-math-unicode ac-source-math-latex ac-source-latex-commands ac-source-yasnippet)
+                 ac-sources))
+   )
+(add-hook 'LaTeX-mode-hook 'ac-LaTeX-mode-setup)
 (ac-config-default)
 
 
@@ -63,9 +62,11 @@
 (setq reftex-save-parse-info t)
 (setq reftex-use-multiple-selection-buffers t)
 
+(require 'tex-smart-umlauts)
+(add-hook 'LaTeX-mode-hook #'tex-smart-umlauts-decode)
+
 (setq latex-mode-hook
  '(lambda ()
-    (ac-latex-mode-setup)
     (reftex-mode)
     (flyspell-mode)
     (ac-flyspell-workaround)
