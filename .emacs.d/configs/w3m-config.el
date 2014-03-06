@@ -1,6 +1,7 @@
 ; browser
 (add-to-list 'load-path "~/.emacs.d/extensions/w3m")
-;(require 'w3m-load)
+(require 'w3m-autoloads)
+
 (setq browse-url-browser-function 'w3m-goto-url-new-session)
 ;(setq browse-url-browser-function 'w3m-browse-url browse-url-new-window-flag t)
 
