@@ -69,7 +69,7 @@
 
 ;; remember addresses
 (add-to-list 'load-path "~/.emacs.d/extensions/bbdb-2.35/lisp")
-(setq bbdb-file "~/.emacs.d/bbdb")
+(setq bbdb-file "~/bbdb")
 (require 'bbdb)
 (bbdb-initialize)
 (setq bbdb-use-pop-up nil)
