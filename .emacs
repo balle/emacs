@@ -33,6 +33,7 @@
 (load "spell-checking-config")
 (add-to-list 'auto-mode-alist '("\\.pp$" . puppet-mode))
 (autoload 'puppet-mode "puppet-config" "puppet mode" t)
+(load "w3m-config")
 
 ;(load "re-builder-with-pcre")
 ;(setq reb-re-syntax 'perl)
@@ -47,6 +48,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(auth-source-save-behavior nil)
+ '(bmkp-last-as-first-bookmark-file "~/.emacs.bmk")
  '(send-mail-function (quote smtpmail-send-it)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

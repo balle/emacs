@@ -544,6 +544,22 @@ V t - display all score rules
 G p - To edit group properties. Insert ((score-file . "emacs.SCORE")) to define a score file for whole group
 G V - create virtual group
 G v - add topic or group to virtual group
+* Browsing with W3M						      :emacs:
+g - goto url in same tab
+G - open link in new tab
+tab - goto next link
+shift + tab - goto previous link
+B - previous page
+d - download
+c - print current url
+E - edit current url
+a - bookmark current url
+[ / ] - goto next / previous form field
+= - Show information about current page such as url and http headers
+\ - show source code
+alt + k - show cookies
+s - show history
+v - view bookmarks
 
 * Misc                                                                :emacs:
 ctrl + g                      -> Cancel
