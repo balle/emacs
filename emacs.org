@@ -428,6 +428,7 @@ esc + x describe-coding-system -> show current encodings
 
 * Dired								      :emacs:
 ctrl + x d - open dired
+ctrl + x ctrl+ j - jump to directory of current file
 m - mark file
 u - unmark
 U - unmark all
@@ -436,11 +437,14 @@ t - mark all
 r - rename
 Q - rename with regexp
 R - move marked files
+s - sort by date / alphabet
+S - make symlink
 C - copy
 D - delete
-X - execute shell command on marked files
+X or ! - execute shell command on marked files (? file get replace with single file name, * with all)
 + - mkdir
 ^ - go dir up
+esc + x dired-find - invoke find and display results in a dired buffer
 =======
 * Sunrise commander                                                   :emacs:
 Has same shortcuts as dired
@@ -490,9 +494,12 @@ d - mark article as read
 = - close article buffer
 / o - display old articles
 / a - display articles of specified author
+/ R - display articles of specified recipient
 / s - display articles with specified subject
 / b - display articles with specified body
 / x - display articles with specified header
+/ t - display articles not older than x days
+/ l - display last 20 articles
 G G - search all marked groups or group under cursor
 C-M-h - show / hide thread
 C-M-k - kill thread
