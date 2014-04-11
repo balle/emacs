@@ -11,6 +11,14 @@
 ; allow cookies
 (setq w3m-use-cookies t)
 
+; default search engine
+(require 'w3m-search)
+
+(add-to-list 'w3m-search-engine-alist
+    '("ixquick" "https://www.ixquick.com/do/search?q=%s"))
+
+(setq w3m-search-default-engine "ixquick")
+
 ; set proxy
 ;(setq w3m-command-arguments
 ;      (nconc w3m-command-arguments

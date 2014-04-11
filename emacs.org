@@ -562,10 +562,12 @@ c - print current url
 E - edit current url
 a - bookmark current url
 [ / ] - goto next / previous form field
+ctrl+c ctrl+c - submit form
 = - Show information about current page such as url and http headers
 \ - show source code
 alt + k - show cookies
 s - show history
+S - search in search engine
 v - view bookmarks
 
 * Misc                                                                :emacs:
