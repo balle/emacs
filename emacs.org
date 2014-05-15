@@ -120,7 +120,7 @@ in a command like search-forward you can do
 alt + p / alt + n       -> get previous or next input you entered
 alt + r / alt + s       -> search history back- or forward
 * Code folding							      :emacs:
-ctrl+c tab -> hide / show block
+f2 -> hide / show block
 ctrl+c ctrl+o ctrl+q -> hide all but top level
 ctrl+c ctrl+o a -> show all
 ctrl+c ctrl+o ctrl+s -> show subtree at cursor

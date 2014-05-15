@@ -92,7 +92,6 @@ in the current *Python* session."
         (define-key python-mode-map "\C-ci" 'rope-auto-import)
         (define-key python-mode-map "\C-x\C-e" 'python-shell-send-defun)
         (define-key python-mode-map "\C-ff" 'python-fill-paragraph-function)
-	(global-set-key (kbd "C-c <tab>") 'outline-cycle)
 	(global-set-key (kbd "C-c C-<up>") 'move-text-up)
 	(global-set-key (kbd "C-c C-<down>") 'move-text-down)
         (setq ropemacs-autoimport-modules '("os.*" "shutil.*" "string.*" "sys.*" "logging" "logging.*" "urllib" "urllib2" "flask"))
