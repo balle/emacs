@@ -50,6 +50,7 @@
                                     ("b" "buy" entry (file "~/organize/TODO.org") "** %?   :buy:")
                                     ("r" "read" entry (file "~/organize/backlog.org") "** %?   :read:")
                                     ("n" "note" entry (file "~/organize/backlog.org") "** %?   :note:")
+                                    ("d" "diary" entry (file "~/organize/diary.org") "* %T %?")
 				    ("e" "emacs" entry (file "~/organize/emacs.org") "** %?   :emacs:"))))
 ;                                    ("a" "appointment" entry (file "~/organize/termine.org") "** %?   :appointment:
 ;SCHEDULED: %T" :empty-lines 1))))
