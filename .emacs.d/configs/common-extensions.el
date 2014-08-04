@@ -4,6 +4,10 @@
 ; alarm clock
 (require 'alarm)
 
+; M-x ido completion
+(require 'smex)
+(smex-initialize)
+
 ; code folding
 (add-to-list 'load-path "~/.emacs.d/extensions/outline-magic")
 (require 'outline-magic)
