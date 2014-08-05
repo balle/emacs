@@ -15,6 +15,11 @@
 ;(add-hook 'lisp-mode-hook (lambda () (add-hook 'before-save-hook 'elint-current-buffer nil 'make-it-local)))
 (add-hook 'interferior-lisp-mode-hook (lambda () (interferior-slime-mode t)))
 
+(add-hook 'slime-mode-hook 'set-up-slime-ac)
+(add-hook 'slime-repl-mode-hook 'set-up-slime-ac)
+(eval-after-load "auto-complete"
+   '(add-to-list 'ac-modes 'slime-repl-mode))
+
 (define-key slime-mode-map "\C-cx" 'slime-selector)
 (define-key slime-mode-map "\C-ci" 'slime-inspect)
 
