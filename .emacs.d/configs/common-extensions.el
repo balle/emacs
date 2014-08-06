@@ -92,11 +92,18 @@
 
 ; activate ido and ibuffer mode
 (add-to-list 'load-path "~/.emacs.d/extensions/ibuffer-git")
+(add-to-list 'load-path "~/.emacs.d/extensions/ibuffer-tramp")
 (require 'ibuffer-git)
+(require 'ibuffer-tramp)
 (ido-mode t)
+(add-hook 'ibuffer-hook
+    (lambda ()
+      (ibuffer-tramp-set-filter-groups-by-tramp-connection)
+      (ibuffer-do-sort-by-alphabetic)))
+
 (setq ibuffer-formats
       '((mark modified read-only " "
-	 (name 18 18 :left :elide)
+	 (name 42 42 :left :elide)
 	 " "
 	 (mode 16 16 :left :elide)
 	 " "
