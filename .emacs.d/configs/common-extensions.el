@@ -5,6 +5,7 @@
 (require 'alarm)
 
 ; M-x ido completion
+(add-to-list 'load-path "~/.emacs.d/extensions/smex")
 (require 'smex)
 (smex-initialize)
 
