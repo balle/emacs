@@ -49,6 +49,14 @@ ctrl+c <up>    -> move row or region upwards
 ctrl+c <down>  -> move row or region downwards
 ctrl+c <left>  -> move word left (in python mode move row or region left)
 ctrl+c <right> -> move word right (in python-mode move row or region right)
+alt+t c        -> transpose char forward
+alt+t C        -> transpose char backward
+alt+t w        -> transpose word forward
+alt+t W        -> transpose word backward
+alt+t l        -> transpose line forward
+alt+t L        -> transpose line backward
+alt+t p        -> transpose paragraph forward
+alt+t P        -> transpose paragraph backward
 
 * Search 							      :emacs:
 alt  + g g        -> goto line
@@ -584,7 +592,7 @@ alt ;                         -> block comment
 alt  + x revert-buffer        -> reload the file
 alt  + x highlight-changes-mode
 ctrl + x esc esc              -> show executed commands as lisp code
-alt  + x text-scale-increase  -> increase font size
+ctrl + x ctrl + +/-           -> increase / decrease font size
 alt  + x describe-face
 alt  + x eval-current-buffer
 alt  + x ediff-directories    -> show difference of two directories

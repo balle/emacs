@@ -109,7 +109,26 @@
 
 (defun balle-transpose-word-backwards (arg)
   (interactive "*p")
+  (backward-word)
   (transpose-subr 'backward-word arg)
+)
+
+(defun balle-transpose-char-backwards (arg)
+  (interactive "*p")
+  (backward-char)
+  (transpose-subr 'backward-char arg)
+)
+
+(defun balle-transpose-line-backwards (arg)
+  (interactive "*p")
+  (backward-line)
+  (transpose-subr 'backward-line arg)
+)
+
+(defun balle-transpose-paragraph-backwards (arg)
+  (interactive "*p")
+  (backward-paragraph)
+  (transpose-subr 'backward-paragraph arg)
 )
 
 (defun json-validate ()
