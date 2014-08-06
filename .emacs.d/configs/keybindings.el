@@ -33,6 +33,7 @@
 (global-set-key (kbd "C-c <right>") 'transpose-words)
 (global-set-key (kbd "M-s") 'balle-search-current-word-in-buffer)
 (global-set-key "\C-xU" 'undo)
+(global-set-key "\C-x\C-b" 'ibuffer)
 (define-key (current-global-map) (kbd "C-x r w") 'window-configuration-to-register)
 (global-set-key "\C-x\C-q" 'goto-last-change)
 (global-unset-key "\C-j")

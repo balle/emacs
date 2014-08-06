@@ -90,8 +90,19 @@
 ; show fill column
 (require 'fill-column-indicator)
 
-; activate ido mode
+; activate ido and ibuffer mode
+(add-to-list 'load-path "~/.emacs.d/extensions/ibuffer-git")
+(require 'ibuffer-git)
 (ido-mode t)
+(setq ibuffer-formats
+      '((mark modified read-only " "
+	 (name 18 18 :left :elide)
+	 " "
+	 (mode 16 16 :left :elide)
+	 " "
+	 (git-status 8 8 :left)
+	 " "
+	 filename-and-process)))
 
 ; goto last change
 (require 'goto-last-change)
