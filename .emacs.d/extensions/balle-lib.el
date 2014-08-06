@@ -137,6 +137,77 @@
 )
 
 
+(defun balle-rrd-to-org (rrdfile)
+  """
+  Dump current average values of a RRD database and convert them into an Org-mode table
+  """
+  (interactive "fFilename: ")
+
+  ;; get output of rrd file as ascii
+  (call-process-shell-command (concat "rrdtool dump " rrdfile) nil "*RRD2ORG*" t)
+  (switch-to-buffer "*RRD2ORG*")
+
+  ;; kill header
+  (beginning-of-buffer)
+  (push-mark)
+  (search-forward "<database>")
+  (kill-region (region-beginning) (region-end))
+  (beginning-of-line)
+  (kill-line)
+
+  ;; kill footer
+  (end-of-buffer)
+  (push-mark)
+  (search-backward "</database>")
+  (beginning-of-line)
+  (kill-region (region-beginning) (region-end))
+
+  ;; kill begin of comment
+  (beginning-of-buffer)
+  (push-mark)
+  (end-of-buffer)
+  (search-backward "<!-- ")
+  (search-forward "<!-- ")
+  (string-rectangle (region-beginning) (region-end) "| ")
+
+  ;; kill xml in the middle
+  (beginning-of-buffer)
+  (search-forward "CET")
+  (push-mark)
+  (end-of-buffer)
+  (search-backward "CET / ")
+  (search-forward "CET / ")
+  (string-rectangle (region-beginning) (region-end) " | ")
+
+  (beginning-of-buffer)
+  (search-forward "--> <row><v>")
+  (search-backward "--> <row><v>")
+  (push-mark)
+  (end-of-buffer)
+  (search-backward "--> <row><v>")
+  (search-forward "--> <row><v>")
+  (string-rectangle (region-beginning) (region-end) "| ")
+
+  ;; end of line
+  (beginning-of-buffer)
+  (end-of-line)
+  (search-backward "</v></row>")
+  (push-mark)
+  (end-of-buffer)
+  (search-backward "</v></row>")
+  (search-forward "</v></row>")
+  (string-rectangle (region-beginning) (region-end) " | ")
+
+  ;; convert buffer to org table
+  (org-mode)
+  (beginning-of-buffer)
+  (insert "| Timestamp | Unix time | Value |\n")
+  (org-cycle)
+  (org-table-goto-column 4)
+  (org-table-delete-column)
+  (beginning-of-buffer)
+)
+
 
 ;(defadvice ispell-show-choices (after convert-choices)
    ; (save-excursion
