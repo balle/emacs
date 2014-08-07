@@ -64,6 +64,11 @@
 (load-file "~/.emacs.d/extensions/xclip/xclip.el")
 (turn-on-xclip)
 
+; better keybindings
+(add-to-list 'load-path "~/.emacs.d/extensions/key-chord")
+(require 'key-chord)
+(key-chord-mode 1)
+
 ; ace jump mode
 (require 'ace-jump-mode)
 
