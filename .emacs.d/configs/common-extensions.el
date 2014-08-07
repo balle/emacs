@@ -68,6 +68,7 @@
 (add-to-list 'load-path "~/.emacs.d/extensions/key-chord")
 (require 'key-chord)
 (key-chord-mode 1)
+(setq key-chord-one-key-delay 0.15)
 
 ; ace jump mode
 (require 'ace-jump-mode)
