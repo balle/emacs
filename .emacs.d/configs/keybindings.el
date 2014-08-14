@@ -66,9 +66,7 @@
 (global-set-key (kbd "C-j <left>") 'backward-list)
 (global-set-key (kbd "C-j <right>") 'forward-list)
 (global-set-key (kbd "C-j <up>") 'outline-backward-same-level)
-(key-chord-define-global "++" 'outline-backward-same-level)
 (global-set-key (kbd "C-j <down>") 'outline-forward-same-level)
-(key-chord-define-global "--" 'outline-forward-same-level)
 
 (global-set-key "\C-cke" 'kmacro-end-or-call-macro)
 (global-set-key "\C-ckn" 'kmacro-cycle-ring-next)
