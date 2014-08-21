@@ -126,6 +126,24 @@
   (enlarge-window 10)
 )
 
+(defun balle-show-daily-tasks ()
+  (interactive)
+  (switch-to-buffer-other-window "TODO.org")
+  (org-match-sparse-tree t "day")
+)
+
+(defun balle-show-weekly-tasks ()
+  (interactive)
+  (switch-to-buffer-other-window "TODO.org")
+  (org-match-sparse-tree t "week")
+)
+
+(defun balle-show-monthly-tasks ()
+  (interactive)
+  (switch-to-buffer-other-window "TODO.org")
+  (org-match-sparse-tree t "month")
+)
+
 ; send notifications
 (defun balle-org-alarm (min-to-app new-time txt)
   (let ((process-connection-type nil)))
