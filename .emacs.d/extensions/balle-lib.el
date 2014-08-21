@@ -109,7 +109,26 @@
 
 (defun balle-transpose-word-backwards (arg)
   (interactive "*p")
+  (backward-word)
   (transpose-subr 'backward-word arg)
+)
+
+(defun balle-transpose-char-backwards (arg)
+  (interactive "*p")
+  (backward-char)
+  (transpose-subr 'backward-char arg)
+)
+
+(defun balle-transpose-line-backwards (arg)
+  (interactive "*p")
+  (backward-line)
+  (transpose-subr 'backward-line arg)
+)
+
+(defun balle-transpose-paragraph-backwards (arg)
+  (interactive "*p")
+  (backward-paragraph)
+  (transpose-subr 'backward-paragraph arg)
 )
 
 (defun json-validate ()
@@ -118,8 +137,92 @@
 )
 
 
+(defun balle-rrd-to-org (rrdfile &optional export)
+  """
+  Dump current average values of a RRD database and convert them into an Org-mode table
+  """
+  (interactive "fFilename: ")
+  (let ((buffer-name (concat "*RRD2ORG " rrdfile "*")))
+    ;; get output of rrd file as ascii
+    (call-process-shell-command
+     (concat "rrdtool dump " rrdfile)
+     nil
+     buffer-name
+     t)
+    (switch-to-buffer buffer-name)
 
-;(defadvice ispell-show-choices (after convert-choices)
+    ;; kill header
+    (beginning-of-buffer)
+    (push-mark)
+   (search-forward "<database>")
+   (kill-region (region-beginning) (region-end))
+   (beginning-of-line)
+   (kill-line)
+
+   ;; kill footer
+   (end-of-buffer)
+   (push-mark)
+   (search-backward "</database>")
+   (beginning-of-line)
+   (kill-region (region-beginning) (region-end))
+
+   ;; kill begin of comment
+   (beginning-of-buffer)
+   (push-mark)
+   (end-of-buffer)
+   (search-backward "<!-- ")
+   (search-forward "<!-- ")
+   (string-rectangle (region-beginning) (region-end) "| ")
+
+   ;; kill xml in the middle
+   (beginning-of-buffer)
+   (search-forward "CET")
+   (push-mark)
+   (end-of-buffer)
+   (search-backward "CET / ")
+   (search-forward "CET / ")
+   (string-rectangle (region-beginning) (region-end) " | ")
+
+   (beginning-of-buffer)
+   (search-forward "--> <row><v>")
+   (search-backward "--> <row><v>")
+   (push-mark)
+   (end-of-buffer)
+   (search-backward "--> <row><v>")
+   (search-forward "--> <row><v>")
+   (string-rectangle (region-beginning) (region-end) "| ")
+
+   ;; end of line
+   (beginning-of-buffer)
+   (end-of-line)
+   (search-backward "</v></row>")
+   (push-mark)
+   (end-of-buffer)
+   (search-backward "</v></row>")
+   (search-forward "</v></row>")
+   (kill-rectangle (region-beginning) (region-end))
+;   (string-rectangle (region-beginning) (region-end) " |")
+
+   ;; convert buffer to org table
+   (org-mode)
+   (beginning-of-buffer)
+   (insert "| Timestamp | Unix time | Value |\n")
+
+   (if export
+       (org-table-export (concat rrdfile ".csv") "orgtbl-to-csv")
+   )
+  )
+)
+
+(defun balle-rrd-to-org-dir (dir &optional export)
+  (interactive "DDirectory:")
+  (mapcar (lambda(rrdfile) 
+	    (balle-rrd-to-org rrdfile export)) 
+	  (directory-files dir t "\\.rrd$"))
+)
+
+
+;(buffer ispell-show-choices (after convert-choices)
    ; (save-excursion
 ;  (switch-to-buffer ispell-choices-buffer)
 ;  (beginning-of-buffer)

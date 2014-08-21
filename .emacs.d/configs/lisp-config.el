@@ -1,6 +1,7 @@
 (add-to-list 'load-path "~/.emacs.d/extensions/slime")
 (add-to-list 'load-path "~/.emacs.d/extensions/ac-slime")
 (require 'slime)
+(require 'ac-slime)
 
 (setq inferior-lisp-program "/usr/bin/sbcl --noinform --no-linedit")
 ;(setq inferior-lisp-program "/usr/bin/clisp")

@@ -64,6 +64,12 @@
 (load-file "~/.emacs.d/extensions/xclip/xclip.el")
 (turn-on-xclip)
 
+; better keybindings
+(add-to-list 'load-path "~/.emacs.d/extensions/key-chord")
+(require 'key-chord)
+(key-chord-mode 1)
+(setq key-chord-one-key-delay 0.15)
+
 ; ace jump mode
 (require 'ace-jump-mode)
 
@@ -90,8 +96,26 @@
 ; show fill column
 (require 'fill-column-indicator)
 
-; activate ido mode
+; activate ido and ibuffer mode
+(add-to-list 'load-path "~/.emacs.d/extensions/ibuffer-git")
+(add-to-list 'load-path "~/.emacs.d/extensions/ibuffer-tramp")
+(require 'ibuffer-git)
+(require 'ibuffer-tramp)
 (ido-mode t)
+(add-hook 'ibuffer-hook
+    (lambda ()
+      (ibuffer-tramp-set-filter-groups-by-tramp-connection)
+      (ibuffer-do-sort-by-alphabetic)))
+
+(setq ibuffer-formats
+      '((mark modified read-only " "
+	 (name 42 42 :left :elide)
+	 " "
+	 (mode 16 16 :left :elide)
+	 " "
+	 (git-status 8 8 :left)
+	 " "
+	 filename-and-process)))
 
 ; goto last change
 (require 'goto-last-change)
