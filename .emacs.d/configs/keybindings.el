@@ -87,6 +87,7 @@
 (global-set-key "\C-xtd" 'balle-show-daily-tasks)
 (global-set-key "\C-xtw" 'balle-show-weekly-tasks)
 (global-set-key "\C-xtm" 'balle-show-monthly-tasks)
+(global-set-key "\C-xty" 'balle-show-yearly-tasks)
 (global-set-key (kbd "M-[ d") 'backward-word)
 (global-set-key (kbd "M-[ c") 'forward-word)
 (global-set-key (kbd "C-c C-<up>") 'move-text-up)
