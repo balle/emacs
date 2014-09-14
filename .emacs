@@ -3,6 +3,8 @@
 (add-to-list 'load-path "~/.emacs.d/extensions")
 (load-file "~/.emacs.d/extensions/emacs-for-python/epy-init.el")
 
+(load "python-config")
+
 (load "custom-lib")
 (load "balle-lib")
 
@@ -15,7 +17,6 @@
 (autoload 'perl-mode "perl-config" "Perl mode" t)
 (add-to-list 'auto-mode-alist '("\\.py$" . python-mode))
 ;(autoload 'python-mode "python-config" "Python mode" t)
-(load "python-config")
 (add-to-list 'auto-mode-alist '("\\.html?$" . sgml-mode))
 ;(autoload 'sgml-mode "html-config" "HTML mode" t)
 ;(autoload 'sgml-mode "django-config" "Django mode" t)

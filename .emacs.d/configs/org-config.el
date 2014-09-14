@@ -48,9 +48,11 @@
 ; from http://doc.norang.ca/org-mode.html
 (setq org-capture-templates (quote (("t" "todo" entry (file "~/organize/TODO.org") "** TODO %? ")
                                     ("b" "buy" entry (file "~/organize/TODO.org") "** %?   :buy:")
-                                    ("r" "read" entry (file "~/organize/backlog.org") "** %?   :read:")
-                                    ("n" "note" entry (file "~/organize/backlog.org") "** %?   :note:")
-                                    ("d" "diary" entry (file "~/organize/diary.org.gpg") "* %T %?")
+                                    ("d" "day" entry (file "~/organize/TODO.org") "** %?   :day:")
+                                    ("w" "week" entry (file "~/organize/TODO.org") "** %?   :week:")
+                                    ("m" "month" entry (file "~/organize/TODO.org") "** %?   :month:")
+                                    ("y" "year" entry (file "~/organize/TODO.org") "** %?   :year:")
+                                    ("D" "diary" entry (file "~/organize/diary.org.gpg") "* %T %?")
 				    ("e" "emacs" entry (file "~/organize/emacs.org") "** %?   :emacs:"))))
 ;                                    ("a" "appointment" entry (file "~/organize/termine.org") "** %?   :appointment:
 ;SCHEDULED: %T" :empty-lines 1))))
@@ -142,6 +144,12 @@
   (interactive)
   (switch-to-buffer-other-window "TODO.org")
   (org-match-sparse-tree t "month")
+)
+
+(defun balle-show-yearly-tasks ()
+  (interactive)
+  (switch-to-buffer-other-window "TODO.org")
+  (org-match-sparse-tree t "year")
 )
 
 ; send notifications

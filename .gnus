@@ -23,8 +23,13 @@
   (gnus-summary-delete-article)
   (next-line))
 
+(defun my-gnus-show-last-articles ()
+  (interactive)
+  (gnus-summary-insert-old-articles 20))
+
 (let ((map gnus-summary-mode-map))
   (define-key map (kbd "x") 'my-gnus-summary-delete-article)
+  (define-key map (kbd "/l") 'my-gnus-show-last-articles)
   (define-key map (kbd "c") 'my-gnus-summary-catchup-and-exit))
 
 ; dont ask stupid questions
@@ -59,9 +64,9 @@
 (gnus-demon-init)
 
 ;; sort messages by score nd date in reverse order
-(setq gnus-thread-sort-functions '((not gnus-thread-sort-by-date) 
+(setq gnus-thread-sort-functions '((not gnus-thread-sort-by-date)
 				   gnus-thread-sort-by-total-score))
-				   
+
 
 ;; Setup GPG/PGP
 (require 'epa-file)
@@ -108,9 +113,9 @@
 (setq nnmail-expiry-wait 'immediate)
 
 ;; show all old messages in mail (INBOX) groups
-(defadvice gnus-summary-mode (after show-all-mails (&optional group))
-  (if (search "INBOX" group)
-      (gnus-summary-insert-old-articles t)))
+;(defadvice gnus-summary-mode (after show-all-mails (&optional group))
+;  (if (search "INBOX" group)
+;      (gnus-summary-insert-old-articles t)))
 
 ;; vcard support
 (require 'vcard)
@@ -177,7 +182,7 @@
 
 ; scoring
 (setq gnus-use-scoring t)
-(setq bbdb/gnus-score-default 2000) 
+(setq bbdb/gnus-score-default 2000)
 (setq max-specpdl-size 100000)
 
 ; load custom settings
