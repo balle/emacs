@@ -74,6 +74,7 @@
 (global-set-key (kbd "C-c !") 'shell-command-on-buffer-file)
 (global-unset-key (kbd "M-!"))
 (global-set-key (kbd "M-!") 'shell-command-on-buffer)
+(define-key shell-mode-map (kbd "C-x C-o") 'balle-comint-kill-output)
 (global-set-key "\C-xte" 'balle-show-emacs-list)
 (global-set-key "\C-xth" 'balle-show-hack-list)
 (global-set-key "\C-xti" 'org-redmine-get-issue)
