@@ -1,5 +1,5 @@
 ; latex
-(add-to-list 'load-path "~/.emacs.d/extensions/auctex-11.87")
+(add-to-list 'load-path "~/.emacs.d/extensions/auctex")
 (add-to-list 'load-path "~/.emacs.d/extensions/ac-math")
 
 (load "~/.emacs.d/extensions/auctex-11.87/tex-site.el" nil t t)
@@ -9,7 +9,7 @@
 (setq TeX-auto-save t)
 (setq TeX-parse-self t)
 (setq-default TeX-electric-escapy t)
-(setq-default TeX-master "../main")
+;(setq-default TeX-master "../main")
 (setq reftex-plug-into-AUCTeX t)
 (setq TeX-PDF-mode t)
 (setq TeX-show-compilation nil)
