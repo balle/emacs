@@ -1,15 +1,15 @@
 ; latex
-(add-to-list 'load-path "~/.emacs.d/extensions/auctex-11.87")
+(add-to-list 'load-path "~/.emacs.d/extensions/auctex")
 (add-to-list 'load-path "~/.emacs.d/extensions/ac-math")
 
-(load "~/.emacs.d/extensions/auctex-11.87/tex-site.el" nil t t)
+(load "~/.emacs.d/extensions/auctex/tex-site.el" nil t t)
 (require 'reftex)
 (require 'preview-latex)
 
 (setq TeX-auto-save t)
 (setq TeX-parse-self t)
 (setq-default TeX-electric-escapy t)
-(setq-default TeX-master "../main")
+;(setq-default TeX-master "../main")
 (setq reftex-plug-into-AUCTeX t)
 (setq TeX-PDF-mode t)
 (setq TeX-show-compilation nil)
@@ -41,7 +41,7 @@
 ;;                t t)))
 
 ; automatically fill and indent
-(add-hook 'LaTeX-mode-hook 'LaTeX-fill-environment)
+;(add-hook 'LaTeX-mode-hook 'LaTeX-fill-environment)
 
 ; auto-completion
 (require 'ac-math)
@@ -56,7 +56,6 @@
 (add-hook 'LaTeX-mode-hook 'ac-LaTeX-mode-setup)
 (ac-config-default)
 
-
 ;; Make RefTeX faster
 (setq reftex-enable-partial-scans t)
 (setq reftex-save-parse-info t)
@@ -70,6 +69,7 @@
     (reftex-mode)
     (flyspell-mode)
     (ac-flyspell-workaround)
+    (auto-complete-mode)
     (setq ac-delay 0.2)
     (define-key LaTeX-mode-map "\C-cu" 'LaTeX-find-matching-begin)
     (define-key LaTeX-mode-map "\C-cd" 'LaTeX-find-matching-end)
