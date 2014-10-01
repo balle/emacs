@@ -76,6 +76,12 @@
 ; easier window switching
 (require 'win-switch)
 
+; discover emacs functions
+(add-to-list 'load-path "~/.emacs.d/extensions/makey")
+(add-to-list 'load-path "~/.emacs.d/extensions/discover")
+(require 'discover)
+(discover-mode)
+
 ; sunrise commander as file manager
 (add-to-list 'load-path "~/.emacs.d/extensions/sunrise-commander")
 (require 'sunrise-commander)
