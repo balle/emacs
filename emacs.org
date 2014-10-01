@@ -453,6 +453,7 @@ X or ! - execute shell command on marked files (? file get replace with single f
 + - mkdir
 ^ - go dir up
 esc + x dired-find - invoke find and display results in a dired buffer
+ctrl + u s - sort directory listing 
 =======
 * Sunrise commander                                                   :emacs:
 Has same shortcuts as dired
@@ -518,7 +519,7 @@ n - next unread
 p - previous unread
 r - reply
 R - reply including copy
-f - forward article
+C-c C-f - forward article
 t - show all header
 m - compose new mail
 C-c m - Send mail to address under cursor
