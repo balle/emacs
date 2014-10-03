@@ -80,7 +80,7 @@
 (add-to-list 'load-path "~/.emacs.d/extensions/makey")
 (add-to-list 'load-path "~/.emacs.d/extensions/discover")
 (require 'discover)
-(discover-mode)
+(global-discover-mode 1)
 
 ; sunrise commander as file manager
 (add-to-list 'load-path "~/.emacs.d/extensions/sunrise-commander")
