@@ -13,6 +13,7 @@
 ;(slime-setup '(slime-repl))
 (slime-setup '(slime-fancy))
 
+(add-hook 'emacs-lisp-mode-hook (lambda () (eldoc-mode t)))
 (add-hook 'lisp-mode-hook (lambda () (slime-mode t)))
 ;(add-hook 'lisp-mode-hook (lambda () (add-hook 'before-save-hook 'elint-current-buffer nil 'make-it-local)))
 (add-hook 'interferior-lisp-mode-hook (lambda () (interferior-slime-mode t)))
