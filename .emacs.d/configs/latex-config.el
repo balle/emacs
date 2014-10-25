@@ -23,6 +23,8 @@
 (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
 (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
 
+(setq flyspell-delay 60)
+
 ; fold some latex code for better reading
 ; cool stuff from http://www.flannaghan.com/2013/01/11/tex-fold-mode
 ;; (add-hook 'LaTeX-mode-hook 
