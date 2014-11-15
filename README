@@ -17,7 +17,7 @@ ln -s emacs/.emacs.d
 ln -s emacs/.emacs-snippets
 ln -s emacs/.eshell
 
-cd emacs/.emacs.d/extensions/auctex-11.87 && ./configure && make
-cd emacs/.emacs.d/extensions/emacs-jedi && pip install -r requirements.txt
+cd emacs/.emacs.d/extensions/auctex && ./configure && make
+cd emacs/.emacs.d/extensions/emacs-jedi && sudo pip install -r requirements.txt
 
 Documentation about keyboard shortcuts can be found in emacs.org

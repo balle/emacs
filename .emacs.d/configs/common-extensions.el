@@ -31,6 +31,8 @@
 (setq projectile-enable-caching t)
 
 ; git settings
+(add-to-list 'load-path "~/.emacs.d/extensions/git-rebase-mode-20140928.1547")
+(add-to-list 'load-path "~/.emacs.d/extensions/git-commit-mode-0.13")
 (add-to-list 'load-path "~/.emacs.d/extensions/magit")
 (require 'magit)
 ; (setq magit-process-popup-time 3)
