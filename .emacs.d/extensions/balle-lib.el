@@ -216,10 +216,21 @@
 
 (defun balle-rrd-to-org-dir (dir &optional export)
   (interactive "DDirectory:")
-  (mapcar (lambda(rrdfile) 
-	    (balle-rrd-to-org rrdfile export)) 
+  (mapcar (lambda(rrdfile)
+	    (balle-rrd-to-org rrdfile export))
 	  (directory-files dir t "\\.rrd$"))
 )
+
+
+(defun balle-get-matching-buffers (regexp)
+  (interactive)
+  (let ((my-buffers ()))
+    (dolist (buffer (buffer-list))
+      (let ((name (buffer-name buffer)))
+      (when (and name (not (string-equal name ""))
+                 (string-match regexp name))
+        (push buffer my-buffers))))
+    my-buffers))
 
 
 ;(buffer ispell-show-choices (after convert-choices)
