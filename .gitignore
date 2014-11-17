@@ -19,4 +19,9 @@
 .emacs.d/*/*.elc
 .emacs.d/*/*/*.elc
 .emacs.d/*/*/*/*.elc
-
+.emacs.d/extensions/auctex/Makefile
+.emacs.d/extensions/auctex/auctex.el
+.emacs.d/extensions/auctex/auto-loads.el
+.emacs.d/extensions/auctex/config.log
+.emacs.d/extensions/auctex/config.status
+.emacs.d/extensions/auctex/tex-site.el
