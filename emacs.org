@@ -322,7 +322,8 @@ you can you numbers or chars for columns
 
 - ctrl + c ctrl + c -> execute formula
 - ctrl + c = -> edit formula
-- ctrl + c * -> recalculate all columns
+- ctrl + c * -> recalculate column
+- ctrl + u ctrl + c * -> recalculate all columns
 
 - ctrl + { -> start formula debugger
 - ctrl + } -> show current line and column
@@ -333,6 +334,14 @@ you can you numbers or chars for columns
 - sum a column =vsum(@2..@-1)
 - average of column =vmean(@2..@-1)
 - calc time durations ='(with-time t (- $3 $2))
+- Insert values of remote column in table BLA =remote(BLA,@@#$2)
+  Table must be prefixed with
+  #+BEGIN_SRC
+  * some heading
+  :PROPERTIES:
+  :ID: BLA
+  :END:
+  #+END_SRC
 
 - ctrl + c ^ - sort table
 
@@ -453,7 +462,7 @@ X or ! - execute shell command on marked files (? file get replace with single f
 + - mkdir
 ^ - go dir up
 esc + x dired-find - invoke find and display results in a dired buffer
-ctrl + u s - sort directory listing 
+ctrl + u s - sort directory listing
 =======
 * Sunrise commander                                                   :emacs:
 Has same shortcuts as dired
