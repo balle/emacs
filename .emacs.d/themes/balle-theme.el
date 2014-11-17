@@ -24,7 +24,7 @@
  '(rst-level-2-face ((t (:background "yellow" :foreground "black"))))
  '(rst-level-3-face ((t (:background "yellow" :foreground "black"))))
  	  
- '(hl-line ((t (:foreground "#ffffff" :background "#666666"))))
+ '(hl-line ((t (:foreground "white" :background "#606060" :bold t))))
  '(fci-rule-color ((t (:foreground "#ffffff"))))
  '(flycheck-error ((t (:foreground "#ffffff" :background "#cd0f06"))))
  '(flymake-errline ((t (:foreground "#ffffff" :background "#cd0f06"))))
@@ -34,6 +34,7 @@
  '(region ((t (:background "#2e4ad7" :foreground "#ffffff"))))
  '(minibuffer-prompt ((t (:foreground "#7299ff" :bold t))))
  '(show-paren-match-face ((t (:bold t :foreground "red"))))
+ '(shr-link ((t (:bold t :foreground "blue"))))
 )
 
 (provide-theme 'balle)
