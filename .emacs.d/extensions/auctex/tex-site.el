@@ -164,8 +164,9 @@ If not a regular release, the date of the last change.")
 
 
 ;;;### (autoloads (turn-on-bib-cite bib-cite-minor-mode) "bib-cite"
-;;;;;;  "bib-cite.el" (21543 57038 43835 105000))
-;;; Generated autoloads from bib-cite.el
+;;;;;;  "../../../../.emacs.d/extensions/auctex/bib-cite.el" (21547
+;;;;;;  48999 0 0))
+;;; Generated autoloads from ../../../../.emacs.d/extensions/auctex/bib-cite.el
 
 (autoload 'bib-cite-minor-mode "bib-cite" "\
 Toggle bib-cite mode.
@@ -182,9 +183,9 @@ Unconditionally turn on Bib Cite mode.
 
 ;;;***
 
-;;;### (autoloads (context-mode) "context" "context.el" (21543 57038
-;;;;;;  47835 125000))
-;;; Generated autoloads from context.el
+;;;### (autoloads (context-mode) "context" "../../../../.emacs.d/extensions/auctex/context.el"
+;;;;;;  (21547 49000 0 0))
+;;; Generated autoloads from ../../../../.emacs.d/extensions/auctex/context.el
 
 (defalias 'ConTeXt-mode 'context-mode)
 
@@ -202,9 +203,9 @@ of ConTeXt-mode-hook.
 
 ;;;***
 
-;;;### (autoloads (context-en-mode) "context-en" "context-en.el"
-;;;;;;  (21543 57038 43835 105000))
-;;; Generated autoloads from context-en.el
+;;;### (autoloads (context-en-mode) "context-en" "../../../../.emacs.d/extensions/auctex/context-en.el"
+;;;;;;  (21547 49000 0 0))
+;;; Generated autoloads from ../../../../.emacs.d/extensions/auctex/context-en.el
 
 (autoload 'context-en-mode "context-en" "\
 Major mode for editing files for ConTeXt using its english interface.
@@ -220,9 +221,9 @@ of context-mode-hook.
 
 ;;;***
 
-;;;### (autoloads (context-nl-mode) "context-nl" "context-nl.el"
-;;;;;;  (21543 57038 43835 105000))
-;;; Generated autoloads from context-nl.el
+;;;### (autoloads (context-nl-mode) "context-nl" "../../../../.emacs.d/extensions/auctex/context-nl.el"
+;;;;;;  (21547 49000 0 0))
+;;; Generated autoloads from ../../../../.emacs.d/extensions/auctex/context-nl.el
 
 (autoload 'context-nl-mode "context-nl" "\
 Major mode for editing files for ConTeXt using its dutch interface.
@@ -238,9 +239,9 @@ of context-mode-hook.
 
 ;;;***
 
-;;;### (autoloads (font-latex-setup) "font-latex" "font-latex.el"
-;;;;;;  (21543 57038 107835 423000))
-;;; Generated autoloads from font-latex.el
+;;;### (autoloads (font-latex-setup) "font-latex" "../../../../.emacs.d/extensions/auctex/font-latex.el"
+;;;;;;  (21547 49000 0 0))
+;;; Generated autoloads from ../../../../.emacs.d/extensions/auctex/font-latex.el
 
 (autoload 'font-latex-setup "font-latex" "\
 Setup this buffer for LaTeX font-lock.  Usually called from a hook.
@@ -250,8 +251,9 @@ Setup this buffer for LaTeX font-lock.  Usually called from a hook.
 ;;;***
 
 ;;;### (autoloads (docTeX-mode TeX-latex-mode BibTeX-auto-store)
-;;;;;;  "latex" "latex.el" (21543 57038 151835 641000))
-;;; Generated autoloads from latex.el
+;;;;;;  "latex" "../../../../.emacs.d/extensions/auctex/latex.el"
+;;;;;;  (21547 49001 0 0))
+;;; Generated autoloads from ../../../../.emacs.d/extensions/auctex/latex.el
 
 (autoload 'BibTeX-auto-store "latex" "\
 This function should be called from `bibtex-mode-hook'.
@@ -288,8 +290,9 @@ runs the hooks in `docTeX-mode-hook'.
 ;;;***
 
 ;;;### (autoloads (multi-prompt-key-value multi-prompt) "multi-prompt"
-;;;;;;  "multi-prompt.el" (21543 57038 151835 641000))
-;;; Generated autoloads from multi-prompt.el
+;;;;;;  "../../../../.emacs.d/extensions/auctex/multi-prompt.el"
+;;;;;;  (21547 49001 0 0))
+;;; Generated autoloads from ../../../../.emacs.d/extensions/auctex/multi-prompt.el
 
 (autoload 'multi-prompt "multi-prompt" "\
 Completing prompt for a list of strings.  
@@ -317,9 +320,9 @@ The return value is the string as entered in the minibuffer.
 
 ;;;***
 
-;;;### (autoloads (ams-tex-mode TeX-plain-tex-mode) "plain-tex" "plain-tex.el"
-;;;;;;  (21543 57038 167835 720000))
-;;; Generated autoloads from plain-tex.el
+;;;### (autoloads (ams-tex-mode TeX-plain-tex-mode) "plain-tex" "../../../../.emacs.d/extensions/auctex/plain-tex.el"
+;;;;;;  (21547 49001 0 0))
+;;; Generated autoloads from ../../../../.emacs.d/extensions/auctex/plain-tex.el
 
 (autoload 'TeX-plain-tex-mode "plain-tex" "\
 Major mode in AUCTeX for editing plain TeX files.
@@ -350,9 +353,9 @@ of `AmS-TeX-mode-hook'.
 ;;;***
 
 ;;;### (autoloads (TeX-submit-bug-report TeX-auto-generate-global
-;;;;;;  TeX-auto-generate TeX-tex-mode) "tex" "tex.el" (21543 57038
-;;;;;;  455837 148000))
-;;; Generated autoloads from tex.el
+;;;;;;  TeX-auto-generate TeX-tex-mode) "tex" "../../../../.emacs.d/extensions/auctex/tex.el"
+;;;;;;  (21547 49007 0 0))
+;;; Generated autoloads from ../../../../.emacs.d/extensions/auctex/tex.el
 
 (defalias 'TeX-assoc-string (symbol-function (if (featurep 'xemacs) 'assoc 'assoc-string)))
 
@@ -395,8 +398,9 @@ information about your AUCTeX version and AUCTeX configuration.
 ;;;***
 
 ;;;### (autoloads (LaTeX-install-toolbar TeX-install-toolbar) "tex-bar"
-;;;;;;  "tex-bar.el" (21543 57038 435837 49000))
-;;; Generated autoloads from tex-bar.el
+;;;;;;  "../../../../.emacs.d/extensions/auctex/tex-bar.el" (21547
+;;;;;;  49007 0 0))
+;;; Generated autoloads from ../../../../.emacs.d/extensions/auctex/tex-bar.el
 
 (autoload 'TeX-install-toolbar "tex-bar" "\
 Install toolbar buttons for TeX mode.
@@ -410,18 +414,18 @@ Install toolbar buttons for LaTeX mode.
 
 ;;;***
 
-;;;### (autoloads nil "tex-fold" "tex-fold.el" (21543 57038 439837
-;;;;;;  69000))
-;;; Generated autoloads from tex-fold.el
+;;;### (autoloads nil "tex-fold" "../../../../.emacs.d/extensions/auctex/tex-fold.el"
+;;;;;;  (21547 49007 0 0))
+;;; Generated autoloads from ../../../../.emacs.d/extensions/auctex/tex-fold.el
  (autoload 'TeX-fold-mode "tex-fold" "Minor mode for hiding and revealing macros and environments." t)
 
 (defalias 'tex-fold-mode 'TeX-fold-mode)
 
 ;;;***
 
-;;;### (autoloads (tex-font-setup) "tex-font" "tex-font.el" (21543
-;;;;;;  57038 439837 69000))
-;;; Generated autoloads from tex-font.el
+;;;### (autoloads (tex-font-setup) "tex-font" "../../../../.emacs.d/extensions/auctex/tex-font.el"
+;;;;;;  (21547 49007 0 0))
+;;; Generated autoloads from ../../../../.emacs.d/extensions/auctex/tex-font.el
 
 (autoload 'tex-font-setup "tex-font" "\
 Setup font lock support for TeX.
@@ -430,9 +434,9 @@ Setup font lock support for TeX.
 
 ;;;***
 
-;;;### (autoloads (TeX-texinfo-mode) "tex-info" "tex-info.el" (21543
-;;;;;;  57038 443837 89000))
-;;; Generated autoloads from tex-info.el
+;;;### (autoloads (TeX-texinfo-mode) "tex-info" "../../../../.emacs.d/extensions/auctex/tex-info.el"
+;;;;;;  (21547 49007 0 0))
+;;; Generated autoloads from ../../../../.emacs.d/extensions/auctex/tex-info.el
 
 (defalias 'Texinfo-mode 'texinfo-mode)
 
@@ -450,8 +454,9 @@ value of `Texinfo-mode-hook'.
 ;;;***
 
 ;;;### (autoloads (japanese-latex-mode japanese-plain-tex-mode) "tex-jp"
-;;;;;;  "tex-jp.el" (21543 57038 443837 89000))
-;;; Generated autoloads from tex-jp.el
+;;;;;;  "../../../../.emacs.d/extensions/auctex/tex-jp.el" (21547
+;;;;;;  49007 0 0))
+;;; Generated autoloads from ../../../../.emacs.d/extensions/auctex/tex-jp.el
 
 (autoload 'japanese-plain-tex-mode "tex-jp" "\
 Major mode in AUCTeX for editing Japanese plain TeX files.
@@ -467,9 +472,9 @@ Set `japanese-TeX-mode' to t, and enter `TeX-latex-mode'.
 
 ;;;***
 
-;;;### (autoloads (texmathp-match-switch texmathp) "texmathp" "texmathp.el"
-;;;;;;  (21543 57038 467837 208000))
-;;; Generated autoloads from texmathp.el
+;;;### (autoloads (texmathp-match-switch texmathp) "texmathp" "../../../../.emacs.d/extensions/auctex/texmathp.el"
+;;;;;;  (21547 49007 0 0))
+;;; Generated autoloads from ../../../../.emacs.d/extensions/auctex/texmathp.el
 
 (autoload 'texmathp "texmathp" "\
 Determine if point is inside (La)TeX math mode.
@@ -488,9 +493,9 @@ Limit searched to BOUND.
 
 ;;;***
 
-;;;### (autoloads nil "toolbar-x" "toolbar-x.el" (21543 57038 467837
-;;;;;;  208000))
-;;; Generated autoloads from toolbar-x.el
+;;;### (autoloads nil "toolbar-x" "../../../../.emacs.d/extensions/auctex/toolbar-x.el"
+;;;;;;  (21547 49007 0 0))
+;;; Generated autoloads from ../../../../.emacs.d/extensions/auctex/toolbar-x.el
  (autoload 'toolbarx-install-toolbar "toolbar-x")
 
 ;;;***
