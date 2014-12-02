@@ -16,6 +16,7 @@
 (setq load-rst-config nil)
 (setq load-terminal-config nil)
 (setq load-w3m-config nil)
+(setq load-calendar-config nil)
 (setq load-music-config nil)
 
 (load "general-options")
@@ -39,6 +40,7 @@
 (if load-spell-checking-config (load "spell-checking-config"))
 (if load-terminal-config (load "terminal-config"))
 (if load-w3m-config (load "w3m-config"))
+(if load-calendar-config (load "calendar-config"))
 (if load-music-config (load "emms-config"))
 
 (load "keybindings")

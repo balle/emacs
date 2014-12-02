@@ -27,6 +27,7 @@
 
 (load-theme 'tango-dark t)
 
+(setq load-calendar-config t)
 (setq load-irc-config t)
 (setq load-org-config t)
 (setq load-spell-checking-config t)

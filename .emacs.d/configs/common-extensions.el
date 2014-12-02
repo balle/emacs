@@ -1,13 +1,13 @@
-(install-missing-packages '(auto-complete 
-			    yasnippet 
+(install-missing-packages '(auto-complete
+			    yasnippet
 			    undo-tree
-			    browse-kill-ring 
-			    smex 
-			    magit 
+			    browse-kill-ring
+			    smex
+			    magit
 			    flycheck
 			    key-chord
 			    ace-jump-mode
-			    win-switch	
+			    win-switch
 			    bookmark+
 			    smartparens
 			    ibuffer-git
@@ -37,9 +37,9 @@
 (setq ac-dwim t)
 (ac-config-default)
 (define-key ac-complete-mode-map "\t" 'ac-expand)
-(setq-default ac-sources '(ac-source-yasnippet 
-			   ac-source-abbrev 
-			   ac-source-dictionary 
+(setq-default ac-sources '(ac-source-yasnippet
+			   ac-source-abbrev
+			   ac-source-dictionary
 			   ac-source-words-in-same-mode-buffers))
 (global-auto-complete-mode t)
 
