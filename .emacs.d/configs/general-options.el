@@ -40,6 +40,9 @@
         (desktop-save desktop-dirname)))
 (add-hook 'auto-save-hook 'my-desktop-save)
 
+; automatically save bookmarks
+(setq bookmark-save-flag 1)
+
 ; package repositories
 (package-initialize)
 (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/") t)
