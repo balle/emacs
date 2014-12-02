@@ -20,4 +20,14 @@ ln -s emacs/.eshell
 cd emacs/.emacs.d/extensions/auctex && ./configure && make
 cd emacs/.emacs.d/extensions/emacs-jedi && sudo pip install -r requirements.txt
 
+For more performance you could now once compile all elisp files. 
+Therefore goto the *scratch* and execute
+
+(require 'find-lisp)
+
+(mapc
+ (lambda (x) (byte-compile-file x))
+ (find-lisp-find-files "~/.emacs.d/" "\\.el$"))
+
+
 Documentation about keyboard shortcuts can be found in emacs.org

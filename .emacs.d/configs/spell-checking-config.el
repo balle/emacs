@@ -1,7 +1,7 @@
 ; spell checking
 (require 'ispell)
 
-(setq ispell-dictionary-base-alist
+(setq ispell-dictionary-alist
         '(
                   ("de_DE"
                             "[a-zäöüßA-ZÄÖÜ]" "[^a-zäöüßA-ZÄÖÜ]" "[']" nil

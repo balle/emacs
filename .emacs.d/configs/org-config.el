@@ -1,9 +1,5 @@
-; org mode for todo lists and "project management"
 (add-to-list 'load-path "~/.emacs.d/extensions/org-redmine")
-
 (add-to-list 'auto-mode-alist '("\\.\\(org\\|org_archive\\)$" . org-mode))
-(require 'org-install)
-(require 'org-table)
 
 ;(setq org-agenda-files (list "~/organize/TODO.org" "~/organize/projekte.org" "~/organize/backlog.org"  "~/organize/emacs.org" "~/organize/read.org"))
 (setq org-agenda-files '("~/organize/"))
@@ -17,32 +13,32 @@
 (setq appt-display-format 'window)
 
 ; remember clock
-(setq org-clock-persist 'history)
-(org-clock-persistence-insinuate)
+;(setq org-clock-persist 'history)
+;(org-clock-persistence-insinuate)
 
 ; alert on clock mode if idle for 15 minutes
-(setq org-clock-idle-time 15)
+;(setq org-clock-idle-time 15)
 
 ; supported programming languages
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '((python . t)
-   (perl . t)
-   (ruby . t)
-   (sh . t)
-   (lisp . t)
-   (emacs-lisp . t)
-))
-(setq org-confirm-babel-evaluate nil)
+;(org-babel-do-load-languages
+; 'org-babel-load-languages
+; '((python . t)
+;   (perl . t)
+;   (ruby . t)
+;   (sh . t)
+;   (lisp . t)
+;   (emacs-lisp . t)
+;))
+;(setq org-confirm-babel-evaluate nil)
 
 ; org-mode redmine interface
-(require 'org-redmine)
-(setq org-redmine-template-header "[%p_n%] #%i% %s% by %as_n%")
+;(require 'org-redmine)
+;(setq org-redmine-template-header "[%p_n%] #%i% %s% by %as_n%")
 
-(defun balle-redmine-tickets ()
-  (interactive)
-  (org-redmine-anything-show-issue-all 'redmine-user)
-)
+;(defun balle-redmine-tickets ()
+;  (interactive)
+;  (org-redmine-anything-show-issue-all 'redmine-user)
+;)
 
 ; Capture templates for: TODO tasks, Notes, appointments
 ; from http://doc.norang.ca/org-mode.html
@@ -54,15 +50,6 @@
                                     ("y" "year" entry (file "~/organize/TODO.org") "** %?   :year:")
                                     ("D" "diary" entry (file "~/organize/diary.org.gpg") "* %T %?")
 				    ("e" "emacs" entry (file "~/organize/emacs.org") "** %?   :emacs:"))))
-;                                    ("a" "appointment" entry (file "~/organize/termine.org") "** %?   :appointment:
-;SCHEDULED: %T" :empty-lines 1))))
-
-
-;(setq org-feed-alist
-;      '(("Datenterrorist"
-;         "http://www.datenterrorist.de/xml-rss2.php"
-;         "~/organize/feeds.org" "Datenterrorist")))
-
 
 ; functions to show todos / notes / appointments
 (defun balle-show-emacs-list ()
@@ -89,20 +76,6 @@
 (defun balle-show-read-list ()
   (interactive)
   (org-tags-view nil "read")
-  (next-multiframe-window)
-  (enlarge-window 10)
-)
-
-(defun balle-show-hack-list ()
-  (interactive)
-  (org-tags-view nil "hacking")
-  (next-multiframe-window)
-  (enlarge-window 10)
-)
-
-(defun balle-show-python-list ()
-  (interactive)
-  (org-tags-view nil "python")
   (next-multiframe-window)
   (enlarge-window 10)
 )
@@ -162,10 +135,10 @@
 
 (setq appt-disp-window-function (function balle-org-alarm))
 
-(add-hook 'org-mode-hook '(lambda ()
-                           (define-key org-mode-map (kbd "C-c l") 'org-store-link)
-                           (define-key org-mode-map (kbd "M-<left>") 'org-agenda-do-date-earlier)
-                           (define-key org-mode-map (kbd "M-<right>") 'org-agenda-do-date-later)))
+;(add-hook 'org-mode-hook '(lambda ()
+;                           (define-key org-mode-map (kbd "C-c l") 'org-store-link)
+;                           (define-key org-mode-map (kbd "M-<left>") 'org-agenda-do-date-earlier)
+;                           (define-key org-mode-map (kbd "M-<right>") 'org-agenda-do-date-later)))
 
 ; add schedules and deadlines to appt on save
 (add-hook 'org-mode-hook '(lambda nil (
@@ -179,79 +152,34 @@
 
 ;; mylyn mode
 ;; remember open files to tasks
-(defun org-recentf-save-and-empty ()
-    "Save and empty recentf"
-      (if (not recentf-mode)
-                (recentf-mode)
-                    (recentf-save-list)
-                        (setq recentf-list nil)
-                            (message "Recentf list reinitialized")))
-
-(defun org-recentf-dblock-update ()
-    "Insert and/or update #+BEGIN: recentf block"
-      (save-excursion
-            (org-back-to-heading)
-                (if (search-forward "#+BEGIN: recentf")
-                    (org-dblock-update)
-                          (outline-next-heading)
-                                (insert "#+BEGIN: recentf\n#+END:\n")
-                                      (search-backward "#+BEGIN")
-                                            (org-dblock-update))))
-
-(defun org-dblock-write:recentf (params)
-    "Write the RECENTF dblock."
-      (interactive)
-        (let* ((rf "(setq recentf-list %s)")
-                (rfl (format rf (prin1-to-string recentf-list))))
-              (insert "#+begin_src emacs-lisp\n" rfl
-                          "\n(recentf-load-list)\n#+end_src")))
-
-(add-hook 'org-clock-in-hook 'org-recentf-save-and-empty)
-(add-hook 'org-clock-out-hook 'org-recentf-dblock-update)
-
-
+;(defun org-recentf-save-and-empty ()
+;    "Save and empty recentf"
+;      (if (not recentf-mode)
+;                (recentf-mode)
+;                    (recentf-save-list)
+;                        (setq recentf-list nil)
+;                            (message "Recentf list reinitialized")))
 ;
-; below code borrow from http://orgmode.org/worg/org-hacks.html
+;(defun org-recentf-dblock-update ()
+;    "Insert and/or update #+BEGIN: recentf block"
+;      (save-excursion
+;            (org-back-to-heading)
+;                (if (search-forward "#+BEGIN: recentf")
+;                    (org-dblock-update)
+;                          (outline-next-heading)
+;                                (insert "#+BEGIN: recentf\n#+END:\n")
+;                                      (search-backward "#+BEGIN")
+;                                            (org-dblock-update))))
 ;
-;; (defun org-time-string-to-seconds (s)
-;;   "Convert a string HH:MM:SS to a number of seconds."
-;;   (cond
-;;    ((and (stringp s)
-;;          (string-match "\\([0-9]+\\):\\([0-9]+\\):\\([0-9]+\\)" s))
-;;     (let ((hour (string-to-number (match-string 1 s)))
-;;           (min (string-to-number (match-string 2 s)))
-;;           (sec (string-to-number (match-string 3 s))))
-;;       (+ (* hour 3600) (* min 60) sec)))
-;;    ((and (stringp s)
-;;          (string-match "\\([0-9]+\\):\\([0-9]+\\)" s))
-;;     (let ((min (string-to-number (match-string 1 s)))
-;;           (sec (string-to-number (match-string 2 s))))
-;;       (+ (* min 60) sec)))
-;;    ((stringp s) (string-to-number s))
-;;    (t s)))
-
-;; (defun org-time-seconds-to-string (secs)
-;;   "Convert a number of seconds to a time string."
-;;   (cond ((>= secs 3600) (format-seconds "%h:%.2m:%.2s" secs))
-;;         ((>= secs 60) (format-seconds "%m:%.2s" secs))
-;;         (t (format-seconds "%s" secs))))
-
-;; (defmacro with-time (time-output-p &rest exprs)
-;;   "Evaluate an org-table formula, converting all fields that look
-;; like time data to integer seconds.  If TIME-OUTPUT-P then return
-;; the result as a time value."
-;;   (list
-;;    (if time-output-p 'org-time-seconds-to-string 'identity)
-;;    (cons 'progn
-;;          (mapcar
-;;           (lambda (expr)
-;;             `,(cons (car expr)
-;;                     (mapcar
-;;                      (lambda (el)
-;;                        (if (listp el)
-;;                            (list 'with-time nil el)
-;;                          (org-time-string-to-seconds el)))
-;;                      (cdr expr))))
-;;           `,@exprs))))
+;(defun org-dblock-write:recentf (params)
+;    "Write the RECENTF dblock."
+;      (interactive)
+;        (let* ((rf "(setq recentf-list %s)")
+;                (rfl (format rf (prin1-to-string recentf-list))))
+;              (insert "#+begin_src emacs-lisp\n" rfl
+;                          "\n(recentf-load-list)\n#+end_src")))
+;
+;(add-hook 'org-clock-in-hook 'org-recentf-save-and-empty)
+;(add-hook 'org-clock-out-hook 'org-recentf-dblock-update)
 
 (org-mode)

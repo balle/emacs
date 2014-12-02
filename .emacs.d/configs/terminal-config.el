@@ -1,4 +1,4 @@
-(add-to-list 'load-path "~/.emacs.d/extensions/key-chord")
+(install-missing-packages '(multi-term))
 
 (require 'multi-term)
 (require 'ace-jump-mode)
@@ -10,11 +10,10 @@
 (key-chord-define-global "jj" 'ace-jump-mode)
 
 (add-hook 'term-mode-hook (lambda ()
-    (setq yas/dont-activate nil)
-    (yas/minor-mode-on)
+    (setq yas-dont-activate t)
     (add-to-list 'term-bind-key-alist '("C-c C-n" . multi-term-next))
     (add-to-list 'term-bind-key-alist '("C-c C-p" . multi-term-prev))
-    (add-to-list 'term-bind-key-alist '("C-c C-j" . term-line-mode))
+    (add-to-list 'term-bind-key-alist '("C-c C-l" . term-line-mode))
     (add-to-list 'term-bind-key-alist '("C-c C-k" . term-char-mode))
 ))
 

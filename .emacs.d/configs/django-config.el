@@ -1,6 +1,8 @@
-(add-to-list 'load-path "~/.emacs.d/extensions/django-mode")
+(install-missing-packages '(django-html-mode))
 (require 'django-html-mode)
+
 ;(add-to-list 'auto-mode-alist '("\\.html$" . django-html-mumamo-mode))
+
 (ac-config-default)
 (auto-complete-mode)
 (add-to-list 'ac-modes 'django-mode)

@@ -1,9 +1,7 @@
 ; latex
-(add-to-list 'load-path "~/.emacs.d/extensions/auctex")
-(add-to-list 'load-path "~/.emacs.d/extensions/auctex/preview")
-(add-to-list 'load-path "~/.emacs.d/extensions/ac-math")
+(install-missing-packages '(ac-math
+			    tex-smart-umlauts))
 
-(load "~/.emacs.d/extensions/auctex/tex-site.el" nil t t)
 (require 'reftex)
 (require 'preview-latex)
 

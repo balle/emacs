@@ -1,24 +1,12 @@
-; set undo buffer size
-(setq undo-limit 500000)
-(setq undo-strong-limit 1000000)
-
-; disable tool- and scrollbar
-(if (boundp 'toggle-scroll-bar)
-  (toggle-scroll-bar -1))
-
-; hide menubar
-(if (boundp 'menu-bar-mode)
-  (menu-bar-mode 0))
+; disable menu-, tool- and scrollbar
+(if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
+(if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+(if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 
 ; ido mode
 (setq ido-enable-flex-matching t)
 (setq ido-everywhere t)
 (ido-mode 1)
-
-; automatically close pairs
-(if (boundp 'electric-pair-mode)
-  (electric-pair-mode 1)
-  (setq skeleton-pair t))
 
 ; save desktop sessions
 (desktop-save-mode 1)
@@ -44,10 +32,6 @@
 (if (boundp 'desktop-auto-save-timeout)
   (setq desktop-auto-save-timeout (* 60 15)))
 
-
-; enable wildcard open files
-(setq find-file-wildcards t)
-
 ; save desktop on auto save hook
 (defun my-desktop-save ()
     (interactive)
@@ -56,6 +40,13 @@
         (desktop-save desktop-dirname)))
 (add-hook 'auto-save-hook 'my-desktop-save)
 
+; package repositories
+(package-initialize)
+(add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/") t)
+(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)
+(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+
+
 ; delete seleted text when typing
 (delete-selection-mode 1)
 
@@ -63,19 +54,8 @@
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'forward)
 
-; exit search mode with any key
-(setq search-exit-option t)
-
 ; display line numbers in margin (fringe). Emacs 23 only.
 (global-linum-mode 0)
-
-; recent files menu entry
-;(recentf-mode 1)
-
-; remote edit method is scp per default
-(setq tramp-default-method "ssh")
-(setq password-cache-expiry nil)
-(setq tramp-debug-buffer t)
 
 ; highlight current line
 (global-hl-line-mode 1)
@@ -83,25 +63,11 @@
 ; highlight brackets
 (show-paren-mode t)
 
-; suspress warnings
-(setq warning-minimum-level :error)
-
-; dired settings
-(require 'dired )
-;(setq dired-listing-switches "")
-(setq dired-recursive-copies (quote always))
-(setq dired-recursive-deletes (quote top))
-(setq dired-dwim-target t)
-(add-hook 'dired-mode-hook
-          (lambda ()
-               (define-key dired-mode-map (kbd "<return>")
-                     'dired-find-alternate-file) ; was dired-advertised-find-file
-                 (define-key dired-mode-map (kbd "^")
-                       (lambda () (interactive) (find-alternate-file "..")))
-                   ; was dired-up-directory
-                  ))
-(define-key dired-mode-map (kbd "<return>") 'dired-find-alternate-file) ; was dired-advertised-find-file
-(define-key dired-mode-map (kbd "^") (lambda () (interactive) (find-alternate-file "..")))  ; was dired-up-directory
+; remote edit method is scp per default
+(setq tramp-default-method "ssh")
+(setq password-cache-expiry nil)
+(setq tramp-debug-buffer nil)
+(setq tramp-verbose 10)
 
 ; backup
 (setq
@@ -113,30 +79,16 @@
    kept-old-versions 3
    version-control t)       ; use versioned backups
 
-
 ; auto save interval
 (setq auto-save-default t)
-(setq auto-save-interval 300)
-(setq auto-save-timeout 300)
-
-; outline mode (for folding)
-(add-hook 'outline-minor-mode-hook
-              (lambda ()
-		(local-set-key "\C-c\C-o" outline-mode-prefix-map)
-		(define-key outline-mode-prefix-map "a" 'show-all)
-	      )
-)
+;(setq auto-save-interval 300)
+;(setq auto-save-timeout 300)
 
 ; suspress kill process questions
 (setq kill-buffer-query-functions
  (remove 'process-kill-buffer-query-function
          kill-buffer-query-functions))
 
-; clean normal buffers not displayed for 3 days
-(setq clean-buffer-list-delay-general 3)
-
-; clean special buffers not displayed for 3 hours
-(setq clean-buffer-list-delay-special (* 3 3600))
 
 ; calendar / diary settings
 (setq diary-file "~/organize/termine")
@@ -224,21 +176,7 @@
 ; drucken via cups
 (setq lpr-command "xpp")
 
-; package management
-(if (> emacs-major-version 23)
-    (progn
-      (require 'package)
-      (package-initialize)
-      (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/") t)
-      (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)
-      (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
-))
-
+(setq warning-minimum-level :error)
 (setq confirm-kill-emacs nil)
 (fset 'yes-or-no-p 'y-or-n-p)
-;(setq compare-ignore-case nil)
 (setq debug-on-error t)
-
-(set-face-background 'hl-line "green")
-
-(setq sentence-end-double-space nil)

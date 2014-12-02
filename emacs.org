@@ -587,7 +587,17 @@ alt + k - show cookies
 s - show history
 S - search in search engine
 v - view bookmarks
-
+esc+w - copy url at point
+* EMMS								      :emacs:
++ - louder
+- - quieter
+enter - play
+P - pause
+s - stop
+p - previous
+n - next
+r - random
+ctrl+x ctrl+s - save playlist
 * Misc                                                                :emacs:
 ctrl + g                      -> Cancel
 ctrl + x u                    -> UNDO tree

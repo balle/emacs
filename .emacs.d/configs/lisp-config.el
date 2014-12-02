@@ -1,5 +1,6 @@
-(add-to-list 'load-path "~/.emacs.d/extensions/slime")
-(add-to-list 'load-path "~/.emacs.d/extensions/ac-slime")
+(install-missing-packages '(slime
+			    ac-slime))
+
 (require 'slime)
 (require 'ac-slime)
 

@@ -1,11 +1,13 @@
-(add-to-list 'load-path "~/.emacs.d/extensions/cedet-1.1")
-(load-file "~/.emacs.d/extensions/cedet-1.1/common/cedet.el")
+(require 'cedet)
 
 ;; needed for completion
-(require 'semantic-ia)
+(require 'semantic/ia)
 
 ;; needed for glibc includes
-(require 'semantic-gcc)
+;(require 'semantic/gcc)
+(require 'semantic/sb)
+(semantic-mode 1)
+
 
 ;; * This enables the database and idle reparse engines
 ;(semantic-load-enable-minimum-features)
@@ -18,10 +20,10 @@
 ;; in topmost line of buffer, semantic-decoration-mode to decorate tags,
 ;; using different styles, and semantic-idle-completion-mode for automatic
 ;; generation of possible names completions, if user stops his work for some time
-(semantic-load-enable-gaudy-code-helpers)
+;(semantic-load-enable-gaudy-code-helpers)
 
 ; Enable template insertion menu
-(global-srecode-minor-mode 1)
+;(global-srecode-minor-mode 1)
 
 ;(add-hook 'c-mode-hook '(lambda ()
 ;    (local-set-key (kbd "RET") 'newline-and-indent)
@@ -42,4 +44,4 @@
 )
 
 
-(add-to-list 'semantic-lex-c-preprocessor-symbol-file "/usr/include/stdlib.h")
+;(add-to-list 'semantic-lex-c-preprocessor-symbol-file "/usr/include/stdlib.h")

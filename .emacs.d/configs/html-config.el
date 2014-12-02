@@ -1,8 +1,9 @@
-(add-to-list 'load-path "~/.emacs.d/extensions/emmet-mode")
-(add-to-list 'load-path "~/.emacs.d/extensions/jinja2-mode")
-(add-to-list 'load-path "~/.emacs.d/extensions/htmlize-20130207.2102")
-(add-to-list 'load-path "~/.emacs.d/extensions/simple-httpd-20121224.1121")
-(add-to-list 'load-path "~/.emacs.d/extensions/impatient-mode-20130127.1656")
+(install-missing-packages '(emmet-mode
+			    jinja2-mode
+			    htmlize
+			    simple-httpd
+			    impatient-mode))
+
 (require 'impatient-mode)
 (require 'rename-sgml-tag)
 

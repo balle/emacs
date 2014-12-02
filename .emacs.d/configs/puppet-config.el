@@ -1,3 +1,4 @@
+(install-missing-packages '(puppet-mode))
 (require 'puppet-mode)
 
 (add-to-list 'ac-modes 'puppet-mode)

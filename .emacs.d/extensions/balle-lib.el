@@ -1,3 +1,9 @@
+(defun install-missing-packages (package-list)
+  (unless package-archive-contents (package-refresh-contents))
+  (dolist (package package-list)
+    (unless (package-installed-p package)
+      (package-install package))))
+
 (defun balle-grep-todos-in-dir (dir &optional not-recursive)
   "Grep recursively for TODO comments in the given directory"
   (interactive "Ddirectory:")
@@ -10,11 +16,11 @@
   (enlarge-window 7)
 )
 
-(defun balle-projectile-open-all-recent ()
-  "Open a project with all recent files"
-  (interactive)
-  (projectile-switch-project)
-  (mapc (lambda (pfile) (find-file (concatenate 'string (projectile-project-root) pfile))) (projectile-recentf-files)))
+;; (defun balle-projectile-open-all-recent ()
+;;   "Open a project with all recent files"
+;;   (interactive)
+;;   (projectile-switch-project)
+;;   (mapc (lambda (pfile) (find-file (concatenate 'string (projectile-project-root) pfile))) (projectile-recentf-files)))
 
 ; comment out current line
 (defun balle-comment-line ()
@@ -48,18 +54,18 @@
 )
 
 
-(defun balle-show-message-buffer ()
-  (interactive)
-  (switch-to-buffer-other-window "*Messages*")
-  (next-multiframe-window)
-  (enlarge-window 10)
-)
+;; (defun balle-show-message-buffer ()
+;;   (interactive)
+;;   (switch-to-buffer-other-window "*Messages*")
+;;   (next-multiframe-window)
+;;   (enlarge-window 10)
+;; )
 
-(defun balle-show-magit-process-buffer ()
-  (interactive)
-  (switch-to-buffer-other-window "*magit-process*")
-  (enlarge-window 5)
-)
+;; (defun balle-show-magit-process-buffer ()
+;;   (interactive)
+;;   (switch-to-buffer-other-window "*magit-process*")
+;;   (enlarge-window 5)
+;; )
 
 ; load dvorak enhanced keys
 (defun balle-dvorak-on ()
@@ -90,22 +96,22 @@
 )
 
 ; search word under cursor
-(defun balle-search-current-word-in-buffer ()
-  (interactive)
-  (require 'thingatpt)
+;; (defun balle-search-current-word-in-buffer ()
+;;   (interactive)
+;;   (require 'thingatpt)
 
-  (if (boundp 'balle-mark-current-sym)
-    (unhighlight-regexp balle-mark-current-sym)
-  )
+;;   (if (boundp 'balle-mark-current-sym)
+;;     (unhighlight-regexp balle-mark-current-sym)
+;;   )
 
-  (setq balle-mark-current-sym (thing-at-point 'symbol))
+;;   (setq balle-mark-current-sym (thing-at-point 'symbol))
 
-  (unless (null balle-mark-current-sym)
-    (let ((case-fold-search nil))
-      (search-forward balle-mark-current-sym)
-    )
-  )
-)
+;;   (unless (null balle-mark-current-sym)
+;;     (let ((case-fold-search nil))
+;;       (search-forward balle-mark-current-sym)
+;;     )
+;;   )
+;; )
 
 (defun balle-transpose-word-backwards (arg)
   (interactive "*p")

@@ -1,5 +1,5 @@
 ; browser
-(add-to-list 'load-path "~/.emacs.d/extensions/w3m")
+(install-missing-packages '(w3m))
 (require 'w3m-autoloads)
 
 (setq browse-url-browser-function 'w3m-goto-url-new-session)
@@ -10,6 +10,7 @@
 
 ; allow cookies
 (setq w3m-use-cookies t)
+(setq w3m-cookie-accept-bad-cookies t)
 
 ; default search engine
 (require 'w3m-search)

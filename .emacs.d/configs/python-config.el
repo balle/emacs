@@ -1,10 +1,7 @@
-(add-to-list 'load-path "~/.emacs.d/extensions/emacs-ctable")
-(add-to-list 'load-path "~/.emacs.d/extensions/emacs-epc")
-(add-to-list 'load-path "~/.emacs.d/extensions/emacs-deferred")
-(add-to-list 'load-path "~/.emacs.d/extensions/emacs-jedi")
-
-;(epy-setup-checker "pyflakes %f")
-;(epy-setup-checker "epylint %f --rcfile=~/.emacs.d/configs/pylint.rc | grep -v 'Class has no __init__ method' | grep -v '_ is not callable'")
+(install-missing-packages '(ctable
+			    epc
+			    deferred
+			    jedi))
 
 ;; auto completion for jedi knights :)
 (require 'jedi)
@@ -14,11 +11,8 @@
 (setq jedi:complete-on-dot t)
 (setq jedi:setup-keys t)
 
-
 ;; use ipython as python shell
-(epy-setup-ipython)
 (setq python-shell-interpreter "ipython")
-
 
 ;; auto-completion for ipython
 ;; borrowed from ipython.el
