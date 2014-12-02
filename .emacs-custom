@@ -15,6 +15,16 @@
 ;(setq tramp-verbose 10)
 ;(setq tramp-shell-prompt-pattern "^[^$>\n]*[#$%>] *\\(\[[0-9;]*[a-zA-Z] *\\)*")
 
+(defun start-irc ()
+   "Connect to IRC."
+   (interactive)
+   (erc-tls :server "irc.freenode.net" :port 6697
+        :nick "mynick" :full-name "Hans Wurst")
+   (erc :server "localhost" :port 6667
+        :nick "mynick" :full-name "Hans Wurst")
+   (setq erc-autojoin-channels-alist '(("irc.freenode.net" "#emacs" "#lisp"))))
+
+
 (load-theme 'tango-dark t)
 
 (setq load-irc-config t)
