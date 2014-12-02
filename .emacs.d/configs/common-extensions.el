@@ -10,11 +10,15 @@
 			    win-switch
 			    bookmark+
 			    smartparens
+			    outline-magic
 			    ibuffer-git
 			    ibuffer-tramp))
 
 ; kill ring browser
 (require 'browse-kill-ring)
+
+; magic text folding
+(require 'outline-magic)
 
 ; alarm clock
 ;(require 'alarm)
