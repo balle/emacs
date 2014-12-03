@@ -474,7 +474,7 @@ j - jump to directory
 o - open directory in other pane
 ctrl + c ctrl + l - locate file
 
-* Shell                                                               :emacs:
+* Shell 							      :emacs:
 ctrl + c ! - run shell command on buffer filename
 esc + ! - run shell command on buffer content and replace it with output
 
@@ -486,6 +486,15 @@ grep output goes to grep buffer
 alias ssh 'cd /ssh:$1:~'
 alias emacs 'find-file-other-window $1'
 
+* Terminal							      :emacs:
+alt+r - search backward in shell
+ctrl+c ctrl+l - switch to line mode
+ctrl+c ctrl+k - switch back to terminal mode
+* Register							      :emacs:
+ctrl+x r n - number to register
+ctrl+x r +/- increment / decrement number
+ctrl+x r w - save window configuration to register
+ctrl+x r j - load register
 * Ido mode                                                            :emacs:
 ctrl + f - disable completion
 ctrl + s - search forward
