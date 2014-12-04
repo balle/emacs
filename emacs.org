@@ -472,6 +472,7 @@ left / right - go back / forward in directory history
 ctrl + / - fuzzy matching for directory listing
 j - jump to directory
 o - open directory in other pane
+ctrl+x d ssh:user@host:/ - open remote directory
 ctrl + c ctrl + l - locate file
 
 * Shell 							      :emacs:
@@ -597,6 +598,7 @@ s - show history
 S - search in search engine
 v - view bookmarks
 esc+w - copy url at point
+ctrl+x m - goto url at point
 * EMMS								      :emacs:
 + - louder
 - - quieter
@@ -607,6 +609,9 @@ p - previous
 n - next
 r - random
 ctrl+x ctrl+s - save playlist
+alt+x emms-add-directory-tree - add dir to current playlist
+alt+x emms-add-playlist - add playlist to current playlist
+alt+x emms-shuffle - shuffle current playlist
 * Misc                                                                :emacs:
 ctrl + g                      -> Cancel
 ctrl + x u                    -> UNDO tree

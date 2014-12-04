@@ -5,6 +5,10 @@
 ;(setq browse-url-browser-function 'browse-url-generic
 ;      browse-url-generic-program "chromium")
 
+; default search engine for w3m
+;(setq w3m-search-default-engine "ixquick")
+;(setq w3m-search-default-engine "google")
+
 ; redmine
 ;(setq org-redmine-uri "http://www.redmine.org")
 
@@ -41,6 +45,7 @@
 (setq load-lisp-config nil)
 (setq load-puppet-config nil)
 (setq load-rst-config t)
+(setq load-sunrise-commander-config t)
 (setq load-terminal-config t)
 (setq load-python-config nil)
 (setq load-music-config t)
