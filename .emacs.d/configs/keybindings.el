@@ -7,6 +7,7 @@
 (global-set-key "\C-xrs" 'bookmark-save)
 (global-unset-key "\C-xrd")
 (global-set-key "\C-xrd" 'bookmark-delete)
+(global-set-key "\C-xm" 'browse-url-at-point)
 (global-set-key (kbd "C-h C-f") 'find-function)
 (global-set-key "\C-x\C-k" 'kill-matching-buffers)
 (global-set-key "\C-xg" 'grep-mode)

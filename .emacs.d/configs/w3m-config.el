@@ -39,6 +39,7 @@
   (setq desktop-save-buffer (lambda (desktop-dirname) w3m-current-url)))
 
 (add-hook 'w3m-mode-hook 'w3m-register-desktop-save)
+(add-hook 'w3m-form-input-textarea-mode-hook '(lambda () (yas-minor-mode))
 
 (defun w3m-restore-desktop-buffer (d-b-file-name d-b-name d-b-misc)
   "Restore a `w3m' buffer on `desktop' load."
@@ -64,4 +65,8 @@
 
 (add-hook 'w3m-mode-hook
 	  (lambda ()
-	    (local-set-key "\M-W" 'w3m-copy-url-at-point)))
+	    (local-set-key "\M-W" 'w3m-copy-url-at-point)
+	    (local-set-key (kbd "<up>") 'previous-line)
+	    (local-set-key (kbd "<down>") 'next-line)
+	    (local-set-key (kbd "<left>") 'backward-char)
+	    (local-set-key (kbd "<right>") 'forward-char)))
