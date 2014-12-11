@@ -21,6 +21,7 @@
 (setq load-music-config nil)
 
 (load "general-options")
+(load "custom-lib")
 (load "balle-lib")
 (load "common-extensions")
 
