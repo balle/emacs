@@ -1,6 +1,5 @@
 ; latex
-(install-missing-packages '(ac-math
-			    tex-smart-umlauts))
+(install-missing-packages '(tex-smart-umlauts ac-math))
 
 (require 'reftex)
 (require 'preview-latex)
@@ -72,7 +71,7 @@
     (ac-flyspell-workaround)
     (auto-complete-mode)
     (setq ac-delay 0.2)
-    (define-key LaTeX-mode-map "\C-cu" 'LaTeX-find-matching-begin)
-    (define-key LaTeX-mode-map "\C-cd" 'LaTeX-find-matching-end)
-    (define-key LaTeX-mode-map "\C-ci" 'LaTeX-insert-item)
+    (define-key latex-mode-map "\C-cu" 'LaTeX-find-matching-begin)
+    (define-key latex-mode-map "\C-cd" 'LaTeX-find-matching-end)
+    (define-key latex-mode-map "\C-ci" 'LaTeX-insert-item)
 ))
