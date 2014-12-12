@@ -95,6 +95,10 @@
 ; drucken via cups
 (setq lpr-command "xpp")
 
+; no blinking cursor, no beep beep
+(blink-cursor-mode 0)
+(setq visible-bell t)
+
 (setq warning-minimum-level :error)
 (setq confirm-kill-emacs nil)
 (fset 'yes-or-no-p 'y-or-n-p)
