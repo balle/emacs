@@ -26,12 +26,12 @@
 ;             '("-o" "http_proxy=http://proxy.hogege.com:8000/")))
 
 ; web jump
-;(defun reddit (reddit)
-;  "Opens the REDDIT in w3m-new-session"
-;  (interactive (list
-;                (read-string "Enter the reddit (default: psycology): " nil nil "psychology" nil)))
-;  (browse-url (format "http://m.reddit.com/r/%s" reddit))
-;  )
+(defun balu-wiki (topic)
+  "Opens the Balu wiki in w3m-new-session"
+  (interactive (list
+                (read-string "Enter the topic (default: linux/systemd): " nil nil "linux/systemd" nil)))
+  (browse-url (format "http://balu-wiki.readthedocs.org/en/latest/%s.html" topic))
+)
 
 ; save sessions
 (defun w3m-register-desktop-save ()
