@@ -563,6 +563,7 @@ K o - save attachment
 O o - save article
 M b - bookmark article
 M B - remove bookmark
+K H - display article as HTML in browser
 a - post article to newsgroup
 G m - make directory / group
 G r - rename directory / group
