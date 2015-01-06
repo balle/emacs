@@ -1,6 +1,7 @@
 ; filter spam
 (gnus-registry-initialize)
 (spam-initialize)
+(setq my-trash-folder "INBOX/Trash")
 (setq spam-split-group "INBOX/Junk")
 (setq spam-use-bogofilter t)
 (setq
@@ -13,7 +14,7 @@
  spam-mark-only-unseen-as-spam t
  spam-mark-ham-unread-before-move-from-spam-group t)
 
-;; delete mail with x key
+;; delete mail with X key, use x to move to trash
 (defun my-gnus-summary-catchup-and-exit ()
   (interactive)
   (gnus-summary-catchup-and-exit t t))
@@ -23,12 +24,18 @@
   (gnus-summary-delete-article)
   (next-line))
 
+(defun my-gnus-summary-move-article-to-trash ()
+  (interactive)
+  (gnus-summary-move-article nil my-trash-folder)
+  (next-line))
+
 (defun my-gnus-show-last-articles ()
   (interactive)
   (gnus-summary-insert-old-articles 20))
 
 (let ((map gnus-summary-mode-map))
-  (define-key map (kbd "x") 'my-gnus-summary-delete-article)
+  (define-key map (kbd "x") 'my-gnus-summary-move-article-to-trash)
+  (define-key map (kbd "X") 'my-gnus-summary-delete-article)
   (define-key map (kbd "/l") 'my-gnus-show-last-articles)
   (define-key map (kbd "c") 'my-gnus-summary-catchup-and-exit))
 
@@ -120,7 +127,7 @@
 ;      (gnus-summary-insert-old-articles t)))
 
 ;; vcard support
-(require 'vcard)
+;; (require 'vcard)
 
 ;; don't ask how many emails to download
 (setq gnus-large-newsgroup t)
