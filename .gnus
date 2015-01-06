@@ -67,6 +67,8 @@
 (setq gnus-thread-sort-functions '((not gnus-thread-sort-by-date)
 				   gnus-thread-sort-by-total-score))
 
+;; No HTML mail
+(setq mm-discouraged-alternatives '("text/html" "text/richtext"))
 
 ;; Setup GPG/PGP
 (require 'epa-file)
