@@ -1,7 +1,11 @@
 (defun install-missing-packages (package-list)
-  ;(unless package-archive-contents (package-refresh-contents))
-  (package-initialize)
-  (package-refresh-contents)
+  (unless package-archive-contents 
+    (progn 
+      (package-initialize) 
+      (package-refresh-contents)))
+  
+;;  (package-initialize) 
+;;  (package-refresh-contents)
   (dolist (package package-list)
     (unless (package-installed-p package)
       (package-install package))))
