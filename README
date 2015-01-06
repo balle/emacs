@@ -33,3 +33,11 @@ Therefore goto the *scratch* and execute
 
 
 Documentation about keyboard shortcuts can be found in emacs.org
+
+For GNUS copy and edit .mailcap and .gnus-custom. Link .gnus to ~/.gnus and 
+create a ~/.authinfo with the following content
+
+machine mail.domain.com login username@domain.com port 25 password MyPASS
+
+It's better practice to save the above in ~/.authinfo.gpg and let Emacs
+en- / decrypt the content.

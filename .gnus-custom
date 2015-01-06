@@ -13,6 +13,21 @@
 ;(setq message-send-mail-function 'smtpmail-send-it)
 (setq smtpmail-default-smtp-server "mail.domain.tld")
 
+; for multiple smtp accounts use
+;(defvar smtp-accounts
+;  '(
+;    (ssl "my.first@mail-account.tld" "mail.domain.tld")
+;    (ssl "my.second@mail-account.tld" "mail.domain2.tld")
+;))
+
+; for multiple imap accounts use
+;(setq gnus-secondary-select-methods '((nntp "news.gwene.org")
+;  (nnimap "second@mail-account.tld"
+;                (nnimap-address "mail.domain2.tld")
+;                (nnimap-server-port 993)
+;                (nnimap-stream ssl))
+;))
+
 ; use gpg
 ;(setq gnus-treat-x-pgp-sig t
 ;      epg-user-id user-gpgid
