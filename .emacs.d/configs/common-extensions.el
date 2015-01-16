@@ -14,6 +14,9 @@
 			    ibuffer-git
 			    ibuffer-tramp))
 
+(add-to-list 'load-path "~/.emacs.d/extensions/outline-magic")
+(require 'outline-magic)
+
 ; kill ring browser
 (require 'browse-kill-ring)
 
