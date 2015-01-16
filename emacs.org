@@ -37,8 +37,11 @@ alt  + y     -> skip through kill-ring
 esc + ^      -> delete indention (join with previous line)
 ctrl + x ctrl + n -> replace newslines with space in region
 
-* Rectangle                                                           :emacs:
-
+* Edit 								      :emacs:
+alt + z                       -> delete all up to char (zap to char)
+ctrl + x u                    -> UNDO tree
+ctrl + x U                    -> undo last change
+alt ;                         -> block comment
 * Recursive edit                                                      :emacs:
 Let you pause a macro / command
 C-u C-x q - enter recursive edit
@@ -600,6 +603,8 @@ S - search in search engine
 v - view bookmarks
 esc+w - copy url at point
 ctrl+x m - goto url at point
+C-c C-p - previous w3m buffer
+C-c C-n - next w3m buffer
 * EMMS								      :emacs:
 + - louder
 - - quieter
@@ -615,15 +620,10 @@ alt+x emms-add-playlist - add playlist to current playlist
 alt+x emms-shuffle - shuffle current playlist
 * Misc                                                                :emacs:
 ctrl + g                      -> Cancel
-ctrl + x u                    -> UNDO tree
-ctrl + x U                    -> undo last change
-
-
 esc+x package-list-packages   -> emacs erweiterung suchen / (de)installieren
 esc+x re-builder              -> regexp helper shows matches in buffer
 esc+x quoted-insert <key>     -> to get keycode to insert in set-key command
 alt  + x compare-windows      -> compare buffers of visible windows
-alt ;                         -> block comment
 alt  + x revert-buffer        -> reload the file
 alt  + x highlight-changes-mode
 ctrl + x esc esc              -> show executed commands as lisp code
