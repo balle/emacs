@@ -541,6 +541,7 @@ n - next unread
 p - previous unread
 r - reply
 R - reply including copy
+S w - reply to all
 C-c C-f - forward article
 t - show all header
 m - compose new mail
