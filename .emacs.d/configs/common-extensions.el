@@ -11,11 +11,18 @@
 			    bookmark+
 			    smartparens
 			    outline-magic
+			    spray
 			    ibuffer-git
 			    ibuffer-tramp))
 
 (add-to-list 'load-path "~/.emacs.d/extensions/outline-magic")
 (require 'outline-magic)
+
+; speed reading mode
+(require spray)
+(setq spray-wpm 400)
+(setq spray-margin-top 1)
+(setq spray-margin-left 1)
 
 ; kill ring browser
 (require 'browse-kill-ring)
