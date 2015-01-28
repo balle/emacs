@@ -31,7 +31,7 @@
 (require 'outline-magic)
 
 ; alarm clock
-;(require 'alarm)
+(require 'alarm)
 
 ; M-x ido completion
 (require 'smex)
