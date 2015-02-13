@@ -33,9 +33,21 @@
   (interactive)
   (gnus-summary-insert-old-articles 20))
 
+(defun my-gnus-mark-region-as-spam ()
+  (interactive)
+  (if (use-region-p)
+    (progn
+      (let ((nr-lines (count-lines (region-beginning) (region-end))))
+	(save-excursion
+	  (goto-char (region-beginning))
+	  (gnus-summary-mark-as-spam nr-lines))))
+    (gnus-summary-mark-as-spam 1)))
+
+
 (let ((map gnus-summary-mode-map))
   (define-key map (kbd "x") 'my-gnus-summary-move-article-to-trash)
   (define-key map (kbd "X") 'my-gnus-summary-delete-article)
+  (define-key map (kbd "$") 'my-gnus-mark-region-as-spam)
   (define-key map (kbd "/l") 'my-gnus-show-last-articles)
   (define-key map (kbd "c") 'my-gnus-summary-catchup-and-exit))
 
