@@ -81,6 +81,15 @@
    kept-old-versions 3
    version-control t)       ; use versioned backups
 
+;;
+;; dired
+;;
+
+(setq dired-recursive-deletes 'always)
+(setq dired-recursive-copies 'always)
+(setq dired-dwim-target t)
+(setq dired-listing-switches "--group-directories-first -alh")
+
 ; auto save interval
 (setq auto-save-default t)
 ;(setq auto-save-interval 300)
