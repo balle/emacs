@@ -304,6 +304,8 @@ f9                    - fetch redmine tickets
 ctrl + c ctrl + x ctrl + i - start clocking time
 ctrl + c ctrl + x ctrl + o - stop clocking time
 
+ctrl + c ctrl + e     - export
+
 ctrl + x t a          - show termin list
 ctrl + x t h          - show hacking list
 ctrl + t l            - show latex list
@@ -317,6 +319,7 @@ ctrl + x t x          - show next list
 f8                    - new entry
 alt + x org-tags-view - show todo list for one day
 alt + x org-agenda
+alt + x org-refile    - move an entry to another heading
 
 * Spreadsheet 							      :emacs:
 lines are indicated with @
