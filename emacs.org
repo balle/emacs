@@ -285,6 +285,8 @@ ctrl + c ctrl + s     - insert schedule
 ctrl + c ctrl + d     - insert deadline
 ctrl + c up / down    - change priority
 ctrl + c ctrl + z     - take a note to an entry
+ctrl+c ctrl+x e       - add effort to task
+ctrl+c ctrl+x p       - add property to task
 ctrl + c l            - store link location in file
 ctrl + c ctrl + l     - insert link
 ctrl + c ctrl + o     - open thing at pointer
@@ -293,16 +295,19 @@ ctrl + c '            - open src block in new buffer
 
 f3                    - agenda view
   a - weekly / daily view
-  d - day view
-  w - week view
-  m - month view
-  y - year view
+  v d - day view
+  v w - week view
+  v m - month view
+  v y - year view
+  j   - jump to date
   right - next
   left - prev
 f9                    - fetch redmine tickets
   tab                 - insert ticket into org file
 ctrl + c ctrl + x ctrl + i - start clocking time
 ctrl + c ctrl + x ctrl + o - stop clocking time
+
+ctl + c +             - sum up columns in org-table
 
 ctrl + x t a          - show termin list
 ctrl + x t h          - show hacking list
