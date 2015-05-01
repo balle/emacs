@@ -42,7 +42,7 @@
 
 ; Capture templates for: TODO tasks, Notes, appointments
 ; from http://doc.norang.ca/org-mode.html
-(setq org-capture-templates (quote (("t" "todo" entry (file "~/organize/TODO.org") "** TODO %? ")
+(setq org-capture-templates (quote (("t" "todo" entry (file "~/organize/TODO.org") "** TODO %? \n:PROPERTIES:\n:CREATED:  <%T>\n:EXPIRY:   <%(org-insert-time-stamp (org-read-date t t \"+6m\"))>\n:END:")
                                     ("b" "buy" entry (file "~/organize/TODO.org") "** %?   :buy:")
                                     ("d" "day" entry (file "~/organize/TODO.org") "** %?   :day:")
                                     ("w" "week" entry (file "~/organize/TODO.org") "** %?   :week:")
@@ -50,6 +50,9 @@
                                     ("y" "year" entry (file "~/organize/TODO.org") "** %?   :year:")
                                     ("D" "diary" entry (file "~/organize/diary.org.gpg") "* %T %?")
 				    ("e" "emacs" entry (file "~/organize/emacs.org") "** %?   :emacs:"))))
+
+(require 'org-expiry)
+(setq org-expiry-handler-function 'org-toggle-archive-tag)
 
 ; functions to show todos / notes / appointments
 (defun balle-show-emacs-list ()
