@@ -52,7 +52,9 @@
 				    ("e" "emacs" entry (file "~/organize/emacs.org") "** %?   :emacs:"))))
 
 (require 'org-expiry)
-(setq org-expiry-handler-function 'org-toggle-archive-tag)
+(setq org-expiry-confirm-flag nil)
+;(defvar org-expiry-handler-function 'org-expiry-archive-subtree)
+(defun org-expiry-handler-function () (org-expiry-add-keyword "EXPIRED"))
 
 ; functions to show todos / notes / appointments
 (defun balle-show-emacs-list ()
