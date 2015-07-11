@@ -459,6 +459,7 @@ u - unmark
 U - unmark all
 t - mark all
 ~ - mark backup files
+* . - mark files with extension
 r - rename
 Q - rename with regexp
 R - move marked files
