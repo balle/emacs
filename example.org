@@ -1,7 +1,7 @@
 #+TITLE: Test presentation in org-mode
 #+AUTHOR: Bastian Ballmann
 #+LaTeX_CLASS: beamer
-#+LaTeX_CLASS_OPTIONS: [presentation,smaller]
+#+LaTeX_CLASS_OPTIONS: [presentation]
 #+BEAMER_THEME: default
 #+OPTIONS: toc:2 H:2
  
