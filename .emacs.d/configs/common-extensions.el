@@ -19,7 +19,7 @@
 (require 'outline-magic)
 
 ; speed reading mode
-(require spray)
+(require 'spray)
 (setq spray-wpm 400)
 (setq spray-margin-top 1)
 (setq spray-margin-left 1)

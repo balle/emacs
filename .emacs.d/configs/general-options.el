@@ -44,6 +44,7 @@
 (setq bookmark-save-flag 1)
 
 ; package repositories
+(require 'package)
 (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/") t)
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
@@ -84,7 +85,7 @@
 ;;
 ;; dired
 ;;
-(put 'dired-find-alternate-file 'disabled nil) ; reuse buffer
+(define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file)
 (setq dired-recursive-deletes 'always)
 (setq dired-recursive-copies 'always)
 (setq dired-dwim-target t)
@@ -94,6 +95,11 @@
 (setq auto-save-default t)
 ;(setq auto-save-interval 300)
 ;(setq auto-save-timeout 300)
+
+;; dired
+(require 'dired)
+(setq dired-recursive-deletes 'always)
+(define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file)
 
 ; suspress kill process questions
 (setq kill-buffer-query-functions
