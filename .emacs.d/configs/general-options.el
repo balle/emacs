@@ -96,11 +96,6 @@
 ;(setq auto-save-interval 300)
 ;(setq auto-save-timeout 300)
 
-;; dired
-(require 'dired)
-(setq dired-recursive-deletes 'always)
-(define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file)
-
 ; suspress kill process questions
 (setq kill-buffer-query-functions
  (remove 'process-kill-buffer-query-function
