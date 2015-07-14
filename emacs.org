@@ -475,6 +475,7 @@ D - delete
 X or ! - execute shell command on marked files (? file get replace with single file name, * with all)
 + - mkdir
 ^ - go dir up
+ctrl + x ctl + j - in a file buffer jump to dir of file in dired
 ctrl + u s - sort file by ls switches
 esc + x dired-toggle-read-only - mass rename files in buffer press C-c C-c to commit changes
 esc + x dired-find - invoke find and display results in a dired buffer

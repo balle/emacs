@@ -85,10 +85,13 @@
 ;;
 ;; dired
 ;;
+(require 'dired)
+(require 'dired-x)
+(require 'dired+)
 (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file)
 (setq dired-recursive-deletes 'always)
 (setq dired-recursive-copies 'always)
-(setq dired-dwim-target t)
+(setq dired-dwim-target t) ; copy between two dired buffers in split window
 (setq dired-listing-switches "--group-directories-first -alh")
 
 ; auto save interval
