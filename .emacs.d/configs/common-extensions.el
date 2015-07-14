@@ -7,6 +7,7 @@
 			    flycheck
 			    key-chord
 			    ace-jump-mode
+			    dired+
 			    win-switch
 			    bookmark+
 			    smartparens
