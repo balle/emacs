@@ -64,6 +64,9 @@
 (setq yas/indent-line nil)
 (yas-global-mode 1)
 
+(add-hook 'text-mode-hook 'yas-minor-mode)
+(add-hook 'text-mode-hook 'auto-complete-mode)
+
 ; flycheck - better syntax checking
 (if (>= emacs-major-version 24)
     (progn
