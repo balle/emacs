@@ -414,7 +414,8 @@ ctrl + space ctrl + space -> push pos to mark ring
 ctrl + x ctrl + space     -> globally goto last pos in mark ring
 ctrl + u ctrl + space     -> goto last pos in mark ring in current buffer
 ctrl + x p <return> - make anonymous bookmark
-
+ctrl + x p t + a          -> add a tag
+ctrl + x p t - a          -> remove a tag
 * Macros 							      :emacs:
 ctrl + x ( -> begin macro recording
 ctrl + x ) -> end macro recording

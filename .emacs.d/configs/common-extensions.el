@@ -8,6 +8,7 @@
 			    key-chord
 			    ace-jump-mode
 			    dired+
+			    bookmark+
 			    win-switch
 			    bookmark+
 			    smartparens
@@ -33,6 +34,10 @@
 
 ; alarm clock
 (require 'alarm)
+
+; more bookmarking features like tags
+(require 'bookmark+)
+(setq bmkp-prompt-for-tags-flag nil)
 
 ; M-x ido completion
 (require 'smex)
