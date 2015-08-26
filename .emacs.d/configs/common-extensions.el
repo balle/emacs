@@ -10,7 +10,6 @@
 			    dired+
 			    bookmark+
 			    win-switch
-			    bookmark+
 			    smartparens
 			    outline-magic
 			    spray
