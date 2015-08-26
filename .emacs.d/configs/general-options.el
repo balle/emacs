@@ -2,6 +2,7 @@
 (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
+(if (display-graphic-p) (set-default-font "Monospace-11"))
 
 ; ido mode
 (setq ido-enable-flex-matching t)
@@ -86,8 +87,8 @@
 ;; dired
 ;;
 (require 'dired)
-(require 'dired-x)
-(require 'dired+)
+;(require 'dired-x)
+;(require 'dired+)
 (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file)
 (setq dired-recursive-deletes 'always)
 (setq dired-recursive-copies 'always)
