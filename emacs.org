@@ -617,7 +617,7 @@ alt + k - show cookies
 s - show history
 S - search in search engine
 v - view bookmarks
-esc+w - copy url at point
+u - copy url at point
 ctrl+x m - goto url at point
 C-c C-p - previous w3m buffer
 C-c C-n - next w3m buffer
