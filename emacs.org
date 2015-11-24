@@ -307,11 +307,19 @@ f9                    - fetch redmine tickets
 ctrl + c ctrl + x ctrl + i - start clocking time
 ctrl + c ctrl + x ctrl + o - stop clocking time
 
-<<<<<<< HEAD
 ctrl + c ctrl + e     - export
-=======
-ctl + c +             - sum up columns in org-table
->>>>>>> e31de9c73e968c0a5fdc4b92b59cc5ce008cad86
+
+ctrl + super + down   - insert row
+ctrl + super + up     - kill row
+alt + super + right   - insert column
+alt + super + left    - kill column
+alt + left / right    - move column left / right
+alt + up / down       - move row up / down
+ctrl + c ^            - sort lines
+
+ctrl + c =            - insert / edit field formula
+ctrl + u ctrl + c =   - insert / edit column formula
+ctrl + c +             - sum up columns in org-table
 
 ctrl + x t a          - show termin list
 ctrl + x t h          - show hacking list
