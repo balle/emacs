@@ -85,11 +85,24 @@ return result
 |    60 | 10 |           5.0 |
 #+TBLFM: $3='(org-sbe "sampformula" (angle $1) (r $2))
 
-
 ** Working with functions and parameters
 
 Test function call call_hello("Lilu")
 
+** using output as input of another block (needs org-babel)
+#+NAME: basic_query 
+#+BEGIN_SRC SQL 
+  SELECT name, grade FROM students 
+#+END_SRC 
+
+#+BEGIN_SRC python :export results :noweb yes :tangle yes
+import sql_helper 
+query = """
+    <<basic_query>>
+    """
+query_status = sql_helper.run_query(query)  
+
+#+END_SRC 
 * Finish
 [[http://www.codekid.net][Just the blog of some code kiddy]]
 [[~/Pictures/balle_baeh.jpg]]
