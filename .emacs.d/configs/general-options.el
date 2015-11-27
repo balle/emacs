@@ -95,6 +95,11 @@
 (setq dired-dwim-target t) ; copy between two dired buffers in split window
 (setq dired-listing-switches "--group-directories-first -alh")
 
+; async dired
+(autoload 'dired-async-mode "dired-async.el" nil t)
+(dired-async-mode 1)
+
+
 ; auto save interval
 (setq auto-save-default t)
 ;(setq auto-save-interval 300)
