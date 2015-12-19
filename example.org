@@ -103,6 +103,12 @@ query = """
 query_status = sql_helper.run_query(query)  
 
 #+END_SRC 
+** insert org table into sql db
+#+headers: :var table=example-table-for-sql
+#+begin_src sql :engine mysql
+load data infile "$table" into mytable;
+#+end_src
+
 * Finish
 [[http://www.codekid.net][Just the blog of some code kiddy]]
 [[~/Pictures/balle_baeh.jpg]]
