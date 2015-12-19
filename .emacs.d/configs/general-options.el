@@ -96,8 +96,8 @@
 (setq dired-listing-switches "--group-directories-first -alh")
 
 ; async dired
-(autoload 'dired-async-mode "dired-async.el" nil t)
-(dired-async-mode 1)
+;(autoload 'dired-async-mode "dired-async.el" nil t)
+;(dired-async-mode 1)
 
 
 ; auto save interval
