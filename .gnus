@@ -203,6 +203,7 @@
 
 ; scoring
 (setq gnus-use-scoring t)
+(setq gnus-use-adaptive-scoring 'word)
 (setq bbdb/gnus-score-default 2000)
 (setq max-specpdl-size 100000)
 
