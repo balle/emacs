@@ -96,6 +96,7 @@
 (setq dired-listing-switches "--group-directories-first -alh")
 
 ; async dired
+(add-to-list 'load-path "~/.emacs.d/extensions/emacs-async")
 (autoload 'dired-async-mode "dired-async.el" nil t)
 (dired-async-mode 1)
 
