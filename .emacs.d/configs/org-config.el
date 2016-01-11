@@ -242,4 +242,13 @@
 ;(add-hook 'org-clock-in-hook 'org-recentf-save-and-empty)
 ;(add-hook 'org-clock-out-hook 'org-recentf-dblock-update)
 
+;; happily borrowed from http://stackoverflow.com/questions/10681766/emacs-org-mode-textual-reference-to-a-fileline
+(defun position-to-kill-ring ()
+    "Copy to the kill ring a string in the format \"file-name:line-number\"
+for the current buffer's file name, and the line number at point."
+    (interactive)
+    (kill-new
+     (format "%s::%d" (buffer-file-name) (save-restriction
+					  (widen) (line-number-at-pos)))))
+
 (org-mode)
