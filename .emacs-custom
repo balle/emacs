@@ -49,3 +49,15 @@
 (setq load-terminal-config t)
 (setq load-python-config nil)
 (setq load-music-config t)
+
+
+;; my abbrevations
+(define-abbrev-table 'global-abbrev-table '(
+   ("2luv" "♥")
+   ("2smly" "☺")))
+
+;; stop asking whether to save newly added abbrev when quitting emacs
+(setq save-abbrevs nil)
+
+;; turn on abbrev mode globally
+(setq-default abbrev-mode t)
