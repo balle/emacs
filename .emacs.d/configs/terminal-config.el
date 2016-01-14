@@ -15,6 +15,7 @@
     (add-to-list 'term-bind-key-alist '("C-c C-p" . multi-term-prev))
     (add-to-list 'term-bind-key-alist '("C-c C-l" . term-line-mode))
     (add-to-list 'term-bind-key-alist '("C-c C-k" . term-char-mode))
+    (add-to-list 'term-bind-key-alist '("C-z" . term-send-raw))
 ))
 
 (global-set-key (kbd "C-c t") 'multi-term-next)
