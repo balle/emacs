@@ -61,3 +61,12 @@
 
 ;; turn on abbrev mode globally
 (setq-default abbrev-mode t)
+
+;; or to turn on abbrev mode only for some modes
+;; (setq balle-abbrev-modes '(erc-mode
+;; 			   message-mode
+;; 			   text-mode
+;; 			   fundamental-mode
+;; 			   emacs-lisp-mode))
+
+;; (dolist (mode (add-hook (quote mode) '(lambda () (abbrev-mode)))) balle-abbrev-modes)
