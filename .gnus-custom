@@ -48,7 +48,7 @@
 (set (if (< emacs-major-version 24)
          'nnimap-split-inbox
        'nnimap-inbox)
-     "INBOX") 
+     "INBOX")
 
 (gnus-registry-initialize)
 (setq nnimap-split-rule 'nnmail-split-fancy)
@@ -64,3 +64,20 @@
           (any "sbcl-help@lists.sourceforge.net" "INBOX/Mailinglist/SBCL")
           "INBOX"    ;; or "mail.misc" for nnml/POP3
       ))
+
+;; configure the order of your topics
+(setq gnus-topic-topology '(("Gnus" visible nil nil)
+			    (("CCC" visible nil nil))
+			    (("Emacs" visible nil
+			      ((score-file . "Emacs.SCORE"))))
+			    (("General" visible nil
+			      ((score-file . "General.SCORE"))))
+			    (("Linux" visible nil
+			      ((score-file . "Linux.SCORE"))))
+			    (("OpenBSD" visible nil
+			      ((score-file . "OpenBSD.SCORE"))))
+			    (("Lisp" visible nil
+			      ((score-file . "Lisp.SCORE"))))
+			    (("Security" visible nil
+			      ((score-file . "Security.SCORE"))))
+			    (("Mail" visible nil nil))))

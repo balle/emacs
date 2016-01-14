@@ -96,8 +96,9 @@
 (setq dired-listing-switches "--group-directories-first -alh")
 
 ; async dired
-;(autoload 'dired-async-mode "dired-async.el" nil t)
-;(dired-async-mode 1)
+(add-to-list 'load-path "~/.emacs.d/extensions/emacs-async")
+(autoload 'dired-async-mode "dired-async.el" nil t)
+(dired-async-mode 1)
 
 
 ; auto save interval

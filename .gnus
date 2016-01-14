@@ -203,7 +203,9 @@
 
 ; scoring
 (setq gnus-use-scoring t)
-(setq gnus-use-adaptive-scoring 'word)
+(setq gnus-use-adaptive-scoring '(word line))
+(setq gnus-adaptive-word-length-limit 5)
+(setq gnus-adaptive-word-no-group-words t)
 (setq bbdb/gnus-score-default 2000)
 (setq max-specpdl-size 100000)
 
