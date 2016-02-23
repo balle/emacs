@@ -13,6 +13,7 @@
 			    smartparens
 			    outline-magic
 			    spray
+			    paradox
 			    ibuffer-git
 			    ibuffer-tramp))
 
