@@ -7,6 +7,9 @@
 (org-babel-do-load-languages
  'org-babel-load-languages (quote ((emacs-lisp . t)
 				   (sqlite . t)
+				   (perl . t)
+				   (ruby . t)
+				   (clojure . t)
 				   (sh . t)
 				   (python . t))))
 
