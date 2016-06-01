@@ -5,6 +5,8 @@
 (require 'key-chord)
 (require 'yasnippet)
 
+(setq term-buffer-maximum-size 20480)
+
 (key-chord-mode 1)
 (setq key-chord-one-key-delay 0.15)
 (key-chord-define-global "jj" 'ace-jump-mode)
