@@ -43,6 +43,7 @@
 (setq load-javascript-config nil)
 (setq load-latex-config nil)
 (setq load-lisp-config nil)
+(setq load-ansible-config nil)
 (setq load-puppet-config nil)
 (setq load-rst-config t)
 (setq load-sunrise-commander-config t)
