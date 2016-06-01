@@ -51,6 +51,12 @@
   (define-key map (kbd "/l") 'my-gnus-show-last-articles)
   (define-key map (kbd "c") 'my-gnus-summary-catchup-and-exit))
 
+(defun my-gnus-article-browse-url ()
+  (interactive)
+  (browse-url (thing-at-point 'url)))
+
+(define-key gnus-article-mode-map (kbd "f") 'my-gnus-article-browse-url)
+
 ; dont ask stupid questions
 (setq gnus-novice-user nil)
 
