@@ -29,6 +29,13 @@
   (gnus-summary-move-article nil my-trash-folder)
   (next-line))
 
+(defun my-gnus-summary-save-parts (&optional arg)
+  (interactive "P")
+  (let ((directory "~/Downloads"))
+    (message "Saving all MIME parts to %s..." directory)
+    (gnus-summary-save-parts ".*" directory arg)
+        (message "Saving all MIME parts to %s...done" directory)))
+
 (defun my-gnus-show-last-articles ()
   (interactive)
   (gnus-summary-insert-old-articles 20))
