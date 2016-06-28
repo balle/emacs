@@ -9,6 +9,7 @@ emacs
 gxmessage
 xclip
 xpp
+pyflakes
 
 Afterwards just add three links
 cd ~
@@ -34,7 +35,7 @@ Therefore goto the *scratch* and execute
 
 Documentation about keyboard shortcuts can be found in emacs.org
 
-For GNUS copy and edit .mailcap and .gnus-custom. Link .gnus to ~/.gnus and 
+For GNUS copy and edit .mailcap and .gnus-custom. Link .gnus to ~/.gnus and
 create a ~/.authinfo with the following content
 
 machine mail.domain.com login username@domain.com port 25 password MyPASS

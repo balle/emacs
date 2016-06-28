@@ -1,7 +1,10 @@
 (install-missing-packages '(ctable
 			    epc
 			    deferred
-			    jedi))
+			    jedi
+			    pyflakes
+			    pyimport
+			    python-test))
 
 ;; auto completion for jedi knights :)
 (require 'jedi)
@@ -95,3 +98,13 @@ in the current *Python* session."
         (setq ropemacs-autoimport-modules '("os.*" "shutil.*" "string.*" "sys.*" "logging" "logging.*" "urllib" "urllib2" "flask"))
         (setq ansi-color-for-comint-mode t)
 ))
+
+;; python code checker
+(require 'pyflakes)
+
+;; manage python imports
+(require 'pyimport)
+(setq pyimport-pyflakes-path "/usr/bin/pyflakes")
+
+;; run python unit tests from within emacs
+(require 'python-test)
