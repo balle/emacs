@@ -3,6 +3,7 @@
 
 (require 'org-install)
 (require 'ob-tangle)
+(require 'org-gnus)
 
 (org-babel-do-load-languages
  'org-babel-load-languages (quote ((emacs-lisp . t)
@@ -152,8 +153,10 @@
 
 (setq appt-disp-window-function (function balle-org-alarm))
 
+(global-set-key (kbd "C-c l") 'org-store-link)
+
 ;(add-hook 'org-mode-hook '(lambda ()
-;                           (define-key org-mode-map (kbd "C-c l") 'org-store-link)
+;                           (define-key org-mode-map (kbd "C-c l") 'org-store-link)))
 ;                           (define-key org-mode-map (kbd "M-<left>") 'org-agenda-do-date-earlier)
 ;                           (define-key org-mode-map (kbd "M-<right>") 'org-agenda-do-date-later)))
 
