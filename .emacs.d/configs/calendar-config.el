@@ -47,6 +47,7 @@
         (holiday-fixed 5 1 "1. Mai")
         (holiday-fixed 10 3 "Tag der Deutschen Einheit")))
 
+(require 'holidays)
 (setq christian-holidays
       '(
         (holiday-float 12 0 -4 "1. Advent" 24)
@@ -72,7 +73,7 @@
                                  (list 4 19 displayed-year))
                                 adjusted-epact))
                (easter (calendar-dayname-on-or-before 0 (+ paschal-moon 7))))
-          (filter-visible-calendar-holidays
+          (holiday-filter-visible-calendar
            (mapcar
             (lambda (l)
               (list (calendar-gregorian-from-absolute (+ easter (car l)))
@@ -93,5 +94,4 @@
         (holiday-float 11 0 1 "Totensonntag" 20)))
 
 (setq calendar-holidays
-      (append general-holidays local-holidays other-holidays
-              christian-holidays solar-holidays))
+      (append general-holidays christian-holidays))
