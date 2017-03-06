@@ -80,10 +80,15 @@
 (add-hook 'gnus-group-mode-hook 'gnus-topic-mode)
 
 ;; use threads
+(setq gnus-show-threads t)
 (setq gnus-summary-thread-gathering-function
             'gnus-gather-threads-by-subject)
 (setq gnus-thread-hide-subtree t)
 ;(setq gnus-thread-ignore-subject t)
+
+(setq gnus-article-sort-functions
+      '(gnus-article-sort-by-date
+	gnus-thread-sort-by-subject))
 
 ; remember password for session
 (setq imap-store-password t)
@@ -147,15 +152,15 @@
 (setq nnmail-expiry-wait 'immediate)
 
 ;; show all old messages in mail (INBOX) groups
-;(defadvice gnus-summary-mode (after show-all-mails (&optional group))
-;  (if (search "INBOX" group)
-;      (gnus-summary-insert-old-articles t)))
+;; (defadvice gnus-topic-select-group (after display-old-mails activate)
+;;   (gnus-summary-insert-old-articles t))
 
 ;; vcard support
 ;; (require 'vcard)
 
 ;; don't ask how many emails to download
 (setq gnus-large-newsgroup t)
+(setq gnus-newsgroup-maximum-articles 500)
 
 ;; Read usenet news and RSS feeds with gwene.org
 (setq gnus-secondary-select-methods '((nntp "news.gwene.org")))
@@ -216,9 +221,10 @@
 
 ; scoring
 (setq gnus-use-scoring t)
-(setq gnus-use-adaptive-scoring '(word line))
-(setq gnus-adaptive-word-length-limit 5)
-(setq gnus-adaptive-word-no-group-words t)
+;(setq gnus-use-adaptive-scoring '(word line))
+;(setq gnus-use-adaptive-scoring nil)
+;(setq gnus-adaptive-word-length-limit 5)
+;(setq gnus-adaptive-word-no-group-words t)
 (setq bbdb/gnus-score-default 2000)
 (setq max-specpdl-size 100000)
 
