@@ -1,3 +1,10 @@
+
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+(package-initialize)
+
 (add-to-list 'load-path "~/.emacs.d/configs")
 (add-to-list 'load-path "~/.emacs.d/extensions")
 
@@ -59,6 +66,9 @@
  ;; If there is more than one, they won't work right.
  '(auth-source-save-behavior nil)
  '(bmkp-last-as-first-bookmark-file "~/.emacs.bmk")
+ '(package-selected-packages
+   (quote
+    (binclock pomidor auto-complete-distel edts yasnippet win-switch web-mode w3m use-package undo-tree try trr tex-smart-umlauts spray spotify smex smartparens robe restclient python-test pyimport pyflakes paradox outline-magic ob-ipython multishell multi-term magit key-chord jedi ibuffer-tramp ibuffer-git hy-mode helm-rhythmbox helm-recoll helm-emms gnuplot fooddice flycheck dired+ clojure-cheatsheet calfw browse-kill-ring bookmark+ axiom-environment ack ace-jump-mode ac-slime ac-math ac-cider)))
  '(send-mail-function (quote smtpmail-send-it)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -66,3 +76,4 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+(put 'dired-find-alternate-file 'disabled nil)

@@ -56,13 +56,10 @@
 ; Capture templates for: TODO tasks, Notes, appointments
 ; from http://doc.norang.ca/org-mode.html
 (setq org-capture-templates (quote (("t" "todo" entry (file "~/organize/TODO.org") "** TODO %? \n:PROPERTIES:\n:CREATED:  <%T>\n:EXPIRY:   <%(org-insert-time-stamp (org-read-date t t \"+6m\"))>\n:END:")
+				    ("n" "next" entry (file "~/organize/TODO.org") "** NEXT %? \n:PROPERTIES:\n:CREATED:  <%T>\n:EXPIRY:   <%(org-insert-time-stamp (org-read-date t t \"+6m\"))>\n:END:")
+				    ("T" "today" entry (file "~/organize/TODO.org") "** TODAY %?")
                                     ("b" "buy" entry (file "~/organize/TODO.org") "** %?   :buy:")
-                                    ("d" "day" entry (file "~/organize/TODO.org") "** %?   :day:")
-                                    ("w" "week" entry (file "~/organize/TODO.org") "** %?   :week:")
-                                    ("m" "month" entry (file "~/organize/TODO.org") "** %?   :month:")
-                                    ("y" "year" entry (file "~/organize/TODO.org") "** %?   :year:")
-                                    ("D" "diary" entry (file "~/organize/diary.org.gpg") "* %T %?")
-				    ("e" "emacs" entry (file "~/organize/emacs.org") "** %?   :emacs:"))))
+				    ("r" "remember" entry (file "~/organize/TODO.org") "** %?   :remember:"))))
 
 (require 'org-expiry)
 (setq org-expiry-confirm-flag nil)
@@ -98,6 +95,13 @@
   (enlarge-window 10)
 )
 
+(defun balle-show-remember-list ()
+  (interactive)
+  (org-tags-view nil "remember")
+  (next-multiframe-window)
+  (enlarge-window 10)
+)
+
 (defun balle-show-waiting-list ()
   (interactive)
   (org-todo-list "WAITING")
@@ -112,35 +116,11 @@
   (enlarge-window 10)
 )
 
-(defun balle-show-started-list ()
+(defun balle-show-today-list ()
   (interactive)
-  (org-todo-list "STARTED")
+  (org-todo-list "TODAY")
   (next-multiframe-window)
   (enlarge-window 10)
-)
-
-(defun balle-show-daily-tasks ()
-  (interactive)
-  (switch-to-buffer-other-window "TODO.org")
-  (org-match-sparse-tree t "day")
-)
-
-(defun balle-show-weekly-tasks ()
-  (interactive)
-  (switch-to-buffer-other-window "TODO.org")
-  (org-match-sparse-tree t "week")
-)
-
-(defun balle-show-monthly-tasks ()
-  (interactive)
-  (switch-to-buffer-other-window "TODO.org")
-  (org-match-sparse-tree t "month")
-)
-
-(defun balle-show-yearly-tasks ()
-  (interactive)
-  (switch-to-buffer-other-window "TODO.org")
-  (org-match-sparse-tree t "year")
 )
 
 ; send notifications

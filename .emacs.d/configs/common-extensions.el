@@ -52,18 +52,8 @@
       (require 'git-gutter)
       (global-git-gutter-mode t)))
 
-; auto-completion
-(require 'auto-complete)
-(setq ac-dwim t)
-(ac-config-default)
-(define-key ac-complete-mode-map "\t" 'ac-expand)
-(setq-default ac-sources '(ac-source-yasnippet
-			   ac-source-abbrev
-			   ac-source-dictionary
-			   ac-source-words-in-same-mode-buffers))
-(global-auto-complete-mode t)
-
 ; yasnippets
+(require 'yasnippet)
 (if (fboundp 'yas/load-directory)
       (yas/load-directory "~/.emacs-snippets"))
 (setq yas/indent-line nil)
@@ -71,6 +61,19 @@
 
 (add-hook 'text-mode-hook 'yas-minor-mode)
 (add-hook 'text-mode-hook 'auto-complete-mode)
+
+(add-hook 'python-mode-hook 'yas-minor-mode)
+(add-hook 'python-mode-hook 'auto-complete-mode)
+
+; auto-completion
+(require 'auto-complete)
+(setq ac-dwim t)
+(ac-config-default)
+(setq-default ac-sources '(ac-source-yasnippet
+			   ac-source-abbrev
+			   ac-source-dictionary
+			   ac-source-words-in-same-mode-buffers))
+(global-auto-complete-mode t)
 
 ; flycheck - better syntax checking
 (if (>= emacs-major-version 24)

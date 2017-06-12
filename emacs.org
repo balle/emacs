@@ -279,6 +279,9 @@ d  -> show task
 
 * Org Mode                                                            :emacs:
 shift + tab           - hide / show all
+ctrl +c ctrl + u      - one layer up
+ctrl +c ctrl + j      - jump to
+ctrl + c ctrl + w     - move a headline
 ctrl + c ctrl + c     - tag an entry / execute code in src block
 ctrl + c ctrl + t     - mark as todo / done
 ctrl + c ctrl + s     - insert schedule
@@ -288,8 +291,8 @@ ctrl + c ctrl + z     - take a note to an entry
 ctrl+c ctrl+x e       - add effort to task
 ctrl+c ctrl+x p       - add property to task
 ctrl + c l            - store link location in file
-ctrl + c ctrl + l     - insert link
-ctrl + c ctrl + o     - open thing at pointer
+ctrl + c ctrl + l     - insert / edit link
+ctrl + c ctrl + o     - follow link / open thing at pointer
 ctrl + c /            - filter document
 ctrl + c '            - open src block in new buffer
 
@@ -484,9 +487,9 @@ D - delete
 X or ! - execute shell command on marked files (? file get replace with single file name, * with all)
 + - mkdir
 ^ - go dir up
+ctrl + x ctrl + q - edit file names like editing a buffer use C-c C-c to commit
 ctrl + x ctl + j - in a file buffer jump to dir of file in dired
 ctrl + u s - sort file by ls switches
-esc + x dired-toggle-read-only - mass rename files in buffer press C-c C-c to commit changes
 esc + x dired-find - invoke find and display results in a dired buffer
 ctrl + u s - sort directory listing
 =======
@@ -605,6 +608,7 @@ L - lower score
 V f - edit score file
 V t - display all score rules
 G p - To edit group properties. Insert ((score-file . "emacs.SCORE")) to define a score file for whole group
+    - Set (display all) to also see old messages
 G V - create virtual group
 G v - add topic or group to virtual group
 * Browsing with W3M						      :emacs:

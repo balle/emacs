@@ -67,6 +67,9 @@
 ; highlight brackets
 (show-paren-mode t)
 
+; show column number in modeline
+(column-number-mode 1)
+
 ; remote edit method is scp per default
 (setq tramp-default-method "ssh")
 (setq password-cache-expiry nil)
