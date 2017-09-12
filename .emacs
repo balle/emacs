@@ -70,7 +70,7 @@
  '(bmkp-last-as-first-bookmark-file "~/.emacs.bmk")
  '(package-selected-packages
    (quote
-    (binclock pomidor auto-complete-distel edts yasnippet win-switch web-mode w3m use-package undo-tree try trr tex-smart-umlauts spray spotify smex smartparens robe restclient python-test pyimport pyflakes paradox outline-magic ob-ipython multishell multi-term magit key-chord jedi ibuffer-tramp ibuffer-git hy-mode helm-rhythmbox helm-recoll helm-emms gnuplot fooddice flycheck dired+ clojure-cheatsheet calfw browse-kill-ring bookmark+ axiom-environment ack ace-jump-mode ac-slime ac-math ac-cider)))
+    (eshell-autojump binclock pomidor auto-complete-distel edts yasnippet win-switch web-mode w3m use-package undo-tree try trr tex-smart-umlauts spray spotify smex smartparens robe restclient python-test pyimport pyflakes paradox outline-magic ob-ipython multishell multi-term magit key-chord jedi ibuffer-tramp ibuffer-git hy-mode helm-rhythmbox helm-recoll helm-emms gnuplot fooddice flycheck dired+ clojure-cheatsheet calfw browse-kill-ring bookmark+ axiom-environment ack ace-jump-mode ac-slime ac-math ac-cider)))
  '(send-mail-function (quote smtpmail-send-it)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -79,3 +79,8 @@
  ;; If there is more than one, they won't work right.
  )
 (put 'dired-find-alternate-file 'disabled nil)
+
+;; fix https://lists.gnu.org/archive/html/info-gnu/2017-09/msg00006.html
+(eval-after-load "enriched"
+    '(defun enriched-decode-display-prop (start end &optional param)
+      (list start end)))
