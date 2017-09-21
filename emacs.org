@@ -594,6 +594,7 @@ O o - save article
 M b - bookmark article
 M B - remove bookmark
 K H - display article as HTML in browser
+C-u g - display article source (g to go back)
 a - post article to newsgroup
 G m - make directory / group
 G r - rename directory / group
