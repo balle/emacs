@@ -9,9 +9,10 @@
                            (nnir-search-engine imap)
                            (nnimap-authenticator login)))
 
-;(setq send-mail-function 'smtpmail-send-it)
-;(setq message-send-mail-function 'smtpmail-send-it)
-(setq smtpmail-default-smtp-server "mail.domain.tld")
+(setq send-mail-function    'smtpmail-send-it
+          smtpmail-smtp-server  "example.org"
+          smtpmail-stream-type  'starttls
+          smtpmail-smtp-service 587)
 
 ; for multiple smtp accounts use
 ;(defvar smtp-accounts
