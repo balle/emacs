@@ -1,4 +1,4 @@
-(install-missing-packages '(calfw))
+(install-missing-packages '(calfw calfw-cal calfw-ical calfw-org))
 
 ; calendar
 (require 'calfw-cal)
