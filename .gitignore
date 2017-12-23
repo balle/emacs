@@ -14,3 +14,6 @@
 .emacs.d/*/*.elc
 .emacs.d/*/*/*.elc
 .emacs.d/*/*/*/*.elc
+.emacs.d/ido.last
+.emacs.d/network-security.data
+.emacs.d/smex-items
