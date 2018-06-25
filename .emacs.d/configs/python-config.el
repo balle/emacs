@@ -2,9 +2,7 @@
 			    epc
 			    deferred
 			    jedi
-			    pyflakes
-			    pyimport
-			    python-test))
+			    pyflakes))
 
 ;; auto completion for jedi knights :)
 (require 'jedi)
@@ -103,8 +101,11 @@ in the current *Python* session."
 (require 'pyflakes)
 
 ;; manage python imports
-(require 'pyimport)
-(setq pyimport-pyflakes-path "/usr/bin/pyflakes")
+(if (>= emacs-major-version 25)
+  (progn
+    (install-missing-packages '(pyimport python-test))
+    (require 'pyimport)
+    (setq pyimport-pyflakes-path "/usr/bin/pyflakes")
 
-;; run python unit tests from within emacs
-(require 'python-test)
+    ;; run python unit tests from within emacs
+    (require 'python-test)))

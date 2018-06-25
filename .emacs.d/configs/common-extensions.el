@@ -3,8 +3,6 @@
 			    undo-tree
 			    browse-kill-ring
 			    smex
-			    magit
-			    flycheck
 			    key-chord
 			    ace-jump-mode
 			    dired+
@@ -44,10 +42,11 @@
 (smex-initialize)
 
 ; git settings
-(require 'magit)
 ; (setq magit-process-popup-time 3)
-(if (>= emacs-major-version 24)
+(if (>= emacs-major-version 25)
     (progn
+      (install-missing-packages '(magit))
+      (require 'magit)
       (add-to-list 'load-path "~/.emacs.d/extensions/emacs-git-gutter")
       (require 'git-gutter)
       (global-git-gutter-mode t)))
@@ -76,8 +75,9 @@
 (global-auto-complete-mode t)
 
 ; flycheck - better syntax checking
-(if (>= emacs-major-version 24)
+(if (>= emacs-major-version 25)
     (progn
+      (install-missing-packages '(flycheck))
       (require 'flycheck)
       (setq flycheck-pylintrc "~/.emacs.d/configs/pylint.rc")
       (add-hook 'after-init-hook #'global-flycheck-mode)
