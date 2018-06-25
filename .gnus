@@ -228,8 +228,5 @@
 (setq bbdb/gnus-score-default 2000)
 (setq max-specpdl-size 100000)
 
-;; fix possible tls cert check security hole
-(setq tls-program '("gnutls-cli --x509cafile %t -p %p %h"))
-
 ; load custom settings
 (load-file "~/.gnus-custom")

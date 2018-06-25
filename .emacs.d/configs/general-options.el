@@ -1,3 +1,14 @@
+; security settings
+(require 'tls)
+(require 'gnutls)
+(setq tls-checktrust t)
+(setq gnutls-verify-error t)
+(setq gnutls-min-prime-bits 1024)
+(setq network-security-level 'high)
+(setq tls-program
+      '("gnutls-cli -p %p --dh-bits=2048 --ocsp --x509cafile=%t \
+--priority='SECURE192:+SECURE128:-VERS-ALL:+VERS-TLS1.2:%%PROFILE_MEDIUM' %h"))
+
 ; disable menu-, tool- and scrollbar
 (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
@@ -48,7 +59,7 @@
 (require 'package)
 (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/") t)
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)
-(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+(add-to-list 'package-archives '("melpa" . "https://stable.melpa.org/packages/") t)
 
 
 ; delete seleted text when typing
