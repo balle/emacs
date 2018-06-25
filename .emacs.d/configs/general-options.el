@@ -3,7 +3,7 @@
 (require 'gnutls)
 (setq tls-checktrust t)
 (setq gnutls-verify-error t)
-(setq gnutls-min-prime-bits 1024)
+(setq gnutls-min-prime-bits 2048)
 (setq network-security-level 'high)
 (setq tls-program
       '("gnutls-cli -p %p --dh-bits=2048 --ocsp --x509cafile=%t \
