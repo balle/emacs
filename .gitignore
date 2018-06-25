@@ -16,4 +16,5 @@
 .emacs.d/*/*/*/*.elc
 .emacs.d/ido.last
 .emacs.d/network-security.data
+.emacs.d/.org-id-locations
 .emacs.d/smex-items
