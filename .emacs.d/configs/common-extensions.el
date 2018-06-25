@@ -12,6 +12,7 @@
 			    outline-magic
 			    spray
 			    paradox
+                            bug-hunter
 			    ibuffer-git
 			    ibuffer-tramp))
 
