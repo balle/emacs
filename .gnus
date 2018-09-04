@@ -50,6 +50,8 @@
 	  (gnus-summary-mark-as-spam nr-lines))))
     (gnus-summary-mark-as-spam 1)))
 
+(let ((map gnus-topic-mode-map))
+  (define-key map (kbd "RET") 'gnus-group-select-group-ephemerally))
 
 (let ((map gnus-summary-mode-map))
   (define-key map (kbd "x") 'my-gnus-summary-move-article-to-trash)
