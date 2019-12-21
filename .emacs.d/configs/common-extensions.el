@@ -54,8 +54,8 @@
 
 ; yasnippets
 (require 'yasnippet)
-(if (fboundp 'yas/load-directory)
-      (yas/load-directory "~/.emacs-snippets"))
+(if (fboundp 'yas-load-directory)
+      (yas-load-directory "~/.emacs-snippets"))
 (setq yas/indent-line nil)
 (yas-global-mode 1)
 
