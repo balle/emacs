@@ -21,6 +21,7 @@
 (setq load-ansible-config nil)
 (setq load-puppet-config nil)
 (setq load-python-config nil)
+(setq load-go-config nil)
 (setq load-spell-checking-config nil)
 (setq load-rst-config nil)
 (setq load-sunrise-commander-config nil)
@@ -50,6 +51,7 @@
 (if load-ansible-config (load "ansible-config"))
 (if load-puppet-config (load "puppet-config"))
 (if load-python-config (load "python-config"))
+(if load-go-config (load "go-config"))
 (if load-rst-config (load "rst-config"))
 (if load-spell-checking-config (load "spell-checking-config"))
 (if load-sunrise-commander-config (load "sunrise-config"))
@@ -67,7 +69,10 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(auth-source-save-behavior nil)
- '(bmkp-last-as-first-bookmark-file "~/.emacs.bmk")
+ '(bmkp-last-as-first-bookmark-file "~/.emacs.d/bookmarks")
+ '(org-agenda-files
+   (quote
+    ("~/organize/TODO.org" "~/organize/projekte.org" "~/organize/backlog.org" "~/organize/read.org")))
  '(package-selected-packages
    (quote
     (eshell-autojump binclock pomidor auto-complete-distel edts yasnippet win-switch web-mode w3m use-package undo-tree try trr tex-smart-umlauts spray spotify smex smartparens robe restclient python-test pyimport pyflakes paradox outline-magic ob-ipython multishell multi-term magit key-chord jedi ibuffer-tramp ibuffer-git hy-mode helm-rhythmbox helm-recoll helm-emms gnuplot fooddice flycheck dired+ clojure-cheatsheet calfw browse-kill-ring bookmark+ axiom-environment ack ace-jump-mode ac-slime ac-math ac-cider)))

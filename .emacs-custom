@@ -50,6 +50,7 @@
 (setq load-terminal-config t)
 (setq load-eshellconfig t)
 (setq load-python-config nil)
+(setq load-go-config nil)
 (setq load-music-config t)
 
 

@@ -1,0 +1,3 @@
+[submodule ".emacs.d/extensions/go-mode.el"]
+	path = .emacs.d/extensions/go-mode.el
+	url = https://github.com/dominikh/go-mode.el.git
