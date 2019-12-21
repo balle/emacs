@@ -8,6 +8,8 @@
     
     (setq inferior-lisp-program "/usr/bin/sbcl --noinform --no-linedit")
     ;(setq inferior-lisp-program "/usr/bin/clisp")
+
+    (load (expand-file-name "~/quicklisp/slime-helper.el"))
     
     (setq slime-net-coding-system 'utf-8-unix)
     (setq lisp-indent-function 'common-lisp-indent-function)
