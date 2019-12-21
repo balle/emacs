@@ -1,18 +1,18 @@
 (add-to-list 'load-path "~/.emacs.d/extensions/org-redmine")
 (add-to-list 'auto-mode-alist '("\\.\\(org\\|org_archive\\)$" . org-mode))
 
-(require 'org-install)
-(require 'ob-tangle)
-(require 'org-gnus)
+;(require 'org-install)
+;(require 'ob-tangle)
+;(require 'org-gnus)
 
-(org-babel-do-load-languages
- 'org-babel-load-languages (quote ((emacs-lisp . t)
-				   (sqlite . t)
-				   (perl . t)
-				   (ruby . t)
-				   (clojure . t)
-				   (sh . t)
-				   (python . t))))
+;; (org-babel-do-load-languages
+;;  'org-babel-load-languages (quote ((emacs-lisp . t)
+;; 				   (sqlite . t)
+;; 				   (perl . t)
+;; 				   (ruby . t)
+;; 				   (clojure . t)
+;; 				   (sh . t)
+;; 				   (python . t))))
 
 ;(setq org-agenda-files (list "~/organize/TODO.org" "~/organize/projekte.org" "~/organize/backlog.org"  "~/organize/emacs.org" "~/organize/read.org"))
 (setq org-agenda-files '("~/organize/"))
@@ -55,8 +55,8 @@
 
 ; Capture templates for: TODO tasks, Notes, appointments
 ; from http://doc.norang.ca/org-mode.html
-(setq org-capture-templates (quote (("t" "todo" entry (file "~/organize/TODO.org") "** TODO %? \n:PROPERTIES:\n:CREATED:  <%T>\n:EXPIRY:   <%(org-insert-time-stamp (org-read-date t t \"+6m\"))>\n:END:")
-				    ("n" "next" entry (file "~/organize/TODO.org") "** NEXT %? \n:PROPERTIES:\n:CREATED:  <%T>\n:EXPIRY:   <%(org-insert-time-stamp (org-read-date t t \"+6m\"))>\n:END:")
+(setq org-capture-templates (quote (("t" "todo" entry (file "~/organize/TODO.org") "** TODO %?")
+				    ("n" "next" entry (file "~/organize/TODO.org") "** NEXT %?")
 				    ("T" "today" entry (file "~/organize/TODO.org") "** TODAY %?")
                                     ("b" "buy" entry (file "~/organize/TODO.org") "** %?   :buy:")
 				    ("r" "remember" entry (file "~/organize/TODO.org") "** %?   :remember:"))))
