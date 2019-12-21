@@ -18,3 +18,8 @@
 .emacs.d/network-security.data
 .emacs.d/.org-id-locations
 .emacs.d/smex-items
+.emacs.d/.python-environments/
+.emacs.d/bookmarks
+.emacs.d/cache/
+.eshell/history
+.eshell/lastdir
