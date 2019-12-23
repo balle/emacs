@@ -15,7 +15,6 @@ Afterwards just add three links
 cd ~
 ln -s emacs/.emacs
 ln -s emacs/.emacs.d
-ln -s emacs/snippets .emacs-snippets
 ln -s emacs/.eshell
 
 After first run of emacs you need to install some python modules if you want
