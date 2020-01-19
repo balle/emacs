@@ -10,10 +10,16 @@
 (require 'go-guru)
 (require 'go-autocomplete)
 
+;; formating options
 (setq tab-width 4)
 (setq standard-indent 4)
 (setq indent-tabs-mode nil)
+
+;; automatically add imports on save
+(setq gofmt-command "goimports")
 (setq gofmt-args "")
+(add-hook 'before-save-hook 'gofmt-before-save)
+
 
 ;; Key bindings specific to go-mode
 (define-key go-mode-map "\C-cg" 'godef-jump)
