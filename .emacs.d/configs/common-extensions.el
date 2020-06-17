@@ -101,6 +101,7 @@
 (require 'undo-tree)
 (global-undo-tree-mode)
 (setq undo-limit 50000)
+(setq undo-tree-visualizer-timestamps t)
 
 ; better bookmarking support
 (add-to-list 'load-path "~/.emacs.d/extensions/bookmark-plus")
