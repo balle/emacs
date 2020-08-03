@@ -1,3 +1,5 @@
+;; $ export GOPATH=~/go/bin
+;; $ export PATH=$PATH:$GOPATH/bin
 ;; $ go get -u golang.org/x/tools/cmd/guru
 ;; $ go get github.com/rogpeppe/godef
 ;; $ go get -u github.com/nsf/gocode
