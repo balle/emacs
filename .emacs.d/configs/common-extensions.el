@@ -10,9 +10,10 @@
 			    win-switch
 			    smartparens
 			    outline-magic
-			    spray
+;			    spray
 			    paradox
-                            bug-hunter
+				bug-hunter
+;				dashboard
 			    ibuffer-git
 			    ibuffer-tramp))
 
@@ -20,10 +21,10 @@
 (require 'outline-magic)
 
 ; speed reading mode
-(require 'spray)
-(setq spray-wpm 400)
-(setq spray-margin-top 1)
-(setq spray-margin-left 1)
+;(require 'spray)
+;(setq spray-wpm 400)
+;(setq spray-margin-top 1)
+;(setq spray-margin-left 1)
 
 ; kill ring browser
 (require 'browse-kill-ring)
