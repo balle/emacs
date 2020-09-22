@@ -44,7 +44,7 @@ User buffers are those not starting with *."
 (directory-files my-desktop-session-dir))
 nil nil nil my-desktop-session-name-hist))
 
-// code borrowed from https://www.emacswiki.org/emacs/MoveLine
+; code borrowed from https://www.emacswiki.org/emacs/MoveLine
 (defun move-line (n)
   "Move the current line up or down by N lines."
   (interactive "p")
