@@ -4,7 +4,7 @@
 ;; $ go get -u -v github.com/nsf/gocode
 ;; $ go get -u -v golang.org/x/tools/cmd/goimports
 ;; $ go get -u -v github.com/dougm/goflymake
-;; $ go get -u -v github.com/motemen/gore
+;; $ go get -u github.com/motemen/gore/cmd/gore
 
 (install-missing-packages '(gotest
 			    gorepl-mode))
@@ -37,3 +37,6 @@
 
 (add-hook 'go-mode-hook '(lambda ()
 	(auto-complete-mode t)))
+
+;; gore repl
+;; (add-hook 'go-mode-hook #'gorepl-mode)
