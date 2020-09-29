@@ -131,7 +131,6 @@ in a command like search-forward you can do
 alt + p / alt + n       -> get previous or next input you entered
 alt + r / alt + s       -> search history back- or forward
 * Code folding							      :emacs:
-f2 -> hide / show block
 ctrl+c ctrl+o ctrl+q -> hide all but top level
 ctrl+c ctrl+o a -> show all
 ctrl+c ctrl+o ctrl+s -> show subtree at cursor
@@ -663,7 +662,6 @@ alt  + x ediff-directories    -> show difference of two directories
 alt + x hightlight-regexp     -> highlight words matching regexp
 alt + x occur                 -> open new buffer, show all lines matching regexp
 alt + x switch-to-buffer
-f4                            -> grep for todo comments in dir
 
 * search / replace in more than one file 			      :emacs:
 execute dired
