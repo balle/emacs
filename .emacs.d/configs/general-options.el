@@ -125,7 +125,11 @@
  (remove 'process-kill-buffer-query-function
          kill-buffer-query-functions))
 
-; drucken via cups
+;; eww
+(setq eww-history nil)
+(setq eww-search-prefix "https://www.ecosia.org/search?q=")
+
+; printing via cups
 (setq lpr-command "xpp")
 
 ; no blinking cursor, no beep beep
