@@ -49,6 +49,9 @@
     (progn
       (install-missing-packages '(magit))
       (require 'magit)
+      (setq magit-refresh-status-buffer nil)
+      (setq auto-revert-buffer-list-filter
+      'magit-auto-revert-repository-buffer-p)
       (add-to-list 'load-path "~/.emacs.d/extensions/emacs-git-gutter")
       (require 'git-gutter)
       (global-git-gutter-mode t)))
