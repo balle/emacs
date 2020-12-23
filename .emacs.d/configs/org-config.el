@@ -14,7 +14,7 @@
 ;; 				   (sh . t)
 ;; 				   (python . t))))
 
-;(setq org-agenda-files (list "~/organize/TODO.org" "~/organize/projekte.org" "~/organize/backlog.org"  "~/organize/emacs.org" "~/organize/read.org"))
+(setq org-agenda-files (list "~/organize/TODO.org" "~/organize/projekte.org" "~/organize/backlog.org"  "~/organize/read.org"))
 (setq org-agenda-files '("~/organize/"))
 (setq org-agenda-include-diary t)
 (setq org-agenda-diary-file "~/organize/termine")
@@ -135,8 +135,9 @@
 
 (global-set-key (kbd "C-c l") 'org-store-link)
 
-;(add-hook 'org-mode-hook '(lambda ()
-;                           (define-key org-mode-map (kbd "C-c l") 'org-store-link)))
+(add-hook 'org-mode-hook '(lambda ()
+                           (define-key org-mode-map (kbd "C-c l") 'org-store-link)
+                           (define-key org-mode-map (kbd "C-c b") 'org-insert-structure-template)))
 ;                           (define-key org-mode-map (kbd "M-<left>") 'org-agenda-do-date-earlier)
 ;                           (define-key org-mode-map (kbd "M-<right>") 'org-agenda-do-date-later)))
 

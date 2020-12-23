@@ -16,7 +16,7 @@
     (setq slime-complete-symbol-function 'slime-fuzzy-complete-symbol)
     
     ;(slime-setup '(slime-repl))
-    (slime-setup '(slime-fancy))
+    ;(slime-setup '(slime-fancy))
     
     (add-hook 'emacs-lisp-mode-hook (lambda () (eldoc-mode t)))
     (add-hook 'lisp-mode-hook (lambda () (slime-mode t)))
