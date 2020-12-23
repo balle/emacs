@@ -4,7 +4,8 @@
 ;; $ go get -u -v github.com/nsf/gocode
 ;; $ go get -u -v golang.org/x/tools/cmd/goimports
 ;; $ go get -u -v github.com/dougm/goflymake
-;; $ go get -u github.com/motemen/gore/cmd/gore
+;; $ go get -u -v github.com/motemen/gore/cmd/gore
+;; $ go get -u -v github.com/go-delve/delve/cmd/dlv
 
 (install-missing-packages '(go-mode
     			    go-guru
