@@ -230,5 +230,15 @@
 (setq bbdb/gnus-score-default 2000)
 (setq max-specpdl-size 100000)
 
+; calendar invites
+(use-package icalendar)
+(use-package gnus-icalendar
+ :requires (gnus icalendar org)
+ :config
+ (setq gnus-icalendar-org-capture-file "~/org/TODO.org")
+ (setq gnus-icalendar-org-capture-headline '("Termine"))
+ (gnus-icalendar-setup)
+ (gnus-icalendar-org-setup))
+
 ; load custom settings
 (load-file "~/.gnus-custom")

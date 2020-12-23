@@ -48,7 +48,7 @@ in the current *Python* session."
 	 (completion-table nil)
 	 completion
 	 (comint-preoutput-filter-functions
-	  (append comint-preoutput-filter-functions
+x	  (append comint-preoutput-filter-functions
 		  '(ansi-color-filter-apply
 		    (lambda (string)
 		      (setq ugly-return (concat ugly-return string))
@@ -109,3 +109,18 @@ in the current *Python* session."
 
     ;; run python unit tests from within emacs
     (require 'python-test)))
+
+;; run pyflakes-3 with flycheck
+;; code borrowed from https://github.com/Wilfred/flycheck-pyflakes/blob/master/flycheck-pyflakes.el
+(require 'flycheck)
+(flycheck-define-checker python-pyflakes
+  "A Python syntax and style checker using the pyflakes utility.
+To override the path to the pyflakes executable, set
+`flycheck-python-pyflakes-executable'.
+See URL `http://pypi.python.org/pypi/pyflakes'."
+  :command ("/usr/local/bin/pyflakes-3" source-inplace)
+  :error-patterns
+  ((error line-start (file-name) ":" line ":" (message) line-end))
+  :modes python-mode)
+
+(add-to-list 'flycheck-checkers 'python-pyflakes)

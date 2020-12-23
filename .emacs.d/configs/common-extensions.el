@@ -10,9 +10,10 @@
 			    win-switch
 			    smartparens
 			    outline-magic
-			    spray
+;			    spray
 			    paradox
-                            bug-hunter
+				bug-hunter
+;				dashboard
 			    ibuffer-git
 			    ibuffer-tramp))
 
@@ -20,10 +21,10 @@
 (require 'outline-magic)
 
 ; speed reading mode
-(require 'spray)
-(setq spray-wpm 400)
-(setq spray-margin-top 1)
-(setq spray-margin-left 1)
+;(require 'spray)
+;(setq spray-wpm 400)
+;(setq spray-margin-top 1)
+;(setq spray-margin-left 1)
 
 ; kill ring browser
 (require 'browse-kill-ring)
@@ -48,6 +49,9 @@
     (progn
       (install-missing-packages '(magit))
       (require 'magit)
+      (setq magit-refresh-status-buffer nil)
+      (setq auto-revert-buffer-list-filter
+      'magit-auto-revert-repository-buffer-p)
       (add-to-list 'load-path "~/.emacs.d/extensions/emacs-git-gutter")
       (require 'git-gutter)
       (global-git-gutter-mode t)))

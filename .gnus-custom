@@ -82,3 +82,7 @@
 			    (("Security" visible nil
 			      ((score-file . "Security.SCORE"))))
 			    (("Mail" visible nil nil))))
+
+; where to store calendar invites
+;(setq gnus-icalendar-org-capture-file "~/org/notes.org")
+;(setq gnus-icalendar-org-capture-headline '("Tasks"))

@@ -2,7 +2,7 @@
 (install-missing-packages '(tex-smart-umlauts ac-math))
 
 (require 'reftex)
-(require 'preview-latex)
+;(require 'preview-latex)
 
 (setq TeX-auto-save t)
 (setq TeX-parse-self t)
@@ -62,7 +62,6 @@
 (setq reftex-use-multiple-selection-buffers t)
 
 (require 'tex-smart-umlauts)
-(add-hook 'LaTeX-mode-hook #'tex-smart-umlauts-decode)
 
 (setq latex-mode-hook
  '(lambda ()
@@ -70,8 +69,10 @@
     (flyspell-mode)
     (ac-flyspell-workaround)
     (auto-complete-mode)
+    (tex-smart-umlauts-mode)
     (setq ac-delay 0.2)
     (define-key latex-mode-map "\C-cu" 'LaTeX-find-matching-begin)
     (define-key latex-mode-map "\C-cd" 'LaTeX-find-matching-end)
     (define-key latex-mode-map "\C-ci" 'LaTeX-insert-item)
-))
+   ))
+
