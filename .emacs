@@ -71,12 +71,10 @@
  '(auth-source-save-behavior nil)
  '(bmkp-last-as-first-bookmark-file "~/.emacs.d/bookmarks")
  '(org-agenda-files
-   (quote
-    ("~/organize/TODO.org" "~/organize/projekte.org" "~/organize/backlog.org" "~/organize/read.org")))
+   '("~/organize/TODO.org" "~/organize/projekte.org" "~/organize/backlog.org" "~/organize/read.org"))
  '(package-selected-packages
-   (quote
-    (gotest gorepl-mode eshell-autojump binclock pomidor auto-complete-distel edts yasnippet win-switch web-mode w3m use-package undo-tree try trr tex-smart-umlauts spray spotify smex smartparens robe restclient python-test pyimport pyflakes paradox outline-magic ob-ipython multishell multi-term magit key-chord jedi ibuffer-tramp ibuffer-git hy-mode helm-rhythmbox helm-recoll helm-emms gnuplot fooddice flycheck dired+ clojure-cheatsheet calfw browse-kill-ring bookmark+ axiom-environment ack ace-jump-mode ac-slime ac-math ac-cider)))
- '(send-mail-function (quote smtpmail-send-it)))
+   '(go-dlv yaml-mode eshell-autojump binclock pomidor auto-complete-distel edts yasnippet win-switch web-mode w3m use-package undo-tree try trr tex-smart-umlauts spray spotify smex smartparens robe restclient python-test pyimport pyflakes paradox outline-magic ob-ipython multishell multi-term magit key-chord jedi ibuffer-tramp ibuffer-git hy-mode helm-rhythmbox helm-recoll helm-emms gnuplot fooddice flycheck dired+ clojure-cheatsheet calfw browse-kill-ring bookmark+ axiom-environment ack ace-jump-mode ac-slime ac-math ac-cider))
+ '(send-mail-function 'smtpmail-send-it))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
