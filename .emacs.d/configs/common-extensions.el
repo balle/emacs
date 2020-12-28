@@ -3,28 +3,21 @@
 			    undo-tree
 			    browse-kill-ring
 			    smex
-			    key-chord
+			    key-chord	
 			    ace-jump-mode
-			    dired+
-			    bookmark+
+			    ;dired+
+			    ;bookmark+
 			    win-switch
 			    smartparens
-			    outline-magic
-;			    spray
+			    ;outline-magic
+			    ;spray
 			    paradox
-				bug-hunter
-;				dashboard
-			    ibuffer-git
+                            bug-hunter
+			    ;ibuffer-git
 			    ibuffer-tramp))
 
 (add-to-list 'load-path "~/.emacs.d/extensions/outline-magic")
 (require 'outline-magic)
-
-; speed reading mode
-;(require 'spray)
-;(setq spray-wpm 400)
-;(setq spray-margin-top 1)
-;(setq spray-margin-left 1)
 
 ; kill ring browser
 (require 'browse-kill-ring)
@@ -36,8 +29,8 @@
 (require 'alarm)
 
 ; more bookmarking features like tags
-(require 'bookmark+)
-(setq bmkp-prompt-for-tags-flag nil)
+;(require 'bookmark+)
+;(setq bmkp-prompt-for-tags-flag nil)
 
 ; M-x ido completion
 (require 'smex)
@@ -91,15 +84,15 @@
 (turn-on-xclip)
 
 ; better keybindings
-(require 'key-chord)
-(key-chord-mode 1)
-(setq key-chord-one-key-delay 0.15)
+;(require 'key-chord)
+;(key-chord-mode 1)
+;(setq key-chord-one-key-delay 0.15)
 
 ; ace jump mode
 (require 'ace-jump-mode)
 
 ; easier window switching
-(require 'win-switch)
+;(require 'win-switch)
 
 ; advaned undo
 (require 'undo-tree)
@@ -108,13 +101,13 @@
 (setq undo-tree-visualizer-timestamps t)
 
 ; better bookmarking support
-(add-to-list 'load-path "~/.emacs.d/extensions/bookmark-plus")
-(require 'bookmark+)
+;(add-to-list 'load-path "~/.emacs.d/extensions/bookmark-plus")
+;(require 'bookmark+)
 
 ; activate ido and ibuffer mode
 (add-to-list 'load-path "~/.emacs.d/extensions/ibuffer-git")
 (add-to-list 'load-path "~/.emacs.d/extensions/ibuffer-tramp")
-(require 'ibuffer-git)
+;(require 'ibuffer-git)
 (require 'ibuffer-tramp)
 (ido-mode t)
 (add-hook 'ibuffer-hook

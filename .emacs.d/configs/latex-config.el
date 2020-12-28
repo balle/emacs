@@ -1,5 +1,5 @@
 ; latex
-(install-missing-packages '(tex-smart-umlauts ac-math))
+;(install-missing-packages '(tex-smart-umlauts ac-math))
 
 (require 'reftex)
 ;(require 'preview-latex)
@@ -44,13 +44,13 @@
 ;(add-hook 'LaTeX-mode-hook 'LaTeX-fill-environment)
 
 ; auto-completion
-(require 'ac-math)
+;(require 'ac-math)
 (add-to-list 'ac-modes 'LaTeX-mode)
 (add-to-list 'ac-modes 'latex-mode)
 
 (defun ac-LaTeX-mode-setup () ; add ac-sources to default ac-sources
    (setq ac-sources
-         (append '(ac-source-math-unicode ac-source-math-latex ac-source-latex-commands ac-source-yasnippet)
+         (append '(ac-source-latex-commands ac-source-yasnippet)
                  ac-sources))
    )
 (add-hook 'LaTeX-mode-hook 'ac-LaTeX-mode-setup)
@@ -61,7 +61,8 @@
 (setq reftex-save-parse-info t)
 (setq reftex-use-multiple-selection-buffers t)
 
-(require 'tex-smart-umlauts)
+;(require 'tex-smart-umlauts)
+;(add-hook 'LaTeX-mode-hook #'tex-smart-umlauts-decode)
 
 (setq latex-mode-hook
  '(lambda ()

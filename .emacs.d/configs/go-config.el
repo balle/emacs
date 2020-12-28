@@ -4,22 +4,21 @@
 ;; $ go get -u -v github.com/nsf/gocode
 ;; $ go get -u -v golang.org/x/tools/cmd/goimports
 ;; $ go get -u -v github.com/dougm/goflymake
-;; $ go get -u github.com/motemen/gore/cmd/gore
+;; $ go get -u -v github.com/motemen/gore/cmd/gore
+;; $ go get -u -v github.com/go-delve/delve/cmd/dlv
 
-(install-missing-packages '(gotest
-			    gorepl-mode))
+(install-missing-packages '(go-mode
+    			    go-guru
+			    go-dlv))
 
 
 (add-to-list 'load-path "~/.emacs.d/extensions/go-mode.el")
 (require 'go-mode)
 (require 'go-autocomplete)
-(require 'gotest)
+(require 'go-dlv)
 
 ;; source code navigator
 (require 'go-guru)
-
-;; a repl for interactive go programming
-(require 'gorepl-mode)
 
 ;; formating options
 (setq tab-width 4)

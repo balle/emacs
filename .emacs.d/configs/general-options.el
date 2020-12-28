@@ -2,7 +2,7 @@
 (require 'tls)
 (require 'gnutls)
 (setq tls-checktrust t)
-(setq gnutls-verify-error t)
+(setq gnutls-verify-error nil)
 (setq gnutls-min-prime-bits 2048)
 (setq network-security-level 'high)
 (setq tls-program
@@ -57,8 +57,8 @@
 
 ; package repositories
 (require 'package)
-(add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/") t)
-(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)
+(add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/") t)
+;(add-to-list 'package-archives '("marmalade" . "https://marmalade-repo.org/packages/") t)
 (add-to-list 'package-archives '("melpa" . "https://stable.melpa.org/packages/") t)
 
 

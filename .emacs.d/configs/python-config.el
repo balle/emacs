@@ -5,12 +5,12 @@
 			    pyflakes))
 
 ;; auto completion for jedi knights :)
-(require 'jedi)
+;(require 'jedi)
 
-(add-hook 'python-mode-hook 'jedi:setup)
-(add-hook 'python-mode-hook 'jedi:ac-setup)
-(setq jedi:complete-on-dot t)
-(setq jedi:setup-keys t)
+;(add-hook 'python-mode-hook 'jedi:setup)
+;(add-hook 'python-mode-hook 'jedi:ac-setup)
+;(setq jedi:complete-on-dot t)
+;(setq jedi:setup-keys t)
 
 (add-to-list 'ac-modes 'python-mode)
 (add-hook 'python-mode-hook '(lambda ()
@@ -18,8 +18,8 @@
 	(auto-complete-mode t)))
 
 ;; use ipython as python shell
-(setq python-shell-interpreter "ipython")
-(setq python-shell-interpreter-args "")
+;(setq python-shell-interpreter "ipython")
+;(setq python-shell-interpreter-args "")
 
 ;; auto-completion for ipython
 ;; borrowed from ipython.el
@@ -103,12 +103,12 @@ x	  (append comint-preoutput-filter-functions
 ;; manage python imports
 (if (>= emacs-major-version 25)
   (progn
-    (install-missing-packages '(pyimport python-test))
+    (install-missing-packages '(pyimport)) ; python-test))
     (require 'pyimport)
-    (setq pyimport-pyflakes-path "/usr/bin/pyflakes")
+    (setq pyimport-pyflakes-path "/usr/bin/pyflakes")))
 
     ;; run python unit tests from within emacs
-    (require 'python-test)))
+    ;(require 'python-test)))
 
 ;; run pyflakes-3 with flycheck
 ;; code borrowed from https://github.com/Wilfred/flycheck-pyflakes/blob/master/flycheck-pyflakes.el
