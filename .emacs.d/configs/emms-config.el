@@ -14,3 +14,14 @@
 (emms-mode-line 1)
 ;(emms-lyrics 1)
 (emms-browser-make-filter "all" 'ignore)
+
+(require 'emms-history)
+
+(defun emms-sleep-timer (minutes)
+  (interactive "nMinutes: ")
+  (sleep-for (* minutes 60))
+  (emms-history-save)
+  (emms-pause))
+
+;(setq emms-history-start-playing t)
+;(emms-history-load)
