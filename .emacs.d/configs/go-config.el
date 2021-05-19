@@ -33,9 +33,12 @@
 
 ;; Key bindings specific to go-mode
 (define-key go-mode-map "\C-cg" 'godef-jump)
+(define-key go-mode-map "\C-cd" 'go-guru-describe)
 
 (add-hook 'go-mode-hook '(lambda ()
-	(auto-complete-mode t)))
+			  (auto-complete-mode t)
+			  (smartparens-mode t)
+			  ))
 
 ;; gore repl
 ;; (add-hook 'go-mode-hook #'gorepl-mode)
