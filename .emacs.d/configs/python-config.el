@@ -2,19 +2,21 @@
 			    epc
 			    deferred
 			    jedi
-			    pyflakes))
+			    flymake-python-pyflakes))
 
 ;; auto completion for jedi knights :)
-;(require 'jedi)
+(require 'jedi)
 
-;(add-hook 'python-mode-hook 'jedi:setup)
-;(add-hook 'python-mode-hook 'jedi:ac-setup)
-;(setq jedi:complete-on-dot t)
-;(setq jedi:setup-keys t)
+(add-hook 'python-mode-hook 'jedi:setup)
+(add-hook 'python-mode-hook 'jedi:ac-setup)
+(setq jedi:complete-on-dot t)
+(setq jedi:setup-keys t)
 
+(require 'flymake)
 (add-to-list 'ac-modes 'python-mode)
 (add-hook 'python-mode-hook '(lambda ()
-;	(eldoc-mode)
+			       (eldoc-mode)
+			       (flymake-mode)
 	(auto-complete-mode t)))
 
 ;; use ipython as python shell
@@ -98,7 +100,7 @@ x	  (append comint-preoutput-filter-functions
 ))
 
 ;; python code checker
-(require 'pyflakes)
+;;(require 'pyflakes)
 
 ;; manage python imports
 (if (>= emacs-major-version 25)
