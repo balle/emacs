@@ -1,8 +1,15 @@
+;; # pip install 'python-language-server[all]'
+;; in emacs M-x jedi:install-server
+
 (install-missing-packages '(ctable
 			    epc
 			    deferred
 			    jedi
-			    flymake-python-pyflakes))
+			    flymake-python-pyflakes
+			    lsp-mode))
+
+(require 'lsp-mode)
+(add-hook 'python-mode-hook #'lsp)
 
 ;; auto completion for jedi knights :)
 (require 'jedi)
