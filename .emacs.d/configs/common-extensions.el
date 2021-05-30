@@ -92,7 +92,7 @@
 (require 'ace-jump-mode)
 
 ; easier window switching
-;(require 'win-switch)
+(require 'win-switch)
 
 ; advaned undo
 (require 'undo-tree)
@@ -126,3 +126,4 @@
 	 filename-and-process)))
 
 (require 'smartparens-config)
+(smartparens-global-mode-enable-in-buffers)
