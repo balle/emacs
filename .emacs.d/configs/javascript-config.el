@@ -1,4 +1,10 @@
+(install-missing-packages '(js2-mode
+			    json-mode))
+
 (require 'json-mode)
+(require 'js2-mode)
+
+(add-hook 'js-mode-hook 'js2-minor-mode)
 
 ; json
 (setq auto-mode-alist
