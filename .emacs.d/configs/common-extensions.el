@@ -121,7 +121,7 @@
 	 " "
 	 (mode 16 16 :left :elide)
 	 " "
-	 (git-status 8 8 :left)
+	 (vc-status 8 8 :left)
 	 " "
 	 filename-and-process)))
 
