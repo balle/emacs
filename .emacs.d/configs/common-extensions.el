@@ -72,12 +72,15 @@
 
 ; flycheck - better syntax checking
 (if (>= emacs-major-version 25)
-    (progn
-      (install-missing-packages '(flycheck))
-      (require 'flycheck)
-      (setq flycheck-pylintrc "~/.emacs.d/configs/pylint.rc")
-      (add-hook 'after-init-hook #'global-flycheck-mode)
-))
+    ;; (progn
+    ;;   (install-missing-packages '(flycheck))
+    ;;   (require 'flycheck)
+    ;;   (setq flycheck-pylintrc "~/.emacs.d/configs/pylint.rc")
+    ;;   (add-hook 'after-init-hook #'global-flycheck-mode)
+    (add-to-list 'load-path "~/.emacs.d/extensions/flycheck")
+    ;(load-file "~/.emacs.d/extensions/flycheck/flycheck.el")
+    (require 'flycheck)
+)
 
 ; X clipboard support on console
 (load-file "~/.emacs.d/extensions/xclip/xclip.el")
