@@ -103,53 +103,6 @@
 (appt-activate)
 (display-time)
 
-
-(require 'async)
-
-;; happily copied from http://kitchingroup.cheme.cmu.edu/blog/2015/11/20/Asynchronously-running-python-blocks-in-org-mode/
-(defun org-babel-async-execute ()
-  "Run a python block at point asynchrously."
-  (interactive)
-
-  (let ((current-file (buffer-file-name))
-	(uuid (org-id-uuid))
-	(temporary-file-directory "./")
-	(tempfile (make-temp-file "py-")))
-
-    (org-babel-tangle '(4) tempfile)
-    (org-babel-remove-result)
-    (save-excursion
-      (re-search-forward "#\\+END_SRC")
-      (insert (format
-	       "\n\n#+RESULTS: %s\n: %s"
-	       (or (org-element-property :name (org-element-context))
-		   "")
-	       uuid)))
-
-    (async-start
-     ;; what to start
-     `(lambda ()
-	;; now we run the command then cleanup
-	(prog1
-	    (shell-command-to-string (format "python %s" ,tempfile))
-	  (delete-file ,tempfile)))
-
-     `(lambda (result)
-	"Code that runs when the async function finishes."
-	(save-window-excursion
-	  (save-excursion
-	    (save-restriction
-	      (with-current-buffer (find-file-noselect ,current-file)
-		(goto-char (point-min))
-		(re-search-forward ,uuid)
-		(beginning-of-line)
-		(kill-line)
-		(insert (mapconcat
-			 (lambda (x)
-			   (format ": %s" x))
-			 (butlast (s-split "\n" result))
-			                          "\n"))))))))))
-
 ;; happily borrowed from http://stackoverflow.com/questions/10681766/emacs-org-mode-textual-reference-to-a-fileline
 (defun position-to-kill-ring ()
     "Copy to the kill ring a string in the format \"file-name:line-number\"
