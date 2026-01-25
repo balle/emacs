@@ -24,3 +24,5 @@
 .eshell/history
 .eshell/lastdir
 .emacs.d/recentf
+.emacs.d/.lsp-session-v1
+.emacs.d/eln-cache/

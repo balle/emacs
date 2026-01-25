@@ -38,7 +38,6 @@
 
 ; save send mails on server
 ;(setq gnus-message-archive-method '(nnimap "another.server.net"))
-;(setq gnus-message-archive-group "Sent")
 (setq gnus-message-archive-group "INBOX/Sent")
 (setq gnus-gcc-mark-as-read t)
 
@@ -68,7 +67,6 @@
 
 ;; configure the order of your topics
 (setq gnus-topic-topology '(("Gnus" visible nil nil)
-			    (("CCC" visible nil nil))
 			    (("Emacs" visible nil
 			      ((score-file . "Emacs.SCORE"))))
 			    (("General" visible nil

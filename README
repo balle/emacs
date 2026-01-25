@@ -1,36 +1,14 @@
-Just a tiny repository to keep my emacs environment in sync.
-Features: Python, Django, Perl, C, Latex + Ispell, Flyspell, Flymake, Auto-Completion, Yasnippets, Ido,
-Kill-Ring-Browser, Undo-Tree, Magit, printing, project management, org-mode with redmine support and more
-Customizations should be saved in ~/.emacs-custom
+My personal emacs config
 
-Installation:
+Requirements:
 
-emacs
-gxmessage
-xclip
-xpp
-pyflakes
+clangd
+pyright
 
 Afterwards just add three links
 cd ~
 ln -s emacs/.emacs
 ln -s emacs/.emacs.d
-ln -s emacs/.eshell
-
-After first run of emacs you need to install some python modules if you want
-to use the python setup
-
-cd emacs/.emacs.d/elpa/jedi-<VERSION> && sudo python setup.py install
-
-For more performance you could now once compile all elisp files.
-Therefore goto the *scratch* and execute
-
-(require 'find-lisp)
-
-(mapc
- (lambda (x) (byte-compile-file x))
- (find-lisp-find-files "~/.emacs.d/" "\\.el$"))
-
 
 Documentation about keyboard shortcuts can be found in emacs.org
 

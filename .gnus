@@ -50,9 +50,6 @@
 	  (gnus-summary-mark-as-spam nr-lines))))
     (gnus-summary-mark-as-spam 1)))
 
-(let ((map gnus-topic-mode-map))
-  (define-key map (kbd "RET") 'gnus-group-select-group-ephemerally))
-
 (let ((map gnus-summary-mode-map))
   (define-key map (kbd "x") 'my-gnus-summary-move-article-to-trash)
   (define-key map (kbd "X") 'my-gnus-summary-delete-article)
@@ -112,43 +109,6 @@
 ;; Setup GPG/PGP
 (require 'epa-file)
 (epa-file-enable)
-
-;; remember addresses
-(add-to-list 'load-path "~/.emacs.d/extensions/bbdb-2.35/lisp")
-(setq bbdb-file "~/bbdb")
-(require 'bbdb)
-(bbdb-initialize)
-(setq bbdb-use-pop-up nil)
-(setq
-     bbdb-offer-save 1                        ;; 1 means save-without-asking
-     bbdb-always-add-address t                ;; add new addresses to existing...
-     bbdb-canonicalize-redundant-nets-p t     ;; x@foo.bar.cx => x@bar.cx
-     bbdb-completion-type nil                 ;; complete on anything
-     bbdb-complete-name-allow-cycling t       ;; cycle through matches
-     bbbd-message-caching-enabled t           ;; be fast
-     bbdb-use-alternate-names t               ;; use AKA
-     ;; auto-create addresses from mail
-     bbdb/mail-auto-create-p 'bbdb-ignore-some-messages-hook
-     bbdb-ignore-some-messages-alist ;; don't ask about fake addresses
-     ;; NOTE: there can be only one entry per header (such as To, From)
-     ;; http://flex.ee.uec.ac.jp/texi/bbdb/bbdb_11.html
-     '(( "From" . "no.?reply\\|DAEMON\\|daemon\\|facebookmail\\|twitter")))
-
-(add-hook 'gnus-startup-hook 'bbdb-insinuate-gnus)
-(autoload 'bbdb/send-hook "moy-bbdb" "Function to be added to `message-send-hook' to notice records when sending messages" t)
-(add-hook 'message-send-hook 'bbdb/send-hook)
-(add-hook 'message-mode-hook
-	  (function (lambda()
-            (progn
-              (flyspell-mode)
-              (local-set-key (kbd "<tab>") 'bbdb-complete-name)
-		      ))))
-
-;; enable auto completion
-(add-to-list 'ac-modes 'message-mode)
-(setq ac-sources '(ac-source-semantic ac-source-yasnippet))
-(ac-config-default)
-(setq ac-delay 0.2)
 
 ;; delete mail immediately
 (setq nnmail-expiry-wait 'immediate)

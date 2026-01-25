@@ -1,36 +1,24 @@
-(install-missing-packages '(auto-complete
+(install-missing-packages '(lsp-mode
+                            helm
+                            helm-lsp
+			    helm-xref			    
+			    company
 			    yasnippet
+			    flycheck
 			    undo-tree
 			    browse-kill-ring
 			    smex
 			    key-chord	
 			    ace-jump-mode
-			    ;dired+
-			    ;bookmark+
-			    win-switch
 			    smartparens
-			    ;outline-magic
-			    ;spray
+			    which-key
 			    paradox
                             bug-hunter
-			    ;ibuffer-git
+			    ibuffer-vc
 			    ibuffer-tramp))
-
-(add-to-list 'load-path "~/.emacs.d/extensions/outline-magic")
-(require 'outline-magic)
 
 ; kill ring browser
 (require 'browse-kill-ring)
-
-; magic text folding
-(require 'outline-magic)
-
-; alarm clock
-(require 'alarm)
-
-; more bookmarking features like tags
-;(require 'bookmark+)
-;(setq bmkp-prompt-for-tags-flag nil)
 
 ; M-x ido completion
 (require 'smex)
@@ -55,20 +43,6 @@
 (yas-global-mode 1)
 
 (add-hook 'text-mode-hook 'yas-minor-mode)
-(add-hook 'text-mode-hook 'auto-complete-mode)
-
-(add-hook 'python-mode-hook 'yas-minor-mode)
-(add-hook 'python-mode-hook 'auto-complete-mode)
-
-; auto-completion
-(require 'auto-complete)
-(setq ac-dwim t)
-(ac-config-default)
-(setq-default ac-sources '(ac-source-yasnippet
-			   ac-source-abbrev
-			   ac-source-dictionary
-			   ac-source-words-in-same-mode-buffers))
-(global-auto-complete-mode t)
 
 ; flycheck - better syntax checking
 (if (>= emacs-major-version 25)
@@ -82,35 +56,18 @@
     (require 'flycheck)
 )
 
-; X clipboard support on console
-(load-file "~/.emacs.d/extensions/xclip/xclip.el")
-(turn-on-xclip)
-
-; better keybindings
-;(require 'key-chord)
-;(key-chord-mode 1)
-;(setq key-chord-one-key-delay 0.15)
-
 ; ace jump mode
 (require 'ace-jump-mode)
-
-; easier window switching
-(require 'win-switch)
 
 ; advaned undo
 (require 'undo-tree)
 (global-undo-tree-mode)
 (setq undo-limit 50000)
 (setq undo-tree-visualizer-timestamps t)
-
-; better bookmarking support
-;(add-to-list 'load-path "~/.emacs.d/extensions/bookmark-plus")
-;(require 'bookmark+)
+(setq undo-tree-history-directory-alist '(("." . "~/.emacs-backup")))
 
 ; activate ido and ibuffer mode
-(add-to-list 'load-path "~/.emacs.d/extensions/ibuffer-git")
-(add-to-list 'load-path "~/.emacs.d/extensions/ibuffer-tramp")
-;(require 'ibuffer-git)
+(require 'ibuffer-vc)
 (require 'ibuffer-tramp)
 (ido-mode t)
 (add-hook 'ibuffer-hook
@@ -130,3 +87,16 @@
 
 (require 'smartparens-config)
 (smartparens-global-mode-enable-in-buffers)
+
+;; (helm-mode)
+(require 'helm-xref)
+(define-key global-map [remap find-file] #'helm-find-files)
+(define-key global-map [remap execute-extended-command] #'helm-M-x)
+(define-key global-map [remap switch-to-buffer] #'helm-mini)
+
+;; lsp mode
+(with-eval-after-load 'lsp-mode
+  (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration)
+  (yas-global-mode))
+
+(which-key-mode)

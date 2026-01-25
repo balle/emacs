@@ -60,7 +60,8 @@
 (add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/") t)
 ;(add-to-list 'package-archives '("marmalade" . "https://marmalade-repo.org/packages/") t)
 (add-to-list 'package-archives '("melpa" . "https://stable.melpa.org/packages/") t)
-
+(package-initialize)
+(package-refresh-contents)
 
 ; delete seleted text when typing
 (delete-selection-mode 1)
@@ -68,9 +69,6 @@
 ; prefix buffernames with dir
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'forward)
-
-; display line numbers in margin (fringe). Emacs 23 only.
-(global-linum-mode 0)
 
 ; highlight current line
 (global-hl-line-mode 1)
@@ -108,12 +106,6 @@
 (setq dired-recursive-copies 'always)
 (setq dired-dwim-target t) ; copy between two dired buffers in split window
 (setq dired-listing-switches "--group-directories-first -alh")
-
-; async dired
-(add-to-list 'load-path "~/.emacs.d/extensions/emacs-async")
-(autoload 'dired-async-mode "dired-async.el" nil t)
-(dired-async-mode 1)
-
 
 ; auto save interval
 (setq auto-save-default t)

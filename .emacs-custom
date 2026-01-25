@@ -1,4 +1,3 @@
-(global-set-key [f1] 'magit-status)
 (global-set-key [f2] 'calendar)
 
 ; default browser
@@ -9,50 +8,7 @@
 ;(setq w3m-search-default-engine "ixquick")
 ;(setq w3m-search-default-engine "google")
 
-; redmine
-;(setq org-redmine-uri "http://www.redmine.org")
-
-;; REST API Key (optional). default nil
-;(setq org-redmine-api-key "xxxxxxxxxxxxxxxxxxx")
-;(setq redmine-user "user")
-
-;(setq tramp-verbose 10)
-;(setq tramp-shell-prompt-pattern "^[^$>\n]*[#$%>] *\\(\[[0-9;]*[a-zA-Z] *\\)*")
-
-(defun start-irc ()
-   "Connect to IRC."
-   (interactive)
-   (erc-tls :server "irc.freenode.net" :port 6697
-        :nick "mynick" :full-name "Hans Wurst")
-   (erc :server "localhost" :port 6667
-        :nick "mynick" :full-name "Hans Wurst")
-   (setq erc-autojoin-channels-alist '(("irc.freenode.net" "#emacs" "#lisp"))))
-
-
 (load-theme 'tango-dark t)
-
-(setq load-calendar-config t)
-(setq load-irc-config t)
-(setq load-org-config t)
-(setq load-spell-checking-config t)
-(setq load-w3m-config t)
-(setq load-c-config nil)
-(setq load-database-config t)
-(setq load-django-config nil)
-(setq load-html-config nil)
-(setq load-javascript-config nil)
-(setq load-latex-config nil)
-(setq load-lisp-config nil)
-(setq load-ansible-config nil)
-(setq load-puppet-config nil)
-(setq load-rst-config t)
-(setq load-sunrise-commander-config t)
-(setq load-terminal-config t)
-(setq load-eshellconfig t)
-(setq load-python-config nil)
-(setq load-go-config nil)
-(setq load-music-config t)
-
 
 ;; my abbrevations
 (define-abbrev-table 'global-abbrev-table '(

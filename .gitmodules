@@ -1,7 +1,0 @@
-[submodule ".emacs.d/extensions/go-mode.el"]
-	path = .emacs.d/extensions/go-mode.el
-	url = https://github.com/dominikh/go-mode.el.git
-[submodule ".emacs.d/extensions/flycheck"]
-        path = .emacs.d/extensions/flycheck
-        url = https://github.com/flycheck/flycheck.git
-        branch = flycheck-32

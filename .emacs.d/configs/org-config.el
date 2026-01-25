@@ -1,20 +1,6 @@
-(add-to-list 'load-path "~/.emacs.d/extensions/org-redmine")
 (add-to-list 'auto-mode-alist '("\\.\\(org\\|org_archive\\)$" . org-mode))
 
-;(require 'org-install)
-;(require 'ob-tangle)
-;(require 'org-gnus)
-
-;; (org-babel-do-load-languages
-;;  'org-babel-load-languages (quote ((emacs-lisp . t)
-;; 				   (sqlite . t)
-;; 				   (perl . t)
-;; 				   (ruby . t)
-;; 				   (clojure . t)
-;; 				   (sh . t)
-;; 				   (python . t))))
-
-(setq org-agenda-files (list "~/organize/TODO.org" "~/organize/projekte.org" "~/organize/backlog.org"  "~/organize/read.org"))
+(setq org-agenda-files (list "~/organize/TODO.org"))
 (setq org-agenda-files '("~/organize/"))
 (setq org-agenda-include-diary t)
 (setq org-agenda-diary-file "~/organize/termine")
@@ -25,34 +11,6 @@
 (setq appt-display-mode-line t)
 (setq appt-display-format 'window)
 
-; remember clock
-;(setq org-clock-persist 'history)
-;(org-clock-persistence-insinuate)
-
-; alert on clock mode if idle for 15 minutes
-;(setq org-clock-idle-time 15)
-
-; supported programming languages
-;(org-babel-do-load-languages
-; 'org-babel-load-languages
-; '((python . t)
-;   (perl . t)
-;   (ruby . t)
-;   (sh . t)
-;   (lisp . t)
-;   (emacs-lisp . t)
-;))
-;(setq org-confirm-babel-evaluate nil)
-
-; org-mode redmine interface
-;(require 'org-redmine)
-;(setq org-redmine-template-header "[%p_n%] #%i% %s% by %as_n%")
-
-;(defun balle-redmine-tickets ()
-;  (interactive)
-;  (org-redmine-anything-show-issue-all 'redmine-user)
-;)
-
 ; Capture templates for: TODO tasks, Notes, appointments
 ; from http://doc.norang.ca/org-mode.html
 (setq org-capture-templates (quote (("t" "todo" entry (file "~/organize/TODO.org") "** TODO %?")
@@ -60,11 +18,6 @@
 				    ("T" "today" entry (file "~/organize/TODO.org") "** TODAY %?")
                                     ("b" "buy" entry (file "~/organize/TODO.org") "** %?   :buy:")
 				    ("r" "remember" entry (file "~/organize/TODO.org") "** %?   :remember:"))))
-
-(require 'org-expiry)
-(setq org-expiry-confirm-flag nil)
-;(defvar org-expiry-handler-function 'org-expiry-archive-subtree)
-(defun org-expiry-handler-function () (org-expiry-add-keyword "EXPIRED"))
 
 ; functions to show todos / notes / appointments
 (defun balle-show-emacs-list ()
@@ -196,38 +149,6 @@
 			   (format ": %s" x))
 			 (butlast (s-split "\n" result))
 			                          "\n"))))))))))
-
-;; mylyn mode
-;; remember open files to tasks
-;(defun org-recentf-save-and-empty ()
-;    "Save and empty recentf"
-;      (if (not recentf-mode)
-;                (recentf-mode)
-;                    (recentf-save-list)
-;                        (setq recentf-list nil)
-;                            (message "Recentf list reinitialized")))
-;
-;(defun org-recentf-dblock-update ()
-;    "Insert and/or update #+BEGIN: recentf block"
-;      (save-excursion
-;            (org-back-to-heading)
-;                (if (search-forward "#+BEGIN: recentf")
-;                    (org-dblock-update)
-;                          (outline-next-heading)
-;                                (insert "#+BEGIN: recentf\n#+END:\n")
-;                                      (search-backward "#+BEGIN")
-;                                            (org-dblock-update))))
-;
-;(defun org-dblock-write:recentf (params)
-;    "Write the RECENTF dblock."
-;      (interactive)
-;        (let* ((rf "(setq recentf-list %s)")
-;                (rfl (format rf (prin1-to-string recentf-list))))
-;              (insert "#+begin_src emacs-lisp\n" rfl
-;                          "\n(recentf-load-list)\n#+end_src")))
-;
-;(add-hook 'org-clock-in-hook 'org-recentf-save-and-empty)
-;(add-hook 'org-clock-out-hook 'org-recentf-dblock-update)
 
 ;; happily borrowed from http://stackoverflow.com/questions/10681766/emacs-org-mode-textual-reference-to-a-fileline
 (defun position-to-kill-ring ()
