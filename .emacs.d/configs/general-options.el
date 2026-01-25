@@ -58,7 +58,6 @@
 ; package repositories
 (require 'package)
 (add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/") t)
-;(add-to-list 'package-archives '("marmalade" . "https://marmalade-repo.org/packages/") t)
 (add-to-list 'package-archives '("melpa" . "https://stable.melpa.org/packages/") t)
 (package-initialize)
 (package-refresh-contents)
@@ -99,8 +98,6 @@
 ;; dired
 ;;
 (require 'dired)
-;(require 'dired-x)
-;(require 'dired+)
 (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file)
 (setq dired-recursive-deletes 'always)
 (setq dired-recursive-copies 'always)

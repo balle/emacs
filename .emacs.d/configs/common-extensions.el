@@ -33,9 +33,6 @@
       (setq magit-refresh-status-buffer nil)
       (setq auto-revert-buffer-list-filter
       'magit-auto-revert-repository-buffer-p)))
-      ;(add-to-list 'load-path "~/.emacs.d/extensions/emacs-git-gutter")
-      ;(require 'git-gutter)
-      ;(global-git-gutter-mode t)))
 
 ; yasnippets
 (require 'yasnippet)
@@ -43,18 +40,6 @@
 (yas-global-mode 1)
 
 (add-hook 'text-mode-hook 'yas-minor-mode)
-
-; flycheck - better syntax checking
-(if (>= emacs-major-version 25)
-    ;; (progn
-    ;;   (install-missing-packages '(flycheck))
-    ;;   (require 'flycheck)
-    ;;   (setq flycheck-pylintrc "~/.emacs.d/configs/pylint.rc")
-    ;;   (add-hook 'after-init-hook #'global-flycheck-mode)
-    (add-to-list 'load-path "~/.emacs.d/extensions/flycheck")
-    ;(load-file "~/.emacs.d/extensions/flycheck/flycheck.el")
-    (require 'flycheck)
-)
 
 ; ace jump mode
 (require 'ace-jump-mode)
