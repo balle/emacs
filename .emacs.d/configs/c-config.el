@@ -14,7 +14,7 @@
 			  (setq c-basic-offset 4
 				tab-width 4
 				indent-tabs-mode t
-				compile-command "cmake -B build && cd build; make")
+				compile-command "cmake -B build && cmake --build build")
 			  (define-key c-mode-map "\C-cc" 'compile)))
 
 
