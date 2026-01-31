@@ -1,3 +1,9 @@
+(install-missing-packages '(flycheck-clang-analyzer))
+(use-package flycheck-clang-analyzer
+  :ensure t
+  :after flycheck
+  :config (flycheck-clang-analyzer-setup))
+
 (add-hook 'c-mode-hook 'lsp)
 (add-hook 'c++-mode-hook 'lsp)
 
