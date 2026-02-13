@@ -1,4 +1,5 @@
 .emacs.d/tramp
+.emacs.d/transient/
 .emacs.d/ac-comphist.dat
 .emacs.d/auto-save-list/
 .emacs.d/eproject.lst
