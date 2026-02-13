@@ -25,7 +25,7 @@
 			  (setq c-basic-offset 4
 				tab-width 4
 				indent-tabs-mode t
-				compile-command "cmake -B build -DCMAKE_BUILD_TYPE=Debug && cmake --build build")
+				compile-command "cmake -B build -DCMAKE_BUILD_TYPE=Debug -DUSE_ASAN=ON && cmake --build build")
 			 (define-key c-mode-map "\C-cc" 'compile)
 			 (define-key c-mode-map "\C-cv" 'balle-valgrind)))
 
