@@ -52,6 +52,7 @@ ctrl+c <up>    -> move row or region upwards
 ctrl+c <down>  -> move row or region downwards
 ctrl+c <left>  -> move word left (in python mode move row or region left)
 ctrl+c <right> -> move word right (in python-mode move row or region right)
+ctrl+x tab     -> indent region
 alt+t c        -> transpose char forward
 alt+t C        -> transpose char backward
 alt+t w        -> transpose word forward
@@ -176,6 +177,8 @@ ctrl + c ctrl + p s  -> run django shell
 ctrl + c ctrl + p m  -> run django migrate
 ctrl + c ctrl + p t  -> run django test
 
+* C                                                                   :emacs:
+ctrl+c l        -> code actions
 * LaTeX 							      :emacs:
 ctrl + c ctrl + c          -> compile / view
 ctrl + c ctrl + p ctrl + p -> preview thing at cursor
@@ -667,6 +670,13 @@ alt + x switch-to-buffer
 execute dired
 mark files with m (u for unmark)
 alt + x dired-do-query-replace-regexp
+
+* AI                                                                  :emacs:
+ctrl+c o          -> open ollama-buddy chat
+ctrl+c c          -> send prompt
+ctrl+c o l        -> send region
+ctrl+c m          -> swap model
+ctrl+c M          -> model management
 
 * Help 								      :emacs:
 ctrl + h a        -> apropos (help keyword search)
